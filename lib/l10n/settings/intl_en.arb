@@ -1,0 +1,68 @@
+{
+  "viewProfileLinkLabel": "View Profile",
+  "@viewProfileLinkLabel": {
+    "description": "The label for the View Profile Link",
+    "type": "text",
+    "placeholders": {}
+  },
+  "personalInfoMenuLabel": "Personal Details",
+  "@personalInfoMenuLabel": {
+    "description": "The label for the Personal Details Menu Item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "personalInfoMenuLabelHint": "Account Settings",
+  "@personalInfoMenuLabelHint": {
+    "description": "Hint for the label for the Personal Details Menu Item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "notificationsMenuLabel": "Notifications",
+  "@notificationsMenuLabel": {
+    "description": "The label for the Notifications Menu Item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "privacyDefinitionsMenuLabel": "Privacy Definitions",
+  "@privacyDefinitionsMenuLabel": {
+    "description": "The label for the Privacy Definitions Menu Item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "paymentsMenuLabel": "Payments",
+  "@paymentsMenuLabel": {
+    "description": "The label for the Payments Menu Item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "contactUsMenuLabel": "Contact Us",
+  "@contactUsMenuLabel": {
+    "description": "The label for the Contact Us Menu Item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "contactUsMenuLabelHint": "Support",
+  "@contactUsMenuLabelHint": {
+    "description": "The label for the Contact Us Menu Item Hint",
+    "type": "text",
+    "placeholders": {}
+  },
+  "userGuidesMenuLabel": "How it Works",
+  "@userGuidesMenuLabel": {
+    "description": "The label for the How It Works Menu Item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "userGuidesMenuLabelHint": "About",
+  "@userGuidesMenuLabelHint": {
+    "description": "The label for the How It Works Menu Item Hint",
+    "type": "text",
+    "placeholders": {}
+  },
+  "termsAndConditionsMenuLabel": "Terms and Conditions",
+  "@termsAndConditionsMenuLabel": {
+    "description": "The label for the Terms of Conditions Menu Item",
+    "type": "text",
+    "placeholders": {}
+  }
+}

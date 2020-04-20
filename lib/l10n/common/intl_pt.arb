@@ -1,0 +1,32 @@
+{
+  "editLinkLabel": "Edit",
+  "@editLinkLabel": {
+    "description": "The label to edit link",
+    "type": "text",
+    "placeholders": {}
+  },
+  "saveLinkLabel": "Save",
+  "@saveLinkLabel": {
+    "description": "The label to save link",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addLanguageLinkLabel": "Add Language",
+  "@addLanguageLinkLabel": {
+    "description": "The label to add language link",
+    "type": "text",
+    "placeholders": {}
+  },
+  "helloLabel": "Olá",
+  "@helloLabel": {
+    "description": "The Hello Label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "classLabel": "Aula",
+  "@classLabel": {
+    "description": "The Class Label",
+    "type": "text",
+    "placeholders": {}
+  }
+}

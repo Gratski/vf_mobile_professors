@@ -1,0 +1,56 @@
+{
+  "editPersonalDetailsHeader": "Editar Informações Pessoais",
+  "@editPersonalDetailsHeader": {
+    "description": "The title header label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "firstNameLabel": "Primeiro Nome",
+  "@firstNameLabel": {
+    "description": "The first name label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "lastNameLabel": "Último Nome",
+  "@lastNameLabel": {
+    "description": "The last name label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "genderLabel": "Genéro",
+  "@genderLabel": {
+    "description": "The gender label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "birthdayLabel": "Data de Nascimento",
+  "@birthdayLabel": {
+    "description": "The Birthday label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailLabel": "Email",
+  "@emailLabel": {
+    "description": "The Email label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "phoneNumberLabel": "Contacto Telefónico",
+  "@phoneNumberLabel": {
+    "description": "The Phone Number label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "vatLabel": "NIF",
+  "@vatLabel": {
+    "description": "The VAT label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nationalityLabel": "Nacionalidade",
+  "@nationalityLabel": {
+    "description": "The Nationality label",
+    "type": "text",
+    "placeholders": {}
+  }
+}

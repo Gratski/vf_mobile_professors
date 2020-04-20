@@ -1,0 +1,86 @@
+{
+  "panelHeaderLabel": "Dashboard",
+  "@panelHeaderLabel": {
+    "description": "The Dashboard Title",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsGeneralEvaluationLabel": "Evaluation",
+  "@statsGeneralEvaluationLabel": {
+    "description": "The evaluation label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsCommentsLabel": "Comments",
+  "@statsCommentsLabel": {
+    "description": "The Comments label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsStudentsLabel": "Students",
+  "@statsStudentsLabel": {
+    "description": "The Students label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsClassesLabel": "Classes",
+  "@statsClassesLabel": {
+    "description": "The Classes label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsThisMonthStudentsLabel": "Students",
+  "@statsThisMonthStudentsLabel": {
+    "description": "The Total Number of Students label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsThisMonthIncomeLabel": "Income",
+  "@statsThisMonthIncomeLabel": {
+    "description": "The Number of Students This Month label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsThisMonthCancellationsLabel": "Cancellations",
+  "@statsThisMonthCancellationsLabel": {
+    "description": "The Number of Cancellation This Month label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nextClassesHeaderLabel": "Next Classes",
+  "@nextClassesHeaderLabel": {
+    "description": "The Next Classes label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "createClassButtonLabel": "New Class",
+  "@createClassButtonLabel": {
+    "description": "The New Class Button label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "classificationHeaderLabel": "Next Classes",
+  "@classificationHeaderLabel": {
+    "description": "The Classification Header label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "classificationHighDescriptionLabel": "Your classification is based on the reviews you receive from your students. Congratulations your classification is ",
+  "@classificationHighDescriptionLabel": {
+    "description": "The New Class Button label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "classificationAverageDescriptionLabel": "Your classification is based on the reviews you receive from your students. Your classification is ",
+  "@classificationAverageDescriptionLabel": {
+    "description": "The New Class Button label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "classificationLowDescriptionLabel": "Your classification is based on the reviews you receive from your students. Your classification is ",
+  "@classificationLowDescriptionLabel": {
+    "description": "The New Class Button label",
+    "type": "text",
+    "placeholders": {}
+  }
+}

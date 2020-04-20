@@ -1,0 +1,86 @@
+{
+  "panelHeaderLabel": "Painel",
+  "@panelHeaderLabel": {
+    "description": "Título de Painel",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsGeneralEvaluationLabel": "Classificação",
+  "@statsGeneralEvaluationLabel": {
+    "description": "The evaluation label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsCommentsLabel": "Comentários",
+  "@statsCommentsLabel": {
+    "description": "The Comments label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsStudentsLabel": "Alunos",
+  "@statsStudentsLabel": {
+    "description": "The Students label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsClassesLabel": "Aulas",
+  "@statsClassesLabel": {
+    "description": "The Classes label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsThisMonthStudentsLabel": "Alunos",
+  "@statsThisMonthStudentsLabel": {
+    "description": "The Total Number of Students label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsThisMonthIncomeLabel": "Rendimentos",
+  "@statsThisMonthIncomeLabel": {
+    "description": "The Number of Students This Month label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsThisMonthCancellationsLabel": "Desistências",
+  "@statsThisMonthCancellationsLabel": {
+    "description": "The Number of Cancellation This Month label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nextClassesHeaderLabel": "Próximas Aulas",
+  "@nextClassesHeaderLabel": {
+    "description": "The Next Classes label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "createClassButtonLabel": "Criar Aula",
+  "@createClassButtonLabel": {
+    "description": "The New Class Button label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "classificationHeaderLabel": "A tua Classificação",
+  "@classificationHeaderLabel": {
+    "description": "The Classification Header label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "classificationHighDescriptionLabel": "Com a média das tuas reviews a tua classificação é %s. Parabéns! Continua o bom trabalho!",
+  "@classificationHighDescriptionLabel": {
+    "description": "The New Class Button label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "classificationAverageDescriptionLabel": "Com a média das tuas reviews a tua classificação é %s.",
+  "@classificationAverageDescriptionLabel": {
+    "description": "The New Class Button label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "classificationLowDescriptionLabel": "Com a média das tuas reviews a tua classificação é %s. Revê o formato das tuas aulas e interação com os alunos.",
+  "@classificationLowDescriptionLabel": {
+    "description": "The New Class Button label",
+    "type": "text",
+    "placeholders": {}
+  }
+}

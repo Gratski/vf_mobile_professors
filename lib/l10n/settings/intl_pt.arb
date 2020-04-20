@@ -1,0 +1,68 @@
+{
+  "viewProfileLinkLabel": "Ver Perfil",
+  "@viewProfileLinkLabel": {
+    "description": "The label for the View Profile Link",
+    "type": "text",
+    "placeholders": {}
+  },
+  "personalInfoMenuLabel": "Informações Pessoais",
+  "@personalInfoMenuLabel": {
+    "description": "The label for the Personal Details Menu Item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "personalInfoMenuLabelHint": "Configurações de Conta",
+  "@personalInfoMenuLabelHint": {
+    "description": "Hint for the label for the Personal Details Menu Item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "notificationsMenuLabel": "Notificações",
+  "@notificationsMenuLabel": {
+    "description": "The label for the Notifications Menu Item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "privacyDefinitionsMenuLabel": "Definições de Privacidade",
+  "@privacyDefinitionsMenuLabel": {
+    "description": "The label for the Privacy Definitions Menu Item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "paymentsMenuLabel": "Pagamentos",
+  "@paymentsMenuLabel": {
+    "description": "The label for the Payments Menu Item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "contactUsMenuLabel": "Contacte-nos",
+  "@contactUsMenuLabel": {
+    "description": "The label for the Contact Us Menu Item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "contactUsMenuLabelHint": "Atendimento",
+  "@contactUsMenuLabelHint": {
+    "description": "The label for the Contact Us Menu Item Hint",
+    "type": "text",
+    "placeholders": {}
+  },
+  "userGuidesMenuLabel": "Como Funciona",
+  "@userGuidesMenuLabel": {
+    "description": "The label for the How It Works Menu Item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "userGuidesMenuLabelHint": "Sobre",
+  "@userGuidesMenuLabelHint": {
+    "description": "The label for the How It Works Menu Item Hint",
+    "type": "text",
+    "placeholders": {}
+  },
+  "termsAndConditionsMenuLabel": "Termos e Condições",
+  "@termsAndConditionsMenuLabel": {
+    "description": "The label for the Terms of Conditions Menu Item",
+    "type": "text",
+    "placeholders": {}
+  }
+}

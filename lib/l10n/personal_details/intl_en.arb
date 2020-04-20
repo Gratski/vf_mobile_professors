@@ -1,0 +1,56 @@
+{
+  "editPersonalDetailsHeader": "Edit Personal Details",
+  "@editPersonalDetailsHeader": {
+    "description": "The title header label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "firstNameLabel": "First Name",
+  "@firstNameLabel": {
+    "description": "The first name label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "lastNameLabel": "Last Name",
+  "@lastNameLabel": {
+    "description": "The last name label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "genderLabel": "Gender",
+  "@genderLabel": {
+    "description": "The gender label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "birthdayLabel": "Birthday",
+  "@birthdayLabel": {
+    "description": "The Birthday label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailLabel": "Email",
+  "@emailLabel": {
+    "description": "The Email label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "phoneNumberLabel": "Phone Number",
+  "@phoneNumberLabel": {
+    "description": "The Phone Number label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "vatLabel": "VAT",
+  "@vatLabel": {
+    "description": "The VAT label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nationalityLabel": "Nationality",
+  "@nationalityLabel": {
+    "description": "The Nationality label",
+    "type": "text",
+    "placeholders": {}
+  }
+}

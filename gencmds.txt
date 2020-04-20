@@ -1,0 +1,59 @@
+------------ Settings
+flutter pub run intl_translation:extract_to_arb \
+--output-dir=lib/l10n/settings \
+lib/locale/settings_locales.dart eof
+
+flutter pub run intl_translation:generate_from_arb --output-dir=lib/l10n/settings \
+--no-use-deferred-loading \
+lib/l10n/settings/intl_messages.arb lib/l10n/settings/intl_en.arb lib/l10n/settings/intl_pt.arb \
+lib/locale/settings_locales.dart eof
+
+------------ Profile Details
+flutter pub run intl_translation:extract_to_arb \
+--output-dir=lib/l10n/profile_details \
+lib/locale/profile_details_locales.dart eof
+
+flutter pub run intl_translation:generate_from_arb --output-dir=lib/l10n/profile_details \
+--no-use-deferred-loading \
+lib/l10n/profile_details/intl_messages.arb lib/l10n/profile_details/intl_en.arb lib/l10n/profile_details/intl_pt.arb \
+lib/locale/profile_details_locales.dart eof
+
+------------ Commons
+flutter pub run intl_translation:extract_to_arb \
+--output-dir=lib/l10n/common \
+lib/locale/common_locales.dart eof
+
+flutter pub run intl_translation:generate_from_arb --output-dir=lib/l10n/common \
+--no-use-deferred-loading \
+lib/l10n/common/intl_messages.arb lib/l10n/common/intl_en.arb lib/l10n/common/intl_pt.arb \
+lib/locale/common_locales.dart eof
+
+------------ Personal Details
+flutter pub run intl_translation:extract_to_arb \
+--output-dir=lib/l10n/personal_details \
+lib/locale/personal_details_locales.dart eof
+
+flutter pub run intl_translation:generate_from_arb --output-dir=lib/l10n/personal_details \
+--no-use-deferred-loading \
+lib/l10n/personal_details/intl_messages.arb lib/l10n/personal_details/intl_en.arb lib/l10n/personal_details/intl_pt.arb \
+lib/locale/personal_details_locales.dart eof
+
+------------ Personal Transactions
+flutter pub run intl_translation:extract_to_arb \
+--output-dir=lib/l10n/personal_transactions \
+lib/locale/personal_transactions_locales.dart eof
+
+flutter pub run intl_translation:generate_from_arb --output-dir=lib/l10n/personal_transactions \
+--no-use-deferred-loading \
+lib/l10n/personal_transactions/intl_messages.arb lib/l10n/personal_transactions/intl_en.arb lib/l10n/personal_transactions/intl_pt.arb \
+lib/locale/personal_transactions_locales.dart eof
+
+------------ DASHBOARD
+flutter pub run intl_translation:extract_to_arb \
+--output-dir=lib/l10n/dashboard \
+lib/locale/dashboard_locales.dart eof
+
+flutter pub run intl_translation:generate_from_arb --output-dir=lib/l10n/dashboard \
+--no-use-deferred-loading \
+lib/l10n/dashboard/intl_messages.arb lib/l10n/dashboard/intl_en.arb lib/l10n/dashboard/intl_pt.arb \
+lib/locale/dashboard_locales.dart eof

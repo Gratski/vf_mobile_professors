@@ -1,0 +1,50 @@
+{
+  "viewAsStudentLinkLabel": "Add Language",
+  "@viewAsStudentLinkLabel": {
+    "description": "The label to view as student link",
+    "type": "text",
+    "placeholders": {}
+  },
+  "greetingLabel": "Hello",
+  "@greetingLabel": {
+    "description": "The label Greeting",
+    "type": "text",
+    "placeholders": {}
+  },
+  "greetingIAmLabel": "I am",
+  "@greetingIAmLabel": {
+    "description": "The label Greeting I am",
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutLabel": "About",
+  "@aboutLabel": {
+    "description": "The label About Section Header",
+    "type": "text",
+    "placeholders": {}
+  },
+  "quoteLabel": "Quote",
+  "@quoteLabel": {
+    "description": "The label Quote Section Header",
+    "type": "text",
+    "placeholders": {}
+  },
+  "teachesLabel": "Teaches...",
+  "@teachesLabel": {
+    "description": "The label Teaches Section Header",
+    "type": "text",
+    "placeholders": {}
+  },
+  "commentsLabel": "Comments...",
+  "@commentsLabel": {
+    "description": "The label Comments Section Header",
+    "type": "text",
+    "placeholders": {}
+  },
+  "viewAllCommentsLinkLabel": "View All Comments",
+  "@viewAllCommentsLinkLabel": {
+    "description": "The label View All Comments Link",
+    "type": "text",
+    "placeholders": {}
+  }
+}

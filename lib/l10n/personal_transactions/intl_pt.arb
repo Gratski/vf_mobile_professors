@@ -1,0 +1,26 @@
+{
+  "transactionsHistoryHeader": "Histórico de Transações",
+  "@transactionsHistoryHeader": {
+    "description": "The label Transactions History Header",
+    "type": "text",
+    "placeholders": {}
+  },
+  "currentMonthTabLabel": "Este Mês",
+  "@currentMonthTabLabel": {
+    "description": "The label for This Month Tab",
+    "type": "text",
+    "placeholders": {}
+  },
+  "totalMonthsTabLabel": "Todas",
+  "@totalMonthsTabLabel": {
+    "description": "The label Total Months Tab",
+    "type": "text",
+    "placeholders": {}
+  },
+  "paymentItemLabel": "Pagamento",
+  "@paymentItemLabel": {
+    "description": "The label Payment Item Label",
+    "type": "text",
+    "placeholders": {}
+  }
+}
