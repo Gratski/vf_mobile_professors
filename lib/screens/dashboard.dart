@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:professors/localization/dashboard/app_localization.dart';
-import 'package:professors/styles/colors.dart';
+import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/styles/padding.dart';
+import 'package:professors/widgets/buttons/buttons_builder.dart';
+import 'package:professors/widgets/dividers/dividers_builder.dart';
 import 'package:professors/widgets/text/text.builder.dart';
-import 'package:professors/localization/dashboard/dashboard_locales.dart'
-    as TRANSLATIONS;
+import 'package:professors/localization/constants/dashboard_constants.dart' as TRANSLATIONS;
 
 class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Padding(
-          padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width * 0.05,
-          right: MediaQuery.of(context).size.width * 0.05),
+          padding: PaddingsBuilder.regularPadding(context),
           child: CustomScrollView(
             slivers: <Widget>[
               SliverAppBar(
@@ -34,30 +33,9 @@ class DashboardScreen extends StatelessWidget {
                     child: Column(
                   children: <Widget>[
 
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 2,
-                          child: Divider(
-                            color: Colors.grey,
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Text("Overview", textAlign: TextAlign.center,),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Divider(
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
+                    DividersBuilder.dividerWithCenteredText('Overview'),
                     /// STATISTICS TOTAL
                     Container(
-                      margin: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height * 0.02),
                       child: Row(
                         children: <Widget>[
                           // evaluation item
@@ -136,32 +114,8 @@ class DashboardScreen extends StatelessWidget {
                       ),
                     ),
 
-                    /// DIVIDER
-                    Container(
-                      margin: EdgeInsets.only(top: 25.0, bottom: 25.0),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 2,
-                            child: Divider(
-                              color: Colors.grey,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Text("This Month", textAlign: TextAlign.center,),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Divider(
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
                     /// STATISTICS CURRENT MONTH
+                    DividersBuilder.dividerWithCenteredText('This Month'),
                     Container(
                       margin: EdgeInsets.only(
                           bottom: MediaQuery.of(context).size.height * 0.02),
@@ -248,14 +202,10 @@ class DashboardScreen extends StatelessWidget {
                           ///BUTTON TO ADD CLASS
                           Container(
                             margin: EdgeInsets.only(top: 15.0),
-                            child: FlatButton(
-                                color: Colors.red,
-                                textColor: Colors.white,
-                                onPressed: () {},
-                                child: TextsBuilder.regularText(
-                                    AppLocalizations.of(context).translate(
-                                        TRANSLATIONS.DashboardConstants
-                                            .NEXT_CLASSES_CREATE_CLASS_BUTTON)),),
+                            child: ButtonsBuilder.redFlatButton(
+                                AppLocalizations.of(context).translate(TRANSLATIONS.DashboardConstants.NEXT_CLASSES_CREATE_CLASS_BUTTON),
+                                    () { }
+                                ),
                           ),
                         ],
                       ),

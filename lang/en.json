@@ -15,6 +15,18 @@
   "DASHBOARD_CLASSIFICATION_HIGH_TEXT": "Score calculation is based on the reviews average. You have an amazing score. Congratulations!",
   "DASHBOARD_CLASSIFICATION_AVERAGE_TEXT": "Score calculation is based on the reviews average. Your score is ok, but we know you could do better. Keep the work.",
   "DASHBOARD_CLASSIFICATION_LOW_TEXT": "Score calculation is based on the reviews average. Your score is bellow average. Please review your class content and classes interaction.",
-  "DASHBOARD_THIS_MONTH": "This Month"
+  "DASHBOARD_THIS_MONTH": "This Month",
+
+  "SETTINGS_VIEW_PROFILE": "View Profile",
+  "SETTINGS_PERSONAL_DETAILS": "Personal Details",
+  "SETTINGS_PERSONAL_DETAILS_HINT": "Account Configurations",
+  "SETTINGS_NOTIFICATIONS": "Notifications",
+  "SETTINGS_PRIVACY_DEFINITIONS": "Privacy Definitions",
+  "SETTINGS_PAYMENTS": "Payments",
+  "SETTINGS_CONTACT_US": "Contact us",
+  "SETTINGS_CONTACT_US_HINT": "Support",
+  "SETTINGS_HOW_IT_WORKS": "User Guide",
+  "SETTINGS_HOW_IT_WORKS_HINT": "About",
+  "SETTINGS_TERMS": "Terms and Conditions"
 
 }

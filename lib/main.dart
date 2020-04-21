@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:professors/screens/dashboard.dart';
-import 'localization/dashboard/app_localization.dart';
+import 'package:professors/screens/settings/settings.dart';
+import 'localization/app_localizations.dart';
 
 void main() {
   runApp(MyApp());
@@ -37,6 +38,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: DashboardScreen());
+        home: SettingsScreen());
   }
 }
