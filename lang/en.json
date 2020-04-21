@@ -1,0 +1,20 @@
+{
+
+  "DASHBOARD_HEADER_TOP": "Dashboard",
+  "DASHBOARD_HEADER_NEXT_CLASSES": "Next Classes",
+  "DASHBOARD_HEADER_CLASSIFICATIONS": "Your Score",
+
+  "DASHBOARD_RATE": "Score",
+  "DASHBOARD_NUMBER_OF_COMMENTS": "Comments",
+  "DASHBOARD_NUMBER_OF_STUDENTS": "Students",
+  "DASHBOARD_NUMBER_OF_CLASSES": "Classes",
+  "DASHBOARD_INCOME": "Income",
+  "DASHBOARD_CANCELLATIONS": "Cancellations",
+  "DASHBOARD_NEXT_CLASSES_NOT_FOUND_TEXT": "Keep your students active and fit. Add your classes now!",
+  "DASHBOARD_NEXT_CLASSES_CREATE_CLASS_BUTTON": "Add Class",
+  "DASHBOARD_CLASSIFICATION_HIGH_TEXT": "Score calculation is based on the reviews average. You have an amazing score. Congratulations!",
+  "DASHBOARD_CLASSIFICATION_AVERAGE_TEXT": "Score calculation is based on the reviews average. Your score is ok, but we know you could do better. Keep the work.",
+  "DASHBOARD_CLASSIFICATION_LOW_TEXT": "Score calculation is based on the reviews average. Your score is bellow average. Please review your class content and classes interaction.",
+  "DASHBOARD_THIS_MONTH": "This Month"
+
+}
