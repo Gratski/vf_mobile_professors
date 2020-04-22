@@ -75,8 +75,12 @@ class TextsBuilder {
     return createText(text, _FONT_SMALL, _FONT_FAMILY_REGULAR);
   }
 
-  static createText(String text, double size, String fontFamily) {
-    return Text(text, style: TextStyle(fontSize: size, fontFamily: fontFamily));
+  static Text textHint(String text) {
+    return createText(text, _FONT_SMALL, _FONT_FAMILY_REGULAR, color: Colors.grey[500]);
+  }
+
+  static createText(String text, double size, String fontFamily, {Color color = Colors.black}) {
+    return Text(text, style: TextStyle(color: color, fontSize: size, fontFamily: fontFamily));
   }
 
   static Text regularText(String text) {
