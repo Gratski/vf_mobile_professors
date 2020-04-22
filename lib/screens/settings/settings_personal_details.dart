@@ -6,6 +6,7 @@ import 'package:professors/localization/constants/general_constants.dart'
     as GENERAL_TRANSLATIONS;
 import 'package:professors/localization/constants/settings_personal_details.dart'
     as SCREEN_TRANSLATIONS;
+import 'package:professors/widgets/structural/appbar_builder.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class SettingsPersonalDetailsScreen extends StatelessWidget {
@@ -14,41 +15,8 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-          SliverAppBar(
-            key: Key('app_bar_key'),
-            expandedHeight: 200,
-            floating: true,
-            pinned: true,
-            snap: true,
-            backgroundColor: Colors.white,
-            leading: Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-              size: 30.0,
-            ),
-            actions: <Widget>[
-              ButtonsBuilder.whiteFlatButton(
-                  AppLocalizations.of(context).translate(
-                      GENERAL_TRANSLATIONS.GeneralConstants.BUTTON_SAVE_LABEL),
-                  () {})
-            ],
-            flexibleSpace: Center(
-              child: Container(
-                padding: PaddingsBuilder.regularPadding(context),
-                margin: EdgeInsets.only(top: 50.0),
-                alignment: Alignment.centerLeft,
-                child: RichText(
-                  text: TextSpan(
-                    style: TextStyle(color: Colors.black),
-                    children: <TextSpan>[
-                      TextsBuilder.h1BoldSpan(AppLocalizations.of(context)
-                          .translate(SCREEN_TRANSLATIONS
-                              .PersonalDetailsConstants.TOP_HEADER)),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+          AppBarBuilder.sliverAppBarWithSaveButton(context, 
+            AppLocalizations.of(context).translate(SCREEN_TRANSLATIONS.PersonalDetailsConstants.TOP_HEADER)
           ),
           SliverToBoxAdapter(
             key: Key('form_box'),
