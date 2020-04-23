@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
-import 'package:professors/localization/constants/date_constants.dart';
 import 'package:professors/localization/constants/general_constants.dart';
+import 'package:professors/localization/constants/settings_transactions_history_constants.dart';
 import 'package:professors/models/transactions/transaction_type.dart';
 import 'package:professors/models/transactions/transactions_list_item.dart';
 import 'package:professors/styles/padding.dart';
-import 'package:professors/localization/constants/settings_transactions_history_constants.dart'
-    as SCREEN_TRANSLATIONS;
 import 'package:professors/utils/date_utils.dart';
 import 'package:professors/widgets/transactions/transaction_list_item.dart';
 
@@ -21,8 +19,10 @@ class SettingsTransactionsHistoryScreen extends StatefulWidget {
 class _SettingsTransactionsHistoryScreenState
     extends State<SettingsTransactionsHistoryScreen>
     with SingleTickerProviderStateMixin {
+
   TabController controller;
   GeneralConstants generalConstants = GeneralConstants();
+  SettingsTransactionsHistoryConstants screenConstants = SettingsTransactionsHistoryConstants();
 
   @override
   void initState() {
@@ -42,13 +42,18 @@ class _SettingsTransactionsHistoryScreenState
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
-        leading: Icon(
-          Icons.arrow_back_ios,
-          color: Colors.black,
+        leading: GestureDetector(
+          onTap: (){
+            Navigator.of(context).pop();
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
         ),
         centerTitle: false,
-        title: const Text(
-          'Tabbed AppBar',
+        title: Text(
+          AppLocalizations.of(context).translate(screenConstants.title),
           style: TextStyle(color: Colors.black),
         ),
         bottom: TabBar(
@@ -66,7 +71,7 @@ class _SettingsTransactionsHistoryScreenState
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width / 2,
                     child: Text(
-                      'This Month',
+                        AppLocalizations.of(context).translate(screenConstants.currentMonth),
                       style: TextStyle(color: Colors.teal),
                     ),
                   );
@@ -80,7 +85,7 @@ class _SettingsTransactionsHistoryScreenState
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width / 2,
                     child: Text(
-                      'All',
+                      AppLocalizations.of(context).translate(screenConstants.all),
                       style: TextStyle(color: Colors.teal),
                     ),
                   );

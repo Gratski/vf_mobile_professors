@@ -9,8 +9,8 @@ class TextsBuilder {
   static String _FONT_FAMILY_REGULAR = 'Inter';
 
   static double _FONT_SIZE_H1 = 38.0;
-  static double _FONT_SIZE_H2 = 24.0;
-  static double _FONT_SIZE_H3 = 20.0;
+  static double _FONT_SIZE_H2 = 30.0;
+  static double _FONT_SIZE_H3 = 24.0;
   static double _FONT_SIZE_H4 = 18.0;
   static double _FONT_SIZE_H5 = 13.0;
   static double _FONT_SIZE_REGULAR = 15.0;
@@ -68,9 +68,14 @@ class TextsBuilder {
     return createText(text, _FONT_SIZE_H1, _FONT_FAMILY_BOLD);
   }
 
+  /// TEXT H2
+  static Text h2Bold(String text) {
+    return createText(text, _FONT_SIZE_H2, _FONT_FAMILY_BOLD);
+  }
+
   /// TEXT H3
   static Text h3Bold(String text) {
-    return createText(text, _FONT_SIZE_H4, _FONT_FAMILY_BOLD);
+    return createText(text, _FONT_SIZE_H3, _FONT_FAMILY_BOLD);
   }
 
   /// TEXT H4
@@ -111,8 +116,8 @@ class TextsBuilder {
     if (color != null) {
       return Text(text,
           style:
-              TextStyle(color: color, fontSize: size, fontFamily: fontFamily));
+              TextStyle(color: color, fontSize: size, fontFamily: fontFamily), overflow: TextOverflow.visible,);
     }
-    return Text(text, style: TextStyle(fontSize: size, fontFamily: fontFamily));
+    return Text(text, style: TextStyle(fontSize: size, fontFamily: fontFamily,), overflow: TextOverflow.visible,);
   }
 }

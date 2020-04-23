@@ -98,10 +98,50 @@ class AppBarBuilder {
         },
       ),
       title: Text(
+        (title != null) ? title : '',
+        style: TextStyle(color: Colors.black),
+      ),
+      centerTitle: false,
+      /**
+          bottom: TabBar(
+          isScrollable: true,
+          tabs: choices.map((Choice choice) {
+          return Tab(
+          text: choice.title,
+          icon: Icon(choice.icon),
+          );
+          }).toList(),
+          ),
+       **/
+    );
+  }
+
+  static AppBar appBarWithTitleAndSaveButton(BuildContext context, String title, VoidCallback callback) {
+
+    GeneralConstants generalConstants = new GeneralConstants();
+
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0.0,
+      leading: GestureDetector(
+        child: Icon(
+          Icons.arrow_back_ios,
+          color: Colors.black,
+        ),
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
+      title: Text(
         title,
         style: TextStyle(color: Colors.black),
       ),
       centerTitle: false,
+      actions: <Widget>[
+        ButtonsBuilder.whiteFlatButton(
+            AppLocalizations.of(context).translate(generalConstants.buttonSaveLabel),
+            callback)
+      ],
       /**
           bottom: TabBar(
           isScrollable: true,

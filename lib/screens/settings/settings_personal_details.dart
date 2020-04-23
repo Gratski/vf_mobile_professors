@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
+import 'package:professors/localization/constants/settings_personal_details.dart';
 import 'package:professors/styles/padding.dart';
-import 'package:professors/widgets/buttons/buttons_builder.dart';
-import 'package:professors/localization/constants/settings_personal_details.dart'
-    as SCREEN_TRANSLATIONS;
 import 'package:professors/widgets/structural/appbar_builder.dart';
 import 'package:professors/widgets/structural/title_widget.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class SettingsPersonalDetailsScreen extends StatelessWidget {
 
-  GeneralConstants generalConstants;
-  SettingsPersonalDetailsScreen() {
-    this.generalConstants = GeneralConstants();
-  }
+  final GeneralConstants generalConstants = GeneralConstants();
+  final PersonalDetailsConstants screenConstants = PersonalDetailsConstants();
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +18,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
       appBar: AppBarBuilder.appBarWithSaveButton(context, () {}),
       body: CustomScrollView(
         slivers: <Widget>[
-          TopTitleWidget(AppLocalizations.of(context).translate(SCREEN_TRANSLATIONS
-          .PersonalDetailsConstants.TOP_HEADER)),
+          TopTitleWidget(AppLocalizations.of(context).translate(screenConstants.topHeader)),
           SliverToBoxAdapter(
             key: Key('form_box'),
             child: Container(
@@ -39,16 +34,13 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextsBuilder.textHint(AppLocalizations.of(context)
-                            .translate(SCREEN_TRANSLATIONS
-                                .PersonalDetailsConstants.FIRSTNAME_LABEL)),
+                            .translate(screenConstants.firstNameLabel)),
                         TextFormField(
                             key: Key('input_firstname'),
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: AppLocalizations.of(context)
-                                    .translate(SCREEN_TRANSLATIONS
-                                        .PersonalDetailsConstants
-                                        .FIRSTNAME_HINT)))
+                                    .translate(screenConstants.firstNameHint)))
                       ],
                     ),
 
@@ -57,16 +49,13 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextsBuilder.textHint(AppLocalizations.of(context)
-                            .translate(SCREEN_TRANSLATIONS
-                                .PersonalDetailsConstants.LASTNAME_LABEL)),
+                            .translate(screenConstants.lastNameLabel)),
                         TextFormField(
                             key: Key('input_lastname'),
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: AppLocalizations.of(context)
-                                    .translate(SCREEN_TRANSLATIONS
-                                        .PersonalDetailsConstants
-                                        .LASTNAME_HINT)))
+                                    .translate(screenConstants.lastNameHint)))
                       ],
                     ),
 
@@ -75,8 +64,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextsBuilder.textHint(AppLocalizations.of(context)
-                            .translate(SCREEN_TRANSLATIONS
-                                .PersonalDetailsConstants.LASTNAME_LABEL)),
+                            .translate(screenConstants.genderHint)),
                         DropdownButton<String>(
                           isExpanded: true,
                           icon: Icon(
@@ -113,8 +101,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextsBuilder.textHint(AppLocalizations.of(context)
-                            .translate(SCREEN_TRANSLATIONS
-                                .PersonalDetailsConstants.BIRTHDAY_HINT)),
+                            .translate(screenConstants.birthdayHint)),
                         Container(
                           padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
                           child: new Theme(
@@ -142,15 +129,13 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextsBuilder.textHint(AppLocalizations.of(context)
-                            .translate(SCREEN_TRANSLATIONS
-                                .PersonalDetailsConstants.EMAIL_LABEL)),
+                            .translate(screenConstants.emailLabel)),
                         TextFormField(
                             key: Key('input_email'),
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: AppLocalizations.of(context)
-                                    .translate(SCREEN_TRANSLATIONS
-                                        .PersonalDetailsConstants.EMAIL_HINT)))
+                                    .translate(screenConstants.emailHint)))
                       ],
                     ),
 
@@ -159,16 +144,13 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextsBuilder.textHint(AppLocalizations.of(context)
-                            .translate(SCREEN_TRANSLATIONS
-                                .PersonalDetailsConstants.PHONE_NUMBER_LABEL)),
+                            .translate(screenConstants.phoneNumberLabel)),
                         TextFormField(
                             key: Key('input_phone_number'),
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: AppLocalizations.of(context)
-                                    .translate(SCREEN_TRANSLATIONS
-                                        .PersonalDetailsConstants
-                                        .PHONE_NUMBER_HINT)))
+                                    .translate(screenConstants.phoneNumberHint)))
                       ],
                     ),
 
@@ -177,15 +159,13 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextsBuilder.textHint(AppLocalizations.of(context)
-                            .translate(SCREEN_TRANSLATIONS
-                                .PersonalDetailsConstants.VAT_LABEL)),
+                            .translate(screenConstants.vatLabel)),
                         TextFormField(
                             key: Key('input_vat_number'),
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: AppLocalizations.of(context)
-                                    .translate(SCREEN_TRANSLATIONS
-                                        .PersonalDetailsConstants.VAT_HINT)))
+                                    .translate(screenConstants.vatHint)))
                       ],
                     ),
 
@@ -194,8 +174,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextsBuilder.textHint(AppLocalizations.of(context)
-                            .translate(SCREEN_TRANSLATIONS
-                                .PersonalDetailsConstants.LASTNAME_LABEL)),
+                            .translate(screenConstants.nationalityHint)),
                         DropdownButton<String>(
                           isExpanded: true,
                           icon: Icon(
