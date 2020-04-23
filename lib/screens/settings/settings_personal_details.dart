@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/buttons/buttons_builder.dart';
-import 'package:professors/localization/constants/general_constants.dart'
-    as GENERAL_TRANSLATIONS;
 import 'package:professors/localization/constants/settings_personal_details.dart'
     as SCREEN_TRANSLATIONS;
 import 'package:professors/widgets/structural/appbar_builder.dart';
+import 'package:professors/widgets/structural/title_widget.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class SettingsPersonalDetailsScreen extends StatelessWidget {
+
+  GeneralConstants generalConstants;
+  SettingsPersonalDetailsScreen() {
+    this.generalConstants = GeneralConstants();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBarBuilder.appBarWithSaveButton(context, () {}),
       body: CustomScrollView(
         slivers: <Widget>[
-          AppBarBuilder.sliverAppBarWithSaveButton(context, 
-            AppLocalizations.of(context).translate(SCREEN_TRANSLATIONS.PersonalDetailsConstants.TOP_HEADER)
-          ),
+          TopTitleWidget(AppLocalizations.of(context).translate(SCREEN_TRANSLATIONS
+          .PersonalDetailsConstants.TOP_HEADER)),
           SliverToBoxAdapter(
             key: Key('form_box'),
             child: Container(
@@ -84,9 +90,14 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                           underline: Container(height: 0),
                           onChanged: (String newValue) {},
                           items: <String>[
-                            AppLocalizations.of(context).translate(GENERAL_TRANSLATIONS.GeneralConstants.LABEL_GENDER_MALE),
-                            AppLocalizations.of(context).translate(GENERAL_TRANSLATIONS.GeneralConstants.LABEL_GENDER_FEMALE)
-                            ].map<DropdownMenuItem<String>>((String value) {
+                            AppLocalizations.of(context).translate(
+                                generalConstants.genderMaleLabel
+                            ),
+                            AppLocalizations.of(context).translate(
+                                generalConstants.genderFemaleLabel
+                            )
+                          ].map<DropdownMenuItem<String>>(
+                            (String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Text(value),
@@ -103,24 +114,23 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                       children: <Widget>[
                         TextsBuilder.textHint(AppLocalizations.of(context)
                             .translate(SCREEN_TRANSLATIONS
-                            .PersonalDetailsConstants.BIRTHDAY_HINT)),
+                                .PersonalDetailsConstants.BIRTHDAY_HINT)),
                         Container(
                           padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
                           child: new Theme(
-                              data: Theme.of(context).copyWith(
-                                primaryColor: Colors.red
-                              ),
+                              data: Theme.of(context)
+                                  .copyWith(primaryColor: Colors.red),
                               child: GestureDetector(
                                 child: Text('Birthday here'),
                                 onTap: () {
                                   showDatePicker(
                                     context: context,
                                     initialDate: DateTime.now(),
-                                    firstDate: DateTime.now().subtract(new Duration(days: (365 * 70))),
+                                    firstDate: DateTime.now().subtract(
+                                        new Duration(days: (365 * 70))),
                                     lastDate: DateTime.now(),
-                                  ).then((date) => {
-                                    print('A new date has been selected')
-                                  });
+                                  ).then((date) =>
+                                      {print('A new date has been selected')});
                                 },
                               )),
                         )
@@ -133,15 +143,14 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                       children: <Widget>[
                         TextsBuilder.textHint(AppLocalizations.of(context)
                             .translate(SCREEN_TRANSLATIONS
-                            .PersonalDetailsConstants.EMAIL_LABEL)),
+                                .PersonalDetailsConstants.EMAIL_LABEL)),
                         TextFormField(
                             key: Key('input_email'),
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: AppLocalizations.of(context)
                                     .translate(SCREEN_TRANSLATIONS
-                                    .PersonalDetailsConstants
-                                    .EMAIL_HINT)))
+                                        .PersonalDetailsConstants.EMAIL_HINT)))
                       ],
                     ),
 
@@ -151,15 +160,15 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                       children: <Widget>[
                         TextsBuilder.textHint(AppLocalizations.of(context)
                             .translate(SCREEN_TRANSLATIONS
-                            .PersonalDetailsConstants.PHONE_NUMBER_LABEL)),
+                                .PersonalDetailsConstants.PHONE_NUMBER_LABEL)),
                         TextFormField(
                             key: Key('input_phone_number'),
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: AppLocalizations.of(context)
                                     .translate(SCREEN_TRANSLATIONS
-                                    .PersonalDetailsConstants
-                                    .PHONE_NUMBER_HINT)))
+                                        .PersonalDetailsConstants
+                                        .PHONE_NUMBER_HINT)))
                       ],
                     ),
 
@@ -169,15 +178,14 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                       children: <Widget>[
                         TextsBuilder.textHint(AppLocalizations.of(context)
                             .translate(SCREEN_TRANSLATIONS
-                            .PersonalDetailsConstants.VAT_LABEL)),
+                                .PersonalDetailsConstants.VAT_LABEL)),
                         TextFormField(
                             key: Key('input_vat_number'),
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: AppLocalizations.of(context)
                                     .translate(SCREEN_TRANSLATIONS
-                                    .PersonalDetailsConstants
-                                    .VAT_HINT)))
+                                        .PersonalDetailsConstants.VAT_HINT)))
                       ],
                     ),
 
@@ -187,7 +195,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                       children: <Widget>[
                         TextsBuilder.textHint(AppLocalizations.of(context)
                             .translate(SCREEN_TRANSLATIONS
-                            .PersonalDetailsConstants.LASTNAME_LABEL)),
+                                .PersonalDetailsConstants.LASTNAME_LABEL)),
                         DropdownButton<String>(
                           isExpanded: true,
                           icon: Icon(
@@ -201,12 +209,13 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                           underline: Container(height: 0),
                           onChanged: (String newValue) {},
                           items: <String>['Portuguese', 'North American']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          },
+                              .map<DropdownMenuItem<String>>(
+                            (String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            },
                           ).toList(),
                         ),
                       ],
