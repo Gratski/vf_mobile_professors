@@ -41,6 +41,6 @@ class MyApp extends StatelessWidget {
           indicatorColor: Colors.red,
           accentColor: Colors.red
         ),
-        home: SettingsTransactionsHistoryScreen());
+        home: SettingsScreen());
   }
 }

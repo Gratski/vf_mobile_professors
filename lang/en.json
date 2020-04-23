@@ -68,5 +68,16 @@
   "SETTINGS_PERSONAL_DETAILS_VAT_ERROR": "Insert a valid VAT number",
   "SETTINGS_PERSONAL_DETAILS_NATIONALITY_HINT": "Nationality",
 
-  "SETTINGS_TRANSACTIONS_HISTORY_TOP_HEADER": "Transactions History"
+  "SETTINGS_TRANSACTIONS_HISTORY_TOP_HEADER": "Transactions History",
+  "SETTINGS_TRANSACTIONS_HISTORY_CURRENT_MONTH": "This Month",
+  "SETTINGS_TRANSACTIONS_HISTORY_ALL": "All",
+
+  "SETTINGS_NOTIFICATIONS_TOP_HEADER": "Notifications",
+  "SETTINGS_NOTIFICATIONS_MESSAGES_LABEL": "Messages",
+  "SETTINGS_NOTIFICATIONS_MESSAGES_HINT": "Be notified when receiving messages, reviews and new class reservations.",
+  "SETTINGS_NOTIFICATIONS_REMINDERS_LABEL": "Reminders",
+  "SETTINGS_NOTIFICATIONS_REMINDERS_HINT": "Get notifications to remind you of your classes.",
+  "SETTINGS_NOTIFICATIONS_ACCOUNT_SUPPORT_LABEL": "System",
+  "SETTINGS_NOTIFICATIONS_ACCOUNT_SUPPORT_HINT": "Be notified every time we release new versions, changes to legal terms and conditions. These notifications will be also sent to your email"
+
 }
