@@ -4,6 +4,7 @@ import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/buttons/buttons_builder.dart';
 import 'package:professors/widgets/dividers/dividers_builder.dart';
+import 'package:professors/widgets/icons/icons_builder.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 import 'package:professors/localization/constants/dashboard_constants.dart'
     as TRANSLATIONS;
@@ -38,192 +39,209 @@ class DashboardScreen extends StatelessWidget {
                 DividersBuilder.dividerWithCenteredText('Overview'),
 
                 /// STATISTICS TOTAL
-                Container(
-                  child: Row(
-                    children: <Widget>[
-                      // evaluation item
-                      Expanded(
-                        flex: 2,
-                        child: Column(
+                Observer(
+                  builder: (_) {
+                    if (dashboardStore.isLoading) {
+                      return CircularProgressIndicator();
+                    } else {
+                      return Container(
+                        child: Row(
                           children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Observer(
-                                  builder: (_) {
-                                    return TextsBuilder.h3Bold(
-                                        '${dashboardStore.score}');
-                                  },
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.red,
-                                )
-                              ],
+                            // evaluation item
+                            Expanded(
+                              flex: 2,
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Observer(
+                                        builder: (_) {
+                                          return TextsBuilder.h3Bold(
+                                              '${dashboardStore.score}');
+                                        },
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.red,
+                                      )
+                                    ],
+                                  ),
+                                  TextsBuilder.regularText(
+                                      AppLocalizations.of(context).translate(
+                                          TRANSLATIONS.DashboardConstants.STATS_RATE))
+                                ],
+                              ),
                             ),
-                            TextsBuilder.regularText(
-                                AppLocalizations.of(context).translate(
-                                    TRANSLATIONS.DashboardConstants.STATS_RATE))
-                          ],
-                        ),
-                      ),
 
-                      /// total reviews
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Observer(
-                                  builder: (_) {
-                                    return TextsBuilder.h3Bold(
-                                        '${dashboardStore.totalComments}');
-                                  },
-                                ),
-                              ],
+                            /// total reviews
+                            Expanded(
+                              flex: 2,
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Observer(
+                                        builder: (_) {
+                                          return TextsBuilder.h3Bold(
+                                              '${dashboardStore.totalComments}');
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  TextsBuilder.regularText(
+                                      AppLocalizations.of(context).translate(
+                                          TRANSLATIONS.DashboardConstants
+                                              .STATS_NUMBER_OF_COMMENTS))
+                                ],
+                              ),
                             ),
-                            TextsBuilder.regularText(
-                                AppLocalizations.of(context).translate(
-                                    TRANSLATIONS.DashboardConstants
-                                        .STATS_NUMBER_OF_COMMENTS))
-                          ],
-                        ),
-                      ),
 
-                      /// total of students
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Observer(
-                                  builder: (_) {
-                                    return TextsBuilder.h3Bold(
-                                        '${dashboardStore.totalNumberOfStudents}');
-                                  },
-                                ),
-                              ],
+                            /// total of students
+                            Expanded(
+                              flex: 2,
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Observer(
+                                        builder: (_) {
+                                          return TextsBuilder.h3Bold(
+                                              '${dashboardStore.totalNumberOfStudents}');
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  TextsBuilder.regularText(
+                                      AppLocalizations.of(context).translate(
+                                          TRANSLATIONS.DashboardConstants
+                                              .STATS_NUMBER_OF_STUDENTS))
+                                ],
+                              ),
                             ),
-                            TextsBuilder.regularText(
-                                AppLocalizations.of(context).translate(
-                                    TRANSLATIONS.DashboardConstants
-                                        .STATS_NUMBER_OF_STUDENTS))
-                          ],
-                        ),
-                      ),
 
-                      /// total classes created
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Observer(
-                                  builder: (_) {
-                                    return TextsBuilder.h3Bold(
-                                        '${dashboardStore.totalNumberOfClasses}');
-                                  },
-                                ),
-                              ],
-                            ),
-                            TextsBuilder.regularText(
-                                AppLocalizations.of(context).translate(
-                                    TRANSLATIONS.DashboardConstants
-                                        .STATS_NUMBER_OF_CLASSES))
+                            /// total classes created
+                            Expanded(
+                              flex: 2,
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Observer(
+                                        builder: (_) {
+                                          return TextsBuilder.h3Bold(
+                                              '${dashboardStore.totalNumberOfClasses}');
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  TextsBuilder.regularText(
+                                      AppLocalizations.of(context).translate(
+                                          TRANSLATIONS.DashboardConstants
+                                              .STATS_NUMBER_OF_CLASSES))
+                                ],
+                              ),
+                            )
                           ],
                         ),
-                      )
-                    ],
-                  ),
+                      );
+                    }
+                  }
                 ),
 
                 /// STATISTICS CURRENT MONTH
                 DividersBuilder.dividerWithCenteredText('This Month'),
-                Container(
-                  margin: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).size.height * 0.02),
-                  child: Row(
-                    children: <Widget>[
-                      /// NUMBER OF STUDENTS
-                      Expanded(
-                        flex: 2,
-                        child: Column(
+                Observer(
+                  builder: (_) {
+                    if (dashboardStore.isLoading) {
+                      return CircularProgressIndicator();
+                    } else {
+                      return Container(
+                        margin: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).size.height * 0.02),
+                        child: Row(
                           children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Observer(
-                                  builder: (_) {
-                                    return TextsBuilder.h3Bold(
-                                        '${dashboardStore.currentMonthNumberOfStudents}');
-                                  },
-                                ),
-                              ],
+                            /// NUMBER OF STUDENTS
+                            Expanded(
+                              flex: 2,
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Observer(
+                                        builder: (_) {
+                                          return TextsBuilder.h3Bold(
+                                              '${dashboardStore.currentMonthNumberOfStudents}');
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  TextsBuilder.regularText(
+                                      AppLocalizations.of(context).translate(
+                                          TRANSLATIONS.DashboardConstants
+                                              .STATS_NUMBER_OF_STUDENTS))
+                                ],
+                              ),
                             ),
-                            TextsBuilder.regularText(
-                                AppLocalizations.of(context).translate(
-                                    TRANSLATIONS.DashboardConstants
-                                        .STATS_NUMBER_OF_STUDENTS))
-                          ],
-                        ),
-                      ),
 
-                      /// INCOME
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Observer(
-                                  builder: (_) {
-                                    return TextsBuilder.h3Bold(
-                                        '${dashboardStore.currentMonthIncome} €');
-                                  },
-                                ),
-                              ],
+                            /// INCOME
+                            Expanded(
+                              flex: 2,
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Observer(
+                                        builder: (_) {
+                                          return TextsBuilder.h3Bold(
+                                              '${dashboardStore.currentMonthIncome} €');
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  TextsBuilder.regularText(
+                                      AppLocalizations.of(context).translate(
+                                          TRANSLATIONS
+                                              .DashboardConstants.STATS_INCOME))
+                                ],
+                              ),
                             ),
-                            TextsBuilder.regularText(
-                                AppLocalizations.of(context).translate(
-                                    TRANSLATIONS
-                                        .DashboardConstants.STATS_INCOME))
-                          ],
-                        ),
-                      ),
 
-                      /// total of students
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Observer(
-                                  builder: (_) {
-                                    return TextsBuilder.h3Bold(
-                                        '${dashboardStore.currentMonthNumberOfStudents}');
-                                  },
-                                ),
-                              ],
+                            /// total of students
+                            Expanded(
+                              flex: 2,
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Observer(
+                                        builder: (_) {
+                                          return TextsBuilder.h3Bold(
+                                              '${dashboardStore.currentMonthNumberOfStudents}');
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  TextsBuilder.regularText(
+                                      AppLocalizations.of(context).translate(
+                                          TRANSLATIONS.DashboardConstants
+                                              .STATS_CANCELLATIONS_NUMBER))
+                                ],
+                              ),
                             ),
-                            TextsBuilder.regularText(
-                                AppLocalizations.of(context).translate(
-                                    TRANSLATIONS.DashboardConstants
-                                        .STATS_CANCELLATIONS_NUMBER))
                           ],
                         ),
-                      ),
-                    ],
-                  ),
+                      );
+                    }
+                  }
                 ),
+
 
                 /// NEXT CLASSES
                 Container(
@@ -233,18 +251,19 @@ class DashboardScreen extends StatelessWidget {
                     children: <Widget>[
                       Observer(
                         builder: (_) {
-                          if( dashboardStore.isNextClassesLoading ) {
+                          if (dashboardStore.isNextClassesLoading) {
                             return Text('');
                           } else {
-                            return TextsBuilder.h1Bold(AppLocalizations.of(context)
-                                .translate(TRANSLATIONS
-                                .DashboardConstants.HEADER_NEXT_CLASSES));
+                            return TextsBuilder.h1Bold(
+                                AppLocalizations.of(context).translate(
+                                    TRANSLATIONS.DashboardConstants
+                                        .HEADER_NEXT_CLASSES));
                           }
                         },
                       ),
                       Observer(
                         builder: (_) {
-                          if ( !dashboardStore.isNextClassesLoading ) {
+                          if (!dashboardStore.isNextClassesLoading) {
                             // show next classes list if there any
                             if (dashboardStore.nextClasses.length > 0) {
                               return ListView.builder(
@@ -252,8 +271,7 @@ class DashboardScreen extends StatelessWidget {
                                 itemCount: dashboardStore.nextClasses.length,
                                 itemBuilder: (_, int index) {
                                   return Text(
-                                      '${dashboardStore.nextClasses[index]
-                                          .designation}');
+                                      '${dashboardStore.nextClasses[index].designation}');
                                 },
                               );
                             } else {
@@ -262,8 +280,9 @@ class DashboardScreen extends StatelessWidget {
                                   Container(
                                     margin: EdgeInsets.only(top: 15.0),
                                     child: TextsBuilder.regularText(
-                                      AppLocalizations.of(context).translate(TRANSLATIONS
-                                          .DashboardConstants.NEXT_CLASSES_NOT_FOUND_TEXT),
+                                      AppLocalizations.of(context).translate(
+                                          TRANSLATIONS.DashboardConstants
+                                              .NEXT_CLASSES_NOT_FOUND_TEXT),
                                     ),
                                   ),
 
@@ -271,10 +290,10 @@ class DashboardScreen extends StatelessWidget {
                                   Container(
                                     margin: EdgeInsets.only(top: 15.0),
                                     child: ButtonsBuilder.redFlatButton(
-                                        AppLocalizations.of(context).translate(TRANSLATIONS
-                                            .DashboardConstants
-                                            .NEXT_CLASSES_CREATE_CLASS_BUTTON),
-                                            () {}),
+                                        AppLocalizations.of(context).translate(
+                                            TRANSLATIONS.DashboardConstants
+                                                .NEXT_CLASSES_CREATE_CLASS_BUTTON),
+                                        () {}),
                                   ),
                                 ],
                               );
@@ -297,40 +316,52 @@ class DashboardScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        TextsBuilder.h1Bold(
-                          AppLocalizations.of(context).translate(TRANSLATIONS
-                              .DashboardConstants.HEADER_NEXT_CLASSES),
+                        Observer(
+                          builder: (_) {
+                            if (dashboardStore.isLoading) {
+                              return CircularProgressIndicator();
+                            } else {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  /// TITLE
+                                  TextsBuilder.h1Bold(
+                                    AppLocalizations.of(context).translate(
+                                        TRANSLATIONS.DashboardConstants
+                                            .HEADER_CLASSIFICATIONS),
+                                  ),
+                                  Row(
+                                      children:
+                                          IconsBuilder.startListBasedOnScore(
+                                              dashboardStore.score)),
+                                  Container(
+                                    margin: EdgeInsets.only(top: 15.0),
+                                    child: (dashboardStore.score < 3)
+                                        ? TextsBuilder.regularText(
+                                            AppLocalizations.of(context)
+                                                .translate(TRANSLATIONS
+                                                    .DashboardConstants
+                                                    .CLASSIFICATION_LOW_TEXT),
+                                          )
+                                        : (dashboardStore.score < 4.5)
+                                            ? TextsBuilder.regularText(
+                                                AppLocalizations.of(context)
+                                                    .translate(TRANSLATIONS
+                                                        .DashboardConstants
+                                                        .CLASSIFICATION_AVERAGE_TEXT),
+                                              )
+                                            : TextsBuilder.regularText(
+                                                AppLocalizations.of(context)
+                                                    .translate(TRANSLATIONS
+                                                        .DashboardConstants
+                                                        .CLASSIFICATION_HIGH_TEXT),
+                                              ),
+                                  ),
+                                ],
+                              );
+                            }
+                          },
                         ),
-                        Row(
-                          children: <Widget>[
-                            Icon(
-                              Icons.star,
-                              color: Colors.red,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.red,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.red,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.red,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.red,
-                            )
-                          ],
-                        ),
-                        Container(
-                            margin: EdgeInsets.only(top: 15.0),
-                            child: TextsBuilder.regularText(
-                                AppLocalizations.of(context).translate(
-                                    TRANSLATIONS.DashboardConstants
-                                        .CLASSIFICATION_HIGH_TEXT))),
                       ],
                     ))
               ],

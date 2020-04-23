@@ -39,8 +39,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Colors.red,
           indicatorColor: Colors.red,
-          
+          accentColor: Colors.red
         ),
-        home: DashboardScreen());
+        home: SettingsTransactionsHistoryScreen());
   }
 }

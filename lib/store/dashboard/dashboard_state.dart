@@ -20,7 +20,7 @@ abstract class _DashboardState with Store {
   bool isNextClassesLoading = false;
 
   @observable
-  double score = 0.0;
+  double score = 2.7;
 
   @observable
   int totalComments = 0;

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/buttons/buttons_builder.dart';
-import 'package:professors/localization/constants/general_constants.dart'
-    as GENERAL_TRANSLATIONS;
 import 'package:professors/localization/constants/settings_personal_details.dart'
     as SCREEN_TRANSLATIONS;
 import 'package:professors/widgets/structural/appbar_builder.dart';
@@ -11,6 +10,12 @@ import 'package:professors/widgets/structural/title_widget.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class SettingsPersonalDetailsScreen extends StatelessWidget {
+
+  GeneralConstants generalConstants;
+  SettingsPersonalDetailsScreen() {
+    this.generalConstants = GeneralConstants();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,11 +91,11 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                           onChanged: (String newValue) {},
                           items: <String>[
                             AppLocalizations.of(context).translate(
-                                GENERAL_TRANSLATIONS
-                                    .GeneralConstants.LABEL_GENDER_MALE),
+                                generalConstants.genderMaleLabel
+                            ),
                             AppLocalizations.of(context).translate(
-                                GENERAL_TRANSLATIONS
-                                    .GeneralConstants.LABEL_GENDER_FEMALE)
+                                generalConstants.genderFemaleLabel
+                            )
                           ].map<DropdownMenuItem<String>>(
                             (String value) {
                               return DropdownMenuItem<String>(

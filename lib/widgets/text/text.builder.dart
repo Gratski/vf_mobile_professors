@@ -37,7 +37,7 @@ class TextsBuilder {
     return TextSpan(
         text: text,
         style:
-        TextStyle(fontSize: _FONT_SIZE_H2, fontFamily: _FONT_FAMILY_BOLD));
+            TextStyle(fontSize: _FONT_SIZE_H2, fontFamily: _FONT_FAMILY_BOLD));
   }
 
   /// SPAN
@@ -59,8 +59,9 @@ class TextsBuilder {
     return TextSpan(
         text: text,
         style: TextStyle(
-          color: Colors.grey,
-            fontSize: _FONT_SMALL, fontFamily: _FONT_FAMILY_REGULAR));
+            color: Colors.grey,
+            fontSize: _FONT_SMALL,
+            fontFamily: _FONT_FAMILY_REGULAR));
   }
 
   static Text h1Bold(String text) {
@@ -88,18 +89,29 @@ class TextsBuilder {
   }
 
   static Text textHint(String text) {
-    return createText(text, _FONT_SMALL, _FONT_FAMILY_REGULAR, color: Colors.grey[500]);
+    return createText(text, _FONT_SMALL, _FONT_FAMILY_REGULAR,
+        color: Colors.grey[500]);
   }
 
-  static Text regularText(String text) {
-    return Text(text,
-        style: TextStyle(
-            fontSize: _FONT_SIZE_REGULAR, fontFamily: _FONT_FAMILY_REGULAR));
+  static Text regularText(String text, {TextAlign alignment}) {
+    TextAlign align = TextAlign.start;
+    if (alignment != null) {
+      align = alignment;
+    }
+    return Text(
+      text,
+      textAlign: align,
+      style: TextStyle(
+          fontSize: _FONT_SIZE_REGULAR, fontFamily: _FONT_FAMILY_REGULAR),
+    );
   }
 
-  static createText(String text, double size, String fontFamily, {Color color}) {
-    if( color != null ) {
-      return Text(text, style: TextStyle(color: color, fontSize: size, fontFamily: fontFamily));
+  static createText(String text, double size, String fontFamily,
+      {Color color}) {
+    if (color != null) {
+      return Text(text,
+          style:
+              TextStyle(color: color, fontSize: size, fontFamily: fontFamily));
     }
     return Text(text, style: TextStyle(fontSize: size, fontFamily: fontFamily));
   }

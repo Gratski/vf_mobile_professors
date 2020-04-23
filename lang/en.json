@@ -1,8 +1,22 @@
 {
 
+  "DATE_MONTH_1": "January",
+  "DATE_MONTH_2": "February",
+  "DATE_MONTH_3": "March",
+  "DATE_MONTH_4": "April",
+  "DATE_MONTH_5": "May",
+  "DATE_MONTH_6": "June",
+  "DATE_MONTH_7": "July",
+  "DATE_MONTH_8": "August",
+  "DATE_MONTH_9": "September",
+  "DATE_MONTH_10": "October",
+  "DATE_MONTH_11": "November",
+  "DATE_MONTH_12": "December",
+
   "GENERAL_ACTIONS_SAVE_LABEL": "SAVE",
   "GENERAL_LABELS_GENDER_MALE": "Male",
   "GENERAL_LABELS_GENDER_FEMALE": "Female",
+  "GENERAL_WORD_OF": "of",
 
   "DASHBOARD_HEADER_TOP": "Dashboard",
   "DASHBOARD_HEADER_NEXT_CLASSES": "Next Classes",

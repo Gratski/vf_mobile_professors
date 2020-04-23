@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/buttons/buttons_builder.dart';
 import 'package:professors/widgets/text/text.builder.dart';
-import 'package:professors/localization/constants/general_constants.dart'
-as GENERAL_TRANSLATIONS;
 
 class Choice {
   const Choice({this.title, this.icon});
@@ -15,16 +14,14 @@ class Choice {
 
 const List<Choice> choices = const <Choice>[
   const Choice(title: 'CAR', icon: Icons.directions_car),
-  const Choice(title: 'BICYCLE', icon: Icons.directions_bike),
-  const Choice(title: 'BOAT', icon: Icons.directions_boat),
-  const Choice(title: 'BUS', icon: Icons.directions_bus),
-  const Choice(title: 'TRAIN', icon: Icons.directions_railway),
-  const Choice(title: 'WALK', icon: Icons.directions_walk),
+  const Choice(title: 'BICYCLE', icon: Icons.directions_bike)
 ];
 
 class AppBarBuilder {
+  static SliverAppBar sliverAppBarWithSaveButton(
+      BuildContext context, String title) {
+    GeneralConstants generalConstants = GeneralConstants();
 
-  static SliverAppBar sliverAppBarWithSaveButton(BuildContext context, String title) {
     return SliverAppBar(
       key: Key('app_bar_key'),
       expandedHeight: 200,
@@ -39,9 +36,9 @@ class AppBarBuilder {
       ),
       actions: <Widget>[
         ButtonsBuilder.whiteFlatButton(
-            AppLocalizations.of(context).translate(
-                GENERAL_TRANSLATIONS.GeneralConstants.BUTTON_SAVE_LABEL),
-                () {})
+            AppLocalizations.of(context)
+                .translate(generalConstants.buttonSaveLabel),
+            () {})
       ],
       flexibleSpace: Center(
         child: Container(
@@ -62,21 +59,27 @@ class AppBarBuilder {
     );
   }
 
-  static AppBar appBarWithSaveButton(BuildContext context, VoidCallback callBack) {
+  static AppBar appBarWithSaveButton(
+      BuildContext context, VoidCallback callBack) {
+
+    GeneralConstants generalConstants = GeneralConstants();
+
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0.0,
       leading: GestureDetector(
-        child: Icon(Icons.arrow_back_ios, color: Colors.black,),
+        child: Icon(
+          Icons.arrow_back_ios,
+          color: Colors.black,
+        ),
         onTap: () {
           Navigator.pop(context);
         },
       ),
       actions: <Widget>[
         ButtonsBuilder.whiteFlatButton(
-            AppLocalizations.of(context).translate(
-                GENERAL_TRANSLATIONS.GeneralConstants.BUTTON_SAVE_LABEL),
-                callBack)
+            AppLocalizations.of(context).translate(generalConstants.buttonSaveLabel),
+            callBack)
       ],
     );
   }
@@ -86,25 +89,63 @@ class AppBarBuilder {
       backgroundColor: Colors.transparent,
       elevation: 0.0,
       leading: GestureDetector(
-        child: Icon(Icons.arrow_back_ios, color: Colors.black,),
+        child: Icon(
+          Icons.arrow_back_ios,
+          color: Colors.black,
+        ),
         onTap: () {
           Navigator.pop(context);
         },
       ),
-      title: Text(title, style: TextStyle(color: Colors.black),),
+      title: Text(
+        title,
+        style: TextStyle(color: Colors.black),
+      ),
       centerTitle: false,
       /**
-      bottom: TabBar(
-        isScrollable: true,
-        tabs: choices.map((Choice choice) {
+          bottom: TabBar(
+          isScrollable: true,
+          tabs: choices.map((Choice choice) {
           return Tab(
-            text: choice.title,
-            icon: Icon(choice.icon),
+          text: choice.title,
+          icon: Icon(choice.icon),
           );
-        }).toList(),
-      ),
-      **/
+          }).toList(),
+          ),
+       **/
     );
   }
 
+  static appBarWithTitleAndTabs(BuildContext context, String title) {
+    TabController tabController = new TabController(length: 2);
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0.0,
+      leading: GestureDetector(
+        child: Icon(
+          Icons.arrow_back_ios,
+          color: Colors.black,
+        ),
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
+      title: Text(
+        title,
+        style: TextStyle(color: Colors.black),
+      ),
+      centerTitle: false,
+      bottom: TabBar(
+        isScrollable: true,
+        tabs: <Widget>[
+          Tab(
+            child: Text('This month'),
+          ),
+          Tab(
+            child: Text('Total'),
+          ),
+        ],
+      ),
+    );
+  }
 }

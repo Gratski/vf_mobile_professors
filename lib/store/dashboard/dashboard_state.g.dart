@@ -9,6 +9,43 @@ part of 'dashboard_state.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$DashboardState on _DashboardState, Store {
+  final _$isLoadingAtom = Atom(name: '_DashboardState.isLoading');
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.context.enforceReadPolicy(_$isLoadingAtom);
+    _$isLoadingAtom.reportObserved();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.context.conditionallyRunInAction(() {
+      super.isLoading = value;
+      _$isLoadingAtom.reportChanged();
+    }, _$isLoadingAtom, name: '${_$isLoadingAtom.name}_set');
+  }
+
+  final _$isNextClassesLoadingAtom =
+      Atom(name: '_DashboardState.isNextClassesLoading');
+
+  @override
+  bool get isNextClassesLoading {
+    _$isNextClassesLoadingAtom.context
+        .enforceReadPolicy(_$isNextClassesLoadingAtom);
+    _$isNextClassesLoadingAtom.reportObserved();
+    return super.isNextClassesLoading;
+  }
+
+  @override
+  set isNextClassesLoading(bool value) {
+    _$isNextClassesLoadingAtom.context.conditionallyRunInAction(() {
+      super.isNextClassesLoading = value;
+      _$isNextClassesLoadingAtom.reportChanged();
+    }, _$isNextClassesLoadingAtom,
+        name: '${_$isNextClassesLoadingAtom.name}_set');
+  }
+
   final _$scoreAtom = Atom(name: '_DashboardState.score');
 
   @override
@@ -142,8 +179,45 @@ mixin _$DashboardState on _DashboardState, Store {
         name: '${_$currentMonthCancellationsAtom.name}_set');
   }
 
+  final _$nextClassesAtom = Atom(name: '_DashboardState.nextClasses');
+
+  @override
+  ObservableList<ClassListItem> get nextClasses {
+    _$nextClassesAtom.context.enforceReadPolicy(_$nextClassesAtom);
+    _$nextClassesAtom.reportObserved();
+    return super.nextClasses;
+  }
+
+  @override
+  set nextClasses(ObservableList<ClassListItem> value) {
+    _$nextClassesAtom.context.conditionallyRunInAction(() {
+      super.nextClasses = value;
+      _$nextClassesAtom.reportChanged();
+    }, _$nextClassesAtom, name: '${_$nextClassesAtom.name}_set');
+  }
+
   final _$_DashboardStateActionController =
       ActionController(name: '_DashboardState');
+
+  @override
+  dynamic setLoading(bool isLoading) {
+    final _$actionInfo = _$_DashboardStateActionController.startAction();
+    try {
+      return super.setLoading(isLoading);
+    } finally {
+      _$_DashboardStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setNextClassesLoading(bool isLoading) {
+    final _$actionInfo = _$_DashboardStateActionController.startAction();
+    try {
+      return super.setNextClassesLoading(isLoading);
+    } finally {
+      _$_DashboardStateActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic setScore(double newScore) {
@@ -211,6 +285,16 @@ mixin _$DashboardState on _DashboardState, Store {
     final _$actionInfo = _$_DashboardStateActionController.startAction();
     try {
       return super.setCurrentMonthCancellations(cancellations);
+    } finally {
+      _$_DashboardStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic resetState() {
+    final _$actionInfo = _$_DashboardStateActionController.startAction();
+    try {
+      return super.resetState();
     } finally {
       _$_DashboardStateActionController.endAction(_$actionInfo);
     }
