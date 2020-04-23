@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
-import 'package:professors/localization/constants/settings_personal_details.dart';
+import 'package:professors/localization/constants/settings/settings_personal_details.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/structural/appbar_builder.dart';
 import 'package:professors/widgets/structural/title_widget.dart';

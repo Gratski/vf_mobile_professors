@@ -78,6 +78,12 @@
   "SETTINGS_NOTIFICATIONS_REMINDERS_LABEL": "Reminders",
   "SETTINGS_NOTIFICATIONS_REMINDERS_HINT": "Get notifications to remind you of your classes.",
   "SETTINGS_NOTIFICATIONS_ACCOUNT_SUPPORT_LABEL": "System",
-  "SETTINGS_NOTIFICATIONS_ACCOUNT_SUPPORT_HINT": "Be notified every time we release new versions, changes to legal terms and conditions. These notifications will be also sent to your email"
+  "SETTINGS_NOTIFICATIONS_ACCOUNT_SUPPORT_HINT": "Be notified every time we release new versions, changes to legal terms and conditions. These notifications will be also sent to your email",
 
+  "SETTINGS_PAYMENTS_TOP_HEADER": "Payments",
+  "SETTINGS_PAYMENTS_BALANCE_LABEL": "Balance",
+  "SETTINGS_PAYMENTS_SEND_INVOICE_LABEL": "Send Invoice",
+  "SETTINGS_PAYMENTS_PAYMENT_METHOD_LABEL": "Payment Method",
+  "SETTINGS_PAYMENTS_CURRENCY_LABEL": "Currency",
+  "SETTING_PAYMENTS_TRANSACTIONS_HISTORY_LABEL": "Transactions History"
 }

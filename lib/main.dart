@@ -3,7 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:professors/screens/dashboard.dart';
 import 'package:professors/screens/settings/settings.dart';
 import 'package:professors/screens/settings/settings_personal_details.dart';
-import 'package:professors/screens/settings/settings_transactions_history.dart';
+import 'package:professors/screens/settings/payments/settings_transactions_history.dart';
 import 'localization/app_localizations.dart';
 
 void main() {

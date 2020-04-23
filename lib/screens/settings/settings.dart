@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/screens/settings/payments/payments.dart';
 import 'package:professors/screens/settings/settings_notifications.dart';
 import 'package:professors/screens/settings/settings_personal_details.dart';
-import 'package:professors/screens/settings/settings_transactions_history.dart';
+import 'package:professors/screens/settings/payments/settings_transactions_history.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/buttons/buttons_builder.dart';
 import 'package:professors/widgets/icons/icons_builder.dart';
 import 'package:professors/widgets/text/text.builder.dart';
-import 'package:professors/localization/constants/settings_constants.dart'
+import 'package:professors/localization/constants/settings/settings_constants.dart'
     as TRANSLATIONS;
 
 class SettingsScreen extends StatelessWidget {
@@ -105,12 +106,12 @@ class SettingsScreen extends StatelessWidget {
                               TRANSLATIONS.SettingsConstants.PRIVACY_DEFINITIONS), null)
                   ),
 
-                  /// PRIVACY DEFINITIONS
+                  /// PAYMENTS
                   ListTile(
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SettingsTransactionsHistoryScreen()),
+                          MaterialPageRoute(builder: (context) => PaymentsScreen()),
                         );
                       },
                       trailing: Icon(Icons.keyboard_arrow_right, color: Colors.black,),
@@ -128,7 +129,7 @@ class SettingsScreen extends StatelessWidget {
                           TRANSLATIONS.SettingsConstants.CONTACT_US_HINT))
                   ),
 
-                  /// CONTACT US
+                  /// HOW IT WORKS
                   ListTile(
                       trailing: Icon(Icons.keyboard_arrow_right, color: Colors.black,),
                       title: createListItemText(
@@ -137,7 +138,7 @@ class SettingsScreen extends StatelessWidget {
                           TRANSLATIONS.SettingsConstants.HOW_IT_WORKS_HINT))
                   ),
 
-                  /// CONTACT US
+                  /// TERMS
                   ListTile(
                       trailing: Icon(Icons.keyboard_arrow_right, color: Colors.black,),
                       title: createListItemText(

@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
-import 'package:professors/localization/constants/settings_transactions_history_constants.dart';
+import 'package:professors/localization/constants/settings/payments/settings_transactions_history_constants.dart';
 import 'package:professors/models/transactions/transaction_type.dart';
 import 'package:professors/models/transactions/transactions_list_item.dart';
 import 'package:professors/styles/padding.dart';
