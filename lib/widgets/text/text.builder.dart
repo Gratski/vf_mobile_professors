@@ -8,7 +8,7 @@ class TextsBuilder {
   static String _FONT_FAMILY_BOLD = 'Inter Bold';
   static String _FONT_FAMILY_REGULAR = 'Inter';
 
-  static double _FONT_SIZE_H1 = 28.0;
+  static double _FONT_SIZE_H1 = 38.0;
   static double _FONT_SIZE_H2 = 24.0;
   static double _FONT_SIZE_H3 = 20.0;
   static double _FONT_SIZE_H4 = 18.0;
@@ -33,6 +33,14 @@ class TextsBuilder {
   }
 
   /// SPAN
+  static TextSpan h2BoldSpan(String text) {
+    return TextSpan(
+        text: text,
+        style:
+        TextStyle(fontSize: _FONT_SIZE_H2, fontFamily: _FONT_FAMILY_BOLD));
+  }
+
+  /// SPAN
   static TextSpan h3LightSpan(String text) {
     return TextSpan(
         text: text,
@@ -53,6 +61,10 @@ class TextsBuilder {
         style: TextStyle(
           color: Colors.grey,
             fontSize: _FONT_SMALL, fontFamily: _FONT_FAMILY_REGULAR));
+  }
+
+  static Text h1Bold(String text) {
+    return createText(text, _FONT_SIZE_H1, _FONT_FAMILY_BOLD);
   }
 
   /// TEXT H3
@@ -79,13 +91,16 @@ class TextsBuilder {
     return createText(text, _FONT_SMALL, _FONT_FAMILY_REGULAR, color: Colors.grey[500]);
   }
 
-  static createText(String text, double size, String fontFamily, {Color color = Colors.black}) {
-    return Text(text, style: TextStyle(color: color, fontSize: size, fontFamily: fontFamily));
-  }
-
   static Text regularText(String text) {
     return Text(text,
         style: TextStyle(
             fontSize: _FONT_SIZE_REGULAR, fontFamily: _FONT_FAMILY_REGULAR));
+  }
+
+  static createText(String text, double size, String fontFamily, {Color color}) {
+    if( color != null ) {
+      return Text(text, style: TextStyle(color: color, fontSize: size, fontFamily: fontFamily));
+    }
+    return Text(text, style: TextStyle(fontSize: size, fontFamily: fontFamily));
   }
 }
