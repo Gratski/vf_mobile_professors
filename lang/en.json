@@ -85,5 +85,16 @@
   "SETTINGS_PAYMENTS_SEND_INVOICE_LABEL": "Send Invoice",
   "SETTINGS_PAYMENTS_PAYMENT_METHOD_LABEL": "Payment Method",
   "SETTINGS_PAYMENTS_CURRENCY_LABEL": "Currency",
-  "SETTING_PAYMENTS_TRANSACTIONS_HISTORY_LABEL": "Transactions History"
+  "SETTINGS_PAYMENTS_TRANSACTIONS_HISTORY_LABEL": "Transactions History",
+
+  "SETTINGS_PAYMENT_METHODS_TOP_HEADER": "Edit Payment Methods",
+  "SETTINGS_PAYMENT_METHODS_ADD_ACCOUNT_LINK": "Add Paypal Account",
+  "SETTINGS_PAYMENT_METHODS_DEFAULT_ACCOUNT_LABEL": "Default",
+
+  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_TOP_HEADER": "Good to know",
+  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_SUB_TITLE": "At this moment PayPal is the only payment method available",
+  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_EXECUTION_TIME_LABEL": "Transaction execution is processed every month on the last business day. Transaction execution can take up to 3 business days to be concluded.",
+  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_TAXATION_LABEL": "It may include taxes according to our terms and condtions depending on the country your are emitting your invoices from.",
+  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_PROCEED_LINK": "Got it! Proceed"
+
 }

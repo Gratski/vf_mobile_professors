@@ -1,4 +1,4 @@
-import 'package:professors/models/transactions/transaction_type.dart';
+import 'package:professors/models/payments/transactions/transaction_type.dart';
 
 class TransactionListItem {
 

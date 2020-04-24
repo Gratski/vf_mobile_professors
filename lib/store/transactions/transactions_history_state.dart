@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:professors/models/transactions/transaction_type.dart';
-import 'package:professors/models/transactions/transactions_list_item.dart';
+import 'package:professors/models/payments/transactions/transaction_type.dart';
+import 'package:professors/models/payments/transactions/transactions_list_item.dart';
 
 part 'transactions_history_state.g.dart';
 

@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/settings/payments/payments_constants.dart';
 import 'package:professors/localization/constants/settings/settings_notifications_constants.dart';
+import 'package:professors/screens/settings/payments/payment_methods.dart';
 import 'package:professors/screens/settings/payments/settings_transactions_history.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/lists/regular_list_tile.dart';
@@ -74,7 +75,12 @@ class PaymentsScreen extends StatelessWidget {
                   RegularListTile(
                       label: AppLocalizations.of(context).translate(screenConstants.paymentMethodLabel),
                       hint: null,
-                      callback: () {}),
+                      callback: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PaymentsMethodsScreen()),
+                        );
+                      }),
                   /// CURRENCY
                   RegularListTile(
                       label: AppLocalizations.of(context).translate(screenConstants.currencyLabel),

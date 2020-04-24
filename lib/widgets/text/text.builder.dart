@@ -93,6 +93,12 @@ class TextsBuilder {
     return createText(text, _FONT_SMALL, _FONT_FAMILY_REGULAR);
   }
 
+  /// TEXT LINK
+  static Text regularLink(String text) {
+    return createText(text, _FONT_SIZE_REGULAR, _FONT_FAMILY_REGULAR, color: Colors.teal);
+  }
+
+  /// TEXT HINT
   static Text textHint(String text) {
     return createText(text, _FONT_SMALL, _FONT_FAMILY_REGULAR,
         color: Colors.grey[500]);
