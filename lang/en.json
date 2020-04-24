@@ -95,6 +95,10 @@
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_SUB_TITLE": "At this moment PayPal is the only payment method available",
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_EXECUTION_TIME_LABEL": "Transaction execution is processed every month on the last business day. Transaction execution can take up to 3 business days to be concluded.",
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_TAXATION_LABEL": "It may include taxes according to our terms and condtions depending on the country your are emitting your invoices from.",
-  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_PROCEED_LINK": "Got it! Proceed"
+  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_PROCEED_LINK": "Got it! Proceed",
+
+  "SETTINGS_ADD_PAYMENT_SEND_INVOICE_TOP_HEADER": "Send Invoice",
+  "SETTINGS_ADD_PAYMENT_SEND_INVOICE_SUB_TITLE": "Send us your monthly invoice. Upload your invoice and our billing team will happy to process it for you.",
+  "SETTINGS_ADD_PAYMENT_SEND_INVOICE_UPLOAD_BUTTON_LABEL": "Upload Invoice"
 
 }

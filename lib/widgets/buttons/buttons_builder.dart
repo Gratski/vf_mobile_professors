@@ -10,6 +10,11 @@ class ButtonsBuilder {
     return createFlatButton(text, callback, Colors.red, Colors.white);
   }
 
+  /// FLAT BUTTON WITH ICON
+  static FlatButton redFlatButtonWithIcon(String text, VoidCallback callback, Icon icon){
+    return createFlatButtonWithIcon(text, callback, Colors.red, Colors.white, icon);
+  }
+
   /// LINK TEXT BLUE
   static FlatButton whiteFlatButton(String text, VoidCallback callback) {
     return createFlatButton(text, callback, Colors.white, Colors.teal);
@@ -22,6 +27,31 @@ class ButtonsBuilder {
       textColor: textColor,
       onPressed: callback,
       child: TextsBuilder.regularText(text),
+    );
+  }
+
+  static FlatButton createFlatButtonWithIcon(
+      String text, VoidCallback callback,
+      Color bgColor, Color textColor,
+      Icon icon
+      ){
+    return FlatButton(
+      padding: EdgeInsets.all(10.0),
+      color: bgColor,
+      textColor: textColor,
+      onPressed: callback,
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 6,
+            child: TextsBuilder.regularText(text, alignment: TextAlign.center),
+          ),
+          Expanded(
+            flex: 4,
+            child: Icon(Icons.file_upload),
+          )
+        ],
+      )
     );
   }
 

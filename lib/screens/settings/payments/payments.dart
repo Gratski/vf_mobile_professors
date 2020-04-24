@@ -6,6 +6,7 @@ import 'package:professors/localization/constants/settings/payments/payments_con
 import 'package:professors/localization/constants/settings/settings_notifications_constants.dart';
 import 'package:professors/screens/settings/payments/payment_methods.dart';
 import 'package:professors/screens/settings/payments/settings_transactions_history.dart';
+import 'package:professors/screens/settings/payments/upload_invoice.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/lists/regular_list_tile.dart';
 import 'package:professors/widgets/structural/appbar_builder.dart';
@@ -70,7 +71,12 @@ class PaymentsScreen extends StatelessWidget {
                   RegularListTile(
                       label: AppLocalizations.of(context).translate(screenConstants.sendInvoiceLabel),
                       hint: null,
-                          callback: () {}),
+                          callback: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SendInvoiceScreen()),
+                            );
+                          }),
                   /// PAYMENT METHOD
                   RegularListTile(
                       label: AppLocalizations.of(context).translate(screenConstants.paymentMethodLabel),
