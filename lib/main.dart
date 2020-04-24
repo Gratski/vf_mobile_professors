@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:professors/screens/dashboard.dart';
+import 'package:professors/screens/home.dart';
 import 'package:professors/screens/settings/settings.dart';
 import 'package:professors/screens/settings/settings_personal_details.dart';
 import 'package:professors/screens/settings/payments/settings_transactions_history.dart';
@@ -41,6 +42,6 @@ class MyApp extends StatelessWidget {
           indicatorColor: Colors.red,
           accentColor: Colors.red
         ),
-        home: SettingsScreen());
+        home: HomeScreen());
   }
 }

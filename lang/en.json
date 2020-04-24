@@ -99,6 +99,17 @@
 
   "SETTINGS_ADD_PAYMENT_SEND_INVOICE_TOP_HEADER": "Send Invoice",
   "SETTINGS_ADD_PAYMENT_SEND_INVOICE_SUB_TITLE": "Send us your monthly invoice. Upload your invoice and our billing team will happy to process it for you.",
-  "SETTINGS_ADD_PAYMENT_SEND_INVOICE_UPLOAD_BUTTON_LABEL": "Upload Invoice"
+  "SETTINGS_ADD_PAYMENT_SEND_INVOICE_UPLOAD_BUTTON_LABEL": "Upload Invoice",
 
+  "SETTINGS_SUPPORT_TYPE_TOP_HEADER": "How can we help you?",
+  "SETTINGS_SUPPORT_TYPE_PAYMENTS_LABEL": "Payments",
+  "SETTINGS_SUPPORT_TYPE_TOP_CLASSES_LABEL": "Classes",
+  "SETTINGS_SUPPORT_TYPE_TOP_ACCOUNT_LABEL": "Account",
+  "SETTINGS_SUPPORT_TYPE_TOP_CALENDAR": "Calendar",
+
+  "SETTINGS_SUPPORT_SEND_TOP_HEADER": "Let us know",
+  "SETTINGS_SUPPORT_SEND_SUBTILE_ONE": "Please try to avoid sensitive content via this form.",
+  "SETTINGS_SUPPORT_SEND_SUBTILE_TWO": "How can we help you?",
+  "SETTINGS_SUPPORT_SEND_MESSAGE_HINT": "Write us a message",
+  "SETTINGS_SUPPORT_SEND_BUTTON_LABEL": "Send"
 }

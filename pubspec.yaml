@@ -17,6 +17,7 @@ dependencies:
   mobx: ^0.3.10
   flutter_mobx: ^0.3.4+2
   file_picker: ^1.6.0
+  image_picker: ^0.6.5+2
 
 dev_dependencies:
   build_runner: ^1.8.1
@@ -29,6 +30,10 @@ flutter:
   assets:
     - lang/en.json
     - lang/pt.json
+    - assets/icons/payments_icon.png
+    - assets/icons/classes_icon.png
+    - assets/icons/account_icon.png
+    - assets/icons/calendar_icon.png
 
   fonts:
     - family: Inter

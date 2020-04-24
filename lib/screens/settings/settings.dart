@@ -4,6 +4,7 @@ import 'package:professors/screens/settings/payments/payments.dart';
 import 'package:professors/screens/settings/settings_notifications.dart';
 import 'package:professors/screens/settings/settings_personal_details.dart';
 import 'package:professors/screens/settings/payments/settings_transactions_history.dart';
+import 'package:professors/screens/settings/support/support_type.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/buttons/buttons_builder.dart';
 import 'package:professors/widgets/icons/icons_builder.dart';
@@ -122,6 +123,12 @@ class SettingsScreen extends StatelessWidget {
 
                   /// CONTACT US
                   ListTile(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SupportTypeScreen()),
+                        );
+                      },
                       trailing: Icon(Icons.keyboard_arrow_right, color: Colors.black,),
                       title: createListItemText(
                           AppLocalizations.of(context).translate(
