@@ -85,6 +85,7 @@ class _SendInvoiceScreenState extends State<SendInvoiceScreen> {
           TopTitleWidget(
             AppLocalizations.of(context)
                 .translate(screenConstants.sendInvoiceTopHeader),
+            'SettingsUploadInvoiceTitleKey'
           ),
           SliverToBoxAdapter(
             child: Container(

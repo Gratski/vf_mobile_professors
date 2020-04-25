@@ -5,13 +5,14 @@ import 'package:professors/widgets/text/text.builder.dart';
 
 class TopTitleWidget extends StatelessWidget {
   String text;
+  String widgetKey;
 
-  TopTitleWidget(this.text);
+  TopTitleWidget(this.text, this.widgetKey);
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      key: Key('title'),
+      key: Key(widgetKey),
       child: Container(
         padding: PaddingsBuilder.topTitlePadding(context),
         margin: EdgeInsets.only(top: 50.0),

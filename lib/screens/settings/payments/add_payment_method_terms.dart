@@ -20,6 +20,7 @@ class PaymentsMethodsTermsScreen extends StatelessWidget {
           TopTitleWidget(
             AppLocalizations.of(context)
                 .translate(screenConstants.addPaymentMethodTermsTopHeader),
+            'SettingsAddPaymentMethodTitleKey'
           ),
           SliverToBoxAdapter(
             child: Container(

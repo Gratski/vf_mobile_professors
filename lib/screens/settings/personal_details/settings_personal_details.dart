@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
-import 'package:professors/localization/constants/settings/settings_personal_details.dart';
+import 'package:professors/localization/constants/settings/personal_details/settings_personal_details.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/structural/appbar_builder.dart';
 import 'package:professors/widgets/structural/title_widget.dart';
@@ -18,7 +18,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
       appBar: AppBarBuilder.appBarWithSaveButton(context, () {}),
       body: CustomScrollView(
         slivers: <Widget>[
-          TopTitleWidget(AppLocalizations.of(context).translate(screenConstants.topHeader)),
+          TopTitleWidget(AppLocalizations.of(context).translate(screenConstants.topHeader), 'SettingsPersonalDetailsTitleKey'),
           SliverToBoxAdapter(
             key: Key('form_box'),
             child: Container(

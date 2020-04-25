@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/settings/payments/payments_constants.dart';
-import 'package:professors/localization/constants/settings/settings_notifications_constants.dart';
+import 'package:professors/localization/constants/settings/notifications/settings_notifications_constants.dart';
 import 'package:professors/screens/settings/payments/payment_methods.dart';
 import 'package:professors/screens/settings/payments/settings_transactions_history.dart';
 import 'package:professors/screens/settings/payments/upload_invoice.dart';
@@ -25,6 +25,7 @@ class PaymentsScreen extends StatelessWidget {
         slivers: <Widget>[
           TopTitleWidget(
             AppLocalizations.of(context).translate(screenConstants.topHeader),
+            'SettingsPaymentsTitleKey'
           ),
           SliverToBoxAdapter(
             child: LayoutBuilder(

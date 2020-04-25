@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/screens/settings/payments/payments.dart';
-import 'package:professors/screens/settings/settings_notifications.dart';
-import 'package:professors/screens/settings/settings_personal_details.dart';
+import 'package:professors/screens/settings/notifications/settings_notifications.dart';
+import 'package:professors/screens/settings/personal_details/settings_personal_details.dart';
 import 'package:professors/screens/settings/payments/settings_transactions_history.dart';
+import 'package:professors/screens/settings/security/security_definitions.dart';
 import 'package:professors/screens/settings/support/support_type.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/buttons/buttons_builder.dart';
 import 'package:professors/widgets/icons/icons_builder.dart';
+import 'package:professors/widgets/lists/regular_list_tile.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 import 'package:professors/localization/constants/settings/settings_constants.dart'
     as TRANSLATIONS;
@@ -99,12 +101,16 @@ class SettingsScreen extends StatelessWidget {
                               TRANSLATIONS.SettingsConstants.NOTIFICATIONS), null)
                   ),
 
-                  /// PRIVACY DEFINITIONS
-                  ListTile(
-                      trailing: Icon(Icons.keyboard_arrow_right, color: Colors.black,),
-                      title: createListItemText(
-                          AppLocalizations.of(context).translate(
-                              TRANSLATIONS.SettingsConstants.PRIVACY_DEFINITIONS), null)
+                  /// SECURITY DEFINITIONS
+                  RegularListTile(
+                    label: AppLocalizations.of(context).translate(
+                        TRANSLATIONS.SettingsConstants.PRIVACY_DEFINITIONS),
+                    callback: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SecurityDefinitionsScreen()),
+                      );
+                    },
                   ),
 
                   /// PAYMENTS

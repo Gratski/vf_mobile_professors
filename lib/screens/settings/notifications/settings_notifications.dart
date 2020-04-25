@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/localization/app_localizations.dart';
-import 'package:professors/localization/constants/settings/settings_notifications_constants.dart';
+import 'package:professors/localization/constants/settings/notifications/settings_notifications_constants.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/structural/appbar_builder.dart';
 import 'package:professors/widgets/structural/title_widget.dart';
@@ -23,6 +23,7 @@ class SettingsNotificationsScreen extends StatelessWidget {
           slivers: <Widget>[
             TopTitleWidget(
               AppLocalizations.of(context).translate(screenConstants.topHeader),
+              'SettingsNotificationsTitleKey'
             ),
             SliverToBoxAdapter(
               child: Container(

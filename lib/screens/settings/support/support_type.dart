@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:professors/localization/app_localizations.dart';
-import 'package:professors/localization/constants/support_contact_constants.dart';
+import 'package:professors/localization/constants/settings/support/support_contact_constants.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/models/support/support_contact_type.dart';
 import 'package:professors/screens/settings/support/support_contact_send.dart';
@@ -23,6 +23,7 @@ class SupportTypeScreen extends StatelessWidget {
           TopTitleWidget(
             AppLocalizations.of(context)
                 .translate(screenConstants.topHeader),
+            'SettingsSupportTypeTitleKey'
           ),
           SliverToBoxAdapter(
             child: Row(

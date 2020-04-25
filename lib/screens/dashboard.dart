@@ -7,7 +7,7 @@ import 'package:professors/widgets/buttons/buttons_builder.dart';
 import 'package:professors/widgets/dividers/dividers_builder.dart';
 import 'package:professors/widgets/icons/icons_builder.dart';
 import 'package:professors/widgets/text/text.builder.dart';
-import 'package:professors/localization/constants/dashboard_constants.dart'
+import 'package:professors/localization/constants/dashboard/dashboard_constants.dart'
     as TRANSLATIONS;
 import 'package:professors/globals/global_vars.dart';
 
