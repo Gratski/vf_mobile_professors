@@ -1,5 +1,6 @@
 import 'package:professors/store/dashboard/dashboard_state.dart';
 import 'package:professors/store/navigation/nav_state.dart';
+import 'package:professors/store/notifications/notifications_state.dart';
 import 'package:professors/store/notifications/settings_notifications_state.dart';
 import 'package:professors/store/payments/methods/settings_payment_methods_state.dart';
 import 'package:professors/store/payments/settings_payments_state.dart';
@@ -13,3 +14,4 @@ final notificationsStore = SettingsNotificationsState(); // settings notificatio
 final paymentsStore = SettingsPaymentsState(); // settings payments
 final paymentMethodsStore = SettingsPaymentMethodsState(); // settings payment methods
 final supportStore = SupportContactState(); // settings support account
+final feedNotificationsStore = NotificationsState(); // Feed Notifications

@@ -91,7 +91,7 @@ abstract class _NotificationsState with Store {
 
       NotificationsModel.complete(
           1,
-          FeedNotificationTypeEnum.MESSAGE_NOTIFICATION,
+          FeedNotificationTypeEnum.SYSTEM_NOTIFICATION,
           false,
           DateTime.now(),
           'https://www.terrainhopperusa.com/wp-content/uploads/2019/01/avatar-woman.png',
