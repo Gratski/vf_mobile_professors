@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:professors/widgets/dividers/dividers_builder.dart';
+import 'package:professors/widgets/structural/dividers/dividers_builder.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class TransactionListItemWidget extends StatelessWidget {

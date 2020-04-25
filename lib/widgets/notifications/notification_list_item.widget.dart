@@ -5,6 +5,9 @@ import 'package:professors/localization/constants/notifications/notifications_co
 import 'package:professors/models/notifications/feed_class_notification_list_item.mode..dart';
 import 'package:professors/models/notifications/feed_notification_type.model.dart';
 import 'package:professors/models/notifications/notifications.model.dart';
+import 'package:professors/screens/notifications/cancelled_class_notification.screen.dart';
+import 'package:professors/screens/notifications/message_notification.screen.dart';
+import 'package:professors/screens/notifications/reservation_class_notification.screen.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class NotificationListItemWidget extends StatelessWidget {
@@ -15,40 +18,96 @@ class NotificationListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: <Widget>[
-          /// Picture
-          Flexible(
-            flex: 2,
-            child: CircleAvatar(
-              maxRadius: MediaQuery.of(context).size.width / 10,
-              backgroundImage: NetworkImage(notification.pictureUrl),
-            ),
-          ),
+    return GestureDetector(
+      onTap: () {
 
-          /// Middle Column
-          Expanded(
-            flex: 6,
-            child: Container(
-              margin: EdgeInsets.only(left: 10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  /// Notification Type Badge
-                  getLabelBasedOnNotificationType(context, notification),
+        /// if is a class related notification
+        if (notification.type == FeedNotificationTypeEnum.CLASS_NOTIFICATION) {
 
-                  /// Notification Title
-                  getTitleBasedOnNotificationType(context, notification),
+          /// If is a cancellation notification
+          if (notification.classObj.notificationType ==
+              FeedClassNotificationTypeModel.CANCELLATION) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CancelledClassNotificationScreen(
+                    notification.id,
+                    notification.sentFromId,
+                    notification.sentFromName,
+                    notification.pictureUrl,
+                    notification.classObj.message),
+              ),
+            );
+          }
+          /// if is a reservation notification
+          else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ReservationClassNotificationScreen(
+                    notification.id,
+                    notification.sentFromId,
+                    notification.sentFromName,
+                    notification.pictureUrl),
+              ),
+            );
+          }
+        }
 
-                  /// Notification Sub Title
-                  getSubTitleBasedOnNotificationType(notification)
-                ],
+        /// If is a message related notification
+        else if ( notification.type == FeedNotificationTypeEnum.MESSAGE_NOTIFICATION ) {
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MessageClassNotificationScreen(
+                  notification.id,
+                  notification.sentFromId,
+                  notification.sentFromName,
+                  notification.pictureUrl,
+                  notification.messageObj.body
               ),
             ),
-          ),
-        ],
+          );
+
+        }
+
+      },
+      child: Container(
+        child: Row(
+          children: <Widget>[
+            /// Picture
+            Flexible(
+              flex: 2,
+              child: CircleAvatar(
+                maxRadius: MediaQuery.of(context).size.width / 10,
+                backgroundImage: NetworkImage(notification.pictureUrl),
+              ),
+            ),
+
+            /// Middle Column
+            Expanded(
+              flex: 6,
+              child: Container(
+                margin: EdgeInsets.only(left: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    /// Notification Type Badge
+                    getLabelBasedOnNotificationType(context, notification),
+
+                    /// Notification Title
+                    getTitleBasedOnNotificationType(context, notification),
+
+                    /// Notification Sub Title
+                    getSubTitleBasedOnNotificationType(notification)
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -77,11 +136,11 @@ class NotificationListItemWidget extends StatelessWidget {
     return Row(
       children: <Widget>[
         Expanded(
-          flex: 8,
-          child: Container(
-            child: _buildLabel(AppLocalizations.of(context).translate(label), color),
-          )
-        ),
+            flex: 8,
+            child: Container(
+              child: _buildLabel(
+                  AppLocalizations.of(context).translate(label), color),
+            )),
         Expanded(
           flex: 4,
           child: Row(

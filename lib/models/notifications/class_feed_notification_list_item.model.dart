@@ -6,6 +6,7 @@ class ClassFeedNotificationListItem {
   String userPictureUrl;
   String discipline;
   String disciplineLanguage;
+  String message;
   FeedClassNotificationTypeModel notificationType;
 
   ClassFeedNotificationListItem();
@@ -15,7 +16,8 @@ class ClassFeedNotificationListItem {
       this.userPictureUrl,
       this.discipline,
       this.disciplineLanguage,
-      this.notificationType
+      this.notificationType,
+      this.message
       );
 
 }

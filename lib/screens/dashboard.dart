@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/localization/app_localizations.dart';
-import 'package:professors/screens/settings/settings.dart';
 import 'package:professors/styles/padding.dart';
-import 'package:professors/widgets/buttons/buttons_builder.dart';
-import 'package:professors/widgets/dividers/dividers_builder.dart';
-import 'package:professors/widgets/icons/icons_builder.dart';
+import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
+import 'package:professors/widgets/structural/dividers/dividers_builder.dart';
+import 'package:professors/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 import 'package:professors/localization/constants/dashboard/dashboard_constants.dart'
     as TRANSLATIONS;

@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/settings/security/settings_security_constants.dart';
 import 'package:professors/screens/settings/security/security_change_password.dart';
-import 'package:professors/styles/padding.dart';
-import 'package:professors/widgets/lists/list_tile_model.dart';
-import 'package:professors/widgets/lists/regular_list_tile.dart';
 import 'package:professors/widgets/structural/appbar_builder.dart';
+import 'package:professors/widgets/structural/lists/list_tile_model.dart';
+import 'package:professors/widgets/structural/lists/regular_list_tile.dart';
 import 'package:professors/widgets/structural/title_widget.dart';
-import 'package:professors/widgets/text/text.builder.dart';
 
 /// Screen where a list of security definitions is presented
 class SecurityDefinitionsScreen extends StatefulWidget {

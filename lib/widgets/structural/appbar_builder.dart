@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/styles/padding.dart';
-import 'package:professors/widgets/buttons/buttons_builder.dart';
+import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class Choice {

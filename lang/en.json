@@ -127,6 +127,24 @@
   "NOTIFICATIONS_BOOKED_LABEL": "Booked",
   "NOTIFICATIONS_CANCELLED_LABEL": "Cancelled",
   "NOTIFICATIONS_MESSAGE_LABEL": "Message",
-  "NOTIFICATIONS_SYSTEM_LABEL": "VFit Team"
+  "NOTIFICATIONS_SYSTEM_LABEL": "VFit Team",
 
+  "NOTIFICATIONS_CANCELLATION_TOP_HEADER": "Cancelled Reservation",
+  "NOTIFICATIONS_CANCELLATION_LABEL": "Cancelled class reservation",
+  "NOTIFICATIONS_CANCELLATION_MESSAGE_LABEL": "Show your students how you appreciate their presence in your classes. Go ahead drop your student a message.",
+  "NOTIFICATIONS_CANCELLATION_SEND_BUTTON": "Send",
+
+  "NOTIFICATIONS_BOOKED_TOP_HEADER": "New Class Reservation!",
+  "NOTIFICATIONS_BOOKED_LABEL": "Booked to your class",
+  "NOTIFICATIONS_BOOKED_MESSAGE_LABEL": "Show your student how excited you are to have him/her in your class.",
+  "NOTIFICATIONS_BOOKED_SEND_BUTTON": "Send",
+
+  "NOTIFICATIONS_MESSAGE_TOP_HEADER": "New Message from...",
+  "NOTIFICATIONS_MESSAGE_LABEL": "Sent you a message",
+  "NOTIFICATIONS_MESSAGE_MESSAGE_LABEL": "Reply as quick as you can. We know quick feedback is one of the most relevant factors of engagement",
+  "NOTIFICATIONS_MESSAGE_SEND_BUTTON": "Send",
+
+  "NOTIFICATIONS_MESSAGE_SENT_CONFIRMATION_TOP_HEADER": "Message",
+  "NOTIFICATIONS_MESSAGE_SENT_CONFIRMATION_MESSAGE": "Your message has been sent!",
+  "NOTIFICATIONS_MESSAGE_SENT_CONFIRMATION_OK_BUTTON_LABEL": "OK"
 }

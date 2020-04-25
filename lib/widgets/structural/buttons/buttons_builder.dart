@@ -22,7 +22,7 @@ class ButtonsBuilder {
 
   static FlatButton createFlatButton(String text, VoidCallback callback, Color bgColor, Color textColor){
     return FlatButton(
-      padding: EdgeInsets.all(0.0),
+      padding: EdgeInsets.all(15.0),
       color: bgColor,
       textColor: textColor,
       onPressed: callback,

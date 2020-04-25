@@ -7,8 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/settings/payments/payments_constants.dart';
 import 'package:professors/styles/padding.dart';
-import 'package:professors/widgets/buttons/buttons_builder.dart';
 import 'package:professors/widgets/structural/appbar_builder.dart';
+import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/widgets/structural/title_widget.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 

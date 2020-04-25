@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/settings/security/settings_security_constants.dart';
 import 'package:professors/styles/padding.dart';
-import 'package:professors/widgets/buttons/buttons_builder.dart';
-import 'package:professors/widgets/inputs/input_text_widget.dart';
-import 'package:professors/widgets/lists/list_tile_model.dart';
 import 'package:professors/widgets/structural/appbar_builder.dart';
+import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
+import 'package:professors/widgets/structural/inputs/input_text_widget.dart';
+import 'package:professors/widgets/structural/lists/list_tile_model.dart';
 import 'package:professors/widgets/structural/title_widget.dart';
 
 /// Screen where a list of security definitions is presented

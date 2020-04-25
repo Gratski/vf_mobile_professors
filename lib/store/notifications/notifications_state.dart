@@ -48,7 +48,8 @@ abstract class _NotificationsState with Store {
           'https://www.terrainhopperusa.com/wp-content/uploads/2019/01/avatar-woman.png',
           'Yoga Relax',
           'English',
-          FeedClassNotificationTypeModel.RESERVATION
+          FeedClassNotificationTypeModel.RESERVATION,
+          ''
         ),
         null,
         null
@@ -68,7 +69,8 @@ abstract class _NotificationsState with Store {
               'https://www.terrainhopperusa.com/wp-content/uploads/2019/01/avatar-woman.png',
               'Yoga Relax',
               'English',
-              FeedClassNotificationTypeModel.CANCELLATION
+              FeedClassNotificationTypeModel.CANCELLATION,
+              'Sorry to have to cancel but I had to.'
           ),
           null,
           null
