@@ -7,7 +7,6 @@ import 'package:professors/widgets/inputs/input_text_widget.dart';
 import 'package:professors/widgets/lists/list_tile_model.dart';
 import 'package:professors/widgets/structural/appbar_builder.dart';
 import 'package:professors/widgets/structural/title_widget.dart';
-import 'package:professors/widgets/text/text.builder.dart';
 
 /// Screen where a list of security definitions is presented
 class ChangePasswordScreen extends StatefulWidget {
@@ -37,43 +36,48 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     ];
 
     return Scaffold(
-        appBar: AppBarBuilder.appBarWithTitle(context, ''),
-        body: CustomScrollView(
-          slivers: <Widget>[
-            /// Title
-            TopTitleWidget(
-                AppLocalizations.of(context)
-                    .translate(screenConstants.changePasswordTopHeader),
-                'ChangePasswordTitleKey'),
+      appBar: AppBarBuilder.appBarWithTitle(context, ''),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          /// Title
+          TopTitleWidget(
+              AppLocalizations.of(context)
+                  .translate(screenConstants.changePasswordTopHeader),
+              'ChangePasswordTitleKey'),
 
-            SliverToBoxAdapter(
-              child: Container(
-                padding: PaddingsBuilder.regularPadding(context),
-                child: Form(
-                  child: ListView(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: <Widget>[
-                      /// Old Password
-                      InputTextWidget(AppLocalizations.of(context)
-                          .translate(screenConstants.changePasswordOldLabel)),
+          SliverToBoxAdapter(
+            child: Container(
+              padding: PaddingsBuilder.regularPadding(context),
+              child: Form(
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: <Widget>[
+                    /// Old Password
+                    InputTextWidget(AppLocalizations.of(context)
+                        .translate(screenConstants.changePasswordOldLabel)),
 
-                      /// New Password
-                      InputTextWidget(AppLocalizations.of(context)
-                          .translate(screenConstants.changePasswordNewLabel)),
+                    /// New Password
+                    InputTextWidget(AppLocalizations.of(context)
+                        .translate(screenConstants.changePasswordNewLabel)),
 
-                      /// Change Button
-                      ButtonsBuilder.redFlatButton(
-                        AppLocalizations.of(context).translate(
-                            screenConstants.changePasswordButtonLabel),
-                        () {},
-                      ),
-                    ],
-                  ),
+                    /// New Password Repeat
+                    InputTextWidget(AppLocalizations.of(context).translate(
+                        screenConstants.changePasswordNewRepeatLabel)),
+
+                    /// Change Button
+                    ButtonsBuilder.redFlatButton(
+                      AppLocalizations.of(context)
+                          .translate(screenConstants.changePasswordButtonLabel),
+                      () {},
+                    ),
+                  ],
                 ),
               ),
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }

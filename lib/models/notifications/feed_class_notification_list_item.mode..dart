@@ -1,0 +1,3 @@
+enum FeedClassNotificationTypeModel {
+  RESERVATION, CANCELLATION
+}
