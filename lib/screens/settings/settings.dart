@@ -64,7 +64,7 @@ class SettingsScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: PaddingsBuilder.regularPadding(context),
+              padding: AppPaddings.regularPadding(context),
               child: ListView(
 
                 shrinkWrap: true,

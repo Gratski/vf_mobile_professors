@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PaddingsBuilder {
+class AppPaddings {
 
   static EdgeInsets regularPadding(BuildContext context){
     return EdgeInsets.only(

@@ -89,7 +89,7 @@ class _SendInvoiceScreenState extends State<SendInvoiceScreen> {
           ),
           SliverToBoxAdapter(
             child: Container(
-              padding: PaddingsBuilder.regularPadding(context),
+              padding: AppPaddings.regularPadding(context),
               margin: EdgeInsets.only(top: 20),
               child: TextsBuilder.regularText(AppLocalizations.of(context)
                   .translate(screenConstants.sendInvoiceSubTitle)),
@@ -98,7 +98,7 @@ class _SendInvoiceScreenState extends State<SendInvoiceScreen> {
           SliverToBoxAdapter(
             child: Container(
               alignment: Alignment.center,
-              padding: PaddingsBuilder.regularPadding(context),
+              padding: AppPaddings.regularPadding(context),
               margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.05),
               child: LayoutBuilder(

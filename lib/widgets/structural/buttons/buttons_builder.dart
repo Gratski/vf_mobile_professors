@@ -1,23 +1,24 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:professors/styles/colors.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class ButtonsBuilder {
 
   /// FLAT BUTTONS
   static FlatButton redFlatButton(String text, VoidCallback callback, {Color color}){
-    return createFlatButton(text, callback, Colors.red, Colors.white);
+    return createFlatButton(text, callback, AppColors.regularRed, Colors.white);
   }
 
   /// FLAT BUTTON WITH ICON
   static FlatButton redFlatButtonWithIcon(String text, VoidCallback callback, Icon icon){
-    return createFlatButtonWithIcon(text, callback, Colors.red, Colors.white, icon);
+    return createFlatButtonWithIcon(text, callback, AppColors.regularRed, Colors.white, icon);
   }
 
   /// LINK TEXT BLUE
   static FlatButton whiteFlatButton(String text, VoidCallback callback) {
-    return createFlatButton(text, callback, Colors.white, Colors.teal);
+    return createFlatButton(text, callback, Colors.white, AppColors.regularGreen);
   }
 
   static FlatButton createFlatButton(String text, VoidCallback callback, Color bgColor, Color textColor){

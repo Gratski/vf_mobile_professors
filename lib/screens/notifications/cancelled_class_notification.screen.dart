@@ -26,7 +26,7 @@ class CancelledClassNotificationScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBarBuilder.appBarWithTitle(context, ''),
       body: Padding(
-        padding: PaddingsBuilder.regularPadding(context),
+        padding: AppPaddings.regularPadding(context),
         child: CustomScrollView(
           slivers: <Widget>[
             TopTitleWidget(

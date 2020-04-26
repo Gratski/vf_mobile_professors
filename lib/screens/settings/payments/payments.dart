@@ -63,7 +63,7 @@ class PaymentsScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              padding: PaddingsBuilder.regularPadding(context),
+              padding: AppPaddings.regularPadding(context),
               child: ListView(
                 shrinkWrap: true,
                 children: <Widget>[

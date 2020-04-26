@@ -22,7 +22,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
           SliverToBoxAdapter(
             key: Key('form_box'),
             child: Container(
-              padding: PaddingsBuilder.regularPadding(context),
+              padding: AppPaddings.regularPadding(context),
               child: Form(
                 key: Key('personal_details_form'),
                 child: ListView(

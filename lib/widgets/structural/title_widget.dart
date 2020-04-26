@@ -14,7 +14,7 @@ class TopTitleWidget extends StatelessWidget {
     return SliverToBoxAdapter(
       key: Key(widgetKey),
       child: Container(
-        padding: PaddingsBuilder.topTitlePadding(context),
+        padding: AppPaddings.topTitlePadding(context),
         margin: EdgeInsets.only(top: 50.0),
         alignment: Alignment.centerLeft,
         child: RichText(

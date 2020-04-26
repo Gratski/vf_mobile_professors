@@ -47,7 +47,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
           SliverToBoxAdapter(
             child: Container(
-              padding: PaddingsBuilder.regularPadding(context),
+              padding: AppPaddings.regularPadding(context),
               child: Form(
                 child: ListView(
                   shrinkWrap: true,

@@ -22,7 +22,7 @@ class CustomSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: PaddingsBuilder.regularPadding(context),
+      padding: AppPaddings.regularPadding(context),
       child: Column(
         children: <Widget>[
           Row(

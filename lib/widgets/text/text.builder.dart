@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:professors/styles/colors.dart';
 
 /// Builder for Text Span App Elements
 class TextsBuilder {
@@ -127,10 +128,10 @@ class TextsBuilder {
   }
 
   static createText(String text, double size, String fontFamily,
-      {Color color = Colors.black, TextAlign align = TextAlign.start}) {
+      {Color color, TextAlign align = TextAlign.start}) {
     return Text(text,
       textAlign: align,
-      style: TextStyle(fontSize: size, fontFamily: fontFamily, color: color),
+      style: TextStyle(fontSize: size, fontFamily: fontFamily, color: ( color != null ) ? color : AppColors.textRegularColor),
       overflow: TextOverflow.visible,);
   }
 }

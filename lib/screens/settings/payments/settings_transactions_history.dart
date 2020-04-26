@@ -102,7 +102,7 @@ class _SettingsTransactionsHistoryScreenState
           Observer(
             builder: (_) {
               return Container(
-                padding: PaddingsBuilder.regularPadding(context),
+                padding: AppPaddings.regularPadding(context),
                 child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: transactionsHistoryStore.transactions.length,
@@ -119,7 +119,7 @@ class _SettingsTransactionsHistoryScreenState
           Observer(
             builder: (_) {
               return Container(
-                padding: PaddingsBuilder.regularPadding(context),
+                padding: AppPaddings.regularPadding(context),
                 child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: transactionsHistoryStore.transactions.length,

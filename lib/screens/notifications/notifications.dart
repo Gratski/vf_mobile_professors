@@ -19,7 +19,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: PaddingsBuilder.regularPadding(context),
+        padding: AppPaddings.regularPadding(context),
         child: CustomScrollView(
           slivers: <Widget>[
             TopTitleWidget(

@@ -64,7 +64,7 @@ class PaymentsMethodsScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              padding: PaddingsBuilder.regularPadding(context),
+              padding: AppPaddings.regularPadding(context),
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(

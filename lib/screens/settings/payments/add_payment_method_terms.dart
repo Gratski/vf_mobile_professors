@@ -24,7 +24,7 @@ class PaymentsMethodsTermsScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              padding: PaddingsBuilder.regularPadding(context),
+              padding: AppPaddings.regularPadding(context),
               margin: EdgeInsets.only(top: 20),
               child: TextsBuilder.regularText(
                 AppLocalizations.of(context).translate(screenConstants.addPaymentMethodTermsExecutionTimeLabel)
@@ -33,7 +33,7 @@ class PaymentsMethodsTermsScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              padding: PaddingsBuilder.regularPadding(context),
+              padding: AppPaddings.regularPadding(context),
               margin: EdgeInsets.only(top: 20),
               child: TextsBuilder.regularText(
                   AppLocalizations.of(context).translate(screenConstants.addPaymentMethodTermsTaxationLabel)
@@ -43,7 +43,7 @@ class PaymentsMethodsTermsScreen extends StatelessWidget {
           SliverToBoxAdapter(
             child: Container(
               alignment: Alignment.center,
-              padding: PaddingsBuilder.regularPadding(context),
+              padding: AppPaddings.regularPadding(context),
               margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
               child: GestureDetector(
                 onTap: () {},

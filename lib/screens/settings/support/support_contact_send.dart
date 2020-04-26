@@ -24,7 +24,7 @@ class SupportContactSendScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              padding: PaddingsBuilder.regularPadding(context),
+              padding: AppPaddings.regularPadding(context),
               margin: EdgeInsets.only(top: 20),
               child: TextsBuilder.regularText(
                   AppLocalizations.of(context).translate(screenConstants.contactSendSubTitleOne)
@@ -35,7 +35,7 @@ class SupportContactSendScreen extends StatelessWidget {
           /// TEXT AREA
           SliverToBoxAdapter(
             child: Container(
-              padding: PaddingsBuilder.regularPadding(context),
+              padding: AppPaddings.regularPadding(context),
               margin: EdgeInsets.only(top: 10),
               child: Form(
                 child: Column(

@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:professors/builders/dialog.builder.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
 import 'package:professors/styles/colors.dart';
 import 'package:professors/styles/padding.dart';
-import 'package:professors/styles/sizes.dart';
 import 'package:professors/widgets/notifications/notification_details_user_details.widget.dart';
 import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/widgets/structural/dividers/dividers_builder.dart';
 import 'package:professors/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
-class ClassesScreen extends StatelessWidget {
+class ProfileScreen extends StatelessWidget {
 
   ClassConstants screenConstants = ClassConstants();
 
   @override
   Widget build(BuildContext context) {
-
-    double sectionTopMargin = MediaQuery.of(context).size.height / 20;
-
     return Scaffold(
       backgroundColor: Colors.black,
       body: NestedScrollView(
@@ -28,23 +23,23 @@ class ClassesScreen extends StatelessWidget {
             SliverAppBar(
               backgroundColor: Colors.transparent,
               elevation: 0.0,
-              leading: Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
+              leading: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.white,
+                ),
               ),
               actions: <Widget>[
                 Container(
                   margin: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
-                  child: Icon(Icons.edit, color: Colors.white, size: AppSizes.iconRegular(context)),
+                  child: Icon(Icons.edit, color: Colors.white, size: MediaQuery.of(context).size.width * 0.08,),
                 ),
                 Container(
                   margin: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
-                  child: GestureDetector(
-                    onTap: () {
-                      DialogsBuilder(context).unavailableOperation();
-                    },
-                    child: Icon(Icons.share, color: Colors.white, size: AppSizes.iconRegular(context)),
-                  ),
+                  child: Icon(Icons.share, color: Colors.white, size: MediaQuery.of(context).size.width * 0.08,),
                 )
               ],
               expandedHeight: MediaQuery.of(context).size.height / 2,
@@ -77,7 +72,7 @@ class ClassesScreen extends StatelessWidget {
                   /// HEADER
                   SliverToBoxAdapter(
                     child: Container(
-                      margin: EdgeInsets.only(top: sectionTopMargin),
+                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
                       padding: AppPaddings.regularPadding(context),
                       child: Row(
                         children: <Widget>[
@@ -111,7 +106,7 @@ class ClassesScreen extends StatelessWidget {
                   SliverToBoxAdapter(
                     child: Container(
                       padding: AppPaddings.regularPadding(context),
-                      margin: EdgeInsets.only(top: sectionTopMargin),
+                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -129,7 +124,7 @@ class ClassesScreen extends StatelessWidget {
                   SliverToBoxAdapter(
                     child: Container(
                       padding: AppPaddings.regularPadding(context),
-                      margin: EdgeInsets.only(top: sectionTopMargin),
+                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -150,7 +145,7 @@ class ClassesScreen extends StatelessWidget {
                   SliverToBoxAdapter(
                     child: Container(
                       padding: AppPaddings.regularPadding(context),
-                      margin: EdgeInsets.only(top: sectionTopMargin),
+                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
@@ -163,18 +158,18 @@ class ClassesScreen extends StatelessWidget {
                           ),
 
                           CircleAvatar(
-                            maxRadius: MediaQuery.of(context).size.width * 0.20,
-                            backgroundColor: Colors.black,
-                            backgroundImage: NetworkImage(
-                              'https://i.ya-webdesign.com/images/circle-avatar-png.png',
-                            )
+                              maxRadius: MediaQuery.of(context).size.width * 0.20,
+                              backgroundColor: Colors.black,
+                              backgroundImage: NetworkImage(
+                                'https://i.ya-webdesign.com/images/circle-avatar-png.png',
+                              )
                           ),
 
                           Container(
                             margin: EdgeInsets.only(top: 20),
                             child: TextsBuilder.h4Bold('João Rodrigues', color: Colors.white),
                           ),
-                          
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: IconsBuilder.startListBasedOnScore(3.5),
@@ -188,11 +183,11 @@ class ClassesScreen extends StatelessWidget {
                   /// CLASS DETAILS
                   SliverToBoxAdapter(
                     child: Container(
-                      padding: EdgeInsets.only(bottom: sectionTopMargin),
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 20,),
                       margin: EdgeInsets.only(
-                        top: sectionTopMargin,
+                        top: MediaQuery.of(context).size.height / 20,
                       ),
-                      color: AppColors.bgGreyColor,
+                      color: Color.fromRGBO(241, 241, 241, 1),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -214,7 +209,7 @@ class ClassesScreen extends StatelessWidget {
                           /// CLASS GOALS
                           Container(
                             padding: AppPaddings.regularPadding(context),
-                            margin: EdgeInsets.only(top: sectionTopMargin),
+                            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
                             child: TextsBuilder.textSmallBold('Class Objectives'.toUpperCase()),
                           ),
 
@@ -224,7 +219,7 @@ class ClassesScreen extends StatelessWidget {
                                 ' fsd ffdsfdsfdf fsdf sdfsdfdsfsd fsdfsdfdf sdfdffdsfsdfs fsdfdsfdsf fsd'
                                 'fsd fdsfsdfsdfsd fsd fs dfdsdfsdf fds dfsdf sdfsdfsdf sfds fds'),
                           ),
-                          
+
                         ],
                       ),
                     ),
@@ -233,54 +228,54 @@ class ClassesScreen extends StatelessWidget {
                   /// COMMENTS
                   SliverToBoxAdapter(
                     child: Container(
-                      padding: AppPaddings.regularPadding(context),
-                      color: Colors.white,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
+                        padding: AppPaddings.regularPadding(context),
+                        color: Colors.white,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
 
-                          /// TITLE COMMENTS
-                          Container(
-                            margin: EdgeInsets.only(top: sectionTopMargin),
-                            child: TextsBuilder.h1Bold(AppLocalizations.of(context).translate(screenConstants.classDetailsCommentsLabel)),
-                          ),
+                            /// TITLE COMMENTS
+                            Container(
+                              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
+                              child: TextsBuilder.h1Bold(AppLocalizations.of(context).translate(screenConstants.classDetailsCommentsLabel)),
+                            ),
 
-                          /// COMMENTS LIST
-                          ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: 10,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 50, top: MediaQuery.of(context).size.height / 50),
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(
-                                      color: AppColors.dividerMainColor,
-                                      width: 2.0
-                                    )
-                                  )
-                                ),
-                                child: NotificationDetailsUserDetailsWidget(
-                                  1,
-                                  'Rebeka',
-                                  'https://res.cloudinary.com/twenty20/private_images/t_watermark-criss-cross-10/v1498884203000/photosp/5ca84b21-4bd5-4484-a125-4f22db2ddd70/stock-photo-portrait-light-women-competition-face-natural-person-woman-strong-5ca84b21-4bd5-4484-a125-4f22db2ddd70.jpg',
-                                  'tfd gdf gfgf gfdg df gfd g fdg dfg fdg df gdf g dfg df gdf gfd gfd ',
-                                  date: DateTime.now(),
-                                ),
-                              );
-                            },
-                          ),
+                            /// COMMENTS LIST
+                            ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: 10,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  padding: EdgeInsets.only(bottom: 20, top: 20),
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(
+                                              color: Colors.grey[300],
+                                              width: 2.0
+                                          )
+                                      )
+                                  ),
+                                  child: NotificationDetailsUserDetailsWidget(
+                                    1,
+                                    'Rebeka',
+                                    'https://res.cloudinary.com/twenty20/private_images/t_watermark-criss-cross-10/v1498884203000/photosp/5ca84b21-4bd5-4484-a125-4f22db2ddd70/stock-photo-portrait-light-women-competition-face-natural-person-woman-strong-5ca84b21-4bd5-4484-a125-4f22db2ddd70.jpg',
+                                    'tfd gdf gfgf gfdg df gfd g fdg dfg fdg df gdf g dfg df gdf gfd gfd ',
+                                    date: DateTime.now(),
+                                  ),
+                                );
+                              },
+                            ),
 
-                        ],
-                      )
+                          ],
+                        )
                     ),
                   ),
 
                   /// LOAD MORE COMMENTS BUTTON
                   SliverToBoxAdapter(
                     child: Container(
-                      color: AppColors.bgMainColor,
+                      color: Colors.white,
                       child: Center(
                         child: ButtonsBuilder.createFlatButton(AppLocalizations.of(context).translate(screenConstants.classDetailsLoadCommentsLabel), () { }, Colors.transparent, Colors.black),
                       ),
@@ -310,7 +305,7 @@ class ClassesScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  
+
                   Flexible(
                     flex: 4,
                     child: ButtonsBuilder.redFlatButton(AppLocalizations.of(context).translate(screenConstants.classDetailsBookButtonLabel).toUpperCase(), () { }),

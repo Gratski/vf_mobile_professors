@@ -42,7 +42,7 @@ class AppBarBuilder {
       ],
       flexibleSpace: Center(
         child: Container(
-          padding: PaddingsBuilder.regularPadding(context),
+          padding: AppPaddings.regularPadding(context),
           margin: EdgeInsets.only(top: 50.0),
           alignment: Alignment.centerLeft,
           child: RichText(

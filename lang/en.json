@@ -17,6 +17,9 @@
   "GENERAL_LABELS_GENDER_MALE": "Male",
   "GENERAL_LABELS_GENDER_FEMALE": "Female",
   "GENERAL_WORD_OF": "of",
+  "GENERAL_DIALOG_UNAVAILABLE_OPERATION_TITLE": "Unavailable Operation",
+  "GENERAL_DIALOG_UNAVAILABLE_OPERATION_BODY": "This operation is not permitted during Pre-Launch Stage. It is present in your screen for you to have the correct look and feel!",
+  "GENERAL_DIALOG_UNAVAILABLE_OPERATION_DISMISS_LABEL": "Ok, Got it!",
 
   "DASHBOARD_HEADER_TOP": "Dashboard",
   "DASHBOARD_HEADER_NEXT_CLASSES": "Next Classes",
