@@ -28,9 +28,14 @@ class ClassesScreen extends StatelessWidget {
             SliverAppBar(
               backgroundColor: Colors.transparent,
               elevation: 0.0,
-              leading: Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
+              leading: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.white,
+                ),
               ),
               actions: <Widget>[
                 Container(

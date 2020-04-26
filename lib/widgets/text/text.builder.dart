@@ -75,8 +75,8 @@ class TextsBuilder {
   }
 
   /// TEXT H3
-  static Text h3Bold(String text) {
-    return createText(text, _FONT_SIZE_H3, _FONT_FAMILY_BOLD);
+  static Text h3Bold(String text, {Color color}) {
+    return createText(text, _FONT_SIZE_H3, _FONT_FAMILY_BOLD, color: color);
   }
   /// TEXT H3
   static Text h3Light(String text, {Color color = Colors.black}) {

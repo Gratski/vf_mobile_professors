@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/screens/profile/profile.screen.dart';
 import 'package:professors/screens/settings/payments/payments.dart';
 import 'package:professors/screens/settings/notifications/settings_notifications.dart';
 import 'package:professors/screens/settings/personal_details/settings_personal_details.dart';
@@ -50,7 +51,12 @@ class SettingsScreen extends StatelessWidget {
                           ButtonsBuilder.whiteFlatButton(
                               AppLocalizations.of(context).translate(
                                   TRANSLATIONS.SettingsConstants.VIEW_PROFILE),
-                              () {}),
+                              () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => ProfileScreen()),
+                                );
+                              }),
                           Row(
                             children: IconsBuilder.startListBasedOnScore(4.0),
                           )
