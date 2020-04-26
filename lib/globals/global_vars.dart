@@ -1,3 +1,4 @@
+import 'package:professors/store/classes/classes_state.dart';
 import 'package:professors/store/dashboard/dashboard_state.dart';
 import 'package:professors/store/navigation/nav_state.dart';
 import 'package:professors/store/notifications/notifications_state.dart';
@@ -15,3 +16,4 @@ final paymentsStore = SettingsPaymentsState(); // settings payments
 final paymentMethodsStore = SettingsPaymentMethodsState(); // settings payment methods
 final supportStore = SupportContactState(); // settings support account
 final feedNotificationsStore = NotificationsState(); // Feed Notifications
+final classesStore = ClassesState(); // Classes Store

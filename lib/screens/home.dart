@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
+import 'package:professors/screens/classes/classes.screen.dart';
 import 'package:professors/screens/dashboard.dart';
 import 'package:professors/screens/notifications/notifications.dart';
 import 'package:professors/screens/settings/settings.dart';
@@ -15,9 +16,10 @@ class HomeScreen extends StatefulWidget {
 
   List<Widget> screens = [
     NotificationsScreen(),
-    SettingsScreen(),
     DashboardScreen(),
-    DashboardScreen()
+    DashboardScreen(),
+    ClassesScreen(),
+    SettingsScreen(),
   ];
 
   @override
@@ -34,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: Observer(
         builder: (_) {
           return BottomNavigationBar(
+              iconSize: 22.0,
               unselectedIconTheme: IconThemeData(color: Colors.grey),
               selectedIconTheme: IconThemeData(color: Colors.red),
               showUnselectedLabels: true,
@@ -45,15 +48,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Text(''),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.userAlt),
-                  title: Text(''),
-                ),
-                BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.tachometerAlt),
                   title: Text(''),
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.dumbbell),
+                  title: Text(''),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(FontAwesomeIcons.dumbbell),
+                  title: Text(''),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(FontAwesomeIcons.user),
                   title: Text(''),
                 ),
               ],

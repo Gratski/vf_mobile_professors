@@ -69,8 +69,8 @@ class TextsBuilder {
   }
 
   /// TEXT H2
-  static Text h2Bold(String text) {
-    return createText(text, _FONT_SIZE_H2, _FONT_FAMILY_BOLD);
+  static Text h2Bold(String text, {Color color}) {
+    return createText(text, _FONT_SIZE_H2, _FONT_FAMILY_BOLD, color: color);
   }
 
   /// TEXT H3
@@ -91,6 +91,10 @@ class TextsBuilder {
   /// TEXT SMALL
   static Text textSmall(String text) {
     return createText(text, _FONT_SMALL, _FONT_FAMILY_REGULAR);
+  }
+
+  static Text textSmallBold(String text, {Color color}) {
+    return createText(text, _FONT_SMALL, _FONT_FAMILY_BOLD, color: color);
   }
 
   /// TEXT LINK

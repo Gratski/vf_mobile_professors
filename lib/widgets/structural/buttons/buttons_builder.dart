@@ -6,7 +6,7 @@ import 'package:professors/widgets/text/text.builder.dart';
 class ButtonsBuilder {
 
   /// FLAT BUTTONS
-  static FlatButton redFlatButton(String text, VoidCallback callback){
+  static FlatButton redFlatButton(String text, VoidCallback callback, {Color color}){
     return createFlatButton(text, callback, Colors.red, Colors.white);
   }
 

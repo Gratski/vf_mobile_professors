@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:professors/screens/classes/classes.screen.dart';
 import 'package:professors/screens/dashboard.dart';
 import 'package:professors/screens/home.dart';
 import 'package:professors/screens/settings/settings.dart';
@@ -42,6 +43,6 @@ class MyApp extends StatelessWidget {
           indicatorColor: Colors.red,
           accentColor: Colors.red
         ),
-        home: HomeScreen());
+        home: ClassesScreen());
   }
 }
