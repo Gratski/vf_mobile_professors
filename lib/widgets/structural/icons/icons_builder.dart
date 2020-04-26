@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class IconsBuilder {
 
@@ -19,6 +20,18 @@ class IconsBuilder {
     }
 
     return list;
+  }
+
+  static Icon difficultyIcon(double level, Color color) {
+
+    if ( level <= 2.5 ) {
+      return Icon(FontAwesomeIcons.spa, color: color,);
+    } else if ( level > 2.5 && level <= 4.0) {
+      return Icon(FontAwesomeIcons.running, color: color);
+    } else {
+      return Icon(FontAwesomeIcons.fire, color: color);
+    }
+
   }
 
 }

@@ -41,11 +41,11 @@ class TextsBuilder {
   }
 
   /// SPAN
-  static TextSpan h3LightSpan(String text) {
+  static TextSpan h3LightSpan(String text, {Color color = Colors.black}) {
     return TextSpan(
         text: text,
         style: TextStyle(
-            fontSize: _FONT_SIZE_H3, fontFamily: _FONT_FAMILY_REGULAR));
+            fontSize: _FONT_SIZE_H3, fontFamily: _FONT_FAMILY_REGULAR, color: color));
   }
 
   static TextSpan regularSpan(String text) {
@@ -77,10 +77,14 @@ class TextsBuilder {
   static Text h3Bold(String text) {
     return createText(text, _FONT_SIZE_H3, _FONT_FAMILY_BOLD);
   }
+  /// TEXT H3
+  static Text h3Light(String text, {Color color = Colors.black}) {
+    return createText(text, _FONT_SIZE_H3, _FONT_FAMILY_REGULAR, color: color);
+  }
 
   /// TEXT H4
-  static Text h4Bold(String text) {
-    return createText(text, _FONT_SIZE_H4, _FONT_FAMILY_BOLD);
+  static Text h4Bold(String text, {Color color}) {
+    return createText(text, _FONT_SIZE_H4, _FONT_FAMILY_BOLD, color: color);
   }
 
   /// TEXT H4

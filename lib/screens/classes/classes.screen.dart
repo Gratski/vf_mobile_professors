@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
 import 'package:professors/styles/padding.dart';
+import 'package:professors/widgets/notifications/notification_details_user_details.widget.dart';
 import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
+import 'package:professors/widgets/structural/dividers/dividers_builder.dart';
+import 'package:professors/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class ClassesScreen extends StatelessWidget {
@@ -22,6 +25,12 @@ class ClassesScreen extends StatelessWidget {
                 Icons.arrow_back_ios,
                 color: Colors.white,
               ),
+              actions: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
+                  child: Icon(Icons.share, color: Colors.white, size: MediaQuery.of(context).size.width * 0.08,),
+                )
+              ],
               expandedHeight: MediaQuery.of(context).size.height / 2,
               floating: false,
               pinned: false,
@@ -40,6 +49,7 @@ class ClassesScreen extends StatelessWidget {
             Expanded(
               child: CustomScrollView(
                 slivers: <Widget>[
+
                   /// HEADER
                   SliverToBoxAdapter(
                     child: Container(
@@ -48,7 +58,7 @@ class ClassesScreen extends StatelessWidget {
                       child: Row(
                         children: <Widget>[
                           Expanded(
-                            flex: 8,
+                            flex: 10,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
@@ -58,15 +68,40 @@ class ClassesScreen extends StatelessWidget {
                             ),
                           ),
 
-                          /// SHARE BUTTON
                           Expanded(
                             flex: 4,
-                            child: Icon(Icons.share, color: Colors.white, size: MediaQuery.of(context).size.width * 0.08,),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                TextsBuilder.h4Bold('4.6', color: Colors.white),
+                                Icon(Icons.star, color: Colors.red,)
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
                   ),
+
+                  /// DIFFICULTY
+                  SliverToBoxAdapter(
+                    child: Container(
+                      padding: PaddingsBuilder.regularPadding(context),
+                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+
+                          TextsBuilder.textSmallBold('Difficulty'.toUpperCase(), color: Colors.white),
+                          TextsBuilder.regularText('Warrior Level', color: Colors.white),
+
+
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  /// DESCRIPTION
                   SliverToBoxAdapter(
                     child: Container(
                       padding: PaddingsBuilder.regularPadding(context),
@@ -83,6 +118,127 @@ class ClassesScreen extends StatelessWidget {
 
 
                         ],
+                      ),
+                    ),
+                  ),
+
+                  /// INSTRUCTOR
+                  SliverToBoxAdapter(
+                    child: Container(
+                      padding: PaddingsBuilder.regularPadding(context),
+                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+
+                          DividersBuilder.dividerWithCenteredText(null),
+
+                          Container(
+                            margin: EdgeInsets.only(bottom: 20, top: 40),
+                            child: TextsBuilder.regularText('Instructor'.toUpperCase(), color: Colors.white),
+                          ),
+
+                          CircleAvatar(
+                            maxRadius: MediaQuery.of(context).size.width * 0.20,
+                            backgroundImage: NetworkImage(
+                                'https://i.ya-webdesign.com/images/circle-avatar-png.png'),
+                          ),
+
+                          Container(
+                            margin: EdgeInsets.only(top: 20),
+                            child: TextsBuilder.h4Bold('João Rodrigues', color: Colors.white),
+                          ),
+                          
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: IconsBuilder.startListBasedOnScore(3.5),
+                          )
+
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  /// CLASS DETAILS
+                  SliverToBoxAdapter(
+                    child: Container(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 20,),
+                      margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height / 20,
+                      ),
+                      color: Color.fromRGBO(241, 241, 241, 1),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+
+                          /// EQUIPMENT
+                          Container(
+                            padding: PaddingsBuilder.regularPadding(context),
+                            margin: EdgeInsets.only(top: 20),
+                            child: TextsBuilder.textSmallBold('Required Equipment'.toUpperCase()),
+                          ),
+
+                          Container(
+                            padding: PaddingsBuilder.regularPadding(context),
+                            child: TextsBuilder.regularText('fsdfsd fsd fdsf dsfs df sdf dsf ds fsd f dsf  fdsfsd f dsfs df dsd'
+                                ' fsd ffdsfdsfdf fsdf sdfsdfdsfsd fsdfsdfdf sdfdffdsfsdfs fsdfdsfdsf fsd'
+                                'fsd fdsfsdfsdfsd fsd fs dfdsdfsdf fds dfsdf sdfsdfsdf sfds fds'),
+                          ),
+
+                          /// CLASS GOALS
+                          Container(
+                            padding: PaddingsBuilder.regularPadding(context),
+                            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
+                            child: TextsBuilder.textSmallBold('Class Objectives'.toUpperCase()),
+                          ),
+
+                          Container(
+                            padding: PaddingsBuilder.regularPadding(context),
+                            child: TextsBuilder.regularText('fsdfsd fsd fdsf dsfs df sdf dsf ds fsd f dsf  fdsfsd f dsfs df dsd'
+                                ' fsd ffdsfdsfdf fsdf sdfsdfdsfsd fsdfsdfdf sdfdffdsfsdfs fsdfdsfdsf fsd'
+                                'fsd fdsfsdfsdfsd fsd fs dfdsdfsdf fds dfsdf sdfsdfsdf sfds fds'),
+                          ),
+                          
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  /// COMMENTS
+                  SliverToBoxAdapter(
+                    child: Container(
+                      color: Colors.white,
+                      child: Center(
+                        child: TextsBuilder.h2Bold('Comments')
+                      ),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Container(
+                      padding: PaddingsBuilder.regularPadding(context),
+                      color: Colors.white,
+                      child: ListView.builder(
+                        physics: AlwaysScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: 10,
+                        itemBuilder: (BuildContext context, int index) {
+                          return NotificationDetailsUserDetailsWidget(
+                              1,
+                              'Rebeka',
+                              'https://res.cloudinary.com/twenty20/private_images/t_watermark-criss-cross-10/v1498884203000/photosp/5ca84b21-4bd5-4484-a125-4f22db2ddd70/stock-photo-portrait-light-women-competition-face-natural-person-woman-strong-5ca84b21-4bd5-4484-a125-4f22db2ddd70.jpg',
+                              'tfd gdf gfgf gfdg df gfd g fdg dfg fdg df gdf g dfg df gdf gfd gfd '
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+
+                  /// LOAD MORE COMMENTS BUTTON
+                  SliverToBoxAdapter(
+                    child: Container(
+                      color: Colors.white,
+                      child: Center(
+                        child: ButtonsBuilder.createFlatButton('More', () { }, Colors.transparent, Colors.black),
                       ),
                     ),
                   ),

@@ -36,7 +36,6 @@ class DividersBuilder {
 
   static Container _createDivider() {
     return Container(
-      margin: EdgeInsets.only( top: 10.0),
       child: Row(
         children: <Widget>[
           Expanded(
