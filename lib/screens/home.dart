@@ -48,15 +48,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Text(''),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.tachometerAlt),
+                  icon: Icon(FontAwesomeIcons.comment),
                   title: Text(''),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.dumbbell),
+                  icon: Icon(FontAwesomeIcons.artstation),
                   title: Text(''),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.dumbbell),
+                  icon: Icon(FontAwesomeIcons.graduationCap),
                   title: Text(''),
                 ),
                 BottomNavigationBarItem(

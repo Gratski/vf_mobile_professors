@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/notifications/notifications_constants.dart';
-import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/notifications/notification_details_user_details.widget.dart';
-import 'package:professors/widgets/structural/appbar_builder.dart';
 import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
-import 'package:professors/widgets/structural/title_widget.dart';
+import 'package:professors/widgets/structural/header/app_header.widget.dart';
+import 'package:professors/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class MessageClassNotificationScreen extends StatelessWidget {
@@ -24,15 +22,14 @@ class MessageClassNotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBuilder.appBarWithTitle(context, ''),
       body: Padding(
-        padding: AppPaddings.regularPadding(context),
         child: CustomScrollView(
           slivers: <Widget>[
-            TopTitleWidget(
-                AppLocalizations.of(context).translate(
-                    screenConstants.messageNotificationTopHeader),
-                'CancellationNotificationTitleKey'),
+
+            CustomAppBar([]),
+
+            AppHeaderWidget(AppLocalizations.of(context).translate(
+                screenConstants.messageNotificationTopHeader)),
 
             /// USER DETAILS
             SliverToBoxAdapter(

@@ -56,6 +56,13 @@ class TextsBuilder {
             fontSize: _FONT_SIZE_REGULAR, fontFamily: _FONT_FAMILY_REGULAR));
   }
 
+  static textSmallSpan(String text) {
+    return TextSpan(
+        text: text,
+        style: TextStyle(
+            fontSize: _FONT_SMALL, fontFamily: _FONT_FAMILY_REGULAR));
+  }
+
   static TextSpan hintSpan(String text) {
     return TextSpan(
         text: text,

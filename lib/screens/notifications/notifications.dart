@@ -4,7 +4,7 @@ import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/notifications/notifications_constants.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/notifications/notification_list_item.widget.dart';
-import 'package:professors/widgets/structural/title_widget.dart';
+import 'package:professors/widgets/structural/header/app_header.widget.dart';
 
 class NotificationsScreen extends StatefulWidget {
   @override
@@ -22,10 +22,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         padding: AppPaddings.regularPadding(context),
         child: CustomScrollView(
           slivers: <Widget>[
-            TopTitleWidget(
-              AppLocalizations.of(context).translate(screenConstants.topHeader),
-              'FeedNotificationsTitleKey'
-            ),
+
+            AppHeaderWidget(AppLocalizations.of(context).translate(screenConstants.topHeader)),
 
             SliverList(
               delegate: SliverChildBuilderDelegate(

@@ -6,7 +6,8 @@ import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/notifications/notification_details_user_details.widget.dart';
 import 'package:professors/widgets/structural/appbar_builder.dart';
 import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
-import 'package:professors/widgets/structural/title_widget.dart';
+import 'package:professors/widgets/structural/header/app_header.widget.dart';
+import 'package:professors/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class CancelledClassNotificationScreen extends StatelessWidget {
@@ -24,15 +25,15 @@ class CancelledClassNotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBuilder.appBarWithTitle(context, ''),
-      body: Padding(
+      body: Container(
         padding: AppPaddings.regularPadding(context),
         child: CustomScrollView(
           slivers: <Widget>[
-            TopTitleWidget(
-                AppLocalizations.of(context).translate(
-                    screenConstants.cancellationNotificationTopHeader),
-                'CancellationNotificationTitleKey'),
+
+            CustomAppBar([]),
+
+            AppHeaderWidget(AppLocalizations.of(context).translate(
+                screenConstants.cancellationNotificationTopHeader)),
 
             /// USER DETAILS
             SliverToBoxAdapter(

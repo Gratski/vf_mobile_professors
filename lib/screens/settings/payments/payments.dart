@@ -7,9 +7,9 @@ import 'package:professors/screens/settings/payments/payment_methods.dart';
 import 'package:professors/screens/settings/payments/settings_transactions_history.dart';
 import 'package:professors/screens/settings/payments/upload_invoice.dart';
 import 'package:professors/styles/padding.dart';
-import 'package:professors/widgets/structural/appbar_builder.dart';
+import 'package:professors/widgets/structural/header/app_header.widget.dart';
+import 'package:professors/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/widgets/structural/lists/regular_list_tile.dart';
-import 'package:professors/widgets/structural/title_widget.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 import 'package:professors/globals/global_vars.dart';
 
@@ -19,13 +19,12 @@ class PaymentsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBuilder.appBarWithTitle(context, null),
       body: CustomScrollView(
         slivers: <Widget>[
-          TopTitleWidget(
-            AppLocalizations.of(context).translate(screenConstants.topHeader),
-            'SettingsPaymentsTitleKey'
-          ),
+
+          CustomAppBar([]),
+          AppHeaderWidget(AppLocalizations.of(context).translate(screenConstants.topHeader)),
+
           SliverToBoxAdapter(
             child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {

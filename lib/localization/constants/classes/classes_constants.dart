@@ -2,6 +2,8 @@ class ClassConstants {
 
   String get classesTopHeader => "CLASSES_TOP_HEADER";
   String get classesSubTitle => "CLASSES_SUB_TITLE";
+  String get classesScheduleLabel => "CLASSES_SCHEDULE_LABEL";
+  String get classesCalendarLabel => "CLASSES_CALENDAR_LABEL";
   String get classesActiveLabel => "CLASSES_ACTIVE_LABEL";
   String get classesInactiveLabel => "CLASSES_INACTIVE_LABEL";
   String get classesDurationLabel => "CLASSES_DURATION_LABEL";

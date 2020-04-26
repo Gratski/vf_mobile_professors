@@ -8,6 +8,7 @@ import 'package:professors/models/notifications/notifications.model.dart';
 import 'package:professors/screens/notifications/cancelled_class_notification.screen.dart';
 import 'package:professors/screens/notifications/message_notification.screen.dart';
 import 'package:professors/screens/notifications/reservation_class_notification.screen.dart';
+import 'package:professors/widgets/text/badges.builder.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class NotificationListItemWidget extends StatelessWidget {
@@ -138,7 +139,7 @@ class NotificationListItemWidget extends StatelessWidget {
         Expanded(
             flex: 8,
             child: Container(
-              child: _buildLabel(
+              child: BadgesBuilder.label(
                   AppLocalizations.of(context).translate(label), color),
             )),
         Expanded(
@@ -157,14 +158,6 @@ class NotificationListItemWidget extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  Widget _buildLabel(String label, Color color) {
-    return Container(
-        padding: EdgeInsets.only(top: 2, bottom: 2, left: 8, right: 8),
-        decoration: BoxDecoration(
-            color: color, borderRadius: BorderRadius.all(Radius.circular(5))),
-        child: TextsBuilder.regularText(label, color: Colors.white));
   }
 
   Widget getTitleBasedOnNotificationType(

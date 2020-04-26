@@ -4,9 +4,10 @@ import 'package:professors/localization/constants/settings/security/settings_sec
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/structural/appbar_builder.dart';
 import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
+import 'package:professors/widgets/structural/header/app_header.widget.dart';
+import 'package:professors/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/widgets/structural/inputs/input_text_widget.dart';
 import 'package:professors/widgets/structural/lists/list_tile_model.dart';
-import 'package:professors/widgets/structural/title_widget.dart';
 
 /// Screen where a list of security definitions is presented
 class ChangePasswordScreen extends StatefulWidget {
@@ -36,14 +37,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     ];
 
     return Scaffold(
-      appBar: AppBarBuilder.appBarWithTitle(context, ''),
       body: CustomScrollView(
         slivers: <Widget>[
-          /// Title
-          TopTitleWidget(
-              AppLocalizations.of(context)
-                  .translate(screenConstants.changePasswordTopHeader),
-              'ChangePasswordTitleKey'),
+
+          CustomAppBar([]),
+          AppHeaderWidget(AppLocalizations.of(context)
+              .translate(screenConstants.changePasswordTopHeader)),
 
           SliverToBoxAdapter(
             child: Container(

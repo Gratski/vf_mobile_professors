@@ -5,7 +5,8 @@ import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/settings/notifications/settings_notifications_constants.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/structural/appbar_builder.dart';
-import 'package:professors/widgets/structural/title_widget.dart';
+import 'package:professors/widgets/structural/header/app_header.widget.dart';
+import 'package:professors/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 import 'package:professors/globals/global_vars.dart';
 
@@ -16,15 +17,13 @@ class SettingsNotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarBuilder.appBarWithTitle(
-            context,
-            null),
         body: CustomScrollView(
           slivers: <Widget>[
-            TopTitleWidget(
-              AppLocalizations.of(context).translate(screenConstants.topHeader),
-              'SettingsNotificationsTitleKey'
-            ),
+
+            CustomAppBar([]),
+
+            AppHeaderWidget(AppLocalizations.of(context).translate(screenConstants.topHeader)),
+
             SliverToBoxAdapter(
               child: Container(
                 padding: AppPaddings.regularPadding(context),

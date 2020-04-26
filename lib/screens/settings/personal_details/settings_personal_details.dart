@@ -4,7 +4,9 @@ import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/constants/settings/personal_details/settings_personal_details.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/structural/appbar_builder.dart';
-import 'package:professors/widgets/structural/title_widget.dart';
+import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
+import 'package:professors/widgets/structural/header/app_header.widget.dart';
+import 'package:professors/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class SettingsPersonalDetailsScreen extends StatelessWidget {
@@ -15,10 +17,18 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBuilder.appBarWithSaveButton(context, () {}),
       body: CustomScrollView(
         slivers: <Widget>[
-          TopTitleWidget(AppLocalizations.of(context).translate(screenConstants.topHeader), 'SettingsPersonalDetailsTitleKey'),
+
+          CustomAppBar([
+            ButtonsBuilder.whiteFlatButton(
+                AppLocalizations.of(context).translate(generalConstants.buttonSaveLabel),
+                () {
+
+                })
+          ]),
+          AppHeaderWidget(AppLocalizations.of(context).translate(screenConstants.topHeader)),
+
           SliverToBoxAdapter(
             key: Key('form_box'),
             child: Container(

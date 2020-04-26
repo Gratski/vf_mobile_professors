@@ -5,8 +5,8 @@ import 'package:professors/localization/constants/settings/support/support_conta
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/models/support/support_contact_type.dart';
 import 'package:professors/screens/settings/support/support_contact_send.dart';
-import 'package:professors/widgets/structural/appbar_builder.dart';
-import 'package:professors/widgets/structural/title_widget.dart';
+import 'package:professors/widgets/structural/header/app_header.widget.dart';
+import 'package:professors/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class SupportTypeScreen extends StatelessWidget {
@@ -16,15 +16,14 @@ class SupportTypeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBuilder.appBarWithTitle(context, ''),
       body: CustomScrollView(
         shrinkWrap: true,
         slivers: <Widget>[
-          TopTitleWidget(
-            AppLocalizations.of(context)
-                .translate(screenConstants.topHeader),
-            'SettingsSupportTypeTitleKey'
-          ),
+
+          CustomAppBar([]),
+          AppHeaderWidget(AppLocalizations.of(context)
+              .translate(screenConstants.topHeader)),
+
           SliverToBoxAdapter(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

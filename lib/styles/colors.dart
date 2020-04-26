@@ -26,4 +26,8 @@ class AppColors {
   static Color get dividerMainColor => Colors.grey[300];
   static Color get dividerDarkColor => Colors.grey[300];
 
+  /// ICONS
+  static Color get iconRegular => Colors.black;
+  static Color get iconRed => regularRed;
+
 }

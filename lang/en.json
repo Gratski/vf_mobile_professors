@@ -39,6 +39,8 @@
   "DASHBOARD_THIS_MONTH": "This Month",
 
   "SETTINGS_VIEW_PROFILE": "View Profile",
+  "SETTINGS_EDIT_PROFILE": "Edit Profile",
+  "SETTINGS_EDIT_PROFILE_HINT": "Edit in different languages",
   "SETTINGS_PERSONAL_DETAILS": "Personal Details",
   "SETTINGS_PERSONAL_DETAILS_HINT": "Account Configurations",
   "SETTINGS_NOTIFICATIONS": "Notifications",
@@ -70,6 +72,13 @@
   "SETTINGS_PERSONAL_DETAILS_VAT_HINT": "Enter your VAT number",
   "SETTINGS_PERSONAL_DETAILS_VAT_ERROR": "Insert a valid VAT number",
   "SETTINGS_PERSONAL_DETAILS_NATIONALITY_HINT": "Nationality",
+
+  "SETTINGS_EDIT_PROFILE_SELECT_LANGUAGE_TOP_HEADER": "Edit your profile in...",
+  "SETTINGS_EDIT_PROFILE_SELECT_LANGUAGE_SUB_TITLE": "Select the language you want to edit your profile in",
+  "SETTINGS_EDIT_PROFILE_SELECT_LANGUAGE_ADD_NEW_LANGUAGE_LINK": "Add Language",
+
+  "SETTINGS_ADD_NEW_LANGUAGE_SELECT_SCREEN_TOP_HEADER": "Add Languages to your profile",
+  "SETTINGS_ADD_NEW_LANGUAGE_SELECT_SCREEN_SUB_TITLE": "The more profile languages you have the more you monetize your classes. We made this available to you, so you can stream to every country in the world! All you need is to fluently speak that language and create classes for that specific language.",
 
   "SETTINGS_TRANSACTIONS_HISTORY_TOP_HEADER": "Transactions History",
   "SETTINGS_TRANSACTIONS_HISTORY_CURRENT_MONTH": "This Month",
@@ -154,6 +163,8 @@
 
   "CLASSES_TOP_HEADER": "Your Classes",
   "CLASSES_SUB_TITLE": "Here you can find all your classes",
+  "CLASSES_SCHEDULE_LABEL": "Agenda",
+  "CLASSES_CALENDAR_LABEL": "Calendar",
   "CLASSES_ACTIVE_LABEL": "Active",
   "CLASSES_INACTIVE_LABEL": "Inactive",
   "CLASSES_DURATION_LABEL": "Duration",

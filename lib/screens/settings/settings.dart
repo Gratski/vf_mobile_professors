@@ -5,6 +5,7 @@ import 'package:professors/screens/settings/payments/payments.dart';
 import 'package:professors/screens/settings/notifications/settings_notifications.dart';
 import 'package:professors/screens/settings/personal_details/settings_personal_details.dart';
 import 'package:professors/screens/settings/security/security_definitions.dart';
+import 'package:professors/screens/settings/profile/settings_edit_profile_select_language.screen.dart';
 import 'package:professors/screens/settings/support/support_type.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
@@ -90,6 +91,22 @@ class SettingsScreen extends StatelessWidget {
                             TRANSLATIONS.SettingsConstants.PERSONAL_DETAILS),
                         AppLocalizations.of(context).translate(
                             TRANSLATIONS.SettingsConstants.PERSONAL_DETAILS_HINT))
+                  ),
+
+                  /// EDIT PROFILE
+                  ListTile(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => EditProfileSelectLanguageScreen()),
+                        );
+                      },
+                      trailing: Icon(Icons.keyboard_arrow_right, color: Colors.black,),
+                      title: createListItemText(
+                          AppLocalizations.of(context).translate(
+                              TRANSLATIONS.SettingsConstants.EDIT_PROFILE),
+                          AppLocalizations.of(context).translate(
+                              TRANSLATIONS.SettingsConstants.EDIT_PROFILE_HINT))
                   ),
 
                   /// NOTIFICATIONS

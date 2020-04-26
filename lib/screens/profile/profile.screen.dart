@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:professors/builders/dialog.builder.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
+import 'package:professors/screens/settings/profile/settings_edit_profile_in_language.screen.dart';
 import 'package:professors/styles/colors.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/styles/sizes.dart';
+import 'package:professors/widgets/avatar/professor_avatar.widget.dart';
 import 'package:professors/widgets/notifications/notification_details_user_details.widget.dart';
 import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/widgets/structural/dividers/dividers_builder.dart';
@@ -40,7 +42,14 @@ class ProfileScreen extends StatelessWidget {
               actions: <Widget>[
                 Container(
                   margin: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
-                  child: Icon(Icons.edit, color: Colors.white, size: AppSizes.iconRegular(context)),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => EditProfileInLanguageScreen('PT', false)),
+                      );
+                    },
+                      child: Icon(Icons.edit, color: Colors.white, size: AppSizes.iconRegular(context),),),
                 ),
                 Container(
                   margin: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
@@ -71,26 +80,10 @@ class ProfileScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
 
-                          Container(
-                           margin: EdgeInsets.only(top: sectionTopMargin / 2),
-                           child: CircleAvatar(
-                               maxRadius: MediaQuery.of(context).size.width * 0.20,
-                               backgroundColor: Colors.black,
-                               backgroundImage: NetworkImage(
-                                 'https://i.ya-webdesign.com/images/circle-avatar-png.png',
-                               ),
-                           ),
+                          ProfessorAvatarWidget(
+                            'João Rodrigues',
+                            'https://i.ya-webdesign.com/images/circle-avatar-png.png'
                           ),
-
-                          Container(
-                            margin: EdgeInsets.only(top: 20),
-                            child: TextsBuilder.h4Bold('João Rodrigues', color: Colors.white),
-                          ),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: IconsBuilder.startListBasedOnScore(3.5),
-                          )
 
                         ],
                       ),

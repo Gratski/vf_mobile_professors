@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,8 @@ import 'package:professors/localization/constants/settings/payments/payments_con
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/structural/appbar_builder.dart';
 import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
-import 'package:professors/widgets/structural/title_widget.dart';
+import 'package:professors/widgets/structural/header/app_header.widget.dart';
+import 'package:professors/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class SendInvoiceScreen extends StatefulWidget {
@@ -79,14 +79,13 @@ class _SendInvoiceScreenState extends State<SendInvoiceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBuilder.appBarWithTitle(context, null),
       body: CustomScrollView(
         slivers: <Widget>[
-          TopTitleWidget(
-            AppLocalizations.of(context)
-                .translate(screenConstants.sendInvoiceTopHeader),
-            'SettingsUploadInvoiceTitleKey'
-          ),
+
+          CustomAppBar([]),
+          AppHeaderWidget(AppLocalizations.of(context)
+              .translate(screenConstants.sendInvoiceTopHeader)),
+
           SliverToBoxAdapter(
             child: Container(
               padding: AppPaddings.regularPadding(context),
