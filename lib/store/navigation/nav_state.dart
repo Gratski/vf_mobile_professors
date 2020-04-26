@@ -13,7 +13,7 @@ class NavState extends _NavState with _$NavState {
 // The store-class
 abstract class _NavState with Store {
   @observable
-  int bottomNavigationIndex;
+  int bottomNavigationIndex = 1;
 
   @action
   bottomNavigationTabIndexChangedAction(int value) {

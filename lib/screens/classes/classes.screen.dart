@@ -35,7 +35,7 @@ class ClassesScreen extends StatelessWidget {
               hideBackButton: true,
             ),
             AppHeaderWidget('Classes',
-                subTitle: 'All your classes are listed here'),
+                subTitle: 'All your classes are listed here', isSubTitleSmall: true,),
 
             /*
             SliverToBoxAdapter(

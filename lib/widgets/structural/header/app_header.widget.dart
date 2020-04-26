@@ -32,7 +32,7 @@ class AppHeaderWidget extends StatelessWidget {
             ),
             ( subTitle != null ) ?
             Container(
-              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
+              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 80),
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: RichText(
@@ -40,7 +40,7 @@ class AppHeaderWidget extends StatelessWidget {
                   text: TextSpan(
                     style: TextStyle(color: Colors.black),
                     children: <TextSpan>[
-                      (!isSubTitleSmall) ? TextsBuilder.h3LightSpan(subTitle) : TextsBuilder.textSmallSpan(subTitle),
+                      (!isSubTitleSmall) ? TextsBuilder.h3LightSpan(subTitle) : TextsBuilder.regularSpan(subTitle),
                     ],
                   ),
                 ),

@@ -15,11 +15,9 @@ class HomeScreen extends StatefulWidget {
   }
 
   List<Widget> screens = [
-    NotificationsScreen(),
-    DashboardScreen(),
+    SettingsScreen(),
     DashboardScreen(),
     ClassesScreen(),
-    SettingsScreen(),
   ];
 
   @override
@@ -43,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
               unselectedItemColor: Colors.grey,
               selectedItemColor: Colors.red,
               items: <BottomNavigationBarItem>[
+                /*
                 BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.bell),
                   title: Text(''),
@@ -51,16 +50,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icon(FontAwesomeIcons.comment),
                   title: Text(''),
                 ),
+                 */
+                BottomNavigationBarItem(
+                  icon: Icon(FontAwesomeIcons.user),
+                  title: Text(''),
+                ),
                 BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.artstation),
                   title: Text(''),
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.graduationCap),
-                  title: Text(''),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.user),
                   title: Text(''),
                 ),
               ],
