@@ -26,7 +26,7 @@ class ButtonsBuilder {
       color: bgColor,
       textColor: textColor,
       onPressed: callback,
-      child: TextsBuilder.regularText(text),
+      child: TextsBuilder.regularText(text, color: textColor),
     );
   }
 

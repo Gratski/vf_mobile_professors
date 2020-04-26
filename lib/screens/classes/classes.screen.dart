@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/notifications/notification_details_user_details.widget.dart';
@@ -9,6 +9,7 @@ import 'package:professors/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class ClassesScreen extends StatelessWidget {
+
   ClassConstants screenConstants = ClassConstants();
 
   @override
@@ -35,9 +36,17 @@ class ClassesScreen extends StatelessWidget {
               floating: false,
               pinned: false,
               flexibleSpace: FlexibleSpaceBar(
-                background: Image.network(
-                  "https://thumbs.dreamstime.com/b/instrutor-yoga-class-no-gym-76292160.jpg",
-                  fit: BoxFit.cover,
+                background: Container(
+                  foregroundDecoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [Colors.black, Colors.transparent])),
+                  child: FadeInImage.assetNetwork(
+                    fit: BoxFit.cover,
+                    placeholder: 'assets/images/loading.gif',
+                    image: 'https://thumbs.dreamstime.com/b/instrutor-yoga-class-no-gym-76292160.jpg',
+                  ),
                 ),
               ),
             ),
@@ -92,7 +101,7 @@ class ClassesScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
 
-                          TextsBuilder.textSmallBold('Difficulty'.toUpperCase(), color: Colors.white),
+                          TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(screenConstants.classDetailsLevelLabel).toUpperCase(), color: Colors.white),
                           TextsBuilder.regularText('Warrior Level', color: Colors.white),
 
 
@@ -110,7 +119,7 @@ class ClassesScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
 
-                          TextsBuilder.textSmallBold('CLASS DESCRIPTION'.toUpperCase(), color: Colors.white),
+                          TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(screenConstants.classDetailsDescriptionLabel).toUpperCase(), color: Colors.white),
                           TextsBuilder.regularText('gfgfd gdf gfd gfdgdf gdf gfdgdfg fdg fdg '
                               'fdgfdg fdg fd gfd g dfg fd gdf gdf g dfg fd gfd gfd g df gdf gfd g '
                               'df gfd g fdg fdg fd gf dg fdfdsfdsfdsf fdsfds fsdfds fdsfssdf '
@@ -135,13 +144,15 @@ class ClassesScreen extends StatelessWidget {
 
                           Container(
                             margin: EdgeInsets.only(bottom: 20, top: 40),
-                            child: TextsBuilder.regularText('Instructor'.toUpperCase(), color: Colors.white),
+                            child: TextsBuilder.regularText(AppLocalizations.of(context).translate(screenConstants.classDetailsInstructorLabel).toUpperCase(), color: Colors.white),
                           ),
 
                           CircleAvatar(
                             maxRadius: MediaQuery.of(context).size.width * 0.20,
+                            backgroundColor: Colors.black,
                             backgroundImage: NetworkImage(
-                                'https://i.ya-webdesign.com/images/circle-avatar-png.png'),
+                              'https://i.ya-webdesign.com/images/circle-avatar-png.png',
+                            )
                           ),
 
                           Container(
@@ -175,7 +186,7 @@ class ClassesScreen extends StatelessWidget {
                           Container(
                             padding: PaddingsBuilder.regularPadding(context),
                             margin: EdgeInsets.only(top: 20),
-                            child: TextsBuilder.textSmallBold('Required Equipment'.toUpperCase()),
+                            child: TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(screenConstants.classDetailsEquipmentLabel).toUpperCase()),
                           ),
 
                           Container(
@@ -216,7 +227,7 @@ class ClassesScreen extends StatelessWidget {
                           /// TITLE COMMENTS
                           Container(
                             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
-                            child: TextsBuilder.h1Bold('Comments'),
+                            child: TextsBuilder.h1Bold(AppLocalizations.of(context).translate(screenConstants.classDetailsCommentsLabel)),
                           ),
 
                           /// COMMENTS LIST
@@ -256,7 +267,7 @@ class ClassesScreen extends StatelessWidget {
                     child: Container(
                       color: Colors.white,
                       child: Center(
-                        child: ButtonsBuilder.createFlatButton('More', () { }, Colors.transparent, Colors.black),
+                        child: ButtonsBuilder.createFlatButton(AppLocalizations.of(context).translate(screenConstants.classDetailsLoadCommentsLabel), () { }, Colors.transparent, Colors.black),
                       ),
                     ),
                   ),
@@ -287,7 +298,7 @@ class ClassesScreen extends StatelessWidget {
                   
                   Flexible(
                     flex: 4,
-                    child: ButtonsBuilder.redFlatButton('Book'.toUpperCase(), () { }),
+                    child: ButtonsBuilder.redFlatButton(AppLocalizations.of(context).translate(screenConstants.classDetailsBookButtonLabel).toUpperCase(), () { }, color: Colors.white),
                   ),
                 ],
               ),

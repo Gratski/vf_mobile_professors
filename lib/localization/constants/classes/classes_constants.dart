@@ -11,4 +11,13 @@ class ClassConstants {
   String get classesAddDatesLabel => "CLASSES_ADD_DATES_LABEL";
   String get classesAddClassButtonLabel => "CLASSES_ADD_CLASS_BUTTON_LABEL";
 
+  String get classDetailsLevelLabel => "CLASS_DETAILS_LEVEL_LABEL";
+  String get classDetailsDescriptionLabel => "CLASS_DETAILS_DESCRIPTION_LABEL";
+  String get classDetailsBookButtonLabel => "CLASS_DETAILS_BOOK_BUTTON_LABEL";
+  String get classDetailsInstructorLabel => "CLASS_DETAILS_INSTRUCTOR_LABEL";
+  String get classDetailsEquipmentLabel => "CLASS_DETAILS_EQUIPMENT_LABEL";
+  String get classDetailsClassGoalsLabel => "CLASS_DETAILS_CLASS_GOALS_LABEL";
+  String get classDetailsCommentsLabel => "CLASS_DETAILS_COMMENTS_LABEL";
+  String get classDetailsLoadCommentsLabel => "CLASS_DETAILS_LOAD_COMMENTS_LABEL";
+
 }

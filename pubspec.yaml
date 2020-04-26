@@ -34,6 +34,7 @@ flutter:
     - assets/icons/classes_icon.png
     - assets/icons/account_icon.png
     - assets/icons/calendar_icon.png
+    - assets/images/loading.gif
 
   fonts:
     - family: Inter
