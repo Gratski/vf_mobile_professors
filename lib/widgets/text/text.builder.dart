@@ -93,8 +93,8 @@ class TextsBuilder {
   }
 
   /// TEXT SMALL
-  static Text textSmall(String text) {
-    return createText(text, _FONT_SMALL, _FONT_FAMILY_REGULAR);
+  static Text textSmall(String text, {TextAlign align, Color color = Colors.black}) {
+    return createText(text, _FONT_SMALL, _FONT_FAMILY_REGULAR, color: color);
   }
 
   static Text textSmallBold(String text, {Color color}) {
@@ -127,12 +127,10 @@ class TextsBuilder {
   }
 
   static createText(String text, double size, String fontFamily,
-      {Color color}) {
-    if (color != null) {
-      return Text(text,
-          style:
-              TextStyle(color: color, fontSize: size, fontFamily: fontFamily), overflow: TextOverflow.visible,);
-    }
-    return Text(text, style: TextStyle(fontSize: size, fontFamily: fontFamily,), overflow: TextOverflow.visible,);
+      {Color color = Colors.black, TextAlign align = TextAlign.start}) {
+    return Text(text,
+      textAlign: align,
+      style: TextStyle(fontSize: size, fontFamily: fontFamily, color: color),
+      overflow: TextOverflow.visible,);
   }
 }

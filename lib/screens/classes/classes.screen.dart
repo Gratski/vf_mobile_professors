@@ -207,29 +207,47 @@ class ClassesScreen extends StatelessWidget {
                   /// COMMENTS
                   SliverToBoxAdapter(
                     child: Container(
-                      color: Colors.white,
-                      child: Center(
-                        child: TextsBuilder.h2Bold('Comments')
-                      ),
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: Container(
                       padding: PaddingsBuilder.regularPadding(context),
                       color: Colors.white,
-                      child: ListView.builder(
-                        physics: AlwaysScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: 10,
-                        itemBuilder: (BuildContext context, int index) {
-                          return NotificationDetailsUserDetailsWidget(
-                              1,
-                              'Rebeka',
-                              'https://res.cloudinary.com/twenty20/private_images/t_watermark-criss-cross-10/v1498884203000/photosp/5ca84b21-4bd5-4484-a125-4f22db2ddd70/stock-photo-portrait-light-women-competition-face-natural-person-woman-strong-5ca84b21-4bd5-4484-a125-4f22db2ddd70.jpg',
-                              'tfd gdf gfgf gfdg df gfd g fdg dfg fdg df gdf g dfg df gdf gfd gfd '
-                          );
-                        },
-                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+
+                          /// TITLE COMMENTS
+                          Container(
+                            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
+                            child: TextsBuilder.h1Bold('Comments'),
+                          ),
+
+                          /// COMMENTS LIST
+                          ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: 10,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                padding: EdgeInsets.only(bottom: 20, top: 20),
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: Colors.grey[300],
+                                      width: 2.0
+                                    )
+                                  )
+                                ),
+                                child: NotificationDetailsUserDetailsWidget(
+                                  1,
+                                  'Rebeka',
+                                  'https://res.cloudinary.com/twenty20/private_images/t_watermark-criss-cross-10/v1498884203000/photosp/5ca84b21-4bd5-4484-a125-4f22db2ddd70/stock-photo-portrait-light-women-competition-face-natural-person-woman-strong-5ca84b21-4bd5-4484-a125-4f22db2ddd70.jpg',
+                                  'tfd gdf gfgf gfdg df gfd g fdg dfg fdg df gdf g dfg df gdf gfd gfd ',
+                                  date: DateTime.now(),
+                                ),
+                              );
+                            },
+                          ),
+
+                        ],
+                      )
                     ),
                   ),
 
