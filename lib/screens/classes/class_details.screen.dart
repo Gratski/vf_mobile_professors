@@ -197,7 +197,6 @@ class ClassesDetailsScreen extends StatelessWidget {
                       margin: EdgeInsets.only(
                         top: sectionTopMargin,
                       ),
-                      color: AppColors.bgGreyColor,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -239,7 +238,6 @@ class ClassesDetailsScreen extends StatelessWidget {
                   SliverToBoxAdapter(
                     child: Container(
                         padding: AppPaddings.regularPadding(context),
-                        color: Colors.white,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -285,7 +283,7 @@ class ClassesDetailsScreen extends StatelessWidget {
                   /// LOAD MORE COMMENTS BUTTON
                   SliverToBoxAdapter(
                     child: Container(
-                      color: AppColors.bgMainColor,
+                      color: Colors.white,
                       child: Center(
                         child: ButtonsBuilder.createFlatButton(AppLocalizations.of(context).translate(screenConstants.classDetailsLoadCommentsLabel), () { }, Colors.transparent, Colors.black),
                       ),

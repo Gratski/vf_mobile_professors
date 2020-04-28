@@ -7,6 +7,7 @@ import 'package:professors/screens/profile/profile.screen.dart';
 import 'package:professors/screens/settings/settings.dart';
 import 'package:professors/screens/settings/personal_details/settings_personal_details.dart';
 import 'package:professors/screens/settings/payments/settings_transactions_history.dart';
+import 'package:professors/styles/colors.dart';
 import 'localization/app_localizations.dart';
 
 void main() {
@@ -40,10 +41,15 @@ class MyApp extends StatelessWidget {
         },
 
         theme: ThemeData(
+          inputDecorationTheme: InputDecorationTheme(
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.textInputBorder, width: 1.0),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.textInputBorder, width: 1.0),
+            ),
+          ),
           canvasColor: Color.fromRGBO(12, 12, 12, 1),
-          primaryColor: Colors.red,
-          indicatorColor: Colors.red,
-          accentColor: Colors.red
         ),
         home: HomeScreen());
   }

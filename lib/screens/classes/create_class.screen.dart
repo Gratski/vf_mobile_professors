@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/create_class.constants.dart';
 import 'package:professors/store/classes/create_class_state.dart';
 import 'package:professors/styles/padding.dart';
-import 'package:professors/widgets/notifications/notification_details_user_details.widget.dart';
 import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/widgets/structural/header/custom_app_bar.widget.dart';

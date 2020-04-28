@@ -5,6 +5,8 @@ import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
 import 'package:professors/screens/classes/class_details.screen.dart';
+import 'package:professors/screens/classes/create_class.screen.dart';
+import 'package:professors/screens/classes/create_class_select_language.screen.dart';
 import 'package:professors/styles/colors.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
@@ -34,12 +36,17 @@ class ClassesScreen extends StatelessWidget {
             CustomAppBar(
               [
                 Container(
-                    margin: EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width / 20),
-                    child: ButtonsBuilder.transparentButton(
-                        'ADD CLASS'.toUpperCase(), () {
-                          //EditClassDetailsScreen()
-                    })),
+                  margin: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width / 20),
+                  child: ButtonsBuilder.transparentButton(
+                    'ADD CLASS'.toUpperCase(),
+                    () {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => CreateClassSelectLanguageScreen()
+                      ));
+                    },
+                  ),
+                ),
               ],
               hideBackButton: true,
             ),
@@ -51,35 +58,30 @@ class ClassesScreen extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
-                    
                     /// Left
                     Flexible(
                       flex: 4,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                              
-                            TextsBuilder.h2Bold('ALL'),
-                            TextsBuilder.h2Bold('YOUR', color: Colors.red),
-                            
-                          ],
-                        ),
+                        children: <Widget>[
+                          TextsBuilder.h2Bold('ALL'),
+                          TextsBuilder.h2Bold('YOUR', color: Colors.red),
+                        ],
+                      ),
                     ),
-                    
+
                     Flexible(
                       flex: 10,
                       child: Container(
-                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width / 40),
+                        margin: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width / 40),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            TextsBuilder.jumboBold('CLASSES')
-                          ],
+                          children: <Widget>[TextsBuilder.jumboBold('CLASSES')],
                         ),
                       ),
                     ),
-                    
                   ],
                 ),
               ),
@@ -143,16 +145,18 @@ class ClassesScreen extends StatelessWidget {
                   delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
                     return GestureDetector(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => ClassesDetailsScreen()
-                        ));
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ClassesDetailsScreen()));
                       },
                       child: Container(
                           margin: EdgeInsets.only(
                               left: MediaQuery.of(context).size.width * 0.05,
                               right: MediaQuery.of(context).size.width * 0.05,
-                              bottom: MediaQuery.of(context).size.height * 0.03),
+                              bottom:
+                                  MediaQuery.of(context).size.height * 0.03),
                           child: Stack(
                             children: <Widget>[
                               AspectRatio(
@@ -176,28 +180,34 @@ class ClassesScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-
                               Positioned(
                                   top: 10,
                                   left: 10,
                                   child: Row(
                                     children: <Widget>[
-                                      Icon(FontAwesomeIcons.solidSquare, color: AppColors.regularRed, size: 15,),
-                                      Icon(FontAwesomeIcons.solidSquare, color: Colors.white, size: 15),
-                                      Icon(FontAwesomeIcons.solidSquare, color: Colors.white, size: 15)
+                                      Icon(
+                                        FontAwesomeIcons.solidSquare,
+                                        color: AppColors.regularRed,
+                                        size: 15,
+                                      ),
+                                      Icon(FontAwesomeIcons.solidSquare,
+                                          color: Colors.white, size: 15),
+                                      Icon(FontAwesomeIcons.solidSquare,
+                                          color: Colors.white, size: 15)
                                     ],
-                                  )
-                              ),
-
+                                  )),
                               Positioned(
                                 top: 10,
                                 right: 10,
                                 child: GestureDetector(
                                   onTap: () {},
-                                  child: Icon(FontAwesomeIcons.edit, color: Colors.grey[500], size: 20,),
+                                  child: Icon(
+                                    FontAwesomeIcons.edit,
+                                    color: Colors.grey[500],
+                                    size: 20,
+                                  ),
                                 ),
                               ),
-
                               Positioned(
                                 bottom: 10,
                                 right: 10,
@@ -206,43 +216,44 @@ class ClassesScreen extends StatelessWidget {
                                   margin: EdgeInsets.only(top: 5),
                                   decoration: BoxDecoration(
                                       color: AppColors.regularRed,
-                                      borderRadius:
-                                      BorderRadius.circular(5)),
+                                      borderRadius: BorderRadius.circular(5)),
                                   child: TextsBuilder.regularText(
-                                      classesStore
-                                          .classes[index].languageCode,
+                                      classesStore.classes[index].languageCode,
                                       color: Colors.white),
                                 ),
                               ),
-
                               Positioned(
                                 bottom: 10,
                                 left: 10,
-                                child: /// LABEL
-                                Container(
-                                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 6,),
+                                child:
+
+                                    /// LABEL
+                                    Container(
+                                  margin: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.height / 6,
+                                  ),
                                   child: Row(
                                     children: <Widget>[
                                       Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: <Widget>[
                                           /// STATUS LABEL
                                           Container(
                                             child: (classesStore
-                                                .classes[index].isActive)
+                                                    .classes[index].isActive)
                                                 ? BadgesBuilder.label(
-                                                AppLocalizations.of(context)
-                                                    .translate(screenConstants
-                                                    .classesActiveLabel)
-                                                    .toUpperCase(),
-                                                AppColors.regularGreen)
+                                                    AppLocalizations.of(context)
+                                                        .translate(screenConstants
+                                                            .classesActiveLabel)
+                                                        .toUpperCase(),
+                                                    AppColors.regularGreen)
                                                 : BadgesBuilder.label(
-                                                AppLocalizations.of(context)
-                                                    .translate(screenConstants
-                                                    .classesInactiveLabel)
-                                                    .toUpperCase(),
-                                                AppColors.regularRed),
+                                                    AppLocalizations.of(context)
+                                                        .translate(screenConstants
+                                                            .classesInactiveLabel)
+                                                        .toUpperCase(),
+                                                    AppColors.regularRed),
                                           ),
 
                                           /// DETAILS
@@ -261,12 +272,12 @@ class ClassesScreen extends StatelessWidget {
                                                           top: 5),
                                                       child: TextsBuilder.regularText(
                                                           ''
-                                                              '${AppLocalizations.of(context).translate(screenConstants.classesDurationLabel)}: '
-                                                              '${classesStore.classes[index].duration} min'),
+                                                          '${AppLocalizations.of(context).translate(screenConstants.classesDurationLabel)}: '
+                                                          '${classesStore.classes[index].duration} min'),
                                                     ),
                                                   ],
                                                   crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                                      CrossAxisAlignment.start,
                                                 ),
                                               ],
                                             ),
@@ -277,7 +288,6 @@ class ClassesScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-
                               Container(
                                 margin: EdgeInsets.only(left: 10),
                                 child: Column(
@@ -287,7 +297,8 @@ class ClassesScreen extends StatelessWidget {
                                         /// DIFFICULTY
                                         Container(
                                           child: Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: <Widget>[],
                                           ),
                                         ),
@@ -296,7 +307,6 @@ class ClassesScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
-
                             ],
                           )),
                     );

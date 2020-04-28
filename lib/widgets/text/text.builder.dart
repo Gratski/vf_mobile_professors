@@ -53,11 +53,11 @@ class TextsBuilder {
             fontSize: _FONT_SIZE_H3, fontFamily: _FONT_FAMILY_REGULAR, color: color));
   }
 
-  static TextSpan regularSpan(String text) {
+  static TextSpan regularSpan(String text, {Color color = Colors.white}) {
     return TextSpan(
         text: text,
         style: TextStyle(
-            fontSize: _FONT_SIZE_REGULAR, fontFamily: _FONT_FAMILY_REGULAR));
+            fontSize: _FONT_SIZE_REGULAR, fontFamily: _FONT_FAMILY_RALE_REGULAR, color: color));
   }
 
   static textSmallSpan(String text) {

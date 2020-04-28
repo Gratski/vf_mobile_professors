@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/constants/settings/personal_details/settings_personal_details.dart';
+import 'package:professors/styles/colors.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/structural/appbar_builder.dart';
 import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
@@ -10,7 +11,6 @@ import 'package:professors/widgets/structural/header/custom_app_bar.widget.dart'
 import 'package:professors/widgets/text/text.builder.dart';
 
 class SettingsPersonalDetailsScreen extends StatelessWidget {
-
   final GeneralConstants generalConstants = GeneralConstants();
   final PersonalDetailsConstants screenConstants = PersonalDetailsConstants();
 
@@ -19,16 +19,14 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-
           CustomAppBar([
             ButtonsBuilder.transparentButton(
-                AppLocalizations.of(context).translate(generalConstants.buttonSaveLabel),
-                () {
-
-                })
+                AppLocalizations.of(context)
+                    .translate(generalConstants.buttonSaveLabel),
+                () {})
           ]),
-          AppHeaderWidget(AppLocalizations.of(context).translate(screenConstants.topHeader)),
-
+          AppHeaderWidget(AppLocalizations.of(context)
+              .translate(screenConstants.topHeader)),
           SliverToBoxAdapter(
             key: Key('form_box'),
             child: Container(
@@ -46,11 +44,15 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                         TextsBuilder.textHint(AppLocalizations.of(context)
                             .translate(screenConstants.firstNameLabel)),
                         TextFormField(
-                            key: Key('input_firstname'),
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: AppLocalizations.of(context)
-                                    .translate(screenConstants.firstNameHint)))
+                          key: Key('input_firstname'),
+                          decoration: InputDecoration(
+                            hintText: 'hint',
+                            hintStyle: TextStyle(color: AppColors.textInputBorder),
+                            labelText: 'Just a text',
+                            labelStyle: TextStyle(color: AppColors.textInputBorder),
+
+                          ),
+                        ),
                       ],
                     ),
 
@@ -88,12 +90,10 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                           underline: Container(height: 0),
                           onChanged: (String newValue) {},
                           items: <String>[
-                            AppLocalizations.of(context).translate(
-                                generalConstants.genderMaleLabel
-                            ),
-                            AppLocalizations.of(context).translate(
-                                generalConstants.genderFemaleLabel
-                            )
+                            AppLocalizations.of(context)
+                                .translate(generalConstants.genderMaleLabel),
+                            AppLocalizations.of(context)
+                                .translate(generalConstants.genderFemaleLabel)
                           ].map<DropdownMenuItem<String>>(
                             (String value) {
                               return DropdownMenuItem<String>(
@@ -160,7 +160,8 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: AppLocalizations.of(context)
-                                    .translate(screenConstants.phoneNumberHint)))
+                                    .translate(
+                                        screenConstants.phoneNumberHint)))
                       ],
                     ),
 

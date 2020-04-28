@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 class AppColors {
 
   static Color get linksColor => Colors.white;
+  static Color get fontColor => Colors.white;
   static Color get regularGreen => Colors.teal;
   static Color get lightGreen => Color.fromRGBO(0, 221, 57, 1);
   static Color get regularRed => Color.fromRGBO(254, 0, 47, 1);
+
+  /// INPUT
+  static Color get textInputBorder => Colors.grey[500];
 
   /// Background Colors
   static Color get bgMainColor => Color.fromRGBO(12, 12, 12, 1);
@@ -28,7 +32,7 @@ class AppColors {
   static Color get dividerDarkColor => Colors.grey[300];
 
   /// ICONS
-  static Color get iconRegular => Colors.black;
+  static Color get iconRegular => fontColor;
   static Color get iconRed => regularRed;
 
 }

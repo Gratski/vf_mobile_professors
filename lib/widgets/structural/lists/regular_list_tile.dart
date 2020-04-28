@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:professors/styles/colors.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class RegularListTile extends StatelessWidget {
@@ -19,7 +20,7 @@ class RegularListTile extends StatelessWidget {
         onTap: routeCallback,
         trailing: Icon(
           Icons.keyboard_arrow_right,
-          color: Colors.black,
+          color: AppColors.fontColor,
         ),
         title: _createListItemText( label, hint));
   }
@@ -27,9 +28,9 @@ class RegularListTile extends StatelessWidget {
   Widget _createListItemText(String text, String hint) {
     return RichText(
       text:
-      TextSpan(style: TextStyle(color: Colors.black), children: <TextSpan>[
+      TextSpan(style: TextStyle(color: AppColors.fontColor), children: <TextSpan>[
         if (hint != null) TextsBuilder.hintSpan(hint.toUpperCase() + "\n"),
-        TextsBuilder.listItemSpan(text)
+        TextsBuilder.regularSpan(text)
       ]),
     );
   }
