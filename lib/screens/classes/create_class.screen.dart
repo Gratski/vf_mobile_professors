@@ -25,7 +25,7 @@ class CreateClassScreen extends StatelessWidget {
           slivers: <Widget>[
 
             CustomAppBar([]),
-            AppHeaderWidget('Create new Class'),
+            AppHeaderWidget('You\'re creating new Class'),
 
             /// Input Text Area
             SliverToBoxAdapter(

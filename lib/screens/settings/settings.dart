@@ -25,13 +25,23 @@ class SettingsScreen extends StatelessWidget {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              backgroundColor: Colors.white,
+              backgroundColor: AppColors.bgMainColor,
               elevation: 0.0,
               floating: false,
               pinned: false,
-              expandedHeight: MediaQuery.of(context).size.height / 3,
+              expandedHeight: MediaQuery.of(context).size.height / 5,
               flexibleSpace: Center(
                 child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/classes_bg.png"),
+                      fit: BoxFit.cover,
+                    ),
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: AppColors.textInputBorder),
+                    ),
+                  ),
+                  padding: EdgeInsets.only(bottom: 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -40,7 +50,7 @@ class SettingsScreen extends StatelessWidget {
                         child: CircleAvatar(
                           maxRadius: MediaQuery.of(context).size.width * 0.15,
                           backgroundImage: NetworkImage(
-                              'https://i.ya-webdesign.com/images/circle-avatar-png.png'),
+                              'https://img2.goodfon.com/wallpaper/big/9/89/gym-coach-weightlifting-gym.jpg'),
                         ),
                       ),
                       Flexible(
@@ -52,17 +62,13 @@ class SettingsScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              TextsBuilder.h3Bold('Raquel Rodrigues',
-                                  color: AppColors.bgMainColor),
+                              TextsBuilder.h3Bold('Raquel Rodrigues',),
                               Row(
-                                children:
-                                    IconsBuilder.startListBasedOnScore(4.0),
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: IconsBuilder.startListBasedOnScore(4.0),
                               ),
-                              ButtonsBuilder.transparentButton(
-                                AppLocalizations.of(context).translate(
-                                    TRANSLATIONS
-                                        .SettingsConstants.VIEW_PROFILE),
-                                () {
+                              GestureDetector(
+                                onTap: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -70,6 +76,14 @@ class SettingsScreen extends StatelessWidget {
                                     ),
                                   );
                                 },
+                                child: Container(
+                                  margin: EdgeInsets.only(top: 15),
+                                  child: TextsBuilder.regularText(
+                                    AppLocalizations.of(context).translate(
+                                        TRANSLATIONS
+                                            .SettingsConstants.VIEW_PROFILE),
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -84,19 +98,23 @@ class SettingsScreen extends StatelessWidget {
         },
         body: CustomScrollView(
           slivers: <Widget>[
+
             SliverToBoxAdapter(
-              child: RegularListTile(
-                label: AppLocalizations.of(context)
-                    .translate(TRANSLATIONS.SettingsConstants.PERSONAL_DETAILS),
-                hint: AppLocalizations.of(context).translate(
-                    TRANSLATIONS.SettingsConstants.PERSONAL_DETAILS_HINT),
-                callback: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SettingsPersonalDetailsScreen()),
-                  );
-                },
+              child: Container(
+                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.04),
+                child: RegularListTile(
+                  label: AppLocalizations.of(context)
+                      .translate(TRANSLATIONS.SettingsConstants.PERSONAL_DETAILS),
+                  hint: AppLocalizations.of(context).translate(
+                      TRANSLATIONS.SettingsConstants.PERSONAL_DETAILS_HINT),
+                  callback: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SettingsPersonalDetailsScreen()),
+                    );
+                  },
+                ),
               ),
             ),
 
