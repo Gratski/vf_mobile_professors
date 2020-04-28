@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
   List<Widget> screens = [
     SettingsScreen(),
-    DashboardScreen(),
+    //DashboardScreen(),
     ClassesScreen(),
   ];
 
@@ -55,10 +55,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icon(FontAwesomeIcons.user),
                   title: Text('profile'),
                 ),
+                /*
                 BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.artstation),
                   title: Text('dashboard'),
                 ),
+                 */
                 BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.playCircle),
                   title: Text('classes'),
