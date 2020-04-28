@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
@@ -23,6 +23,12 @@ class ClassesScreen extends StatelessWidget {
 
     return Scaffold(
       body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/classes_bg.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: CustomScrollView(
           slivers: <Widget>[
             CustomAppBar(
@@ -30,12 +36,54 @@ class ClassesScreen extends StatelessWidget {
                 Container(
                     margin: EdgeInsets.only(
                         right: MediaQuery.of(context).size.width / 20),
-                    child: ButtonsBuilder.whiteFlatButton('Add Class', () {})),
+                    child: ButtonsBuilder.transparentButton(
+                        'ADD CLASS'.toUpperCase(), () {
+                          //EditClassDetailsScreen()
+                    })),
               ],
               hideBackButton: true,
             ),
-            AppHeaderWidget('Classes',
-                subTitle: 'All your classes are listed here', isSubTitleSmall: true,),
+
+            /// CUSTOM SCREEN TITLE
+            SliverToBoxAdapter(
+              child: Container(
+                padding: AppPaddings.topTitlePadding(context),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    
+                    /// Left
+                    Flexible(
+                      flex: 4,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                              
+                            TextsBuilder.h2Bold('ALL'),
+                            TextsBuilder.h2Bold('YOUR', color: Colors.red),
+                            
+                          ],
+                        ),
+                    ),
+                    
+                    Flexible(
+                      flex: 10,
+                      child: Container(
+                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width / 40),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            TextsBuilder.jumboBold('CLASSES')
+                          ],
+                        ),
+                      ),
+                    ),
+                    
+                  ],
+                ),
+              ),
+            ),
 
             /*
             SliverToBoxAdapter(
@@ -88,160 +136,169 @@ class ClassesScreen extends StatelessWidget {
             ),
             */
 
+            /// Classes list
             Observer(
               builder: (BuildContext context) {
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                    return Container(
-                      margin: EdgeInsets.only(top: 20),
-                      padding: AppPaddings.regularPadding(context),
-                      child: Column(
-                        children: <Widget>[
-                          /// LABEL
-                          Row(
+                    return GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => ClassesDetailsScreen()
+                        ));
+                      },
+                      child: Container(
+                          margin: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.05,
+                              right: MediaQuery.of(context).size.width * 0.05,
+                              bottom: MediaQuery.of(context).size.height * 0.03),
+                          child: Stack(
                             children: <Widget>[
-                              Flexible(
-                                flex: 5,
-                                child: Container(
-                                  child: (classesStore.classes[index].isActive)
-                                      ? BadgesBuilder.label(
-                                          AppLocalizations.of(context)
-                                              .translate(screenConstants
-                                                  .classesActiveLabel)
-                                              .toUpperCase(),
-                                          AppColors.regularGreen)
-                                      : BadgesBuilder.label(
-                                          AppLocalizations.of(context)
-                                              .translate(screenConstants
-                                                  .classesInactiveLabel)
-                                              .toUpperCase(),
-                                          AppColors.regularRed),
+                              AspectRatio(
+                                aspectRatio: 3 / 2,
+                                child: Image.network(
+                                  classesStore.classes[index].pictureUrl,
+                                  fit: BoxFit.fill,
                                 ),
                               ),
-                            ],
-                          ),
+                              AspectRatio(
+                                aspectRatio: 3 / 2,
+                                child: Opacity(
+                                  opacity: 0.65,
+                                  child: Container(
+                                    foregroundDecoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                          colors: [Colors.black, Colors.black],
+                                          begin: Alignment.bottomCenter,
+                                          end: Alignment.topCenter),
+                                    ),
+                                  ),
+                                ),
+                              ),
 
-                          /// DETAILS
-                          Container(
-                            margin: EdgeInsets.only(top: 5),
-                            child: Row(
-                              children: <Widget>[
-                                /// TEXTUAL DETAILS
-                                Expanded(
-                                  flex: 8,
-                                  child: Column(
+                              Positioned(
+                                  top: 10,
+                                  left: 10,
+                                  child: Row(
                                     children: <Widget>[
-                                      TextsBuilder.h3Bold(classesStore
-                                          .classes[index].designation),
-                                      Container(
-                                        margin: EdgeInsets.only(top: 5),
-                                        child: TextsBuilder.regularText(''
-                                            '${AppLocalizations.of(context).translate(screenConstants.classesDurationLabel)}: '
-                                            '${classesStore.classes[index].duration} min'),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(top: 5),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.grey, width: 2.0),
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                        child: TextsBuilder.h4Bold(
-                                            classesStore
-                                                .classes[index].languageCode,
-                                            color: Colors.black54),
+                                      Icon(FontAwesomeIcons.solidSquare, color: AppColors.regularRed, size: 15,),
+                                      Icon(FontAwesomeIcons.solidSquare, color: Colors.white, size: 15),
+                                      Icon(FontAwesomeIcons.solidSquare, color: Colors.white, size: 15)
+                                    ],
+                                  )
+                              ),
+
+                              Positioned(
+                                top: 10,
+                                right: 10,
+                                child: GestureDetector(
+                                  onTap: () {},
+                                  child: Icon(FontAwesomeIcons.edit, color: Colors.grey[500], size: 20,),
+                                ),
+                              ),
+
+                              Positioned(
+                                bottom: 10,
+                                right: 10,
+                                child: Container(
+                                  padding: EdgeInsets.all(5),
+                                  margin: EdgeInsets.only(top: 5),
+                                  decoration: BoxDecoration(
+                                      color: AppColors.regularRed,
+                                      borderRadius:
+                                      BorderRadius.circular(5)),
+                                  child: TextsBuilder.regularText(
+                                      classesStore
+                                          .classes[index].languageCode,
+                                      color: Colors.white),
+                                ),
+                              ),
+
+                              Positioned(
+                                bottom: 10,
+                                left: 10,
+                                child: /// LABEL
+                                Container(
+                                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 6,),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          /// STATUS LABEL
+                                          Container(
+                                            child: (classesStore
+                                                .classes[index].isActive)
+                                                ? BadgesBuilder.label(
+                                                AppLocalizations.of(context)
+                                                    .translate(screenConstants
+                                                    .classesActiveLabel)
+                                                    .toUpperCase(),
+                                                AppColors.regularGreen)
+                                                : BadgesBuilder.label(
+                                                AppLocalizations.of(context)
+                                                    .translate(screenConstants
+                                                    .classesInactiveLabel)
+                                                    .toUpperCase(),
+                                                AppColors.regularRed),
+                                          ),
+
+                                          /// DETAILS
+                                          Container(
+                                            margin: EdgeInsets.only(top: 5),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Column(
+                                                  children: <Widget>[
+                                                    TextsBuilder.h3Bold(
+                                                        classesStore
+                                                            .classes[index]
+                                                            .designation),
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          top: 5),
+                                                      child: TextsBuilder.regularText(
+                                                          ''
+                                                              '${AppLocalizations.of(context).translate(screenConstants.classesDurationLabel)}: '
+                                                              '${classesStore.classes[index].duration} min'),
+                                                    ),
+                                                  ],
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                   ),
                                 ),
+                              ),
 
-                                /// IMAGE
-                                Expanded(
-                                  flex: 4,
-                                  child: FadeInImage(
-                                    image: NetworkImage(
-                                        classesStore.classes[index].pictureUrl),
-                                    fit: BoxFit.cover,
-                                    placeholder:
-                                        AssetImage('assets/images/loading.gif'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          /// ACTIONS
-                          Container(
-                            margin: EdgeInsets.only(top: 10),
-                            child: Row(
-                              children: <Widget>[
-                                Flexible(
-                                  flex: 3,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ClassesDetailsScreen()));
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.only(
-                                          right: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              20),
-                                      child: TextsBuilder.regularLink(
-                                        AppLocalizations.of(context).translate(
-                                            screenConstants.classesViewLabel),
-                                      ),
+                              Container(
+                                margin: EdgeInsets.only(left: 10),
+                                child: Column(
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        /// DIFFICULTY
+                                        Container(
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: <Widget>[],
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                Flexible(
-                                  flex: 3,
-                                  child: Container(
-                                    margin: EdgeInsets.only(
-                                        right:
-                                            MediaQuery.of(context).size.width /
-                                                20),
-                                    child: TextsBuilder.regularLink(
-                                      AppLocalizations.of(context).translate(
-                                          screenConstants.classesEditLabel),
-                                    ),
-                                  ),
-                                ),
-                                /*
-                                Expanded(
-                                  flex: 3,
-                                  child: TextsBuilder.regularLink(
-                                    AppLocalizations.of(context).translate(
-                                        screenConstants.classesShareLabel),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 3,
-                                  child: TextsBuilder.regularLink(
-                                    AppLocalizations.of(context).translate(
-                                        screenConstants.classesAddDatesLabel),
-                                  ),
+                              ),
 
-                                ),*/
-                              ],
-                            ),
-                          ),
-
-                          ///DIVIDER
-                          Container(
-                            margin: EdgeInsets.only(top: 20),
-                            child:
-                                DividersBuilder.dividerWithCenteredText(null),
-                          ),
-                        ],
-                      ),
+                            ],
+                          )),
                     );
                   }, childCount: classesStore.classes.length),
                 );

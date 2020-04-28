@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
         },
 
         theme: ThemeData(
+          canvasColor: Color.fromRGBO(12, 12, 12, 1),
           primaryColor: Colors.red,
           indicatorColor: Colors.red,
           accentColor: Colors.red

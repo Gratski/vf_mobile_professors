@@ -49,7 +49,7 @@ class SettingsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           TextsBuilder.h3Bold('Raquel Rodrigues'),
-                          ButtonsBuilder.whiteFlatButton(
+                          ButtonsBuilder.transparentButton(
                               AppLocalizations.of(context).translate(
                                   TRANSLATIONS.SettingsConstants.VIEW_PROFILE),
                               () {

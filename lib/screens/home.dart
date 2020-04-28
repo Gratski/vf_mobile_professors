@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: Observer(
         builder: (_) {
           return BottomNavigationBar(
-              iconSize: 22.0,
+              iconSize: 18.0,
               unselectedIconTheme: IconThemeData(color: Colors.grey),
               selectedIconTheme: IconThemeData(color: Colors.red),
               showUnselectedLabels: true,
@@ -53,15 +53,15 @@ class _HomeScreenState extends State<HomeScreen> {
                  */
                 BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.user),
-                  title: Text(''),
+                  title: Text('profile'),
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.artstation),
-                  title: Text(''),
+                  title: Text('dashboard'),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.graduationCap),
-                  title: Text(''),
+                  icon: Icon(FontAwesomeIcons.playCircle),
+                  title: Text('classes'),
                 ),
               ],
               currentIndex: navStore.bottomNavigationIndex,

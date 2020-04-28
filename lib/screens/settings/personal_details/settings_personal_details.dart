@@ -21,7 +21,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
         slivers: <Widget>[
 
           CustomAppBar([
-            ButtonsBuilder.whiteFlatButton(
+            ButtonsBuilder.transparentButton(
                 AppLocalizations.of(context).translate(generalConstants.buttonSaveLabel),
                 () {
 

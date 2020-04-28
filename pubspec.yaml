@@ -35,6 +35,7 @@ flutter:
     - assets/icons/account_icon.png
     - assets/icons/calendar_icon.png
     - assets/images/loading.gif
+    - assets/images/classes_bg.png
 
   fonts:
     - family: Inter
@@ -45,3 +46,15 @@ flutter:
       fonts:
         - asset: assets/fonts/Inter-Bold.ttf
           weight: 700
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway-Regular.ttf
+    - family: Raleway Bold
+      fonts:
+        - asset: assets/fonts/Raleway-Bold.ttf
+    - family: Raleway Extra Bold
+      fonts:
+          - asset: assets/fonts/Raleway-ExtraBold.ttf
+    - family: Raleway Light
+      fonts:
+        - asset: assets/fonts/Raleway-Light.ttf

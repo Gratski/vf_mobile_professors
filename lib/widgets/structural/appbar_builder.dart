@@ -35,7 +35,7 @@ class AppBarBuilder {
         size: 30.0,
       ),
       actions: <Widget>[
-        ButtonsBuilder.whiteFlatButton(
+        ButtonsBuilder.transparentButton(
             AppLocalizations.of(context)
                 .translate(generalConstants.buttonSaveLabel),
             () {})
@@ -77,7 +77,7 @@ class AppBarBuilder {
         },
       ),
       actions: <Widget>[
-        ButtonsBuilder.whiteFlatButton(
+        ButtonsBuilder.transparentButton(
             AppLocalizations.of(context).translate(generalConstants.buttonSaveLabel),
             callBack)
       ],
@@ -138,7 +138,7 @@ class AppBarBuilder {
       ),
       centerTitle: false,
       actions: <Widget>[
-        ButtonsBuilder.whiteFlatButton(
+        ButtonsBuilder.transparentButton(
             AppLocalizations.of(context).translate(generalConstants.buttonSaveLabel),
             callback)
       ],

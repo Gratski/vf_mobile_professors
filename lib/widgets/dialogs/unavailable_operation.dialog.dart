@@ -54,7 +54,7 @@ class UnavailableOperationDialog extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40, bottom: MediaQuery.of(context).size.height / 30),
             padding: EdgeInsets.all(5),
-            child: ButtonsBuilder.whiteFlatButton(AppLocalizations.of(context).translate(constants.dialogUnavailableOperationDismissLabel), () {
+            child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.dialogUnavailableOperationDismissLabel), () {
               Navigator.of(context).pop();
             }),
           ),

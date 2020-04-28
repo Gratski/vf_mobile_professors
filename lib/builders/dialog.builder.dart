@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:professors/widgets/dialogs/comment_options.dialog.dart';
-import 'package:professors/widgets/dialogs/unavailable:operation.dialog.dart';
+import 'package:professors/widgets/dialogs/unavailable_operation.dialog.dart';
 
 class DialogsBuilder {
 

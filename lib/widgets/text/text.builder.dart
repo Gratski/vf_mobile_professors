@@ -6,9 +6,13 @@ import 'package:professors/styles/colors.dart';
 
 /// Builder for Text Span App Elements
 class TextsBuilder {
+  static String _FONT_FAMILY_RALE_EXTRA_BOLD = 'Raleway Extra Bold';
+  static String _FONT_FAMILY_RALE_BOLD = 'Raleway Bold';
+  static String _FONT_FAMILY_RALE_REGULAR = 'Raleway';
   static String _FONT_FAMILY_BOLD = 'Inter Bold';
   static String _FONT_FAMILY_REGULAR = 'Inter';
 
+  static double _FONT_SIZE_JUMBO = 55;
   static double _FONT_SIZE_H1 = 38.0;
   static double _FONT_SIZE_H2 = 30.0;
   static double _FONT_SIZE_H3 = 24.0;
@@ -26,11 +30,11 @@ class TextsBuilder {
   }
 
   /// SPAN
-  static TextSpan h1BoldSpan(String text) {
+  static TextSpan h1BoldSpan(String text, {Color color = Colors.white}) {
     return TextSpan(
         text: text,
         style:
-            TextStyle(fontSize: _FONT_SIZE_H1, fontFamily: _FONT_FAMILY_BOLD));
+            TextStyle(fontSize: _FONT_SIZE_H1, fontFamily: _FONT_FAMILY_RALE_EXTRA_BOLD, color: color));
   }
 
   /// SPAN
@@ -72,13 +76,17 @@ class TextsBuilder {
             fontFamily: _FONT_FAMILY_REGULAR));
   }
 
+  static Text jumboBold(String text) {
+    return createText(text, _FONT_SIZE_JUMBO, _FONT_FAMILY_RALE_EXTRA_BOLD);
+  }
+
   static Text h1Bold(String text) {
-    return createText(text, _FONT_SIZE_H1, _FONT_FAMILY_BOLD);
+    return createText(text, _FONT_SIZE_H1, _FONT_FAMILY_RALE_EXTRA_BOLD);
   }
 
   /// TEXT H2
   static Text h2Bold(String text, {Color color}) {
-    return createText(text, _FONT_SIZE_H2, _FONT_FAMILY_BOLD, color: color);
+    return createText(text, _FONT_SIZE_H2, _FONT_FAMILY_RALE_EXTRA_BOLD, color: color);
   }
 
   /// TEXT H3
@@ -129,7 +137,7 @@ class TextsBuilder {
       text,
       textAlign: align,
       style: TextStyle(
-        color: ( color != null ) ? color : Colors.black,
+        color: ( color != null ) ? color : AppColors.textRegularColor,
           fontSize: _FONT_SIZE_REGULAR, fontFamily: _FONT_FAMILY_REGULAR),
     );
   }

@@ -25,7 +25,7 @@ class EditProfileInLanguageScreen extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(
                       right: MediaQuery.of(context).size.width / 20),
-                  child: ButtonsBuilder.whiteFlatButton('SAVE', () { })
+                  child: ButtonsBuilder.transparentButton('SAVE', () { })
                 ),
               ],
             ),

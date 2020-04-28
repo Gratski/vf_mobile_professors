@@ -72,7 +72,7 @@ class CommentOptionsDialog extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40, bottom: MediaQuery.of(context).size.height / 30),
             padding: EdgeInsets.all(5),
-            child: ButtonsBuilder.whiteFlatButton('Report', () {
+            child: ButtonsBuilder.transparentButton('Report', () {
               Navigator.of(context).pop();
             }),
           ),

@@ -17,8 +17,12 @@ class ButtonsBuilder {
   }
 
   /// LINK TEXT BLUE
-  static FlatButton whiteFlatButton(String text, VoidCallback callback) {
-    return createFlatButton(text, callback, Colors.transparent, AppColors.regularGreen);
+  static FlatButton transparentButton(String text, VoidCallback callback) {
+    return createFlatButton(text, callback, Colors.transparent, AppColors.linksColor);
+  }
+
+  static blackButton(String text, VoidCallback callback) {
+    return createFlatButton(text, callback, AppColors.bgMainColor, AppColors.linksColor);
   }
 
   static FlatButton createFlatButton(String text, VoidCallback callback, Color bgColor, Color textColor){
