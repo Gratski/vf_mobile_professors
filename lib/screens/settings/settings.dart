@@ -29,7 +29,7 @@ class SettingsScreen extends StatelessWidget {
               elevation: 0.0,
               floating: false,
               pinned: false,
-              expandedHeight: MediaQuery.of(context).size.height / 5,
+              expandedHeight: MediaQuery.of(context).size.height / 4.5,
               flexibleSpace: Center(
                 child: Container(
                   decoration: BoxDecoration(

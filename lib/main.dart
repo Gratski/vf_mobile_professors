@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
               borderSide: BorderSide(color: AppColors.textInputBorder, width: 1.0),
             ),
           ),
-          canvasColor: Color.fromRGBO(12, 12, 12, 1),
+          canvasColor: AppColors.bgMainColor
         ),
         home: HomeScreen());
   }
