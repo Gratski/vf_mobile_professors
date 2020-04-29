@@ -10,4 +10,6 @@ class AppSizes {
   static double textRegular(BuildContext context) => MediaQuery.of(context).size.width * 0.02;
   static double textSmall(BuildContext context) => MediaQuery.of(context).size.width * 0.02;
 
+  static double inputTopMargin(BuildContext context) => 20;
+
 }

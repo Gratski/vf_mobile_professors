@@ -44,10 +44,10 @@ class MyApp extends StatelessWidget {
           inputDecorationTheme: InputDecorationTheme(
             hintStyle: TextStyle(color: AppColors.textInputBorder),
             labelStyle: TextStyle(color: AppColors.textInputBorder),
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: AppColors.textInputBorder, width: 1.0),
             ),
-            enabledBorder: OutlineInputBorder(
+            enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: AppColors.textInputBorder, width: 1.0),
             ),
           ),

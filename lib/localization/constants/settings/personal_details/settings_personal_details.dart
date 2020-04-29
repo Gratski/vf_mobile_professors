@@ -28,4 +28,7 @@ class PersonalDetailsConstants {
 
   String get nationalityHint => "SETTINGS_PERSONAL_DETAILS_NATIONALITY_HINT";
 
+  String get genderScreenTopHeader => "SETTINGS_PERSONAL_DETAILS_GENDER_SCREEN_TOP_HEADER";
+  String get genderScreenSubTitle => "SETTINGS_PERSONAL_DETAILS_GENDER_SCREEN_SUB_TITLE";
+
 }

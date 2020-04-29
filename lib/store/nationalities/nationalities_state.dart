@@ -23,7 +23,17 @@ abstract class _NationalitiesState with Store {
         1,
         'Portuguese',
         ''
-      )
+      ),
+      NationalityListItemModel(
+          2,
+          'English',
+          ''
+      ),
+      NationalityListItemModel(
+          3,
+          'French',
+          ''
+      ),
     ],
   );
 

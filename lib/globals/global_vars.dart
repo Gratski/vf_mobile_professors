@@ -8,7 +8,9 @@ import 'package:professors/store/payments/methods/settings_payment_methods_state
 import 'package:professors/store/payments/settings_payments_state.dart';
 import 'package:professors/store/support/support_contact_state.dart';
 import 'package:professors/store/transactions/transactions_history_state.dart';
+import 'package:professors/store/user/user_state.dart';
 
+final userStore = UserState();
 final navStore = NavState();
 final dashboardStore = DashboardState();
 final transactionsHistoryStore = TransactionsHistoryState();
