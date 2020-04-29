@@ -58,7 +58,12 @@ class EditProfileSelectLanguageScreen extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return GestureDetector(
-                  onTap: listItems[index].callback,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => EditProfileInLanguageScreen('PT', false)),
+                    );
+                  },
                   child: RegularListTile(
                     label: listItems[index].label,
                   ),

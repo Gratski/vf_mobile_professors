@@ -27,6 +27,9 @@ abstract class _UserState with Store {
   String email = "rodrigues.at.work@gmail.com";
 
   @observable
+  String pictureUrl = 'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg';
+
+  @observable
   String phoneNumber = "+351968039230";
 
   @observable
@@ -75,6 +78,11 @@ abstract class _UserState with Store {
   @action
   setEmail(String email) {
     this.email = email;
+  }
+
+  @action
+  setPictureUrl(String pictureUrl) {
+    this.pictureUrl = pictureUrl;
   }
 
   @action

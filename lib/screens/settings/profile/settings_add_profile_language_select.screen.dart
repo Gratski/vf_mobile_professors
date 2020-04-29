@@ -30,17 +30,7 @@ class EditProfileAddNewLanguageScreen extends StatelessWidget {
         key: Key('security_definitions_list'),
         shrinkWrap: true,
         slivers: <Widget>[
-          CustomAppBar([
-            Container(
-              margin: EdgeInsets.only(
-                  right: MediaQuery.of(context).size.width / 20),
-              child: ButtonsBuilder.transparentButton(
-                AppLocalizations.of(context)
-                    .translate(generalConstants.buttonSaveLabel),
-                    () {},
-              ),
-            ),
-          ]),
+          CustomAppBar([]),
 
           /// Title
           AppHeaderWidget(
@@ -56,7 +46,12 @@ class EditProfileAddNewLanguageScreen extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
                 return GestureDetector(
-                  onTap: listItems[index].callback,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => EditProfileInLanguageScreen('PT', true)),
+                    );
+                  },
                   child: RegularListTile(
                     label: listItems[index].label,
                   ),

@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:professors/builders/dialog.builder.dart';
-import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
-import 'package:professors/screens/settings/profile/settings_edit_profile_in_language.screen.dart';
+import 'package:professors/screens/settings/profile/settings_edit_profile_select_language.screen.dart';
 import 'package:professors/styles/colors.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/styles/sizes.dart';
 import 'package:professors/widgets/avatar/professor_avatar.widget.dart';
 import 'package:professors/widgets/notifications/notification_details_user_details.widget.dart';
 import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
-import 'package:professors/widgets/structural/dividers/dividers_builder.dart';
-import 'package:professors/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 
 class ProfileScreen extends StatelessWidget {
 
   ClassConstants screenConstants = ClassConstants();
+
+  bool showEditButton;
+  bool showShareButton;
+
+  ProfileScreen(this.showEditButton, this.showShareButton);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,6 @@ class ProfileScreen extends StatelessWidget {
     double sectionTopMargin = MediaQuery.of(context).size.height / 20;
 
     return Scaffold(
-      backgroundColor: Colors.black,
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
@@ -40,26 +41,28 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               actions: <Widget>[
+                ( showEditButton ) ?
                 Container(
                   margin: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => EditProfileInLanguageScreen('PT', false)),
+                        MaterialPageRoute(builder: (context) => EditProfileSelectLanguageScreen()),
                       );
                     },
-                      child: Icon(Icons.edit, color: Colors.white, size: AppSizes.iconRegular(context),),),
-                ),
+                      child: Icon(Icons.edit, color: AppColors.bgGreyColor, size: AppSizes.iconRegular(context),),),
+                ) : Text(''),
+                ( showShareButton ) ?
                 Container(
                   margin: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
                   child: GestureDetector(
                     onTap: () {
                       DialogsBuilder(context).unavailableOperation();
                     },
-                    child: Icon(Icons.share, color: Colors.white, size: AppSizes.iconRegular(context)),
+                    child: Icon(Icons.share, color: AppColors.bgGreyColor, size: AppSizes.iconRegular(context)),
                   ),
-                )
+                ) : Text(''),
               ],
               floating: false,
               pinned: false,
@@ -68,7 +71,6 @@ class ProfileScreen extends StatelessWidget {
         },
         body: Column(
           children: <Widget>[
-
             Expanded(
               child: CustomScrollView(
                 slivers: <Widget>[
@@ -84,7 +86,6 @@ class ProfileScreen extends StatelessWidget {
                             'João Rodrigues',
                             'https://i.ya-webdesign.com/images/circle-avatar-png.png'
                           ),
-
                         ],
                       ),
                     ),
@@ -165,7 +166,7 @@ class ProfileScreen extends StatelessWidget {
                             /// TITLE
                             Container(
                               margin: EdgeInsets.only(top: sectionTopMargin),
-                              child: TextsBuilder.h1Bold('Teaches...'),
+                              child: TextsBuilder.h2Bold('Teaches', color: AppColors.bgMainColor),
                             ),
 
                             /// CLASSES CATEGORY LIST
@@ -184,7 +185,7 @@ class ProfileScreen extends StatelessWidget {
                                       border: Border.all(color: Colors.black)
                                     ),
                                     padding: EdgeInsets.all(10),
-                                    child: TextsBuilder.h4Bold('HIIT'),
+                                    child: TextsBuilder.h4Bold('HIIT', color: AppColors.bgMainColor),
                                   ),
 
                                   Container(
@@ -194,7 +195,7 @@ class ProfileScreen extends StatelessWidget {
                                         border: Border.all(color: Colors.black)
                                     ),
                                     padding: EdgeInsets.all(10),
-                                    child: TextsBuilder.h4Bold('YOGA'),
+                                    child: TextsBuilder.h4Bold('YOGA', color: AppColors.bgMainColor),
                                   ),
 
                                   Container(
@@ -204,7 +205,7 @@ class ProfileScreen extends StatelessWidget {
                                         border: Border.all(color: Colors.black)
                                     ),
                                     padding: EdgeInsets.all(10),
-                                    child: TextsBuilder.h4Bold('ZUMBA'),
+                                    child: TextsBuilder.h4Bold('ZUMBA', color: AppColors.bgMainColor),
                                   ),
                                   
                                 ],
@@ -219,7 +220,6 @@ class ProfileScreen extends StatelessWidget {
                   SliverToBoxAdapter(
                     child: Container(
                         padding: AppPaddings.regularPadding(context),
-                        color: Colors.white,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -268,7 +268,7 @@ class ProfileScreen extends StatelessWidget {
                     child: Container(
                       color: AppColors.bgMainColor,
                       child: Center(
-                        child: ButtonsBuilder.createFlatButton('Load more', () { }, Colors.transparent, Colors.black),
+                        child: ButtonsBuilder.createFlatButton('Load more', () { }, Colors.transparent, AppColors.linksColor),
                       ),
                     ),
                   ),

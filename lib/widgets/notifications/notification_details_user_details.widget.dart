@@ -61,7 +61,7 @@ class NotificationDetailsUserDetailsWidget extends StatelessWidget {
                     onTap: () {
                       DialogsBuilder(context).reportCommentDialog();
                     },
-                    child: TextsBuilder.textSmall('report')
+                    child: TextsBuilder.textSmall('report', color: AppColors.fontColor)
                   ),
                 ),
               ),
@@ -80,7 +80,7 @@ class NotificationDetailsUserDetailsWidget extends StatelessWidget {
               margin: EdgeInsets.only(top: 10),
               child: Row(
                 children: <Widget>[
-                  TextsBuilder.textSmall('Classification: '),
+                  TextsBuilder.textSmall('Classification: ', color: AppColors.fontColor),
                   TextsBuilder.textSmallBold('$score'),
                   Icon(Icons.star, color: AppColors.regularRed,),
                 ],

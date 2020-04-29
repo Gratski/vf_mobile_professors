@@ -15,6 +15,7 @@ class AppColors {
   /// Background Colors
   static Color get bgMainColor => Color.fromRGBO(34, 34, 34, 1);
   static Color get bgGreyColor => Color.fromRGBO(241, 241, 241, 1);
+  static Color get bgInputColor => Color.fromRGBO(42, 42, 42, 1);
 
   /// Text Colors
   static Color get textRegularColor => Colors.grey[200];

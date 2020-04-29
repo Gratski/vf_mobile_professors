@@ -77,6 +77,23 @@ mixin _$UserState on _UserState, Store {
     }, _$emailAtom, name: '${_$emailAtom.name}_set');
   }
 
+  final _$pictureUrlAtom = Atom(name: '_UserState.pictureUrl');
+
+  @override
+  String get pictureUrl {
+    _$pictureUrlAtom.context.enforceReadPolicy(_$pictureUrlAtom);
+    _$pictureUrlAtom.reportObserved();
+    return super.pictureUrl;
+  }
+
+  @override
+  set pictureUrl(String value) {
+    _$pictureUrlAtom.context.conditionallyRunInAction(() {
+      super.pictureUrl = value;
+      _$pictureUrlAtom.reportChanged();
+    }, _$pictureUrlAtom, name: '${_$pictureUrlAtom.name}_set');
+  }
+
   final _$phoneNumberAtom = Atom(name: '_UserState.phoneNumber');
 
   @override
@@ -229,6 +246,16 @@ mixin _$UserState on _UserState, Store {
     final _$actionInfo = _$_UserStateActionController.startAction();
     try {
       return super.setEmail(email);
+    } finally {
+      _$_UserStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setPictureUrl(String pictureUrl) {
+    final _$actionInfo = _$_UserStateActionController.startAction();
+    try {
+      return super.setPictureUrl(pictureUrl);
     } finally {
       _$_UserStateActionController.endAction(_$actionInfo);
     }

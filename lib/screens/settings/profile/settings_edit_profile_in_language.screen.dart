@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:professors/globals/global_vars.dart';
+import 'package:professors/screens/profile/profile.screen.dart';
 import 'package:professors/styles/colors.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/avatar/professor_avatar.widget.dart';
@@ -23,9 +26,14 @@ class EditProfileInLanguageScreen extends StatelessWidget {
             CustomAppBar(
               [
                 Container(
-                  margin: EdgeInsets.only(
-                      right: MediaQuery.of(context).size.width / 20),
-                  child: ButtonsBuilder.transparentButton('SAVE', () { })
+                  margin: EdgeInsets.only(),
+                  child: ( !isAdding ) ? ButtonsBuilder.transparentButton('View Profile', () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProfileScreen(false, false)),
+                    );
+                  }) : Text('')
                 ),
               ],
             ),
@@ -36,15 +44,20 @@ class EditProfileInLanguageScreen extends StatelessWidget {
             Expanded(
               child: CustomScrollView(
                 slivers: <Widget>[
-                  /// INSTRUCTOR
+                  /// Avatar
                   SliverToBoxAdapter(
                     child: Container(
+                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 30),
                       padding: AppPaddings.regularPadding(context),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          ProfessorAvatarWidget('João Rodrigues',
-                              'https://i.ya-webdesign.com/images/circle-avatar-png.png', textColor: AppColors.fontColor,),
+                          Observer(
+                            builder: (_) {
+                              return ProfessorAvatarWidget('${userStore.firstName} ${userStore.lastName}',
+                                userStore.pictureUrl, textColor: AppColors.fontColor,);
+                            }
+                          ),
                         ],
                       ),
                     ),
@@ -72,7 +85,8 @@ class EditProfileInLanguageScreen extends StatelessWidget {
                               padding: AppPaddings.regularPadding(context),
                               child: TextFormField(
                                 decoration: InputDecoration(
-                                  fillColor: AppColors.bgGreyColor,
+                                  fillColor: AppColors.bgInputColor,
+                                  filled: true,
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
                                       borderSide: BorderSide(
@@ -89,7 +103,7 @@ class EditProfileInLanguageScreen extends StatelessWidget {
                             /// QUOTE
                             Container(
                               padding: AppPaddings.regularPadding(context),
-                              margin: EdgeInsets.only(top: sectionTopMargin),
+                              margin: EdgeInsets.only(top: sectionTopMargin / 4),
                               child: TextsBuilder.h3Bold('Quote'.toUpperCase(),),
                             ),
                             Container(
@@ -97,6 +111,8 @@ class EditProfileInLanguageScreen extends StatelessWidget {
                               padding: AppPaddings.regularPadding(context),
                               child: TextFormField(
                                 decoration: InputDecoration(
+                                  fillColor: AppColors.bgInputColor,
+                                  filled: true,
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
                                       borderSide: BorderSide(
@@ -110,9 +126,15 @@ class EditProfileInLanguageScreen extends StatelessWidget {
                               ),
                             ),
 
+                            Container(
+                              alignment: Alignment.center,
+                              padding: AppPaddings.regularPadding(context),
+                              margin: EdgeInsets.only(top: sectionTopMargin / 4),
+                              child: ButtonsBuilder.redFlatButton('Save', () { })
+                            ),
                           ],
                         ),
-                      )
+                      ),
                     ),
                   ),
                 ],

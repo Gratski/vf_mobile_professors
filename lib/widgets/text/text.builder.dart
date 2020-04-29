@@ -80,8 +80,8 @@ class TextsBuilder {
     return createText(text, _FONT_SIZE_JUMBO, _FONT_FAMILY_RALE_EXTRA_BOLD);
   }
 
-  static Text h1Bold(String text) {
-    return createText(text, _FONT_SIZE_H1, _FONT_FAMILY_RALE_EXTRA_BOLD);
+  static Text h1Bold(String text, {Color color}) {
+    return createText(text, _FONT_SIZE_H1, _FONT_FAMILY_RALE_EXTRA_BOLD, color: ( color != null ) ? color : AppColors.fontColor);
   }
 
   /// TEXT H2
