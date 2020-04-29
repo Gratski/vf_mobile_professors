@@ -42,6 +42,8 @@ class MyApp extends StatelessWidget {
 
         theme: ThemeData(
           inputDecorationTheme: InputDecorationTheme(
+            hintStyle: TextStyle(color: AppColors.textInputBorder),
+            labelStyle: TextStyle(color: AppColors.textInputBorder),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.textInputBorder, width: 1.0),
             ),

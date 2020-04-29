@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:professors/localization/constants/classes/create_class.constants.dart';
 import 'package:professors/screens/classes/create_class.screen.dart';
+import 'package:professors/screens/settings/profile/settings_add_profile_language_select.screen.dart';
 import 'package:professors/store/classes/create_class_state.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/structural/buttons/buttons_builder.dart';
@@ -22,7 +23,15 @@ class CreateClassSelectLanguageScreen extends StatelessWidget {
         child: CustomScrollView(
           slivers: <Widget>[
 
-            CustomAppBar([]),
+            CustomAppBar([
+              ButtonsBuilder.transparentButton('Add language', () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => EditProfileAddNewLanguageScreen()
+                  )
+                );
+              },),
+            ],),
             AppHeaderWidget('This class will be given in...', subTitle: 'Select the language of this class',),
 
             /// Language Options List

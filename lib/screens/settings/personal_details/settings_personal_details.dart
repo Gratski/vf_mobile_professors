@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/constants/settings/personal_details/settings_personal_details.dart';
+import 'package:professors/screens/settings/personal_details/settings_nationality.screen.dart';
 import 'package:professors/styles/colors.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/structural/appbar_builder.dart';
@@ -41,16 +42,11 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        TextsBuilder.textHint(AppLocalizations.of(context)
-                            .translate(screenConstants.firstNameLabel)),
                         TextFormField(
                           key: Key('input_firstname'),
                           decoration: InputDecoration(
-                            hintText: 'hint',
-                            hintStyle: TextStyle(color: AppColors.textInputBorder),
-                            labelText: 'Just a text',
-                            labelStyle: TextStyle(color: AppColors.textInputBorder),
-
+                            hintText: 'write your first name',
+                            labelText: 'First Name',
                           ),
                         ),
                       ],
@@ -60,12 +56,12 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        TextsBuilder.textHint(AppLocalizations.of(context)
-                            .translate(screenConstants.lastNameLabel)),
                         TextFormField(
                             key: Key('input_lastname'),
                             decoration: InputDecoration(
                                 border: InputBorder.none,
+                                labelText: AppLocalizations.of(context)
+                                    .translate(screenConstants.lastNameLabel),
                                 hintText: AppLocalizations.of(context)
                                     .translate(screenConstants.lastNameHint)))
                       ],
@@ -86,7 +82,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                           value: 'Male',
                           iconSize: 24,
                           elevation: 16,
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(color: AppColors.fontColor),
                           underline: Container(height: 0),
                           onChanged: (String newValue) {},
                           items: <String>[
@@ -110,8 +106,6 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        TextsBuilder.textHint(AppLocalizations.of(context)
-                            .translate(screenConstants.birthdayHint)),
                         Container(
                           padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
                           child: new Theme(
@@ -138,12 +132,12 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        TextsBuilder.textHint(AppLocalizations.of(context)
-                            .translate(screenConstants.emailLabel)),
                         TextFormField(
                             key: Key('input_email'),
                             decoration: InputDecoration(
                                 border: InputBorder.none,
+                                labelText: AppLocalizations.of(context)
+                                    .translate(screenConstants.emailLabel),
                                 hintText: AppLocalizations.of(context)
                                     .translate(screenConstants.emailHint)))
                       ],
@@ -153,12 +147,12 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        TextsBuilder.textHint(AppLocalizations.of(context)
-                            .translate(screenConstants.phoneNumberLabel)),
                         TextFormField(
                             key: Key('input_phone_number'),
                             decoration: InputDecoration(
                                 border: InputBorder.none,
+                                labelText: AppLocalizations.of(context)
+                                    .translate(screenConstants.phoneNumberLabel),
                                 hintText: AppLocalizations.of(context)
                                     .translate(
                                         screenConstants.phoneNumberHint)))
@@ -169,45 +163,33 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        TextsBuilder.textHint(AppLocalizations.of(context)
-                            .translate(screenConstants.vatLabel)),
                         TextFormField(
                             key: Key('input_vat_number'),
                             decoration: InputDecoration(
                                 border: InputBorder.none,
+                                labelText: AppLocalizations.of(context)
+                                    .translate(screenConstants.vatLabel),
                                 hintText: AppLocalizations.of(context)
                                     .translate(screenConstants.vatHint)))
                       ],
                     ),
-
-                    /// NATIONALITY
+                    /// VAT NUMBER
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        TextsBuilder.textHint(AppLocalizations.of(context)
-                            .translate(screenConstants.nationalityHint)),
-                        DropdownButton<String>(
-                          isExpanded: true,
-                          icon: Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.white,
-                          ),
-                          value: 'Portuguese',
-                          iconSize: 24,
-                          elevation: 16,
-                          style: TextStyle(color: Colors.black),
-                          underline: Container(height: 0),
-                          onChanged: (String newValue) {},
-                          items: <String>['Portuguese', 'North American']
-                              .map<DropdownMenuItem<String>>(
-                            (String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
+                        TextFormField(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) => SettingsNationalityScreen()
+                              ),);
                             },
-                          ).toList(),
-                        ),
+                            key: Key('input_nationality'),
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                labelText: AppLocalizations.of(context)
+                                    .translate(screenConstants.nationalityHint),
+                                hintText: AppLocalizations.of(context)
+                                    .translate(screenConstants.nationalityHint)))
                       ],
                     ),
                   ],
