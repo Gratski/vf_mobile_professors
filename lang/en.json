@@ -96,7 +96,7 @@
   "SETTINGS_PAYMENTS_BALANCE_LABEL": "Balance",
   "SETTINGS_PAYMENTS_SEND_INVOICE_LABEL": "Send Invoice",
   "SETTINGS_PAYMENTS_PAYMENT_METHOD_LABEL": "Payment Method",
-  "SETTINGS_PAYMENTS_CURRENCY_LABEL": "Currency",
+  "SETTINGS_PAYMENTS_CURRENCY_LABEL": "Change Currency",
   "SETTINGS_PAYMENTS_TRANSACTIONS_HISTORY_LABEL": "Transactions History",
 
   "SETTINGS_PAYMENT_METHODS_TOP_HEADER": "Edit Payment Methods",
@@ -112,6 +112,9 @@
   "SETTINGS_ADD_PAYMENT_SEND_INVOICE_TOP_HEADER": "Send Invoice",
   "SETTINGS_ADD_PAYMENT_SEND_INVOICE_SUB_TITLE": "Send us your monthly invoice. Upload your invoice and our billing team will happy to process it for you.",
   "SETTINGS_ADD_PAYMENT_SEND_INVOICE_UPLOAD_BUTTON_LABEL": "Upload Invoice",
+
+  "SETTINGS_PAYMENTS_SELECT_CURRENCY_TOP_HEADER": "Select your currency",
+  "SETTINGS_PAYMENTS_SELECT_CURRENCY_SUB_TITLE": "This will not affect your current balance",
 
   "SETTINGS_SUPPORT_TYPE_TOP_HEADER": "How can we help you?",
   "SETTINGS_SUPPORT_TYPE_PAYMENTS_LABEL": "Payments",

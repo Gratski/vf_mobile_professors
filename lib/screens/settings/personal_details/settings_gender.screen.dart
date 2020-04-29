@@ -48,6 +48,8 @@ class SettingsGenderScreen extends StatelessWidget {
                       screenStore.setGender(Gender.MALE);
                       Navigator.pop(context);
                     },
+                    selected: screenStore.gender == Gender.MALE,
+                    hideTrailing: screenStore.gender != Gender.MALE,
                   ),
 
                   /// FEMALE OPTION
@@ -58,6 +60,8 @@ class SettingsGenderScreen extends StatelessWidget {
                       screenStore.setGender(Gender.FEMALE);
                       Navigator.pop(context);
                     },
+                    selected: screenStore.gender == Gender.FEMALE,
+                    hideTrailing: screenStore.gender != Gender.FEMALE,
                   ),
                 ],
               ),

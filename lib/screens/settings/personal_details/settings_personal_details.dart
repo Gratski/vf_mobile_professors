@@ -74,6 +74,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                   Form(
                     key: _formKey,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         /// FIRSTNAME
                         Container(
@@ -81,7 +82,6 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                             style: TextStyle(color: AppColors.fontColor),
                             controller: firstNameController,
                             onChanged: (value) => screenStore.setFirstName(value),
-                            key: Key('input_firstname'),
                             decoration: InputDecoration(
                               hintText: 'write your first name',
                               labelText: 'First Name',
@@ -95,7 +95,6 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                             style: TextStyle(color: AppColors.fontColor),
                             controller: lastNameController,
                             onChanged: (value) => screenStore.setLastName(value),
-                            key: Key('input_lastname'),
                             decoration: InputDecoration(
                               hintText: 'write your last name',
                               labelText: 'Last Name',
@@ -110,7 +109,6 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                             enabled: false,
                             controller: emailController,
                             onChanged: (value) => screenStore.setFirstName(value),
-                            key: Key('input_firstname'),
                             decoration: InputDecoration(
                               hintText: 'write your first name',
                               labelText: 'First Name',
@@ -124,7 +122,6 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                             style: TextStyle(color: AppColors.fontColor),
                             controller: phoneNumberController,
                             onChanged: (value) => screenStore.setPhoneNumber(value),
-                            key: Key('input_phone'),
                             decoration: InputDecoration(
                               hintText: 'write your phone number',
                               labelText: 'Phone Number',

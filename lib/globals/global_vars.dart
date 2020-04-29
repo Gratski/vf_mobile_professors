@@ -9,9 +9,13 @@ import 'package:professors/store/payments/settings_payments_state.dart';
 import 'package:professors/store/support/support_contact_state.dart';
 import 'package:professors/store/transactions/transactions_history_state.dart';
 import 'package:professors/store/user/user_state.dart';
+import 'package:professors/store/user/user_wallet_state.dart';
 
 final userStore = UserState();
+final userWallet = UserWalletState();
+
 final navStore = NavState();
+
 final dashboardStore = DashboardState();
 final transactionsHistoryStore = TransactionsHistoryState();
 final notificationsStore = SettingsNotificationsState();

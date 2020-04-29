@@ -21,4 +21,7 @@ class PaymentsConstants {
   String get sendInvoiceSubTitle => "SETTINGS_ADD_PAYMENT_SEND_INVOICE_SUB_TITLE";
   String get sendInvoiceUploadButtonLabel => "SETTINGS_ADD_PAYMENT_SEND_INVOICE_UPLOAD_BUTTON_LABEL";
 
+  String get selectCurrencyTopHeader => "SETTINGS_PAYMENTS_SELECT_CURRENCY_TOP_HEADER";
+  String get selectCurrencySubTitle => "SETTINGS_PAYMENTS_SELECT_CURRENCY_SUB_TITLE";
+
 }
