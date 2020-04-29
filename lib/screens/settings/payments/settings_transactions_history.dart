@@ -6,6 +6,7 @@ import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/constants/settings/payments/settings_transactions_history_constants.dart';
 import 'package:professors/models/payments/transactions/transaction_type.dart';
 import 'package:professors/models/payments/transactions/transactions_list_item.dart';
+import 'package:professors/styles/colors.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/utils/date_utils.dart';
 import 'package:professors/widgets/transactions/transaction_list_item.dart';
@@ -40,7 +41,7 @@ class _SettingsTransactionsHistoryScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.bgMainColor,
         elevation: 0.0,
         leading: GestureDetector(
           onTap: (){
@@ -48,13 +49,13 @@ class _SettingsTransactionsHistoryScreenState
           },
           child: Icon(
             Icons.arrow_back_ios,
-            color: Colors.black,
+            color: AppColors.fontColor,
           ),
         ),
         centerTitle: false,
         title: Text(
           AppLocalizations.of(context).translate(screenConstants.title),
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: AppColors.fontColor),
         ),
         bottom: TabBar(
           indicatorSize: TabBarIndicatorSize.tab,

@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:professors/models/payments/accounts/PaymentAccountListItem.dart';
 import 'package:professors/models/payments/currency.model.dart';
 
 part 'user_wallet_state.g.dart';
@@ -23,6 +24,12 @@ abstract class _UserWalletState with Store {
   CurrencyModel currency = CurrencyModel(1, 'EUR', '€');
 
   @observable
+  ObservableList<PaymentAccountListItem> accounts = ObservableList.of([
+    PaymentAccountListItem(
+        email: 'rodrigues.at.work@gmail.com', isDefault: true),
+  ]);
+
+  @observable
   ObservableList<CurrencyModel> availableCurrencies = ObservableList.of([
     CurrencyModel(1, 'EUR', '€'),
     CurrencyModel(2, 'USD', '\$'),
@@ -38,6 +45,17 @@ abstract class _UserWalletState with Store {
   @action
   setCurrency(CurrencyModel currency) {
     this.currency = currency;
+  }
+
+  @action
+  setAccounts(List<PaymentAccountListItem> accounts) {
+    accounts.clear();
+    accounts.addAll(accounts);
+  }
+
+  @action
+  addAccount(PaymentAccountListItem account) {
+    accounts.add(account);
   }
 
   @action

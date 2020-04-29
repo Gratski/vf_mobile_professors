@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/settings/payments/payments_constants.dart';
 import 'package:professors/screens/settings/payments/add_payment_method_terms.dart';
+import 'package:professors/styles/colors.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/widgets/structural/header/custom_app_bar.widget.dart';
@@ -29,29 +31,22 @@ class PaymentsMethodsScreen extends StatelessWidget {
                 builder: (_) {
                   return ListView.builder(
                     shrinkWrap: true,
-                    itemCount: paymentMethodsStore.accounts.length,
+                    itemCount: userWallet.accounts.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
                         onTap: () {},
                         trailing: Container(
                           padding: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                            borderRadius: BorderRadius.all(Radius.circular(5))
-                          ),
                           child:
-                            ( paymentMethodsStore.accounts[index].isDefault ) ? Text(
-                            AppLocalizations.of(context).translate(
-                                screenConstants.paymentMethodsDefaultAccountLabel),
-                          ) : Text('')
+                            ( userWallet.accounts[index].isDefault ) ? Icon(Icons.check, color: AppColors.regularGreen,) : Text('')
                         ),
-                        title: RichText(
-                          text: TextSpan(
-                            style: TextStyle(color: Colors.black),
-                            children: <TextSpan>[
-                              TextsBuilder.h3LightSpan('PayPal\n'),
-                              TextsBuilder.regularSpan(paymentMethodsStore.accounts[index].email),
-                            ]
+                        title: Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Icon(FontAwesomeIcons.ccPaypal, color: AppColors.paypalColor, size: MediaQuery.of(context).size.width * 0.10,),
+                              TextsBuilder.regularText(userWallet.accounts[index].email)
+                            ],
                           ),
                         ),
                       );

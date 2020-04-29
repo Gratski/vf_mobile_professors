@@ -17,6 +17,12 @@ class PaymentsConstants {
   String get addPaymentMethodTermsTaxationLabel => "SETTINGS_ADD_PAYMENT_METHODS_TERMS_TAXATION_LABEL";
   String get addPaymentMethodTermsProceedLink => "SETTINGS_ADD_PAYMENT_METHODS_TERMS_PROCEED_LINK";
 
+  String get addPaymentMethodTopHeader => "SETTINGS_ADD_PAYMENT_METHODS_TOP_HEADER";
+  String get addPaymentMethodSubTitle => "SETTINGS_ADD_PAYMENT_METHODS_SUB_TITLE";
+  String get addPaymentMethodEmailLabel => "SETTINGS_ADD_PAYMENT_METHODS_EMAIL_LABEL";
+  String get addPaymentMethodEmailHint => "SETTINGS_ADD_PAYMENT_METHODS_EMAIL_HINT";
+  String get addPaymentMethodEmailAddButton => "SETTINGS_ADD_PAYMENT_METHODS_ADD_BUTTON";
+
   String get sendInvoiceTopHeader => "SETTINGS_ADD_PAYMENT_SEND_INVOICE_TOP_HEADER";
   String get sendInvoiceSubTitle => "SETTINGS_ADD_PAYMENT_SEND_INVOICE_SUB_TITLE";
   String get sendInvoiceUploadButtonLabel => "SETTINGS_ADD_PAYMENT_SEND_INVOICE_UPLOAD_BUTTON_LABEL";

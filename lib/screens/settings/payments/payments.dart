@@ -7,6 +7,7 @@ import 'package:professors/screens/settings/payments/payment_methods.dart';
 import 'package:professors/screens/settings/payments/payments_select_currency.screen.dart';
 import 'package:professors/screens/settings/payments/settings_transactions_history.dart';
 import 'package:professors/screens/settings/payments/upload_invoice.dart';
+import 'package:professors/styles/colors.dart';
 import 'package:professors/styles/padding.dart';
 import 'package:professors/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/widgets/structural/header/custom_app_bar.widget.dart';
@@ -24,24 +25,29 @@ class PaymentsScreen extends StatelessWidget {
         slivers: <Widget>[
           CustomAppBar([]),
           AppHeaderWidget(AppLocalizations.of(context)
-              .translate(screenConstants.topHeader)),
+              .translate(screenConstants.topHeader),),
           SliverToBoxAdapter(child: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
             return Container(
               width: MediaQuery.of(context).size.width / 2,
               padding: EdgeInsets.all(30),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.teal),
+                color: AppColors.bgGreyColor,
+                border: Border(top: BorderSide(color: AppColors.regularGreen), bottom: BorderSide(color: AppColors.regularGreen))
               ),
               child: Column(
                 children: <Widget>[
-                  TextsBuilder.h4Bold(AppLocalizations.of(context)
-                      .translate(screenConstants.balanceLabel)),
+                  Observer(
+                    builder: (_) {
+                      return TextsBuilder.h4Bold('${AppLocalizations.of(context)
+                          .translate(screenConstants.balanceLabel)} ( ${userWallet.currency.symbol} )', color: AppColors.bgMainColor);
+                    },
+                  ),
                   Observer(builder: (_) {
                     return Container(
                       margin: EdgeInsets.only(top: 15.0),
                       child: TextsBuilder.h4Bold(
-                          "${userWallet.currency.symbol} ${userWallet.balance}"),
+                          "${userWallet.balance}", color: AppColors.bgMainColor),
                     );
                   }),
                 ],

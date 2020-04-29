@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
 
   static Color get linksColor => Colors.white;
+  static Color get paypalColor => Color.fromRGBO(0, 107, 192, 1);
   static Color get fontColor => Colors.white;
   static Color get regularGreen => Colors.teal;
   static Color get lightGreen => Color.fromRGBO(0, 221, 57, 1);

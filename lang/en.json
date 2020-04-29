@@ -45,7 +45,7 @@
   "SETTINGS_PERSONAL_DETAILS_HINT": "Account Configurations",
   "SETTINGS_NOTIFICATIONS": "Notifications",
   "SETTINGS_PRIVACY_DEFINITIONS": "Security Definitions",
-  "SETTINGS_PAYMENTS": "Payments",
+  "SETTINGS_PAYMENTS": "Wallet",
   "SETTINGS_CONTACT_US": "Contact us",
   "SETTINGS_CONTACT_US_HINT": "Support",
   "SETTINGS_HOW_IT_WORKS": "User Guide",
@@ -92,8 +92,8 @@
   "SETTINGS_NOTIFICATIONS_ACCOUNT_SUPPORT_LABEL": "System",
   "SETTINGS_NOTIFICATIONS_ACCOUNT_SUPPORT_HINT": "Be notified every time we release new versions, changes to legal terms and conditions. These notifications will be also sent to your email",
 
-  "SETTINGS_PAYMENTS_TOP_HEADER": "Payments",
-  "SETTINGS_PAYMENTS_BALANCE_LABEL": "Balance",
+  "SETTINGS_PAYMENTS_TOP_HEADER": "Wallet",
+  "SETTINGS_PAYMENTS_BALANCE_LABEL": "Your Balance",
   "SETTINGS_PAYMENTS_SEND_INVOICE_LABEL": "Send Invoice",
   "SETTINGS_PAYMENTS_PAYMENT_METHOD_LABEL": "Payment Method",
   "SETTINGS_PAYMENTS_CURRENCY_LABEL": "Change Currency",
@@ -108,6 +108,12 @@
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_EXECUTION_TIME_LABEL": "Transaction execution is processed every month on the last business day. Transaction execution can take up to 3 business days to be concluded.",
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_TAXATION_LABEL": "It may include taxes according to our terms and condtions depending on the country your are emitting your invoices from.",
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_PROCEED_LINK": "Got it! Proceed",
+
+  "SETTINGS_ADD_PAYMENT_METHODS_TOP_HEADER": "Add PayPal account",
+  "SETTINGS_ADD_PAYMENT_METHODS_SUB_TITLE": "Here you add a PayPal account to your wallet. For your safety, to make it your default payments account, add it here and then edit it.",
+  "SETTINGS_ADD_PAYMENT_METHODS_EMAIL_LABEL": "PayPal email",
+  "SETTINGS_ADD_PAYMENT_METHODS_EMAIL_HINT": "",
+  "SETTINGS_ADD_PAYMENT_METHODS_ADD_BUTTON": "Add Account",
 
   "SETTINGS_ADD_PAYMENT_SEND_INVOICE_TOP_HEADER": "Send Invoice",
   "SETTINGS_ADD_PAYMENT_SEND_INVOICE_SUB_TITLE": "Send us your monthly invoice. Upload your invoice and our billing team will happy to process it for you.",

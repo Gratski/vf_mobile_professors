@@ -60,6 +60,23 @@ mixin _$UserWalletState on _UserWalletState, Store {
     }, _$currencyAtom, name: '${_$currencyAtom.name}_set');
   }
 
+  final _$accountsAtom = Atom(name: '_UserWalletState.accounts');
+
+  @override
+  ObservableList<PaymentAccountListItem> get accounts {
+    _$accountsAtom.context.enforceReadPolicy(_$accountsAtom);
+    _$accountsAtom.reportObserved();
+    return super.accounts;
+  }
+
+  @override
+  set accounts(ObservableList<PaymentAccountListItem> value) {
+    _$accountsAtom.context.conditionallyRunInAction(() {
+      super.accounts = value;
+      _$accountsAtom.reportChanged();
+    }, _$accountsAtom, name: '${_$accountsAtom.name}_set');
+  }
+
   final _$availableCurrenciesAtom =
       Atom(name: '_UserWalletState.availableCurrencies');
 
@@ -98,6 +115,26 @@ mixin _$UserWalletState on _UserWalletState, Store {
     final _$actionInfo = _$_UserWalletStateActionController.startAction();
     try {
       return super.setCurrency(currency);
+    } finally {
+      _$_UserWalletStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setAccounts(List<PaymentAccountListItem> accounts) {
+    final _$actionInfo = _$_UserWalletStateActionController.startAction();
+    try {
+      return super.setAccounts(accounts);
+    } finally {
+      _$_UserWalletStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic addAccount(PaymentAccountListItem account) {
+    final _$actionInfo = _$_UserWalletStateActionController.startAction();
+    try {
+      return super.addAccount(account);
     } finally {
       _$_UserWalletStateActionController.endAction(_$actionInfo);
     }

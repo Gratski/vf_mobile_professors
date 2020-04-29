@@ -44,7 +44,7 @@ class EditProfileInLanguageScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           ProfessorAvatarWidget('João Rodrigues',
-                              'https://i.ya-webdesign.com/images/circle-avatar-png.png', textColor: Colors.black,),
+                              'https://i.ya-webdesign.com/images/circle-avatar-png.png', textColor: AppColors.fontColor,),
                         ],
                       ),
                     ),
@@ -72,6 +72,7 @@ class EditProfileInLanguageScreen extends StatelessWidget {
                               padding: AppPaddings.regularPadding(context),
                               child: TextFormField(
                                 decoration: InputDecoration(
+                                  fillColor: AppColors.bgGreyColor,
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
                                       borderSide: BorderSide(

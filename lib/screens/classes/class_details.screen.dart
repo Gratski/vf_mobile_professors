@@ -21,7 +21,7 @@ class ClassesDetailsScreen extends StatelessWidget {
     double sectionTopMargin = MediaQuery.of(context).size.height / 20;
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.bgMainColor,
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
@@ -61,7 +61,7 @@ class ClassesDetailsScreen extends StatelessWidget {
                       gradient: LinearGradient(
                           begin: Alignment.bottomCenter,
                           end: Alignment.topCenter,
-                          colors: [Colors.black, Colors.transparent])),
+                          colors: [AppColors.bgMainColor, Colors.transparent])),
                   child: FadeInImage.assetNetwork(
                     fit: BoxFit.cover,
                     placeholder: 'assets/images/loading.gif',
@@ -151,45 +151,6 @@ class ClassesDetailsScreen extends StatelessWidget {
                     ),
                   ),
 
-                  /// INSTRUCTOR
-                  SliverToBoxAdapter(
-                    child: Container(
-                      padding: AppPaddings.regularPadding(context),
-                      margin: EdgeInsets.only(top: sectionTopMargin),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-
-                          DividersBuilder.dividerWithCenteredText(null),
-
-                          Container(
-                            margin: EdgeInsets.only(bottom: 20, top: 40),
-                            child: TextsBuilder.regularText(AppLocalizations.of(context).translate(screenConstants.classDetailsInstructorLabel).toUpperCase(), color: Colors.white),
-                          ),
-
-                          CircleAvatar(
-                              maxRadius: MediaQuery.of(context).size.width * 0.20,
-                              backgroundColor: Colors.black,
-                              backgroundImage: NetworkImage(
-                                'https://i.ya-webdesign.com/images/circle-avatar-png.png',
-                              )
-                          ),
-
-                          Container(
-                            margin: EdgeInsets.only(top: 20),
-                            child: TextsBuilder.h4Bold('João Rodrigues', color: Colors.white),
-                          ),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: IconsBuilder.startListBasedOnScore(3.5),
-                          )
-
-                        ],
-                      ),
-                    ),
-                  ),
-
                   /// CLASS DETAILS
                   SliverToBoxAdapter(
                     child: Container(
@@ -229,6 +190,46 @@ class ClassesDetailsScreen extends StatelessWidget {
                                 'fsd fdsfsdfsdfsd fsd fs dfdsdfsdf fds dfsdf sdfsdfsdf sfds fds'),
                           ),
 
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  /// INSTRUCTOR
+                  SliverToBoxAdapter(
+                    child: Container(
+                      color: AppColors.bgGreyColor,
+                      padding: AppPaddings.regularPadding(context),
+                      margin: EdgeInsets.only(top: sectionTopMargin),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+
+                          Container(
+                            margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 40, top: MediaQuery.of(context).size.height / 30),
+                            child: TextsBuilder.h4Bold(AppLocalizations.of(context).translate(screenConstants.classDetailsInstructorLabel).toUpperCase(), color: AppColors.bgMainColor),
+                          ),
+
+                          CircleAvatar(
+                              maxRadius: MediaQuery.of(context).size.width * 0.20,
+                              backgroundColor: AppColors.bgMainColor,
+                              backgroundImage: NetworkImage(
+                                'https://img2.goodfon.com/wallpaper/big/9/89/gym-coach-weightlifting-gym.jpg',
+                              )
+                          ),
+
+                          Container(
+                            margin: EdgeInsets.only(top: 20),
+                            child: TextsBuilder.h4Bold('João Rodrigues', color: AppColors.bgMainColor),
+                          ),
+
+                          Container(
+                            margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 30),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: IconsBuilder.startListBasedOnScore(3.5),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -307,7 +308,7 @@ class ClassesDetailsScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        TextsBuilder.regularText('Yoga Relax'.toUpperCase()),
+                        TextsBuilder.regularText('Yoga Relax'.toUpperCase(), color: AppColors.bgMainColor),
                         TextsBuilder.textSmall('17th April'),
                         TextsBuilder.textSmall('13:30 - 14:00'),
                       ],
