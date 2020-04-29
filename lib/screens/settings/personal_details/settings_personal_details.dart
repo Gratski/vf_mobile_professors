@@ -73,7 +73,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                   Container(
                     child: TextFormField(
                       style: TextStyle(color: AppColors.fontColor),
-                      onChanged: (value) => screenStore.setFirstName(value),
+                      //onChanged: (value) => screenStore.setFirstName(value),
                       key: Key('input_firstname'),
                       decoration: InputDecoration(
                         hintText: 'write your first name',
