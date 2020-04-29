@@ -73,7 +73,6 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                   Container(
                     child: TextFormField(
                       style: TextStyle(color: AppColors.fontColor),
-                      controller: firstNameController,
                       onChanged: (value) => screenStore.setFirstName(value),
                       key: Key('input_firstname'),
                       decoration: InputDecoration(
