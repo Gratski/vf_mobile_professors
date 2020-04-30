@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:professors/models/category/category.model.dart';
+import 'package:professors/models/classes/difficulty_level.model.dart';
 import 'package:professors/models/language_context/language_context.model.dart';
 
 part 'edit_class_state.g.dart';
@@ -35,6 +37,36 @@ abstract class _EditClassState with Store {
 
   @observable
   ObservableList<int> possibleDurations = ObservableList.of([20, 30, 35, 45]);// in minutes
+
+  @observable
+  DifficultyLevel difficultyLevel;
+
+  @observable
+  ObservableList<DifficultyLevel> possibleDifficultyLevels = ObservableList.of([
+    DifficultyLevel(
+      1, 'Easy', 'Applies to every types of members'
+    ) ,
+    DifficultyLevel(
+        2, 'Moderate', 'Moderate charge'
+    ),
+    DifficultyLevel(
+        3, 'Fit', 'Requires a very good physical shape'
+    ),
+    DifficultyLevel(
+        4, 'Hard', 'Only for beasts'
+    )
+  ]);// in minutes
+
+  @action
+  setPossibleDifficultyLevels(List<DifficultyLevel> levels){
+    this.possibleDifficultyLevels.clear();
+    this.possibleDifficultyLevels.addAll(levels);
+  }
+
+  @action
+  setDifficultyLevel(DifficultyLevel level){
+    this.difficultyLevel = level;
+  }
 
   //////////////////////////////////////////////////////////////////////////////
   // CATEGORY RELATED

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:professors/screens/home.dart';
+import 'package:professors/screens/authenticated/home.dart';
+import 'package:professors/screens/permitted/auth/login.screen.dart';
+import 'package:professors/screens/permitted/auth/registration.screen.dart';
 import 'package:professors/screens/permitted/splash/SplashPagesScreen.dart';
 import 'package:professors/styles/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,13 +15,18 @@ void main() async {
   bool showedOnboarding = prefs.getBool("showedOnboarding");
   bool isNew = showedOnboarding == null || !showedOnboarding;
 
-  runApp(MyApp(isNew));
+  String authToken = prefs.getString("auth-token");
+  bool hasToken = authToken != null && authToken.isNotEmpty;
+
+
+  runApp(MyApp(isNew, hasToken));
 }
 
 class MyApp extends StatelessWidget {
 
   bool isNew;
-  MyApp(this.isNew);
+  bool hasToken;
+  MyApp(this.isNew, this.hasToken);
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +67,7 @@ class MyApp extends StatelessWidget {
           ),
           canvasColor: AppColors.bgMainColor
         ),
-        home: (isNew) ? SplashPagesScreen() : HomeScreen()
+        home: (isNew) ? SplashPagesScreen() : (hasToken) ? HomeScreen() : RegistrationScreen()
     );
   }
 }

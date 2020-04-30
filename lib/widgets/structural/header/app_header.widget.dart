@@ -5,14 +5,15 @@ import 'package:professors/widgets/text/text.builder.dart';
 class AppHeaderWidget extends StatelessWidget {
   String title, subTitle;
   bool isSubTitleSmall;
+  EdgeInsets padding;
 
-  AppHeaderWidget(this.title, {this.subTitle, this.isSubTitleSmall = false});
+  AppHeaderWidget(this.title, {this.subTitle, this.isSubTitleSmall = false, this.padding});
 
   @override
   SliverToBoxAdapter build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
-        padding: AppPaddings.topTitlePadding(context),
+        padding: (padding == null) ? AppPaddings.topTitlePadding(context) : padding,
         child: Column(
           children: <Widget>[
             Container(

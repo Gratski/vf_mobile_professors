@@ -5,9 +5,9 @@ import 'package:professors/localization/constants/notifications/notifications_co
 import 'package:professors/models/notifications/feed_class_notification_list_item.mode..dart';
 import 'package:professors/models/notifications/feed_notification_type.model.dart';
 import 'package:professors/models/notifications/notifications.model.dart';
-import 'package:professors/screens/notifications/cancelled_class_notification.screen.dart';
-import 'package:professors/screens/notifications/message_notification.screen.dart';
-import 'package:professors/screens/notifications/reservation_class_notification.screen.dart';
+import 'package:professors/screens/authenticated/notifications/cancelled_class_notification.screen.dart';
+import 'package:professors/screens/authenticated/notifications/message_notification.screen.dart';
+import 'package:professors/screens/authenticated/notifications/reservation_class_notification.screen.dart';
 import 'package:professors/widgets/text/badges.builder.dart';
 import 'package:professors/widgets/text/text.builder.dart';
 

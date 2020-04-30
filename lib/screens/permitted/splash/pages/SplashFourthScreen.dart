@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:professors/screens/home.dart';
+import 'package:professors/screens/authenticated/home.dart';
 import 'package:professors/screens/permitted/splash/pages/abstract_splash.screen.dart';
 import 'package:professors/styles/colors.dart';
 import 'package:professors/styles/padding.dart';

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
-import 'package:professors/screens/home.dart';
+import 'package:professors/screens/authenticated/home.dart';
 import 'package:professors/screens/permitted/splash/pages/SplashFirstScreen.dart';
 import 'package:professors/screens/permitted/splash/pages/SplashFourthScreen.dart';
 import 'package:professors/screens/permitted/splash/pages/SplashSecondScreen.dart';

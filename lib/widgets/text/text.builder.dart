@@ -57,7 +57,7 @@ class TextsBuilder {
     return TextSpan(
         text: text,
         style: TextStyle(
-            fontSize: _FONT_SIZE_REGULAR, fontFamily: _FONT_FAMILY_RALE_REGULAR, color: color));
+            fontSize: _FONT_SIZE_REGULAR, fontFamily: _FONT_FAMILY_REGULAR, color: color));
   }
 
   static textSmallSpan(String text) {
@@ -91,7 +91,7 @@ class TextsBuilder {
 
   /// TEXT H3
   static Text h3Bold(String text, {Color color}) {
-    return createText(text, _FONT_SIZE_H3, _FONT_FAMILY_BOLD, color: color);
+    return createText(text, _FONT_SIZE_H3, _FONT_FAMILY_RALE_EXTRA_BOLD, color: color);
   }
   /// TEXT H3
   static Text h3Light(String text, {Color color = Colors.black}) {
@@ -100,7 +100,7 @@ class TextsBuilder {
 
   /// TEXT H4
   static Text h4Bold(String text, {Color color}) {
-    return createText(text, _FONT_SIZE_H4, _FONT_FAMILY_BOLD, color: color);
+    return createText(text, _FONT_SIZE_H4, _FONT_FAMILY_RALE_EXTRA_BOLD, color: color);
   }
 
   /// TEXT H4
