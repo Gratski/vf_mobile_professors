@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:professors/screens/classes/classes.screen.dart';
-import 'package:professors/screens/dashboard.dart';
 import 'package:professors/screens/home.dart';
-import 'package:professors/screens/profile/profile.screen.dart';
-import 'package:professors/screens/settings/settings.dart';
-import 'package:professors/screens/settings/personal_details/settings_personal_details.dart';
-import 'package:professors/screens/settings/payments/settings_transactions_history.dart';
+import 'package:professors/screens/permitted/splash/SplashPagesScreen.dart';
 import 'package:professors/styles/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'localization/app_localizations.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool showedOnboarding = prefs.getBool("showedOnboarding");
+  bool isNew = showedOnboarding == null || !showedOnboarding;
+
+  runApp(MyApp(isNew));
 }
 
 class MyApp extends StatelessWidget {
+
+  bool isNew;
+  MyApp(this.isNew);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,6 +60,7 @@ class MyApp extends StatelessWidget {
           ),
           canvasColor: AppColors.bgMainColor
         ),
-        home: HomeScreen());
+        home: (isNew) ? SplashPagesScreen() : HomeScreen()
+    );
   }
 }

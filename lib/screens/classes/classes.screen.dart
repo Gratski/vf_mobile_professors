@@ -38,15 +38,23 @@ class ClassesScreen extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(
                       right: MediaQuery.of(context).size.width / 20),
-                  child: ButtonsBuilder.transparentButton(
-                    'ADD CLASS'.toUpperCase(),
-                    () {
+                  child: FlatButton(
+                    onPressed: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
                                   CreateClassSelectLanguageScreen()));
                     },
+                    child: Row(
+                      children: <Widget>[
+                        //Icon(FontAwesomeIcons.plus, color: AppColors.fontColor,),
+                        Container(
+                          margin: EdgeInsets.only(left: 10),
+                          child: TextsBuilder.h4Bold('ADD CLASS'.toUpperCase()),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -154,167 +162,162 @@ class ClassesScreen extends StatelessWidget {
                                 builder: (context) => ClassesDetailsScreen()));
                       },
                       child: Container(
-                          margin: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.05,
-                              right: MediaQuery.of(context).size.width * 0.05,
-                              bottom:
-                                  MediaQuery.of(context).size.height * 0.03),
-                          child: Stack(
-                            children: <Widget>[
-                              AspectRatio(
-                                aspectRatio: 3 / 2,
-                                child: Image.network(
-                                  classesStore.classes[index].pictureUrl,
-                                  fit: BoxFit.fill,
-                                ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        margin: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.05,
+                            right: MediaQuery.of(context).size.width * 0.05,
+                            bottom: MediaQuery.of(context).size.height * 0.03),
+                        child: Stack(
+                          children: <Widget>[
+                            AspectRatio(
+                              aspectRatio: 3 / 2,
+                              child: Image.network(
+                                classesStore.classes[index].pictureUrl,
+                                fit: BoxFit.fill,
                               ),
-                              AspectRatio(
-                                aspectRatio: 3 / 2,
-                                child: Opacity(
-                                  opacity: 0.65,
-                                  child: Container(
-                                    foregroundDecoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                          colors: [Colors.black, Colors.black],
-                                          begin: Alignment.bottomCenter,
-                                          end: Alignment.topCenter),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                  top: 10,
-                                  left: 10,
-                                  child: Row(
-                                    children: <Widget>[
-                                      Icon(
-                                        FontAwesomeIcons.solidSquare,
-                                        color: AppColors.regularRed,
-                                        size: 15,
-                                      ),
-                                      Icon(FontAwesomeIcons.solidSquare,
-                                          color: Colors.white, size: 15),
-                                      Icon(FontAwesomeIcons.solidSquare,
-                                          color: Colors.white, size: 15)
-                                    ],
-                                  )),
-                              Positioned(
-                                top: 10,
-                                right: 10,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            CreateOrEditClassScreen(
-                                                classesStore.classes[index]
-                                                    .languageContext,
-                                                cd: classesStore
-                                                    .classes[index]),
-                                      ),
-                                    );
-                                  },
-                                  child: Icon(
-                                    FontAwesomeIcons.edit,
-                                    color: Colors.grey[500],
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 10,
-                                right: 10,
+                            ),
+                            AspectRatio(
+                              aspectRatio: 3 / 2,
+                              child: Opacity(
+                                opacity: 0.65,
                                 child: Container(
-                                  padding: EdgeInsets.all(5),
-                                  margin: EdgeInsets.only(top: 5),
-                                  decoration: BoxDecoration(
-                                      color: AppColors.regularRed,
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: TextsBuilder.regularText(
-                                      classesStore.classes[index]
-                                          .languageContext.languageCode,
-                                      color: Colors.white),
+                                  foregroundDecoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                        colors: [AppColors.bgMainColor, Colors.transparent],
+                                        begin: Alignment.bottomCenter,
+                                        end: Alignment.topCenter),
+                                  ),
                                 ),
                               ),
-                              Positioned(
-                                bottom: 10,
+                            ),
+                            Positioned(
+                                top: 10,
                                 left: 10,
-                                child:
-
-                                    /// LABEL
-                                    Container(
-                                  margin: EdgeInsets.only(
-                                    top: MediaQuery.of(context).size.height / 6,
-                                  ),
-                                  child: Row(
-                                    children: <Widget>[
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          /// STATUS LABEL
-                                          Container(
-                                            child: (classesStore
-                                                    .classes[index].isActive)
-                                                ? BadgesBuilder.label(
-                                                    AppLocalizations.of(context)
-                                                        .translate(screenConstants
-                                                            .classesActiveLabel)
-                                                        .toUpperCase(),
-                                                    AppColors.regularGreen)
-                                                : BadgesBuilder.label(
-                                                    AppLocalizations.of(context)
-                                                        .translate(screenConstants
-                                                            .classesInactiveLabel)
-                                                        .toUpperCase(),
-                                                    AppColors.regularRed),
-                                          ),
-
-                                          /// DETAILS
-                                          Container(
-                                            margin: EdgeInsets.only(top: 5),
-                                            child: Row(
-                                              children: <Widget>[
-                                                Column(
-                                                  children: <Widget>[
-                                                    TextsBuilder.h3Bold(
-                                                        classesStore
-                                                            .classes[index]
-                                                            .designation),
-                                                    Container(
-                                                      margin: EdgeInsets.only(
-                                                          top: 5),
-                                                      child: TextsBuilder.regularText(
-                                                          ''
-                                                          '${AppLocalizations.of(context).translate(screenConstants.classesDurationLabel)}: '
-                                                          '${classesStore.classes[index].duration} min'),
-                                                    ),
-                                                  ],
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      FontAwesomeIcons.solidSquare,
+                                      color: AppColors.regularRed,
+                                      size: 15,
+                                    ),
+                                    Icon(FontAwesomeIcons.solidSquare,
+                                        color: Colors.white, size: 15),
+                                    Icon(FontAwesomeIcons.solidSquare,
+                                        color: Colors.white, size: 15)
+                                  ],
+                                )),
+                            Positioned(
+                              top: 10,
+                              right: 10,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          CreateOrEditClassScreen(
+                                              classesStore.classes[index]
+                                                  .languageContext,
+                                              cd: classesStore.classes[index]),
+                                    ),
+                                  );
+                                },
+                                child: Icon(
+                                  FontAwesomeIcons.edit,
+                                  color: AppColors.fontColor,
+                                  size: 20,
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.only(left: 10),
-                                child: Column(
+                            ),
+                            Positioned(
+                              bottom: 10,
+                              right: 10,
+                              child: Container(
+                                padding: EdgeInsets.all(5),
+                                margin: EdgeInsets.only(top: 5),
+                                decoration: BoxDecoration(
+                                    color: AppColors.regularRed,
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: TextsBuilder.regularText(
+                                    classesStore.classes[index].languageContext
+                                        .languageCode,
+                                    color: Colors.white),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 10,
+                              left: 10,
+                              child:
+
+                                  /// LABEL
+                                  Container(
+                                margin: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height / 6,
+                                ),
+                                child: Row(
                                   children: <Widget>[
-                                    Row(
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        /// DIFFICULTY
+                                        /// STATUS LABEL
                                         Container(
+                                          child: (classesStore
+                                                  .classes[index].isActive)
+                                              ? BadgesBuilder.label(
+                                                  AppLocalizations.of(context)
+                                                      .translate(screenConstants
+                                                          .classesActiveLabel)
+                                                      .toUpperCase(),
+                                                  AppColors.regularGreen)
+                                              : BadgesBuilder.label(
+                                                  AppLocalizations.of(context)
+                                                      .translate(screenConstants
+                                                          .classesInactiveLabel)
+                                                      .toUpperCase(),
+                                                  AppColors.regularRed),
+                                        ),
+
+                                        /// DETAILS
+                                        Container(
+                                          margin: EdgeInsets.only(top: 5),
                                           child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[],
+                                            children: <Widget>[
+                                              Column(
+                                                children: <Widget>[
+                                                  TextsBuilder.h3Bold(
+                                                      classesStore
+                                                          .classes[index]
+                                                          .designation),
+                                                  Container(
+                                                    margin:
+                                                        EdgeInsets.only(top: 5),
+                                                    child: Row(
+                                                      children: <Widget>[
+                                                        Icon(
+                                                          FontAwesomeIcons
+                                                              .clock,
+                                                          color: AppColors
+                                                              .fontColor,
+                                                        ),
+                                                        Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  left: 10),
+                                                          child: TextsBuilder
+                                                              .regularText(
+                                                                  '${classesStore.classes[index].duration} min'),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
@@ -322,8 +325,29 @@ class ClassesScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                            ],
-                          )),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 10),
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      /// DIFFICULTY
+                                      Container(
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     );
                   }, childCount: classesStore.classes.length),
                 );

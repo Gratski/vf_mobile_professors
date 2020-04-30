@@ -3,16 +3,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/screens/classes/classes.screen.dart';
-import 'package:professors/screens/dashboard.dart';
-import 'package:professors/screens/notifications/notifications.dart';
 import 'package:professors/screens/settings/settings.dart';
 
 class HomeScreen extends StatefulWidget {
-  clearNavigationHistory(BuildContext context) {
-    while (Navigator.of(context).canPop()) {
-      Navigator.of(context).pop();
-    }
-  }
 
   List<Widget> screens = [
     SettingsScreen(),
@@ -68,7 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
               currentIndex: navStore.bottomNavigationIndex,
               onTap: (value) {
-                widget.clearNavigationHistory(context);
                 navStore.bottomNavigationTabIndexChangedAction(value);
               });
         },

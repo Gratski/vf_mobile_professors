@@ -13,5 +13,6 @@ class SettingsConstants {
   static const String HOW_IT_WORKS = "SETTINGS_HOW_IT_WORKS";
   static const String HOW_IT_WORKS_HINT = "SETTINGS_HOW_IT_WORKS_HINT";
   static const String TERMS = "SETTINGS_TERMS";
+  static const String LOGOUT = "SETTINGS_LOGOUT";
 
 }

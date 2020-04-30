@@ -25,6 +25,7 @@ class SettingsScreen extends StatelessWidget {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
+              leading: Text(''),
               backgroundColor: AppColors.bgMainColor,
               elevation: 0.0,
               floating: false,
@@ -224,6 +225,22 @@ class SettingsScreen extends StatelessWidget {
                         builder: (context) => SupportTypeScreen()),
                   );
                 },
+              ),
+            ),
+
+            /// LOGOUT
+            SliverToBoxAdapter(
+              child: RegularListTile(
+                label: AppLocalizations.of(context)
+                    .translate(TRANSLATIONS.SettingsConstants.LOGOUT),
+                callback: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SupportTypeScreen()),
+                  );
+                },
+                hideTrailing: true,
               ),
             ),
           ],

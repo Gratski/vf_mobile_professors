@@ -14,7 +14,7 @@ abstract class _GeneralState with Store {
 
   /// True when the app is ready
   @observable
-  bool isReady;
+  bool isReady = true;
 
   /// First Level Categories list always available
   @observable
@@ -44,6 +44,11 @@ abstract class _GeneralState with Store {
   @action
   setCategories(List<CategoryModel> categories){
     this.categories.addAll(categories);
+  }
+
+  @action
+  setIsReady(bool isReady){
+    this.isReady = isReady;
   }
 
 }

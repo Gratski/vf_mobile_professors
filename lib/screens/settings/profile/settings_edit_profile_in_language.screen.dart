@@ -78,7 +78,7 @@ class EditProfileInLanguageScreen extends StatelessWidget {
                             Container(
                               padding: AppPaddings.regularPadding(context),
                               margin: EdgeInsets.only(top: sectionTopMargin / 4),
-                              child: TextsBuilder.h3Bold('About'.toUpperCase(),),
+                              child: TextsBuilder.h4Bold('About',),
                             ),
                             Container(
                               margin: EdgeInsets.only(top: sectionTopMargin / 2),
@@ -104,7 +104,7 @@ class EditProfileInLanguageScreen extends StatelessWidget {
                             Container(
                               padding: AppPaddings.regularPadding(context),
                               margin: EdgeInsets.only(top: sectionTopMargin / 4),
-                              child: TextsBuilder.h3Bold('Quote'.toUpperCase(),),
+                              child: TextsBuilder.h4Bold('Quote',),
                             ),
                             Container(
                               margin: EdgeInsets.only(top: sectionTopMargin / 2),

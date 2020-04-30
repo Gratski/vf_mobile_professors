@@ -88,6 +88,7 @@ class CreateOrEditClassScreen extends StatelessWidget {
 
   PageView buildPageView() {
     return PageView(
+      physics:new NeverScrollableScrollPhysics(),
       controller: pageController,
       children: <Widget>[
         SelectCategoryPage(
