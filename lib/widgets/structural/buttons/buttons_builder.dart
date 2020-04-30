@@ -11,6 +11,10 @@ class ButtonsBuilder {
     return createFlatButton(text, callback, AppColors.regularRed, Colors.white);
   }
 
+  static FlatButton greenFlatButton(String text, VoidCallback callback, {Color color}){
+    return createFlatButton(text, callback, AppColors.regularGreen, Colors.white);
+  }
+
   /// FLAT BUTTON WITH ICON
   static FlatButton redFlatButtonWithIcon(String text, VoidCallback callback, Icon icon){
     return createFlatButtonWithIcon(text, callback, AppColors.regularRed, Colors.white, icon);

@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
 
         theme: ThemeData(
           inputDecorationTheme: InputDecorationTheme(
+            counterStyle: TextStyle(color: AppColors.fontColor),
             hintStyle: TextStyle(color: AppColors.textInputBorder),
             labelStyle: TextStyle(color: AppColors.textInputBorder),
             focusedBorder: UnderlineInputBorder(

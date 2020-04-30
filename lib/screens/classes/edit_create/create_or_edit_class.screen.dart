@@ -35,11 +35,13 @@ class CreateOrEditClassScreen extends StatelessWidget {
   // labels
   String title;
   int classId;
+  ClassModel cm;
 
   CreateOrEditClassScreen(LanguageContextModel lcm, {ClassModel cd}) {
     editOrCreateClassStore.setLanguageContext(lcm);
 
     if (cd != null) {
+      cm = cd;
       classId = cd.id;
       editOrCreateClassStore.setId(cd.id);
       editOrCreateClassStore.setDesignation(cd.designation);
@@ -91,6 +93,7 @@ class CreateOrEditClassScreen extends StatelessWidget {
         SelectCategoryPage(
           (CategoryModel category) {
             editOrCreateClassStore.setParentCategory(category);
+            editOrCreateClassStore.setParentCategory(category);
             editOrCreateClassStore.setCurrentPageNumber(1);
             pageController.animateToPage(1,
                 duration: Duration(milliseconds: 300),
@@ -100,13 +103,14 @@ class CreateOrEditClassScreen extends StatelessWidget {
         SelectSubCategoryPage(
           (CategoryModel category) {
             editOrCreateClassStore.setSubCategory(category);
+            editOrCreateClassStore.setSubCategory(category);
             editOrCreateClassStore.setCurrentPageNumber(2);
             pageController.animateToPage(2,
                 duration: Duration(milliseconds: 300),
                 curve: Cubic(1, 1, 1, 1));
           },
         ),
-        ClassDetailsPage( () {}, (BuildContext context){
+        ClassDetailsPage(cm, () {}, (BuildContext context){
           editOrCreateClassStore.setCurrentPageNumber(0);
           pageController.animateToPage(0,
               duration: Duration(milliseconds: 300),
