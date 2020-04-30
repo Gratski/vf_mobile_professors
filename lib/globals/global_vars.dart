@@ -1,5 +1,7 @@
 import 'package:professors/store/classes/classes_state.dart';
+import 'package:professors/store/classes/edit_class_state.dart';
 import 'package:professors/store/dashboard/dashboard_state.dart';
+import 'package:professors/store/general/general_state.dart';
 import 'package:professors/store/nationalities/nationalities_state.dart';
 import 'package:professors/store/navigation/nav_state.dart';
 import 'package:professors/store/notifications/notifications_state.dart';
@@ -14,8 +16,12 @@ final userStore = UserState();
 final userWallet = UserWalletState();
 
 final navStore = NavState();
+final generalStore = GeneralState();
+
+final editOrCreateClassStore = EditClassState();
 
 final dashboardStore = DashboardState();
+
 final transactionsHistoryStore = TransactionsHistoryState();
 final notificationsStore = SettingsNotificationsState();
 final paymentsStore = SettingsPaymentsState();

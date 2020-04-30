@@ -7,8 +7,9 @@ class CustomAppBar extends StatelessWidget {
   List<Widget> actions;
   String title;
   bool hideBackButton;
+  Function customBackCallback;
 
-  CustomAppBar(this.actions, {this.title, this.hideBackButton = false});
+  CustomAppBar(this.actions, {this.customBackCallback, this.title, this.hideBackButton = false});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,11 @@ class CustomAppBar extends StatelessWidget {
       elevation: 0.0,
       leading: GestureDetector(
         onTap: () {
-          Navigator.pop(context);
+          if (customBackCallback != null) {
+            this.customBackCallback(context);
+          } else {
+            Navigator.pop(context);
+          }
         },
         child: (!hideBackButton) ? Icon(
           Icons.arrow_back_ios,

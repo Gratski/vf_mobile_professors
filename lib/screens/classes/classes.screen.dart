@@ -5,7 +5,7 @@ import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
 import 'package:professors/screens/classes/class_details.screen.dart';
-import 'package:professors/screens/classes/create_class.screen.dart';
+import 'package:professors/screens/classes/edit_create/create_or_edit_class.screen.dart';
 import 'package:professors/screens/classes/create_class_select_language.screen.dart';
 import 'package:professors/styles/colors.dart';
 import 'package:professors/styles/padding.dart';
@@ -41,9 +41,11 @@ class ClassesScreen extends StatelessWidget {
                   child: ButtonsBuilder.transparentButton(
                     'ADD CLASS'.toUpperCase(),
                     () {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => CreateClassSelectLanguageScreen()
-                      ));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  CreateClassSelectLanguageScreen()));
                     },
                   ),
                 ),
@@ -200,7 +202,19 @@ class ClassesScreen extends StatelessWidget {
                                 top: 10,
                                 right: 10,
                                 child: GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            CreateOrEditClassScreen(
+                                                classesStore.classes[index]
+                                                    .languageContext,
+                                                cd: classesStore
+                                                    .classes[index]),
+                                      ),
+                                    );
+                                  },
                                   child: Icon(
                                     FontAwesomeIcons.edit,
                                     color: Colors.grey[500],
@@ -218,7 +232,8 @@ class ClassesScreen extends StatelessWidget {
                                       color: AppColors.regularRed,
                                       borderRadius: BorderRadius.circular(5)),
                                   child: TextsBuilder.regularText(
-                                      classesStore.classes[index].languageCode,
+                                      classesStore.classes[index]
+                                          .languageContext.languageCode,
                                       color: Colors.white),
                                 ),
                               ),

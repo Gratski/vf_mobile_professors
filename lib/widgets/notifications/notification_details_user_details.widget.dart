@@ -91,8 +91,7 @@ class NotificationDetailsUserDetailsWidget extends StatelessWidget {
             ),
           ),
         ],
-
-      )
+      ),
     );
   }
 
