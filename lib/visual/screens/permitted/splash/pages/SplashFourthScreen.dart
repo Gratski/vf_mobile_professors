@@ -64,9 +64,7 @@ class SplashFourthScreen extends AbstractSplashScreen {
                         () async {
                           SharedPreferences prefs = await SharedPreferences.getInstance();
                           prefs.setBool('showedOnboarding', true);
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => HomeScreen()
-                          ));
+                          Navigator.pushNamedAndRemoveUntil(context, "/registration", (r) => false);
                         },
                       ),
                     ),

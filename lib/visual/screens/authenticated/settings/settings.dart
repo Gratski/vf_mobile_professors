@@ -242,10 +242,8 @@ class SettingsScreen extends StatelessWidget {
                 label: AppLocalizations.of(context)
                     .translate(TRANSLATIONS.SettingsConstants.LOGOUT),
                 callback: () async {
-
                   SignOutResponse rsp = await restServices.getAuthRestService().signOut();
                   Navigator.pushNamedAndRemoveUntil(context, "/registration", (r) => false);
-
                 },
                 hideTrailing: true,
               ),
