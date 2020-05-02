@@ -98,24 +98,25 @@ class LoginScreen extends AbstractAuthScreen {
                               // validate fields and perform call to auth API
                               authStore.setIsLoading(true);
                               authStore.setHasError(false);
-                              try {
-                                LoginResponse rsp = await restServices.getAuthRestService().signIn(emailController.text, passwordController.text);
-                                print(rsp.token);
-                                authStore.setIsLoading(false);
+                              restServices.getAuthRestService().signIn(emailController.text, passwordController.text).then(
+                                        (rsp) {
+                                          authStore.setIsLoading(false);
+                                          Navigator.of(context).push(MaterialPageRoute(
+                                              builder: (context) => HomeScreen()
+                                          ));
+                                        }
+                                ).catchError(
+                                        (e) {
+                                          authStore.setIsLoading(false);
+                                          authStore.setHasError(true);
+                                          authStore.setErrorMsg(e.cause);
+                                        });
 
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => HomeScreen()
-                                ));
-
-                              } on AuthenticationException catch(e) {
-                                authStore.setHasError(true);
-                                authStore.setErrorMsg(e.cause);
-                              } finally {
-                                authStore.setIsLoading(false);
-                              }
-                            });
+                              });
                           } else {
-                            return CircularProgressIndicator();
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
                           }
 
                         },
