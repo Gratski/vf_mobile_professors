@@ -11,7 +11,7 @@ class AuthState extends _AuthState with _$AuthState {
 abstract class _AuthState with Store {
 
   @observable
-  bool isLoading = true;
+  bool isLoading = false;
 
   @observable
   bool hasError = false;
@@ -31,7 +31,7 @@ abstract class _AuthState with Store {
 
   @action
   setErrorMsg(String errorMsg) {
-
+    this.errorMsg = errorMsg;
   }
 
 }

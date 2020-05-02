@@ -52,10 +52,26 @@ class LoginScreen extends AbstractAuthScreen {
                   .translate(screenConstants.loginTopHeader))
             ),
 
+            // error message
+            Observer(
+              builder: (context) {
+                if ( authStore.hasError ) {
+                  return // Title
+                    Container(
+                        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
+                        padding: AppPaddings.regularPadding(context),
+                        child: TextsBuilder.regularText(authStore.errorMsg)
+                    );
+                } else {
+                  return Container();
+                }
+              },
+            ),
+
             // Email
             Container(
                 padding: AppPaddings.regularPadding(context),
-                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
+                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
                 child: TextFormField(
                   controller: emailController,
                   style: TextStyle(color: AppColors.fontColor),
@@ -83,6 +99,20 @@ class LoginScreen extends AbstractAuthScreen {
             ),
 
             // Button
+            Observer(
+              builder: (_) {
+                if( authStore.isLoading ) {
+                  return Center(
+                    child: Container(
+                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+                return Container();
+              },
+            ),
+
             Container(
                 padding: AppPaddings.regularPadding(context),
                 margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
@@ -93,7 +123,7 @@ class LoginScreen extends AbstractAuthScreen {
                       child: Observer(
                         builder: (_) {
 
-                          if ( authStore.isLoading ) {
+                          if ( !authStore.isLoading ) {
                             return ButtonsBuilder.redFlatButton(AppLocalizations.of(context).translate(screenConstants.loginButtonLabel), () async {
                               // validate fields and perform call to auth API
                               authStore.setIsLoading(true);
@@ -101,6 +131,7 @@ class LoginScreen extends AbstractAuthScreen {
                               restServices.getAuthRestService().signIn(emailController.text, passwordController.text).then(
                                         (rsp) {
                                           authStore.setIsLoading(false);
+                                          authStore.setHasError(false);
                                           Navigator.of(context).push(MaterialPageRoute(
                                               builder: (context) => HomeScreen()
                                           ));
@@ -113,12 +144,8 @@ class LoginScreen extends AbstractAuthScreen {
                                         });
 
                               });
-                          } else {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
                           }
-
+                          return Container();
                         },
                       ),
                     )

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/services/dto/auth/signout/signout.dto.dart';
 import 'package:professors/visual/screens/authenticated/profile/profile.screen.dart';
 import 'package:professors/visual/screens/authenticated/settings/payments/payments.dart';
 import 'package:professors/visual/screens/authenticated/settings/personal_details/settings_personal_details.dart';
 import 'package:professors/visual/screens/authenticated/settings/profile/settings_edit_profile_select_language.screen.dart';
 import 'package:professors/visual/screens/authenticated/settings/security/security_definitions.dart';
 import 'package:professors/visual/screens/authenticated/settings/support/support_type.dart';
+import 'package:professors/visual/screens/permitted/auth/login.screen.dart';
+import 'package:professors/visual/screens/permitted/auth/registration.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/visual/widgets/structural/lists/regular_list_tile.dart';
@@ -237,13 +241,13 @@ class SettingsScreen extends StatelessWidget {
               child: RegularListTile(
                 label: AppLocalizations.of(context)
                     .translate(TRANSLATIONS.SettingsConstants.LOGOUT),
-                callback: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SupportTypeScreen(),
-                    ),
-                  );
+                callback: () async {
+
+                  SignOutResponse rsp = await restServices.getAuthRestService().signOut();
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => RegistrationScreen()
+                  ));
+
                 },
                 hideTrailing: true,
               ),
