@@ -11,27 +11,60 @@ class AuthState extends _AuthState with _$AuthState {
 abstract class _AuthState with Store {
 
   @observable
-  bool isLoading = false;
+  bool loginIsLoading = false;
+  @observable
+  bool loginHasError = false;
+  @observable
+  String loginErrorMsg = "";
 
   @observable
-  bool hasError = false;
-
+  bool passwordRecoveryIsLoading = false;
   @observable
-  String errorMsg = "";
+  bool passwordRecoveryHasError = false;
+  @observable
+  String passwordRecoveryErrorMsg = "";
+  @observable
+  bool passwordRecoveryHasSucceeded = false;
 
   @action
-  setIsLoading(bool isLoading) {
-    this.isLoading = isLoading;
+  setLoginIsLoading(bool isLoading) {
+    this.loginIsLoading = isLoading;
+  }
+  @action
+  setLoginHasError(bool hasError) {
+    this.loginHasError = hasError;
+  }
+  @action
+  setLoginErrorMsg(String errorMsg) {
+    this.loginErrorMsg = errorMsg;
   }
 
   @action
-  setHasError(bool hasError) {
-    this.hasError = hasError;
+  setPasswordRecoveryIsLoading(bool isLoading) {
+    this.passwordRecoveryIsLoading = isLoading;
+  }
+  @action
+  setPasswordRecoveryHasError(bool hasError) {
+    this.passwordRecoveryHasError = hasError;
+  }
+  @action
+  setPasswordRecoveryErrorMsg(String errorMsg) {
+    this.passwordRecoveryErrorMsg = errorMsg;
+  }
+  @action
+  setPasswordRecoveryHasSucceeded(bool hasSucceeded) {
+    this.passwordRecoveryHasSucceeded = hasSucceeded;
   }
 
   @action
-  setErrorMsg(String errorMsg) {
-    this.errorMsg = errorMsg;
+  reset() {
+    this.loginHasError = false;
+    this.loginIsLoading = false;
+    this.loginErrorMsg = "";
+    this.passwordRecoveryHasError = false;
+    this.passwordRecoveryIsLoading = false;
+    this.passwordRecoveryErrorMsg = "";
+    this.passwordRecoveryHasSucceeded = false;
   }
 
 }

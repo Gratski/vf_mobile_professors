@@ -19,7 +19,7 @@ class CustomAppBar extends StatelessWidget {
       leading: GestureDetector(
         onTap: () {
           if (customBackCallback != null) {
-            this.customBackCallback(context);
+            this.customBackCallback();
           } else {
             Navigator.pop(context);
           }

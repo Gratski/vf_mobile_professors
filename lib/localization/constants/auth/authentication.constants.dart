@@ -19,5 +19,6 @@ class AuthenticationConstants {
   String get passwordRecoverySubTitle => "AUTH_PASSWORD_RECOVERY_SUB_TITLE";
   String get passwordRecoveryEmailLabel => "AUTH_PASSWORD_RECOVERY_EMAIL_LABEL";
   String get passwordRecoveryButtonLabel => "AUTH_PASSWORD_RECOVERY_BUTTON_LABEL";
+  String get passwordRecoverySuccessText => "AUTH_PASSWORD_RECOVERY_SUCCESS_TEXT";
 
 }

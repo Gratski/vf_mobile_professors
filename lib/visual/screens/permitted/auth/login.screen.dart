@@ -10,6 +10,7 @@ import 'package:professors/visual/screens/permitted/auth/abstract_auth.screen.da
 import 'package:professors/visual/screens/permitted/auth/password_recovery.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
+import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
@@ -55,12 +56,12 @@ class LoginScreen extends AbstractAuthScreen {
             // error message
             Observer(
               builder: (context) {
-                if ( authStore.hasError ) {
+                if ( authStore.loginHasError ) {
                   return // Title
                     Container(
                         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
                         padding: AppPaddings.regularPadding(context),
-                        child: TextsBuilder.regularText(authStore.errorMsg)
+                        child: TextsBuilder.regularText(authStore.loginErrorMsg)
                     );
                 } else {
                   return Container();
@@ -98,21 +99,17 @@ class LoginScreen extends AbstractAuthScreen {
                 )
             ),
 
-            // Button
+            // Loader
             Observer(
               builder: (_) {
-                if( authStore.isLoading ) {
-                  return Center(
-                    child: Container(
-                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
+                if( authStore.loginIsLoading ) {
+                  return DefaultLoaderWidget();
                 }
                 return Container();
               },
             ),
 
+            // Button
             Container(
                 padding: AppPaddings.regularPadding(context),
                 margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
@@ -123,23 +120,24 @@ class LoginScreen extends AbstractAuthScreen {
                       child: Observer(
                         builder: (_) {
 
-                          if ( !authStore.isLoading ) {
+                          if ( !authStore.loginIsLoading ) {
                             return ButtonsBuilder.redFlatButton(AppLocalizations.of(context).translate(screenConstants.loginButtonLabel), () async {
                               // validate fields and perform call to auth API
-                              authStore.setIsLoading(true);
-                              authStore.setHasError(false);
+                              authStore.setLoginIsLoading(true);
+                              authStore.setLoginHasError(false);
                               restServices.getAuthRestService().signIn(context,
                                   emailController.text, passwordController.text).then(
                                         (rsp) {
-                                          authStore.setIsLoading(false);
-                                          authStore.setHasError(false);
+                                          authStore.reset();
+                                          emailController.clear();
+                                          passwordController.clear();
                                           Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
                                         }
                                 ).catchError(
                                         (e) {
-                                          authStore.setIsLoading(false);
-                                          authStore.setHasError(true);
-                                          authStore.setErrorMsg(e.cause);
+                                          authStore.setLoginIsLoading(false);
+                                          authStore.setLoginHasError(true);
+                                          authStore.setLoginErrorMsg(e.cause);
                                         });
 
                               });
@@ -167,6 +165,11 @@ class LoginScreen extends AbstractAuthScreen {
         ),
       ),
     ];
+  }
+
+  @override
+  onBackButtonTap() {
+    authStore.reset();
   }
 
 

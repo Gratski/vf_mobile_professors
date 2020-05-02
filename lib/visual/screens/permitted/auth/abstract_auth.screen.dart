@@ -5,6 +5,7 @@ abstract class AbstractAuthScreen extends StatelessWidget {
 
   getSlivers(BuildContext context);
   getHideBackButton();
+  onBackButtonTap();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,10 @@ abstract class AbstractAuthScreen extends StatelessWidget {
           ),
           child: NestedScrollView(
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-              return [CustomAppBar([], hideBackButton: getHideBackButton(),)];
+              return [CustomAppBar([], hideBackButton: getHideBackButton(), customBackCallback: () {
+                onBackButtonTap();
+                Navigator.pop(context);
+              },)];
             },
             body: CustomScrollView(
               slivers: getSlivers(context)

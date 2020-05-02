@@ -38,6 +38,7 @@
   "AUTH_PASSWORD_RECOVERY_SUB_TITLE": "Enter your email. We will e-mail you a fresh generated cyphered and secure password.",
   "AUTH_PASSWORD_RECOVERY_EMAIL_LABEL": "E-mail",
   "AUTH_PASSWORD_RECOVERY_BUTTON_LABEL": "Send",
+  "AUTH_PASSWORD_RECOVERY_SUCCESS_TEXT": "A new secured password has been sent to your email",
 
   "DASHBOARD_HEADER_TOP": "Dashboard",
   "DASHBOARD_HEADER_NEXT_CLASSES": "Next Classes",

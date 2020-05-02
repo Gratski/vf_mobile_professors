@@ -135,4 +135,7 @@ class RegistrationScreen extends AbstractAuthScreen {
     }
   }
 
+  @override
+  onBackButtonTap() {}
+
 }

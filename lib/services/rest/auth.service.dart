@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:professors/services/dto/auth/password_recovery/password_recovery.request.dart';
+import 'package:professors/services/dto/auth/password_recovery/password_recovery.response.dart';
 import 'package:professors/services/dto/auth/registration/registration.request.dart';
 import 'package:professors/services/dto/auth/registration/registration.response.dart';
 import 'package:professors/services/dto/auth/signin/signin.request.dart';
@@ -44,15 +46,28 @@ class AuthService extends AbstractRestService {
   ///
   /// Validates a user if this is user has already a valid access token
   ///
-  Future<RegistrationResponse> registration(String email, String password, String accessCode) async {
+  Future<RegistrationResponse> registration(BuildContext context, String email, String password, String accessCode) async {
     RegistrationRequest request = RegistrationRequest(email, password, accessCode);
-    final rsp = await http.post('$REST_URL/registrations/validation', body: request.toJson());
-
-    if( rsp.statusCode != 201 ) {
-      //TODO: handle fine grane server messages here
-      throw new ApiException('Error during registration');
+    try {
+      final rsp = await performJsonPost(context, '$REST_URL/registrations/validation', request.toJson());
+      RegistrationResponse result = RegistrationResponse.fromJson(jsonDecode(rsp.body));
+      return result;
+    } on ApiException catch(e) {
+      throw new ApiException(e.cause);
     }
-    RegistrationResponse regRsp = RegistrationResponse.fromJson(jsonDecode(rsp.body));
+  }
+
+  ///
+  /// Recovers the password for a given user
+  Future<PasswordRecoveryResponse> passwordRecovery(BuildContext context, String email) async {
+    PasswordRecoveryRequest request = PasswordRecoveryRequest(email);
+    try {
+      final response = await performJsonPost(context, '$REST_URL/auth/password-recovery', request.toJson());
+      PasswordRecoveryResponse result = PasswordRecoveryResponse();
+      return result;
+    } on ApiException catch(e) {
+      throw new ApiException(e.cause);
+    }
   }
 
 }
