@@ -49,8 +49,8 @@ class AuthService extends AbstractRestService {
   Future<RegistrationResponse> registration(BuildContext context, String email, String password, String accessCode) async {
     RegistrationRequest request = RegistrationRequest(email, password, accessCode);
     try {
-      final rsp = await performJsonPost(context, '$REST_URL/registrations/validation', request.toJson());
-      RegistrationResponse result = RegistrationResponse.fromJson(jsonDecode(rsp.body));
+      final rsp = await performJsonPost(context, '$REST_URL/registrations/professor/validation', request.toJson());
+      RegistrationResponse result = RegistrationResponse();
       return result;
     } on ApiException catch(e) {
       throw new ApiException(e.cause);

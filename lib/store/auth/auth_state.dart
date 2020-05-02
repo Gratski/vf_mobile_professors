@@ -26,6 +26,13 @@ abstract class _AuthState with Store {
   @observable
   bool passwordRecoveryHasSucceeded = false;
 
+  @observable
+  bool registerIsLoading = false;
+  @observable
+  bool registerHasError = false;
+  @observable
+  String registerErrorMsg = "";
+
   @action
   setLoginIsLoading(bool isLoading) {
     this.loginIsLoading = isLoading;
@@ -57,6 +64,19 @@ abstract class _AuthState with Store {
   }
 
   @action
+  setRegisterIsLoading(bool isLoading) {
+    this.registerIsLoading = isLoading;
+  }
+  @action
+  setRegisterHasError(bool hasError) {
+    this.registerHasError = hasError;
+  }
+  @action
+  setRegisterErrorMsg(String errorMsg) {
+    this.registerErrorMsg = errorMsg;
+  }
+
+  @action
   reset() {
     this.loginHasError = false;
     this.loginIsLoading = false;
@@ -65,6 +85,9 @@ abstract class _AuthState with Store {
     this.passwordRecoveryIsLoading = false;
     this.passwordRecoveryErrorMsg = "";
     this.passwordRecoveryHasSucceeded = false;
+    this.registerHasError = false;
+    this.registerIsLoading = false;
+    this.registerErrorMsg = "";
   }
 
 }

@@ -4,6 +4,7 @@ import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/auth/authentication.constants.dart';
 import 'package:professors/visual/screens/permitted/auth/abstract_auth.screen.dart';
+import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
@@ -70,6 +71,7 @@ class PasswordRecoveryScreen extends AbstractAuthScreen {
                     margin:
                     EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
                     child: TextFormField(
+                      style: TextStyle(color: AppColors.fontColor),
                       controller: emailController,
                       decoration: InputDecoration(
                           hintText: AppLocalizations.of(context)
