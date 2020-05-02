@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
+import 'package:professors/visual/screens/authenticated/abstract_authenticated_stfl.screen.dart';
 import 'package:professors/visual/screens/authenticated/classes/classes.screen.dart';
 import 'package:professors/visual/screens/authenticated/settings/settings.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends AuthenticatedStatefulScreen {
 
   List<Widget> screens = [
     SettingsScreen(),
@@ -19,6 +20,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    widget.authenticate(context);
+
     return Scaffold(
       body: Observer(
         builder: (_) => widget.screens[navStore.bottomNavigationIndex],
