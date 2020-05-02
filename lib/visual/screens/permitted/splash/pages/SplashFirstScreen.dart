@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:professors/screens/permitted/splash/pages/abstract_splash.screen.dart';
-import 'package:professors/styles/colors.dart';
-import 'package:professors/styles/padding.dart';
-import 'package:professors/widgets/text/text.builder.dart';
+import 'package:professors/visual/screens/permitted/splash/pages/abstract_splash.screen.dart';
+import 'package:professors/visual/styles/colors.dart';
+import 'package:professors/visual/styles/padding.dart';
+import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class SplashFirstScreen extends AbstractSplashScreen {
 
