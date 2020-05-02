@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class HttpError {
   String timestamp;
   int status;

@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/auth/authentication.constants.dart';
-import 'package:professors/services/dto/auth/signin/login.response.dart';
+import 'package:professors/services/dto/auth/signin/signin.response.dart';
 import 'package:professors/services/exceptions/authentication.exception.dart';
 import 'package:professors/visual/screens/authenticated/home.dart';
 import 'package:professors/visual/screens/permitted/auth/abstract_auth.screen.dart';
@@ -128,7 +128,8 @@ class LoginScreen extends AbstractAuthScreen {
                               // validate fields and perform call to auth API
                               authStore.setIsLoading(true);
                               authStore.setHasError(false);
-                              restServices.getAuthRestService().signIn(emailController.text, passwordController.text).then(
+                              restServices.getAuthRestService().signIn(context,
+                                  emailController.text, passwordController.text).then(
                                         (rsp) {
                                           authStore.setIsLoading(false);
                                           authStore.setHasError(false);
