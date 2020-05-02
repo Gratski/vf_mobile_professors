@@ -244,9 +244,7 @@ class SettingsScreen extends StatelessWidget {
                 callback: () async {
 
                   SignOutResponse rsp = await restServices.getAuthRestService().signOut();
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => RegistrationScreen()
-                  ));
+                  Navigator.pushNamedAndRemoveUntil(context, "/registration", (r) => false);
 
                 },
                 hideTrailing: true,

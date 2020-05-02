@@ -132,9 +132,7 @@ class LoginScreen extends AbstractAuthScreen {
                                         (rsp) {
                                           authStore.setIsLoading(false);
                                           authStore.setHasError(false);
-                                          Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) => HomeScreen()
-                                          ));
+                                          Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
                                         }
                                 ).catchError(
                                         (e) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:professors/visual/screens/authenticated/home.dart';
+import 'package:professors/visual/screens/permitted/auth/login.screen.dart';
 import 'package:professors/visual/screens/permitted/auth/registration.screen.dart';
 import 'package:professors/visual/screens/permitted/splash/SplashPagesScreen.dart';
 import 'package:professors/visual/styles/colors.dart';
@@ -34,6 +35,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
+        routes: {
+          '/splash': (context) => SplashPagesScreen(),
+          '/login': (context) => LoginScreen(),
+          '/registration': (context) => RegistrationScreen(),
+          '/home': (context) => HomeScreen()
+        },
+        initialRoute: (isNew) ? '/splash' : (hasToken) ? '/home' : '/registration',
+
         localizationsDelegates: [
           // app specific localizations
           AppLocalizations.delegate,
@@ -69,8 +79,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
           canvasColor: AppColors.bgMainColor
-        ),
-        home: (isNew) ? SplashPagesScreen() : (hasToken) ? HomeScreen() : RegistrationScreen()
+        )
     );
   }
 }
