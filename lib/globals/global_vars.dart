@@ -1,3 +1,5 @@
+import 'package:professors/services/rest/rest.services.dart';
+import 'package:professors/store/auth/auth_state.dart';
 import 'package:professors/store/classes/classes_state.dart';
 import 'package:professors/store/classes/edit_class_state.dart';
 import 'package:professors/store/dashboard/dashboard_state.dart';
@@ -12,11 +14,16 @@ import 'package:professors/store/transactions/transactions_history_state.dart';
 import 'package:professors/store/user/user_state.dart';
 import 'package:professors/store/user/user_wallet_state.dart';
 
+// Services
+final restServices = RestServices();
+
 final userStore = UserState();
 final userWallet = UserWalletState();
 
 final navStore = NavState();
 final generalStore = GeneralState();
+
+final authStore = AuthState();
 
 final editOrCreateClassStore = EditClassState();
 

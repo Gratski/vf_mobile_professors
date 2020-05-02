@@ -55,4 +55,14 @@ mixin _$GeneralState on _GeneralState, Store {
       _$_GeneralStateActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  dynamic setIsReady(bool isReady) {
+    final _$actionInfo = _$_GeneralStateActionController.startAction();
+    try {
+      return super.setIsReady(isReady);
+    } finally {
+      _$_GeneralStateActionController.endAction(_$actionInfo);
+    }
+  }
 }

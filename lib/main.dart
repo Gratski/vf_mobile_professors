@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:professors/screens/authenticated/home.dart';
-import 'package:professors/screens/permitted/auth/login.screen.dart';
-import 'package:professors/screens/permitted/auth/registration.screen.dart';
-import 'package:professors/screens/permitted/splash/SplashPagesScreen.dart';
-import 'package:professors/styles/colors.dart';
+import 'package:professors/visual/screens/authenticated/home.dart';
+import 'package:professors/visual/screens/permitted/auth/registration.screen.dart';
+import 'package:professors/visual/screens/permitted/splash/SplashPagesScreen.dart';
+import 'package:professors/visual/styles/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'globals/app.config.dart';
 import 'localization/app_localizations.dart';
 
-void main() async {
+void main({String env}) async {
 
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -18,6 +18,9 @@ void main() async {
   String authToken = prefs.getString("auth-token");
   bool hasToken = authToken != null && authToken.isNotEmpty;
 
+  // load our config
+  //uncomment for prod "prod"
+  final config = await AppConfig.forEnvironment(env);
 
   runApp(MyApp(isNew, hasToken));
 }

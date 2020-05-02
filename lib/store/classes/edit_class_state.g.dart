@@ -130,6 +130,43 @@ mixin _$EditClassState on _EditClassState, Store {
     }, _$possibleDurationsAtom, name: '${_$possibleDurationsAtom.name}_set');
   }
 
+  final _$difficultyLevelAtom = Atom(name: '_EditClassState.difficultyLevel');
+
+  @override
+  DifficultyLevel get difficultyLevel {
+    _$difficultyLevelAtom.context.enforceReadPolicy(_$difficultyLevelAtom);
+    _$difficultyLevelAtom.reportObserved();
+    return super.difficultyLevel;
+  }
+
+  @override
+  set difficultyLevel(DifficultyLevel value) {
+    _$difficultyLevelAtom.context.conditionallyRunInAction(() {
+      super.difficultyLevel = value;
+      _$difficultyLevelAtom.reportChanged();
+    }, _$difficultyLevelAtom, name: '${_$difficultyLevelAtom.name}_set');
+  }
+
+  final _$possibleDifficultyLevelsAtom =
+      Atom(name: '_EditClassState.possibleDifficultyLevels');
+
+  @override
+  ObservableList<DifficultyLevel> get possibleDifficultyLevels {
+    _$possibleDifficultyLevelsAtom.context
+        .enforceReadPolicy(_$possibleDifficultyLevelsAtom);
+    _$possibleDifficultyLevelsAtom.reportObserved();
+    return super.possibleDifficultyLevels;
+  }
+
+  @override
+  set possibleDifficultyLevels(ObservableList<DifficultyLevel> value) {
+    _$possibleDifficultyLevelsAtom.context.conditionallyRunInAction(() {
+      super.possibleDifficultyLevels = value;
+      _$possibleDifficultyLevelsAtom.reportChanged();
+    }, _$possibleDifficultyLevelsAtom,
+        name: '${_$possibleDifficultyLevelsAtom.name}_set');
+  }
+
   final _$parentCategoryAtom = Atom(name: '_EditClassState.parentCategory');
 
   @override
@@ -255,6 +292,26 @@ mixin _$EditClassState on _EditClassState, Store {
 
   final _$_EditClassStateActionController =
       ActionController(name: '_EditClassState');
+
+  @override
+  dynamic setPossibleDifficultyLevels(List<DifficultyLevel> levels) {
+    final _$actionInfo = _$_EditClassStateActionController.startAction();
+    try {
+      return super.setPossibleDifficultyLevels(levels);
+    } finally {
+      _$_EditClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setDifficultyLevel(DifficultyLevel level) {
+    final _$actionInfo = _$_EditClassStateActionController.startAction();
+    try {
+      return super.setDifficultyLevel(level);
+    } finally {
+      _$_EditClassStateActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic setSubCategory(CategoryModel category) {
