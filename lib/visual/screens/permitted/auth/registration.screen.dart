@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/auth/authentication.constants.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
+import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/permitted/auth/abstract_auth.screen.dart';
 import 'package:professors/visual/screens/permitted/auth/login.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
@@ -58,22 +60,6 @@ class RegistrationScreen extends AbstractAuthScreen {
                   margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01),
                   child: TextsBuilder.regularText(AppLocalizations.of(context)
                       .translate(screenConstants.registrationSubTitle))
-              ),
-            ),
-
-            // error message
-            Container(
-              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
-              child: Observer(
-                builder: (_){
-                  if ( authStore.registerHasError ) {
-                    return Center(
-                      child: TextsBuilder.regularText(authStore.registerErrorMsg),
-                    );
-                  } else {
-                    return Container();
-                  }
-                },
               ),
             ),
 
@@ -142,7 +128,6 @@ class RegistrationScreen extends AbstractAuthScreen {
                             child: ButtonsBuilder.redFlatButton(AppLocalizations.of(context).translate(screenConstants.registrationButtonLabel), () {
 
                               authStore.setRegisterIsLoading(true);
-                              authStore.setRegisterHasError(false);
 
                               String email = emailController.text;
                               String password = passwordController.text;
@@ -158,14 +143,12 @@ class RegistrationScreen extends AbstractAuthScreen {
                                   authStore.reset();
                                   Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
                                 }).catchError((e) {
-                                  authStore.reset();
-                                  authStore.setRegisterHasError(true);
-                                  authStore.setRegisterErrorMsg(e.cause);
+                                  authStore.setRegisterIsLoading(false);
+                                  ToasterBuilder.buildErrorToaster(context, e.cause);
                                 });
                               }).catchError((e) {
-                                authStore.reset();
-                                authStore.setRegisterHasError(true);
-                                authStore.setRegisterErrorMsg(e.cause);
+                                authStore.setRegisterIsLoading(false);
+                                ToasterBuilder.buildErrorToaster(context, e.cause);
                               });
 
                             }),

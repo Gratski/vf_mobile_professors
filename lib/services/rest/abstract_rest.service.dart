@@ -7,30 +7,31 @@ import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/localization.config.dart';
 import 'package:professors/services/dto/errors/http_error.dto.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AbstractRestService {
   String REST_URL = "http://192.168.1.103:2222/api/v1";
 
   Future<Response> performJsonPost(BuildContext context, String path, String body) async {
-    final response = await http.post(path, body: body, headers: _authHeaders(context));
+    final response = await http.post(path, body: body, headers: await _authHeaders(context));
     await _handleError(context, response);
     return response;
   }
 
   Future<Response> performJsonPut(BuildContext context, String path, String body) async {
-    final response = await http.put(path, body: body, headers: _authHeaders(context));
+    final response = await http.put(path, body: body, headers: await _authHeaders(context));
     await _handleError(context, response);
     return response;
   }
 
   Future<Response> performJsonGet(BuildContext context, String path) async {
-    final response = await http.get(path, headers: _authHeaders(context));
+    final response = await http.get(path, headers: await _authHeaders(context));
     await _handleError(context, response);
     return response;
   }
 
   Future<Response> performJsonDelete(BuildContext context, String path) async {
-    final response = await http.delete(path, headers: _authHeaders(context));
+    final response = await http.delete(path, headers: await _authHeaders(context));
     await _handleError(context, response);
     return response;
   }
@@ -50,10 +51,18 @@ abstract class AbstractRestService {
     return;
   }
 
-  Map<String, String> _authHeaders(BuildContext context) {
+  Future<Map<String, String>> _authHeaders(BuildContext context) async {
+    String token = "";
+    if (authStore.authToken == null || authStore.authToken.isEmpty) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      token = prefs.getString("authToken") ?? "";
+    } else {
+      token = authStore.authToken;
+    }
     return {
       "content-type": "application/json",
-      "Accept-Language": LocalizationConfig.extractCurrentLocale(context).languageCode
+      "Accept-Language": LocalizationConfig.extractCurrentLocale(context).languageCode,
+      "Authorization": "Bearer $token"
     };
   }
 }

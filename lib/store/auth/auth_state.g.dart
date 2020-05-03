@@ -9,6 +9,23 @@ part of 'auth_state.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AuthState on _AuthState, Store {
+  final _$authTokenAtom = Atom(name: '_AuthState.authToken');
+
+  @override
+  String get authToken {
+    _$authTokenAtom.context.enforceReadPolicy(_$authTokenAtom);
+    _$authTokenAtom.reportObserved();
+    return super.authToken;
+  }
+
+  @override
+  set authToken(String value) {
+    _$authTokenAtom.context.conditionallyRunInAction(() {
+      super.authToken = value;
+      _$authTokenAtom.reportChanged();
+    }, _$authTokenAtom, name: '${_$authTokenAtom.name}_set');
+  }
+
   final _$loginIsLoadingAtom = Atom(name: '_AuthState.loginIsLoading');
 
   @override
@@ -24,40 +41,6 @@ mixin _$AuthState on _AuthState, Store {
       super.loginIsLoading = value;
       _$loginIsLoadingAtom.reportChanged();
     }, _$loginIsLoadingAtom, name: '${_$loginIsLoadingAtom.name}_set');
-  }
-
-  final _$loginHasErrorAtom = Atom(name: '_AuthState.loginHasError');
-
-  @override
-  bool get loginHasError {
-    _$loginHasErrorAtom.context.enforceReadPolicy(_$loginHasErrorAtom);
-    _$loginHasErrorAtom.reportObserved();
-    return super.loginHasError;
-  }
-
-  @override
-  set loginHasError(bool value) {
-    _$loginHasErrorAtom.context.conditionallyRunInAction(() {
-      super.loginHasError = value;
-      _$loginHasErrorAtom.reportChanged();
-    }, _$loginHasErrorAtom, name: '${_$loginHasErrorAtom.name}_set');
-  }
-
-  final _$loginErrorMsgAtom = Atom(name: '_AuthState.loginErrorMsg');
-
-  @override
-  String get loginErrorMsg {
-    _$loginErrorMsgAtom.context.enforceReadPolicy(_$loginErrorMsgAtom);
-    _$loginErrorMsgAtom.reportObserved();
-    return super.loginErrorMsg;
-  }
-
-  @override
-  set loginErrorMsg(String value) {
-    _$loginErrorMsgAtom.context.conditionallyRunInAction(() {
-      super.loginErrorMsg = value;
-      _$loginErrorMsgAtom.reportChanged();
-    }, _$loginErrorMsgAtom, name: '${_$loginErrorMsgAtom.name}_set');
   }
 
   final _$passwordRecoveryIsLoadingAtom =
@@ -80,66 +63,6 @@ mixin _$AuthState on _AuthState, Store {
         name: '${_$passwordRecoveryIsLoadingAtom.name}_set');
   }
 
-  final _$passwordRecoveryHasErrorAtom =
-      Atom(name: '_AuthState.passwordRecoveryHasError');
-
-  @override
-  bool get passwordRecoveryHasError {
-    _$passwordRecoveryHasErrorAtom.context
-        .enforceReadPolicy(_$passwordRecoveryHasErrorAtom);
-    _$passwordRecoveryHasErrorAtom.reportObserved();
-    return super.passwordRecoveryHasError;
-  }
-
-  @override
-  set passwordRecoveryHasError(bool value) {
-    _$passwordRecoveryHasErrorAtom.context.conditionallyRunInAction(() {
-      super.passwordRecoveryHasError = value;
-      _$passwordRecoveryHasErrorAtom.reportChanged();
-    }, _$passwordRecoveryHasErrorAtom,
-        name: '${_$passwordRecoveryHasErrorAtom.name}_set');
-  }
-
-  final _$passwordRecoveryErrorMsgAtom =
-      Atom(name: '_AuthState.passwordRecoveryErrorMsg');
-
-  @override
-  String get passwordRecoveryErrorMsg {
-    _$passwordRecoveryErrorMsgAtom.context
-        .enforceReadPolicy(_$passwordRecoveryErrorMsgAtom);
-    _$passwordRecoveryErrorMsgAtom.reportObserved();
-    return super.passwordRecoveryErrorMsg;
-  }
-
-  @override
-  set passwordRecoveryErrorMsg(String value) {
-    _$passwordRecoveryErrorMsgAtom.context.conditionallyRunInAction(() {
-      super.passwordRecoveryErrorMsg = value;
-      _$passwordRecoveryErrorMsgAtom.reportChanged();
-    }, _$passwordRecoveryErrorMsgAtom,
-        name: '${_$passwordRecoveryErrorMsgAtom.name}_set');
-  }
-
-  final _$passwordRecoveryHasSucceededAtom =
-      Atom(name: '_AuthState.passwordRecoveryHasSucceeded');
-
-  @override
-  bool get passwordRecoveryHasSucceeded {
-    _$passwordRecoveryHasSucceededAtom.context
-        .enforceReadPolicy(_$passwordRecoveryHasSucceededAtom);
-    _$passwordRecoveryHasSucceededAtom.reportObserved();
-    return super.passwordRecoveryHasSucceeded;
-  }
-
-  @override
-  set passwordRecoveryHasSucceeded(bool value) {
-    _$passwordRecoveryHasSucceededAtom.context.conditionallyRunInAction(() {
-      super.passwordRecoveryHasSucceeded = value;
-      _$passwordRecoveryHasSucceededAtom.reportChanged();
-    }, _$passwordRecoveryHasSucceededAtom,
-        name: '${_$passwordRecoveryHasSucceededAtom.name}_set');
-  }
-
   final _$registerIsLoadingAtom = Atom(name: '_AuthState.registerIsLoading');
 
   @override
@@ -157,67 +80,23 @@ mixin _$AuthState on _AuthState, Store {
     }, _$registerIsLoadingAtom, name: '${_$registerIsLoadingAtom.name}_set');
   }
 
-  final _$registerHasErrorAtom = Atom(name: '_AuthState.registerHasError');
-
-  @override
-  bool get registerHasError {
-    _$registerHasErrorAtom.context.enforceReadPolicy(_$registerHasErrorAtom);
-    _$registerHasErrorAtom.reportObserved();
-    return super.registerHasError;
-  }
-
-  @override
-  set registerHasError(bool value) {
-    _$registerHasErrorAtom.context.conditionallyRunInAction(() {
-      super.registerHasError = value;
-      _$registerHasErrorAtom.reportChanged();
-    }, _$registerHasErrorAtom, name: '${_$registerHasErrorAtom.name}_set');
-  }
-
-  final _$registerErrorMsgAtom = Atom(name: '_AuthState.registerErrorMsg');
-
-  @override
-  String get registerErrorMsg {
-    _$registerErrorMsgAtom.context.enforceReadPolicy(_$registerErrorMsgAtom);
-    _$registerErrorMsgAtom.reportObserved();
-    return super.registerErrorMsg;
-  }
-
-  @override
-  set registerErrorMsg(String value) {
-    _$registerErrorMsgAtom.context.conditionallyRunInAction(() {
-      super.registerErrorMsg = value;
-      _$registerErrorMsgAtom.reportChanged();
-    }, _$registerErrorMsgAtom, name: '${_$registerErrorMsgAtom.name}_set');
-  }
-
   final _$_AuthStateActionController = ActionController(name: '_AuthState');
+
+  @override
+  dynamic setAuthToken(String authToken) {
+    final _$actionInfo = _$_AuthStateActionController.startAction();
+    try {
+      return super.setAuthToken(authToken);
+    } finally {
+      _$_AuthStateActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic setLoginIsLoading(bool isLoading) {
     final _$actionInfo = _$_AuthStateActionController.startAction();
     try {
       return super.setLoginIsLoading(isLoading);
-    } finally {
-      _$_AuthStateActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setLoginHasError(bool hasError) {
-    final _$actionInfo = _$_AuthStateActionController.startAction();
-    try {
-      return super.setLoginHasError(hasError);
-    } finally {
-      _$_AuthStateActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setLoginErrorMsg(String errorMsg) {
-    final _$actionInfo = _$_AuthStateActionController.startAction();
-    try {
-      return super.setLoginErrorMsg(errorMsg);
     } finally {
       _$_AuthStateActionController.endAction(_$actionInfo);
     }
@@ -234,60 +113,10 @@ mixin _$AuthState on _AuthState, Store {
   }
 
   @override
-  dynamic setPasswordRecoveryHasError(bool hasError) {
-    final _$actionInfo = _$_AuthStateActionController.startAction();
-    try {
-      return super.setPasswordRecoveryHasError(hasError);
-    } finally {
-      _$_AuthStateActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setPasswordRecoveryErrorMsg(String errorMsg) {
-    final _$actionInfo = _$_AuthStateActionController.startAction();
-    try {
-      return super.setPasswordRecoveryErrorMsg(errorMsg);
-    } finally {
-      _$_AuthStateActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setPasswordRecoveryHasSucceeded(bool hasSucceeded) {
-    final _$actionInfo = _$_AuthStateActionController.startAction();
-    try {
-      return super.setPasswordRecoveryHasSucceeded(hasSucceeded);
-    } finally {
-      _$_AuthStateActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   dynamic setRegisterIsLoading(bool isLoading) {
     final _$actionInfo = _$_AuthStateActionController.startAction();
     try {
       return super.setRegisterIsLoading(isLoading);
-    } finally {
-      _$_AuthStateActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setRegisterHasError(bool hasError) {
-    final _$actionInfo = _$_AuthStateActionController.startAction();
-    try {
-      return super.setRegisterHasError(hasError);
-    } finally {
-      _$_AuthStateActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setRegisterErrorMsg(String errorMsg) {
-    final _$actionInfo = _$_AuthStateActionController.startAction();
-    try {
-      return super.setRegisterErrorMsg(errorMsg);
     } finally {
       _$_AuthStateActionController.endAction(_$actionInfo);
     }

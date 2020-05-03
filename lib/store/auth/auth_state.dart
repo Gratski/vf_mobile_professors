@@ -10,84 +10,47 @@ class AuthState extends _AuthState with _$AuthState {
 
 abstract class _AuthState with Store {
 
+  // session token
+  @observable
+  String authToken;
+
+  // login vars
   @observable
   bool loginIsLoading = false;
-  @observable
-  bool loginHasError = false;
-  @observable
-  String loginErrorMsg = "";
 
+  // password recovery vars
   @observable
   bool passwordRecoveryIsLoading = false;
-  @observable
-  bool passwordRecoveryHasError = false;
-  @observable
-  String passwordRecoveryErrorMsg = "";
-  @observable
-  bool passwordRecoveryHasSucceeded = false;
 
+  // regist form vars
   @observable
   bool registerIsLoading = false;
-  @observable
-  bool registerHasError = false;
-  @observable
-  String registerErrorMsg = "";
+
+  @action
+  setAuthToken(String authToken) {
+    this.authToken = authToken;
+  }
 
   @action
   setLoginIsLoading(bool isLoading) {
     this.loginIsLoading = isLoading;
-  }
-  @action
-  setLoginHasError(bool hasError) {
-    this.loginHasError = hasError;
-  }
-  @action
-  setLoginErrorMsg(String errorMsg) {
-    this.loginErrorMsg = errorMsg;
   }
 
   @action
   setPasswordRecoveryIsLoading(bool isLoading) {
     this.passwordRecoveryIsLoading = isLoading;
   }
-  @action
-  setPasswordRecoveryHasError(bool hasError) {
-    this.passwordRecoveryHasError = hasError;
-  }
-  @action
-  setPasswordRecoveryErrorMsg(String errorMsg) {
-    this.passwordRecoveryErrorMsg = errorMsg;
-  }
-  @action
-  setPasswordRecoveryHasSucceeded(bool hasSucceeded) {
-    this.passwordRecoveryHasSucceeded = hasSucceeded;
-  }
 
   @action
   setRegisterIsLoading(bool isLoading) {
     this.registerIsLoading = isLoading;
   }
-  @action
-  setRegisterHasError(bool hasError) {
-    this.registerHasError = hasError;
-  }
-  @action
-  setRegisterErrorMsg(String errorMsg) {
-    this.registerErrorMsg = errorMsg;
-  }
 
   @action
   reset() {
-    this.loginHasError = false;
     this.loginIsLoading = false;
-    this.loginErrorMsg = "";
-    this.passwordRecoveryHasError = false;
     this.passwordRecoveryIsLoading = false;
-    this.passwordRecoveryErrorMsg = "";
-    this.passwordRecoveryHasSucceeded = false;
-    this.registerHasError = false;
     this.registerIsLoading = false;
-    this.registerErrorMsg = "";
   }
 
 }

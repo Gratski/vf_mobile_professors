@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:professors/globals/global_vars.dart';
 import 'package:professors/services/dto/auth/password_recovery/password_recovery.request.dart';
 import 'package:professors/services/dto/auth/password_recovery/password_recovery.response.dart';
 import 'package:professors/services/dto/auth/registration/registration.request.dart';
@@ -26,6 +27,7 @@ class AuthService extends AbstractRestService {
       LoginResponse loginRsp = LoginResponse.fromJson(jsonDecode(response.body));
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('authToken', loginRsp.token);
+      authStore.setAuthToken(loginRsp.token);
       return loginRsp;
     } on ApiException catch(e) {
       throw new AuthenticationException(e.cause);
@@ -39,6 +41,7 @@ class AuthService extends AbstractRestService {
   Future<SignOutResponse> signOut() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove("authToken");
+    authStore.setAuthToken(null);
     return SignOutResponse();
   }
 
