@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:professors/localization/localization.config.dart';
 import 'package:professors/visual/screens/authenticated/home.dart';
 import 'package:professors/visual/screens/permitted/auth/login.screen.dart';
 import 'package:professors/visual/screens/permitted/auth/registration.screen.dart';
@@ -53,10 +54,7 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: [
-          const Locale('en'),
-          const Locale('pt')
-        ],
+        supportedLocales: LocalizationConfig.supportedLocales,
         localeResolutionCallback: (locale, supportedLocales) {
           for(var supportedLocale in supportedLocales) {
             if(supportedLocale.languageCode == locale.languageCode) {

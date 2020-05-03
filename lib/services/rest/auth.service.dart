@@ -10,7 +10,6 @@ import 'package:professors/services/dto/auth/signin/signin.response.dart';
 import 'package:professors/services/dto/auth/signout/signout.dto.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
 import 'package:professors/services/exceptions/authentication.exception.dart';
-import 'package:professors/services/dto/errors/http_error.dto.dart';
 import 'package:professors/services/rest/abstract_rest.service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
