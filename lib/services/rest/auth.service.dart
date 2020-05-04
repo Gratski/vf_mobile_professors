@@ -23,7 +23,7 @@ class AuthService extends AbstractRestService {
 
     LoginRequest request = LoginRequest(email, pwd);
     try {
-      final response = await this.performJsonPost(context, '$REST_URL/auth/signin', request.toJson());
+      final response = await this.performJsonPost(context, '$REST_URL/auth/signin', request.toJson(), useAuth: false);
       LoginResponse loginRsp = LoginResponse.fromJson(jsonDecode(response.body));
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('authToken', loginRsp.token);
@@ -51,7 +51,7 @@ class AuthService extends AbstractRestService {
   Future<RegistrationResponse> registration(BuildContext context, String email, String password, String accessCode) async {
     RegistrationRequest request = RegistrationRequest(email, password, accessCode);
     try {
-      final rsp = await performJsonPost(context, '$REST_URL/registrations/professor/validation', request.toJson());
+      final rsp = await performJsonPost(context, '$REST_URL/registrations/professor/validation', request.toJson(), useAuth: false);
       RegistrationResponse result = RegistrationResponse();
       return result;
     } on ApiException catch(e) {
@@ -64,7 +64,7 @@ class AuthService extends AbstractRestService {
   Future<PasswordRecoveryResponse> passwordRecovery(BuildContext context, String email) async {
     PasswordRecoveryRequest request = PasswordRecoveryRequest(email);
     try {
-      final response = await performJsonPost(context, '$REST_URL/auth/password-recovery', request.toJson());
+      final response = await performJsonPost(context, '$REST_URL/auth/password-recovery', request.toJson(), useAuth: false);
       PasswordRecoveryResponse result = PasswordRecoveryResponse();
       return result;
     } on ApiException catch(e) {

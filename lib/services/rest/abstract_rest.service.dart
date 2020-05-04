@@ -14,13 +14,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class AbstractRestService {
   String REST_URL = "http://192.168.1.103:2222/api/v1";
 
-  Future<Response> performJsonPost(BuildContext context, String path, String body) async {
-    final response = await http.post(path, body: body, headers: await _authHeaders(context));
+  Future<Response> performJsonPost(BuildContext context, String path, String body, {bool useAuth = true}) async {
+    final response = await http.post(path, body: body, headers: await _authHeaders(context, useAuth: useAuth));
     await _handleError(context, response);
     return response;
   }
 
-  Future<Response> performJsonPut(BuildContext context, String path, String body) async {
+  Future<Response> performJsonPut(BuildContext context, String path, String body, {bool useAuth: true}) async {
     final response = await http.put(path, body: body, headers: await _authHeaders(context));
     await _handleError(context, response);
     return response;
@@ -36,9 +36,9 @@ abstract class AbstractRestService {
     }
   }
 
-  Future<Response> performJsonDelete(BuildContext context, String path) async {
+  Future<Response> performJsonDelete(BuildContext context, String path, {bool useAuth = true}) async {
     try {
-      final response = await http.delete(path, headers: await _authHeaders(context));
+      final response = await http.delete(path, headers: await _authHeaders(context, useAuth: useAuth));
       await _handleError(context, response);
       return response;
     } on ApiException catch(e) {
