@@ -11,8 +11,8 @@ class GetCountriesResponse {
     list.forEach((v) {
       CountryModel cur = CountryModel(
         v["id"],
-        v["countryCode"],
         v["countryName"],
+        v["countryCode"],
       );
       result.add(cur);
     });

@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:professors/models/country.model.dart';
 import 'package:professors/models/profile/nationality_list_item.model.dart';
 
 part 'nationalities_state.g.dart';
@@ -17,30 +18,22 @@ abstract class _NationalitiesState with Store {
   bool isLoading = false;
 
   @observable
-  ObservableList<NationalityListItemModel> nationalities = ObservableList.of(
-    [
-      NationalityListItemModel(
-        1,
-        'Portuguese',
-        ''
-      ),
-      NationalityListItemModel(
-          2,
-          'English',
-          ''
-      ),
-      NationalityListItemModel(
-          3,
-          'French',
-          ''
-      ),
-    ],
-  );
+  ObservableList<CountryModel> nationalities = ObservableList.of([],);
 
   @action
-  setNationalities(List<NationalityListItemModel> list) {
+  setIsLoading(bool isLoading) {
+    this.isLoading = isLoading;
+  }
+
+  @action
+  setNationalities(List<CountryModel> list) {
     this.nationalities.clear();
     this.nationalities.addAll(list);
+  }
+
+  @action
+  clearNationalities() {
+    this.nationalities.clear();
   }
 
   @action

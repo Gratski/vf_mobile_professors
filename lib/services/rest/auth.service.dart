@@ -30,7 +30,9 @@ class AuthService extends AbstractRestService {
       authStore.setAuthToken(loginRsp.token);
       return loginRsp;
     } on ApiException catch(e) {
-      throw new AuthenticationException(e.cause);
+      throw AuthenticationException(e.cause);
+    } on Exception catch(e) {
+      throw AuthenticationException('Internet Connection Error');
     }
 
   }

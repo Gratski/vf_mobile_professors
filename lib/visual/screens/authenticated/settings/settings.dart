@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/services/dto/auth/signout/signout.dto.dart';
@@ -51,11 +52,18 @@ class SettingsScreen extends StatelessWidget {
                     children: <Widget>[
                       Flexible(
                         flex: 5,
-                        child: CircleAvatar(
-                          maxRadius: MediaQuery.of(context).size.width * 0.15,
-                          backgroundImage: NetworkImage(
-                              'https://img2.goodfon.com/wallpaper/big/9/89/gym-coach-weightlifting-gym.jpg'),
-                        ),
+                        child: Observer(
+                          builder: (_) {
+                            return CircleAvatar(
+                              backgroundColor: AppColors.bgMainColor,
+                              maxRadius: MediaQuery.of(context).size.width * 0.15,
+                              backgroundImage: userStore.pictureUrl != null ? NetworkImage(
+                                  userStore.pictureUrl) : AssetImage(
+                                'assets/images/logo.png'
+                              )
+                            );
+                          },
+                        )
                       ),
                       Flexible(
                         flex: 7,
@@ -66,8 +74,12 @@ class SettingsScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              TextsBuilder.h3Bold(
-                                'Raquel Rodrigues',
+                              Observer(
+                               builder: (_) {
+                                 return TextsBuilder.h3Bold(
+                                  "${userStore.firstName} ${userStore.lastName}",
+                                 );
+                               },
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,

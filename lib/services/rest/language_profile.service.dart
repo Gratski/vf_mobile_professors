@@ -18,7 +18,7 @@ class LanguageProfileService extends AbstractRestService {
     // set loading to true
     generalStore.setIsExistingLanguagesLoading(true);
     try{
-      final rsp = await this.performJsonGet(context, '$REST_URL/professors/me/profile-details');
+      final rsp = await this.performJsonGet(context, '$REST_URL/professors/me/profile-details/existing-languages');
       final languages = GetLanguagesResponse.fromJson(jsonDecode(rsp.body));
 
       // update existing languages in general store

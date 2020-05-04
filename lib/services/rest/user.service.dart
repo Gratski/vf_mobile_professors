@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
 import 'package:professors/services/rest/abstract_rest.service.dart';
+import 'package:professors/store/user/edit_profile_details_state.dart';
 
 class UserService extends AbstractRestService {
 
@@ -19,7 +20,7 @@ class UserService extends AbstractRestService {
       userStore.setLastName(resultMap["lastName"]);
       userStore.setEmail(resultMap["email"]);
       userStore.setGender(resultMap["gender"]);
-      userStore.setBirthday(resultMap["birthday"]);
+      userStore.setBirthday(DateTime.parse(resultMap["birthday"]));
       userStore.setPhoneNumber(resultMap["phoneNumber"]);
       userStore.setCountry(resultMap["nationality"]["id"], resultMap["nationality"]["countryName"]);
 
@@ -45,6 +46,7 @@ class UserService extends AbstractRestService {
       int nationalityCountryId,
       String phoneNumber,
       DateTime birthday) async {
+
     try {
       final rsp = await this.performJsonPut(
         context,
@@ -56,13 +58,16 @@ class UserService extends AbstractRestService {
             "gender": gender,
             "nationalityCountryId": nationalityCountryId,
             "phoneNumber": phoneNumber,
-            "birthday": birthday,
+            "birthday": birthday.millisecondsSinceEpoch,
           },
         ),
       );
       return;
     } on ApiException catch (e) {
       throw e;
+    } on Exception catch(e) {
+      throw e;
     }
+
   }
 }

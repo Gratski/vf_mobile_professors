@@ -5,10 +5,14 @@ import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/constants/settings/personal_details/settings_personal_details.dart';
+import 'package:professors/models/gender.dart';
+import 'package:professors/services/exceptions/api.exception.dart';
+import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/authenticated/settings/personal_details/settings_gender.screen.dart';
 import 'package:professors/visual/screens/authenticated/settings/personal_details/settings_nationality.screen.dart';
 import 'package:professors/store/user/edit_profile_details_state.dart';
 import 'package:professors/visual/styles/colors.dart';
+import 'package:professors/visual/styles/margins.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/styles/sizes.dart';
 import 'package:professors/utils/date_utils.dart';
@@ -59,7 +63,28 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                 ButtonsBuilder.transparentButton(
                   AppLocalizations.of(context)
                       .translate(generalConstants.buttonSaveLabel),
-                  () {},
+                  () {
+                    restServices.getUserService().updateUserPersonalDetails(context,
+                        firstNameController.text,
+                        lastNameController.text,
+                        screenStore.gender == Gender.MALE ? "MALE" : "FEMALE",
+                        screenStore.countryId,
+                        phoneNumberController.text,
+                        screenStore.birthday)
+                        .then((value) {
+                      restServices.getUserService().getUserPersonalDetails(context);
+                      ToasterBuilder.buildSuccessToaster(context, "successfully updated");
+                    })
+                        .catchError((e) {
+                          String msg = "Something went wrong";
+                          if ( e is ApiException ) {
+                            msg = e.cause;
+                          } else {
+                            print(e);
+                          }
+                          ToasterBuilder.buildErrorToaster(context, msg);
+                    });
+                  },
                 ),
               ],
             ),
@@ -95,6 +120,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
 
                         /// LASTNAME
                         Container(
+                          margin: EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
                           child: TextFormField(
                             style: TextStyle(color: AppColors.fontColor),
                             controller: lastNameController,
@@ -108,20 +134,22 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
 
                         /// EMAIL
                         Container(
+                          margin: EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
                           child: TextFormField(
                             style: TextStyle(color: AppColors.fontColor),
                             enabled: false,
                             controller: emailController,
                             onChanged: (value) => screenStore.setFirstName(value),
                             decoration: InputDecoration(
-                              hintText: 'write your first name',
-                              labelText: 'First Name',
+                              hintText: 'write your email',
+                              labelText: 'Email',
                             ),
                           ),
                         ),
 
                         /// PHONE NUMBER
                         Container(
+                          margin: EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
                           child: TextFormField(
                             style: TextStyle(color: AppColors.fontColor),
                             controller: phoneNumberController,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/constants/settings/profile/settings_edit_profile.constants.dart';
@@ -15,15 +16,6 @@ class EditProfileAddNewLanguageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<ListTileModel> listItems = [
-      ListTileModel('Portuguese', () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => EditProfileInLanguageScreen('PT', true)),
-        );
-      }),
-    ];
-
     return Scaffold(
       body: CustomScrollView(
         key: Key('security_definitions_list'),
@@ -48,15 +40,18 @@ class EditProfileAddNewLanguageScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => EditProfileInLanguageScreen('PT', true)),
+                      MaterialPageRoute(builder: (context) => EditProfileInLanguageScreen(
+                          generalStore.availableLanguages[index].id,
+                          generalStore.availableLanguages[index].designation,
+                          true)),
                     );
                   },
                   child: RegularListTile(
-                    label: listItems[index].label,
+                    label: generalStore.availableLanguages[index].designation,
                   ),
                 );
               },
-              childCount: listItems.length,
+              childCount: generalStore.availableLanguages.length,
             ),
           )
         ],

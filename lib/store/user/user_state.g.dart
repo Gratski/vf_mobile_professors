@@ -182,6 +182,16 @@ mixin _$UserState on _UserState, Store {
   final _$_UserStateActionController = ActionController(name: '_UserState');
 
   @override
+  dynamic setIsLoading(bool isLoading) {
+    final _$actionInfo = _$_UserStateActionController.startAction();
+    try {
+      return super.setIsLoading(isLoading);
+    } finally {
+      _$_UserStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setFirstName(String firstName) {
     final _$actionInfo = _$_UserStateActionController.startAction();
     try {

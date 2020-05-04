@@ -10,10 +10,11 @@ import 'package:professors/visual/widgets/structural/header/custom_app_bar.widge
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class EditProfileInLanguageScreen extends StatelessWidget {
-  final String languageCode;
+  final int languageId;
+  final String languageName;
   final bool isAdding; /// true when the user is adding a new language to his/her profile
 
-  EditProfileInLanguageScreen(this.languageCode, this.isAdding);
+  EditProfileInLanguageScreen(this.languageId, this.languageName, this.isAdding);
 
   @override
   Widget build(BuildContext context) {

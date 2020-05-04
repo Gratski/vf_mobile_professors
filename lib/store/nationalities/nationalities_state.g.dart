@@ -29,14 +29,14 @@ mixin _$NationalitiesState on _NationalitiesState, Store {
   final _$nationalitiesAtom = Atom(name: '_NationalitiesState.nationalities');
 
   @override
-  ObservableList<NationalityListItemModel> get nationalities {
+  ObservableList<CountryModel> get nationalities {
     _$nationalitiesAtom.context.enforceReadPolicy(_$nationalitiesAtom);
     _$nationalitiesAtom.reportObserved();
     return super.nationalities;
   }
 
   @override
-  set nationalities(ObservableList<NationalityListItemModel> value) {
+  set nationalities(ObservableList<CountryModel> value) {
     _$nationalitiesAtom.context.conditionallyRunInAction(() {
       super.nationalities = value;
       _$nationalitiesAtom.reportChanged();
@@ -47,10 +47,30 @@ mixin _$NationalitiesState on _NationalitiesState, Store {
       ActionController(name: '_NationalitiesState');
 
   @override
-  dynamic setNationalities(List<NationalityListItemModel> list) {
+  dynamic setIsLoading(bool isLoading) {
+    final _$actionInfo = _$_NationalitiesStateActionController.startAction();
+    try {
+      return super.setIsLoading(isLoading);
+    } finally {
+      _$_NationalitiesStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setNationalities(List<CountryModel> list) {
     final _$actionInfo = _$_NationalitiesStateActionController.startAction();
     try {
       return super.setNationalities(list);
+    } finally {
+      _$_NationalitiesStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic clearNationalities() {
+    final _$actionInfo = _$_NationalitiesStateActionController.startAction();
+    try {
+      return super.clearNationalities();
     } finally {
       _$_NationalitiesStateActionController.endAction(_$actionInfo);
     }

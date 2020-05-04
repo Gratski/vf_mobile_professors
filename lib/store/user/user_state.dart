@@ -15,7 +15,7 @@ class UserState extends _UserState with _$UserState {
 // The store-class
 abstract class _UserState with Store {
   @observable
-  bool isLoading = false;
+  bool isLoading = true;
 
   @observable
   String firstName = "Joao";

@@ -15,9 +15,15 @@ abstract class AbstractRestService {
   String REST_URL = "http://192.168.1.103:2222/api/v1";
 
   Future<Response> performJsonPost(BuildContext context, String path, String body, {bool useAuth = true}) async {
-    final response = await http.post(path, body: body, headers: await _authHeaders(context, useAuth: useAuth));
-    await _handleError(context, response);
-    return response;
+    try {
+      final response = await http.post(path, body: body, headers: await _authHeaders(context, useAuth: useAuth));
+      await _handleError(context, response);
+      return response;
+    } on ApiException catch(e) {
+      throw e;
+    } on Exception catch(e) {
+      throw ApiException("Internet Error");
+    }
   }
 
   Future<Response> performJsonPut(BuildContext context, String path, String body, {bool useAuth: true}) async {
@@ -52,7 +58,7 @@ abstract class AbstractRestService {
     if( response.statusCode >= 400 ) {
 
       // not authenticated
-      if ( response.statusCode == 401 || response.statusCode == 403 || response.statusCode == 405 ) {
+      if ( response.statusCode == 401 || response.statusCode == 403 ) {
         await restServices.getAuthRestService().signOut();
         Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
       }
@@ -66,7 +72,7 @@ abstract class AbstractRestService {
   Future<Map<String, String>> _authHeaders(BuildContext context, {bool useAuth = true}) async {
     Map<String, String> map = {
       "content-type": "application/json",
-      //"Accept-Language": LocalizationConfig.extractCurrentLocale(context).languageCode,
+      "Accept-Language": LocalizationConfig.extractCurrentLocale(context).languageCode,
     };
 
     if ( useAuth ) {

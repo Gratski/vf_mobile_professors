@@ -1,3 +1,4 @@
+import 'package:after_init/after_init.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
@@ -9,13 +10,18 @@ import 'package:professors/visual/widgets/structural/header/app_header.widget.da
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/visual/widgets/structural/lists/regular_list_tile.dart';
 
-class SettingsNationalityScreen extends StatelessWidget {
-
-  final GeneralConstants generalConstants = GeneralConstants();
-  final NationalityScreenConstants screenConstants = NationalityScreenConstants();
+class SettingsNationalityScreen extends StatefulWidget {
 
   EditProfileDetailsState screenStore;
   SettingsNationalityScreen(this.screenStore);
+
+  @override
+  _SettingsNationalityScreen createState() => _SettingsNationalityScreen();
+}
+
+class _SettingsNationalityScreen extends State<SettingsNationalityScreen> with AfterInitMixin<SettingsNationalityScreen> {
+  final GeneralConstants generalConstants = GeneralConstants();
+  final NationalityScreenConstants screenConstants = NationalityScreenConstants();
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +41,15 @@ class SettingsNationalityScreen extends StatelessWidget {
                 return SliverList(
                   delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
                     return RegularListTile(
-                      label: nationalitiesStore.nationalities[index].designation,
+                      label: nationalitiesStore.nationalities[index].countryName,
                       callback: () {
-                        screenStore.setCountry(
+                        widget.screenStore.setCountry(
                             nationalitiesStore.nationalities[index].id,
-                            nationalitiesStore.nationalities[index].designation);
+                            nationalitiesStore.nationalities[index].countryName);
                         Navigator.pop(context);
                       },
-                      selected: nationalitiesStore.nationalities[index].id == screenStore.countryId,
-                      hideTrailing: nationalitiesStore.nationalities[index].id != screenStore.countryId,
+                      selected: nationalitiesStore.nationalities[index].id == widget.screenStore.countryId,
+                      hideTrailing: nationalitiesStore.nationalities[index].id != widget.screenStore.countryId,
                     );
                   },
                     childCount: nationalitiesStore.nationalities.length,
@@ -55,5 +61,16 @@ class SettingsNationalityScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void didInitState() {
+    restServices.getCountriesService().getCountries(context);
+  }
+
+  @override
+  void dispose() {
+    nationalitiesStore.clearNationalities();
+    super.dispose();
   }
 }
