@@ -66,6 +66,10 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
             AppHeaderWidget(
               AppLocalizations.of(context).translate(screenConstants.topHeader),
             ),
+
+            // show only if is not loading
+
+
             // fields to edit
             SliverList(
               key: GlobalKey(),

@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:professors/globals/global_vars.dart';
+import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/localization.config.dart';
 import 'package:professors/services/dto/errors/http_error.dto.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
+import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AbstractRestService {
@@ -24,23 +26,33 @@ abstract class AbstractRestService {
     return response;
   }
 
-  Future<Response> performJsonGet(BuildContext context, String path) async {
-    final response = await http.get(path, headers: await _authHeaders(context));
-    await _handleError(context, response);
-    return response;
+  Future<Response> performJsonGet(BuildContext context, String path, {bool useAuth = true}) async {
+    try {
+      final response = await http.get(path, headers: await _authHeaders(context, useAuth: useAuth));
+      await _handleError(context, response);
+      return response;
+    } on Exception catch(e) {
+      print("");
+    }
   }
 
   Future<Response> performJsonDelete(BuildContext context, String path) async {
-    final response = await http.delete(path, headers: await _authHeaders(context));
-    await _handleError(context, response);
-    return response;
+    try {
+      final response = await http.delete(path, headers: await _authHeaders(context));
+      await _handleError(context, response);
+      return response;
+    } on ApiException catch(e) {
+      throw e;
+    } on Exception catch(e) {
+      ToasterBuilder.buildErrorToaster(context, "Internet Connection Error");
+    }
   }
 
   Future<void> _handleError(BuildContext context, Response response ) async {
     if( response.statusCode >= 400 ) {
 
       // not authenticated
-      if ( response.statusCode == 401 || response.statusCode == 403 ) {
+      if ( response.statusCode == 401 || response.statusCode == 403 || response.statusCode == 405 ) {
         await restServices.getAuthRestService().signOut();
         Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
       }
@@ -51,18 +63,24 @@ abstract class AbstractRestService {
     return;
   }
 
-  Future<Map<String, String>> _authHeaders(BuildContext context) async {
-    String token = "";
-    if (authStore.authToken == null || authStore.authToken.isEmpty) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      token = prefs.getString("authToken") ?? "";
-    } else {
-      token = authStore.authToken;
-    }
-    return {
+  Future<Map<String, String>> _authHeaders(BuildContext context, {bool useAuth = true}) async {
+    Map<String, String> map = {
       "content-type": "application/json",
-      "Accept-Language": LocalizationConfig.extractCurrentLocale(context).languageCode,
-      "Authorization": "Bearer $token"
+      //"Accept-Language": LocalizationConfig.extractCurrentLocale(context).languageCode,
     };
+
+    if ( useAuth ) {
+      String token = "";
+      if (authStore.authToken == null || authStore.authToken.isEmpty) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        token = prefs.getString("authToken") ?? "";
+      } else {
+        token = authStore.authToken;
+      }
+      if ( token != null && token.isNotEmpty ) {
+        map["Authorization"] = "Bearer $token";
+      }
+    }
+    return map;
   }
 }

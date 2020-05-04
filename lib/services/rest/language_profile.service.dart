@@ -11,11 +11,14 @@ import 'package:professors/services/rest/abstract_rest.service.dart';
 
 class LanguageProfileService extends AbstractRestService {
 
+  ///
+  /// Gets all existing profile languages for the professor
+  ///
   Future<void> getExistingProfileLanguages(BuildContext context) async {
     // set loading to true
     generalStore.setIsExistingLanguagesLoading(true);
     try{
-      final rsp = await this.performJsonGet(context, '$REST_URL/professors/profile-details');
+      final rsp = await this.performJsonGet(context, '$REST_URL/professors/me/profile-details');
       final languages = GetLanguagesResponse.fromJson(jsonDecode(rsp.body));
 
       // update existing languages in general store
@@ -29,11 +32,14 @@ class LanguageProfileService extends AbstractRestService {
     }
   }
 
+  ///
+  /// Gets all available profile languages for the professor
+  ///
   Future<void> getAvailableProfileLanguages(BuildContext context) async {
     // set loading to true
     generalStore.setIsAvailableLanguagesLoading(true);
     try{
-      final rsp = await this.performJsonGet(context, '$REST_URL/professors/profile-details/available-languages');
+      final rsp = await this.performJsonGet(context, '$REST_URL/professors/me/profile-details/available-languages');
       final languages = GetLanguagesResponse.fromJson(jsonDecode(rsp.body));
 
       // update available languages in general store
@@ -52,7 +58,7 @@ class LanguageProfileService extends AbstractRestService {
       String description, String quote) async {
     CreateLanguageProfileRequest req = CreateLanguageProfileRequest(languageId, description, description, quote);
     try {
-      final rsp =  await this.performJsonPost(context, '$REST_URL/professors/profile-details', req.toJson());
+      final rsp =  await this.performJsonPost(context, '$REST_URL/professors/me/profile-details', req.toJson());
       return CreateOperationResponse.fromJson(jsonDecode(rsp.body));
     } on ApiException catch(e) {
       throw e;

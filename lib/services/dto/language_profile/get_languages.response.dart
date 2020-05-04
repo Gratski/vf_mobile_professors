@@ -4,12 +4,11 @@ class GetLanguagesResponse {
 
   List<LanguageModel> languages;
   GetLanguagesResponse.fromJson(Map<String, dynamic> map) {
-    this.languages = this.mapper(map);
+    this.languages = this.mapper(map["items"]);
   }
 
   @override
-  List<LanguageModel> mapper(Map<String, dynamic> map) {
-    List<Map<String, dynamic>> list = map["items"];
+  List<LanguageModel> mapper(List<dynamic> list) {
     List<LanguageModel> result = List.of([]);
     list.forEach(
       (elem) {

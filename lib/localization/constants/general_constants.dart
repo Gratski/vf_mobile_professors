@@ -1,4 +1,6 @@
 class GeneralConstants {
+  String get internetConnectionText => "GENERAL_INTERNET_CONNECTION_ERROR";
+
   String get buttonSaveLabel => "GENERAL_ACTIONS_SAVE_LABEL";
 
   String get genderMaleLabel => "GENERAL_LABELS_GENDER_MALE";

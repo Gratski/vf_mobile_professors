@@ -13,6 +13,7 @@
   "DATE_MONTH_11": "November",
   "DATE_MONTH_12": "December",
 
+  "GENERAL_INTERNET_CONNECTION_ERROR": "Verify your Internet Connection",
   "GENERAL_ACTIONS_SAVE_LABEL": "SAVE",
   "GENERAL_LABELS_GENDER_MALE": "Male",
   "GENERAL_LABELS_GENDER_FEMALE": "Female",

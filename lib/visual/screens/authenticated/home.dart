@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
+import 'package:professors/lifecycle_events.handler.dart';
 import 'package:professors/visual/screens/authenticated/abstract_authenticated_stfl.screen.dart';
 import 'package:professors/visual/screens/authenticated/classes/classes.screen.dart';
 import 'package:professors/visual/screens/authenticated/settings/settings.dart';
 
 class HomeScreen extends AuthenticatedStatefulScreen {
-
   List<Widget> screens = [
     SettingsScreen(),
     ClassesScreen(),
@@ -68,5 +68,19 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    restServices
+        .getLanguageProfileService()
+        .getAvailableProfileLanguages(context)
+        .then(
+          (value) => print("ok"),
+        )
+        .catchError((e) {
+      print(e.cause ?? "error");
+    });
   }
 }
