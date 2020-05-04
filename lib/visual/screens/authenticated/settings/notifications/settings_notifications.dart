@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/settings/notifications/settings_notifications_constants.dart';
+import 'package:professors/models/notification_preference_type.model.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
@@ -47,7 +48,7 @@ class SettingsNotificationsScreen extends StatelessWidget {
                                       builder: (_) {
                                         return CupertinoSwitch(
                                           value: notificationsStore.messageNotificationsActive,
-                                          onChanged: (newValue) => notificationsStore.setMessageNotificationsActive(newValue),
+                                          onChanged: (newValue) => restServices.getUserService().toggleUserNotificationPreference(context, NotificationPreferenceTypeModel.GENERAL, notificationsStore.messageNotificationsActive),
                                         );
                                       },
                                     ),
@@ -89,7 +90,7 @@ class SettingsNotificationsScreen extends StatelessWidget {
                                         builder: (_) {
                                           return CupertinoSwitch(
                                             value: notificationsStore.reminderNotificationsActive,
-                                            onChanged: (newValue) => notificationsStore.setReminderNotificationsActive(newValue),
+                                            onChanged: (newValue) => restServices.getUserService().toggleUserNotificationPreference(context, NotificationPreferenceTypeModel.REMINDER, notificationsStore.reminderNotificationsActive),
                                           );
                                         },
                                       ),
@@ -131,7 +132,7 @@ class SettingsNotificationsScreen extends StatelessWidget {
                                         builder: (_) {
                                           return CupertinoSwitch(
                                             value: notificationsStore.supportNotificationsActive,
-                                            onChanged: (newValue) => notificationsStore.setSupportNotificationsActive(newValue),
+                                            onChanged: (newValue) => restServices.getUserService().toggleUserNotificationPreference(context, NotificationPreferenceTypeModel.SYSTEM, notificationsStore.supportNotificationsActive),
                                           );
                                         },
                                       ),

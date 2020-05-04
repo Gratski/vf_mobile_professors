@@ -75,5 +75,6 @@ class _HomeScreenState extends State<HomeScreen> with AfterInitMixin<HomeScreen>
     restServices.getLanguageProfileService().getAvailableProfileLanguages(context);
     restServices.getLanguageProfileService().getExistingProfileLanguages(context);
     restServices.getUserService().getUserPersonalDetails(context);
+    restServices.getUserService().getUserNotificationPreferences(context);
   }
 }

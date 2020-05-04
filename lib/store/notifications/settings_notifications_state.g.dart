@@ -9,6 +9,23 @@ part of 'settings_notifications_state.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SettingsNotificationsState on _SettingsNotificationsState, Store {
+  final _$isLoadingAtom = Atom(name: '_SettingsNotificationsState.isLoading');
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.context.enforceReadPolicy(_$isLoadingAtom);
+    _$isLoadingAtom.reportObserved();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.context.conditionallyRunInAction(() {
+      super.isLoading = value;
+      _$isLoadingAtom.reportChanged();
+    }, _$isLoadingAtom, name: '${_$isLoadingAtom.name}_set');
+  }
+
   final _$messageNotificationsActiveAtom =
       Atom(name: '_SettingsNotificationsState.messageNotificationsActive');
 
@@ -71,6 +88,17 @@ mixin _$SettingsNotificationsState on _SettingsNotificationsState, Store {
 
   final _$_SettingsNotificationsStateActionController =
       ActionController(name: '_SettingsNotificationsState');
+
+  @override
+  dynamic setIsLoading(bool isLoading) {
+    final _$actionInfo =
+        _$_SettingsNotificationsStateActionController.startAction();
+    try {
+      return super.setIsLoading(isLoading);
+    } finally {
+      _$_SettingsNotificationsStateActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic setMessageNotificationsActive(bool newValue) {
