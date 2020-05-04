@@ -8,6 +8,13 @@ class AppPaddings {
         right: MediaQuery.of(context).size.width * 0.03);
   }
 
+  static EdgeInsets regularWithBottomPadding(BuildContext context){
+    return EdgeInsets.only(
+        left: MediaQuery.of(context).size.width * 0.03,
+        right: MediaQuery.of(context).size.width * 0.03,
+        bottom: MediaQuery.of(context).size.width * 0.03);
+  }
+
   static EdgeInsets regularAllPadding(BuildContext context){
     return EdgeInsets.only(
         left: MediaQuery.of(context).size.width * 0.05,

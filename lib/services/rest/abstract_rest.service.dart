@@ -54,6 +54,12 @@ abstract class AbstractRestService {
     }
   }
 
+  Future<void> handleUnknownError(BuildContext context) async {
+    // TODO: Localize this
+    ToasterBuilder.buildErrorToaster(context, "Something went wrong");
+    return;
+  }
+
   Future<void> _handleError(BuildContext context, Response response ) async {
     if( response.statusCode >= 400 ) {
 
@@ -88,5 +94,9 @@ abstract class AbstractRestService {
       }
     }
     return map;
+  }
+
+  decodeBody(Response rsp) {
+    return jsonDecode(Utf8Decoder().convert(rsp.bodyBytes));
   }
 }

@@ -9,6 +9,7 @@ import 'package:professors/store/navigation/nav_state.dart';
 import 'package:professors/store/notifications/notifications_state.dart';
 import 'package:professors/store/notifications/settings_notifications_state.dart';
 import 'package:professors/store/payments/settings_payments_state.dart';
+import 'package:professors/store/profile_details_state.dart';
 import 'package:professors/store/support/support_contact_state.dart';
 import 'package:professors/store/transactions/transactions_history_state.dart';
 import 'package:professors/store/user/user_state.dart';
@@ -18,6 +19,7 @@ import 'package:professors/store/user/user_wallet_state.dart';
 final restServices = RestServices();
 
 final userStore = UserState();
+final profileDetailsStore = ProfileDetailsState();
 final userWallet = UserWalletState();
 
 final navStore = NavState();

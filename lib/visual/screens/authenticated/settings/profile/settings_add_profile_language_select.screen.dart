@@ -38,12 +38,13 @@ class EditProfileAddNewLanguageScreen extends StatelessWidget {
                   (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
+
+                    profileDetailsStore.setIsLoading(true);
+                    profileDetailsStore.setId(null);
+
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => EditProfileInLanguageScreen(
-                          generalStore.availableLanguages[index].id,
-                          generalStore.availableLanguages[index].designation,
-                          true)),
+                      MaterialPageRoute(builder: (context) => EditProfileInLanguageScreen(generalStore.availableLanguages[index].id),),
                     );
                   },
                   child: RegularListTile(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
@@ -18,8 +19,8 @@ class ProfessorAvatarWidget extends StatelessWidget {
           Container(
             child: CircleAvatar(
               maxRadius: MediaQuery.of(context).size.width * 0.20,
-              backgroundColor: Colors.black,
-              backgroundImage: NetworkImage(pictureUrl),
+              backgroundColor: AppColors.bgMainColor,
+              backgroundImage: (pictureUrl != null) ? NetworkImage(pictureUrl) : AssetImage('assets/images/logo.png'),
             ),
           ),
 
