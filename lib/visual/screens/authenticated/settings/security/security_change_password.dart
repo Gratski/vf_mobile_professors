@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/settings/security/settings_security_constants.dart';
+import 'package:professors/store/security/change_password_state.dart';
+import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/styles/padding.dart';
+import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
@@ -17,6 +22,14 @@ class ChangePasswordScreen extends StatefulWidget {
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   /// Constants for translations
   final SettingsSecurityConstants screenConstants = SettingsSecurityConstants();
+
+  /// store
+  final ChangePasswordState store = ChangePasswordState();
+
+  /// controllers
+  final TextEditingController oldPasswordController = TextEditingController();
+  final TextEditingController newPasswordController = TextEditingController();
+  final TextEditingController newPasswordRepeatController = TextEditingController();
 
   List<ListTileModel> listItems;
 
@@ -43,37 +56,50 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           AppHeaderWidget(AppLocalizations.of(context)
               .translate(screenConstants.changePasswordTopHeader)),
 
-          SliverToBoxAdapter(
-            child: Container(
-              padding: AppPaddings.regularPadding(context),
-              child: Form(
-                child: ListView(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: <Widget>[
-                    /// Old Password
-                    InputTextWidget(AppLocalizations.of(context)
-                        .translate(screenConstants.changePasswordOldLabel)),
+                SliverToBoxAdapter(
+                  child: Container(
+                    padding: AppPaddings.regularPadding(context),
+                    child: Form(
+                      child: ListView(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: <Widget>[
+                          /// Old Password
+                          InputTextWidget(AppLocalizations.of(context)
+                              .translate(screenConstants.changePasswordOldLabel), oldPasswordController),
 
-                    /// New Password
-                    InputTextWidget(AppLocalizations.of(context)
-                        .translate(screenConstants.changePasswordNewLabel)),
+                          /// New Password
+                          InputTextWidget(AppLocalizations.of(context)
+                              .translate(screenConstants.changePasswordNewLabel), newPasswordController),
 
-                    /// New Password Repeat
-                    InputTextWidget(AppLocalizations.of(context).translate(
-                        screenConstants.changePasswordNewRepeatLabel)),
+                          /// New Password Repeat
+                          InputTextWidget(AppLocalizations.of(context).translate(
+                              screenConstants.changePasswordNewRepeatLabel), newPasswordRepeatController),
 
-                    /// Change Button
-                    ButtonsBuilder.redFlatButton(
-                      AppLocalizations.of(context)
-                          .translate(screenConstants.changePasswordButtonLabel),
-                      () {},
+                          /// Change Button
+                          ButtonsBuilder.redFlatButton(
+                            AppLocalizations.of(context)
+                                .translate(screenConstants.changePasswordButtonLabel),
+                                () {
+                              store.setIsLoading(true);
+                              restServices.getSecurityService().changePassword(
+                                  context,
+                                  oldPasswordController.text,
+                                  newPasswordController.text).then((_){
+
+                              }).catchError((e) {
+                                ToasterBuilder.buildErrorToaster(context, e.cause);
+                              }).whenComplete((){
+                                store.setIsLoading(false);
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ),
+
         ],
       ),
     );

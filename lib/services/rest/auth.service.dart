@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart' as http;
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/services/dto/auth/password_recovery/password_recovery.request.dart';
 import 'package:professors/services/dto/auth/password_recovery/password_recovery.response.dart';
