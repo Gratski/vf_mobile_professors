@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/settings/security/settings_security_constants.dart';
 import 'package:professors/store/security/change_password_state.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/styles/padding.dart';
-import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
@@ -86,7 +84,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   context,
                                   oldPasswordController.text,
                                   newPasswordController.text).then((_){
-
+                                ToasterBuilder.buildSuccessToaster(context, "Password Changed");
+                                setState(() {
+                                  oldPasswordController.text = "";
+                                  newPasswordController.text = "";
+                                  newPasswordRepeatController.text = "";
+                                });
                               }).catchError((e) {
                                 ToasterBuilder.buildErrorToaster(context, e.cause);
                               }).whenComplete((){
@@ -103,5 +106,19 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         ],
       ),
     );
+  }
+
+  _changePassword() {
+    restServices.getSecurityService().changePassword(context,
+        oldPasswordController.text,
+        newPasswordController.text).then((value) {
+          ToasterBuilder.buildSuccessToaster(context, "Password Changed");
+          setState(() {
+            oldPasswordController.text = "";
+            newPasswordController.text = "";
+          });
+    }).catchError((e) {
+      ToasterBuilder.buildErrorToaster(context, e.cause);
+    });
   }
 }

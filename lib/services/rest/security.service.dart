@@ -10,7 +10,7 @@ class SecurityService extends AbstractRestService {
     try {
       await performJsonPost(
         context,
-        '$REST_URL/users/change-password',
+        '$REST_URL/auth/me/change-password',
         jsonEncode(
           {"oldPassword": oldPassword, "newPassword": newPassword},
         ),
