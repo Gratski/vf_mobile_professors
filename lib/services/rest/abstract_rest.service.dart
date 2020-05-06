@@ -69,6 +69,9 @@ abstract class AbstractRestService {
     }
   }
 
+  ////////////////////////////////////////
+// Error Handlers
+////////////////////////////////////////
   Future<void> handleUnknownError(BuildContext context) async {
     // TODO: Localize this
     ToasterBuilder.buildErrorToaster(context, "Something went wrong");
@@ -89,9 +92,9 @@ abstract class AbstractRestService {
     return;
   }
 
-  ////////////////////////////////////////
-  // Helpers
-  ////////////////////////////////////////
+////////////////////////////////////////
+// Helpers
+////////////////////////////////////////
   Future<Map<String, String>> _authHeaders(BuildContext context, {bool useAuth = true}) async {
     Map<String, String> map = {
       "content-type": "application/json",
@@ -113,9 +116,24 @@ abstract class AbstractRestService {
     return map;
   }
 
+  decodeBody(Response rsp) {
+    String jsonStr = Utf8Decoder().convert(rsp.bodyBytes);
+    if (jsonStr == null || jsonStr.isEmpty) {
+      return {};
+    }
+    return jsonDecode(jsonStr);
+  }
+
+  decodeBodyPayload(String rsp) {
+    return jsonDecode(rsp);
+  }
+
+////////////////////////////////////////
+// Cache Handlers
+////////////////////////////////////////
   Future<String> fetchFromCache(String url) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    dynamic cachedContent = prefs.getString(url);
+    String cachedContent = prefs.getString(url);
     if ( cachedContent != null ) {
       return cachedContent;
     } else {
@@ -125,15 +143,11 @@ abstract class AbstractRestService {
 
   Future<void> updateCache(String url, Response rsp) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(url, decodeBody(rsp));
+    prefs.setString(url, jsonEncode(decodeBody(rsp)));
     return;
   }
 
-  decodeBody(Response rsp) {
-    return jsonDecode(Utf8Decoder().convert(rsp.bodyBytes));
-  }
-
-  enumToString(dynamic e) {
+  String enumToString(dynamic e) {
     return '${e.toString().substring(e.toString().indexOf('.')+1)}';
   }
 }
