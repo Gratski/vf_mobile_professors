@@ -37,4 +37,3 @@ final paymentsStore = SettingsPaymentsState();
 final supportStore = SupportContactState();
 final feedNotificationsStore = NotificationsState();
 final classesStore = ClassesState(); // Classes Store
-final nationalitiesStore = NationalitiesState(); // Nationalities

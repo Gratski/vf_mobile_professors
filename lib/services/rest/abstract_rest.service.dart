@@ -14,33 +14,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class AbstractRestService {
   String REST_URL = "http://192.168.1.103:2222/api/v1";
 
-  Future<Response> performJsonPost(BuildContext context, String path, String body, {bool useAuth = true}) async {
-    try {
-      final response = await http.post(path, body: body, headers: await _authHeaders(context, useAuth: useAuth));
-      await _handleError(context, response);
-      return response;
-    } on ApiException catch(e) {
-      throw e;
-    } on Exception catch(e) {
-      throw ApiException("Internet Error");
-    }
-  }
-
-  Future<Response> performJsonPut(BuildContext context, String path, String body, {bool useAuth: true}) async {
-    final response = await http.put(path, body: body, headers: await _authHeaders(context));
-    await _handleError(context, response);
-    return response;
-  }
-
-  Future<Response> performJsonGet(BuildContext context, String path, {bool useAuth = true, bool useCache = false}) async {
+  ///
+  /// Perform GET
+  ///
+  Future<Map<String, dynamic>> performJsonGet(BuildContext context, String path, {bool useAuth = true, bool useCache = false}) async {
     try {
 
       // check cache
       if (useCache) {
-       final cachedContent = await fetchFromCache(path);
-       if (cachedContent != null && cachedContent.isNotEmpty) {
-         return Response(cachedContent, 200);
-       }
+        final cachedContent = await fetchFromCache(path);
+        if (cachedContent != null) {
+          return cachedContent;
+        }
       }
 
       final response = await http.get(path, headers: await _authHeaders(context, useAuth: useAuth));
@@ -51,13 +36,46 @@ abstract class AbstractRestService {
         updateCache(path, response);
       }
 
-      return response;
+      return decodeBody(response);
     } on Exception catch(e) {
       print("");
     }
   }
 
-  Future<Response> performJsonDelete(BuildContext context, String path, {bool useAuth = true}) async {
+  ///
+  /// Perform POST
+  ///
+  Future<Map<String, dynamic>> performJsonPost(BuildContext context, String path, String body, {bool useAuth = true}) async {
+    try {
+      final response = await http.post(path, body: body, headers: await _authHeaders(context, useAuth: useAuth));
+      await _handleError(context, response);
+      return decodeBody(response);
+    } on ApiException catch(e) {
+      throw e;
+    } on Exception catch(e) {
+      throw ApiException("Internet Error");
+    }
+  }
+
+  ///
+  /// Perform PUT
+  ///
+  Future<void> performJsonPut(BuildContext context, String path, String body, {bool useAuth: true}) async {
+    try {
+      final response = await http.put(path, body: body, headers: await _authHeaders(context));
+      await _handleError(context, response);
+      return decodeBody(response);
+    } on ApiException catch(e) {
+      throw e;
+    } on Exception catch(_) {
+      throw ApiException("Internet Error");
+    }
+  }
+
+  ///
+  /// Perform DELETE
+  ///
+  Future<void> performJsonDelete(BuildContext context, String path, {bool useAuth = true}) async {
     try {
       final response = await http.delete(path, headers: await _authHeaders(context, useAuth: useAuth));
       await _handleError(context, response);
@@ -135,7 +153,7 @@ abstract class AbstractRestService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String cachedContent = prefs.getString(url);
     if ( cachedContent != null ) {
-      return cachedContent;
+      return decodeBodyPayload(cachedContent);
     } else {
       return null;
     }
