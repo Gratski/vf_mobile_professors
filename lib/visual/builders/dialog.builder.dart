@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:professors/visual/widgets/dialogs/comment_options.dialog.dart';
+import 'package:professors/visual/widgets/dialogs/edit_payment_method.dialog.dart';
 import 'package:professors/visual/widgets/dialogs/unavailable_operation.dialog.dart';
 
 class DialogsBuilder {
@@ -18,6 +19,13 @@ class DialogsBuilder {
     showDialog(
       context: context,
       builder: (BuildContext context) => CommentOptionsDialog(),
+    );
+  }
+
+  editPaymenMethodDialog(VoidCallback makeDefaultCallback, VoidCallback deleteCallback) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => EditPaymentMethodDialog(makeDefaultCallback, deleteCallback),
     );
   }
 

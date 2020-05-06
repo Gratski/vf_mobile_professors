@@ -4,6 +4,7 @@ import 'package:professors/services/rest/language_profile.service.dart';
 import 'package:professors/services/rest/profile_details.service.dart';
 import 'package:professors/services/rest/security.service.dart';
 import 'package:professors/services/rest/user.service.dart';
+import 'package:professors/services/rest/wallet.service.dart';
 
 class RestServices {
 
@@ -47,6 +48,13 @@ class RestServices {
   ///
   LanguageProfileService getLanguageProfileService() {
     return LanguageProfileService();
+  }
+
+  ///
+  /// Gets the wallet service
+  ///
+  WalletService getWalletService() {
+    return WalletService();
   }
 
 }

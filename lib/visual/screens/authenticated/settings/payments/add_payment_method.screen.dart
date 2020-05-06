@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/settings/payments/payments_constants.dart';
 import 'package:professors/models/payments/accounts/PaymentAccountListItem.dart';
+import 'package:professors/store/payments/add_payment_method_state.dart';
+import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
+import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
@@ -15,6 +20,9 @@ class AddPaymentMethodScreen extends StatelessWidget {
 
   // input controllers
   TextEditingController emailController = TextEditingController();
+
+  // screen state
+  AddPaymentMethodState screenStore = AddPaymentMethodState();
 
   @override
   Widget build(BuildContext context) {
@@ -57,31 +65,34 @@ class AddPaymentMethodScreen extends StatelessWidget {
                         ),
 
                         /// BUTTON
-                        Container(
-                          margin: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height / 15),
-                          child: ButtonsBuilder.redFlatButton(
-                            AppLocalizations.of(context).translate(
-                                screenConstants.addPaymentMethodEmailAddButton),
-                            () {
-                              userWallet.addAccount(PaymentAccountListItem(
-                                email: emailController.text,
-                                isDefault: false
-                              ),);
-                              int counter = 0;
-                              Navigator.popUntil(
-                                context,
-                                (route) {
-                                  if (counter == 2) {
-                                    return true;
-                                  } else {
-                                    counter++;
-                                    return false;
-                                  }
-                                },
+                        Observer(
+                          builder: (_) {
+                            //
+                            if ( screenStore.isLoading ) {
+                              return DefaultLoaderWidget();
+
+                            } else {
+                              return Container(
+                                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 15),
+                                child: ButtonsBuilder.redFlatButton(
+                                  AppLocalizations.of(context).translate(
+                                      screenConstants.addPaymentMethodEmailAddButton),
+                                      () {
+                                    screenStore.setIsLoading(true);
+                                    restServices.getWalletService().createPaymentMethod(context, emailController.text)
+                                    .then((value){
+                                      restServices.getWalletService().getPaymentMethods(context);
+                                      ToasterBuilder.buildSuccessToaster(context, "Payment Method Created");
+                                      _goBackToPaymentMethodsList(context);
+                                    }).catchError((e){
+                                      ToasterBuilder.buildErrorToaster(context, e.cause);
+                                    }).whenComplete(() => screenStore.setIsLoading(false));
+                                  },
+                                ),
                               );
-                            },
-                          ),
+                            }
+
+                          },
                         ),
                       ],
                     ),
@@ -92,6 +103,21 @@ class AddPaymentMethodScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  _goBackToPaymentMethodsList(BuildContext context) {
+    int counter = 0;
+    Navigator.popUntil(
+      context,
+          (route) {
+        if (counter == 2) {
+          return true;
+        } else {
+          counter++;
+          return false;
+        }
+      },
     );
   }
 }
