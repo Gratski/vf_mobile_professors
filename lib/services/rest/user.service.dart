@@ -83,7 +83,7 @@ class UserService extends AbstractRestService {
 
     try {
       String path = '$REST_URL/users/me/notification-preferences/'
-          '${type.toString().substring(type.toString().indexOf('.')+1)}/${ isActive ? 'disable' : 'enable' }';
+          '${enumToString(type)}/${ isActive ? 'disable' : 'enable' }';
       final rsp = await performJsonPost(context, path, jsonEncode({}));
       getUserNotificationPreferences(context);
       return;
