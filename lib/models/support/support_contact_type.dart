@@ -1,3 +1,3 @@
-enum SupportContactType {
+enum SupportContactTypeModel {
   PAYMENTS, CLASSES, ACCOUNT, CALENDAR, OTHER
 }

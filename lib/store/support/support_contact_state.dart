@@ -13,10 +13,10 @@ class SupportContactState extends _SupportContactState with _$SupportContactStat
 abstract class _SupportContactState with Store {
 
   @observable
-  SupportContactType supportType = SupportContactType.OTHER;
+  SupportContactTypeModel supportType = SupportContactTypeModel.OTHER;
 
   @action
-  setContactType(SupportContactType type){
+  setContactType(SupportContactTypeModel type){
     supportType = type;
   }
 

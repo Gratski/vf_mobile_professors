@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/settings/support/support_contact_constants.dart';
+import 'package:professors/models/support/support_contact_type.dart';
+import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
@@ -10,6 +13,10 @@ import 'package:professors/visual/widgets/text/text.builder.dart';
 class SupportContactSendScreen extends StatelessWidget {
 
   SupportContactConstants screenConstants = SupportContactConstants();
+  TextEditingController msgController = TextEditingController();
+
+  SupportContactTypeModel contactType;
+  SupportContactSendScreen(this.contactType);
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +47,7 @@ class SupportContactSendScreen extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
+                      controller: msgController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -56,7 +64,17 @@ class SupportContactSendScreen extends StatelessWidget {
                     /// BUTTON
                     ButtonsBuilder.redFlatButton(AppLocalizations.of(context)
                         .translate(screenConstants.contactSendButtonLabel),
-                            () {  }
+                            () {
+                      restServices.getSupportService().sendSupportMessage(context, this.contactType, msgController.text)
+                          .then((value){
+                            ToasterBuilder.buildSuccessToaster(context, AppLocalizations.of(context)
+                                .translate(screenConstants.contactSendSuccessTextLabel));
+                            Navigator.pop(context);
+                      })
+                          .catchError((e) {
+                        ToasterBuilder.buildSuccessToaster(context, e.cause);
+                      });
+                            }
                             ),
                   ],
                 ),

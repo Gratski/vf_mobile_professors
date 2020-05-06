@@ -3,6 +3,7 @@ import 'package:professors/services/rest/countries.service.dart';
 import 'package:professors/services/rest/language_profile.service.dart';
 import 'package:professors/services/rest/profile_details.service.dart';
 import 'package:professors/services/rest/security.service.dart';
+import 'package:professors/services/rest/support.service.dart';
 import 'package:professors/services/rest/user.service.dart';
 import 'package:professors/services/rest/wallet.service.dart';
 
@@ -55,6 +56,13 @@ class RestServices {
   ///
   WalletService getWalletService() {
     return WalletService();
+  }
+
+  ///
+  /// Gets Support Service
+  ///
+  SupportService getSupportService() {
+    return SupportService();
   }
 
 }

@@ -29,10 +29,10 @@ class SupportTypeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 listItem('payments_icon', AppLocalizations.of(context).translate(screenConstants.paymentsLabel), () {
-                  navigateToNextScreen(context, SupportContactType.PAYMENTS);
+                  navigateToNextScreen(context, SupportContactTypeModel.PAYMENTS);
                 }),
                 listItem('classes_icon', AppLocalizations.of(context).translate(screenConstants.classesLabel), () {
-                  navigateToNextScreen(context, SupportContactType.CLASSES);
+                  navigateToNextScreen(context, SupportContactTypeModel.CLASSES);
                 }),
               ],
             ),
@@ -42,10 +42,10 @@ class SupportTypeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 listItem('account_icon', AppLocalizations.of(context).translate(screenConstants.accountLabel), () {
-                  navigateToNextScreen(context, SupportContactType.ACCOUNT);
+                  navigateToNextScreen(context, SupportContactTypeModel.ACCOUNT);
                 }),
                 listItem('calendar_icon', AppLocalizations.of(context).translate(screenConstants.calendarLabel), () {
-                  navigateToNextScreen(context, SupportContactType.CALENDAR);
+                  navigateToNextScreen(context, SupportContactTypeModel.CALENDAR);
                 }),
               ],
             ),
@@ -55,11 +55,10 @@ class SupportTypeScreen extends StatelessWidget {
     );
   }
 
-  navigateToNextScreen(BuildContext context, SupportContactType contactType) {
-    supportStore.setContactType(contactType);
+  navigateToNextScreen(BuildContext context, SupportContactTypeModel contactType) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SupportContactSendScreen()),
+      MaterialPageRoute(builder: (context) => SupportContactSendScreen(contactType)),
     );
   }
 

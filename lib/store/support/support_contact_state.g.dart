@@ -12,14 +12,14 @@ mixin _$SupportContactState on _SupportContactState, Store {
   final _$supportTypeAtom = Atom(name: '_SupportContactState.supportType');
 
   @override
-  SupportContactType get supportType {
+  SupportContactTypeModel get supportType {
     _$supportTypeAtom.context.enforceReadPolicy(_$supportTypeAtom);
     _$supportTypeAtom.reportObserved();
     return super.supportType;
   }
 
   @override
-  set supportType(SupportContactType value) {
+  set supportType(SupportContactTypeModel value) {
     _$supportTypeAtom.context.conditionallyRunInAction(() {
       super.supportType = value;
       _$supportTypeAtom.reportChanged();
@@ -30,7 +30,7 @@ mixin _$SupportContactState on _SupportContactState, Store {
       ActionController(name: '_SupportContactState');
 
   @override
-  dynamic setContactType(SupportContactType type) {
+  dynamic setContactType(SupportContactTypeModel type) {
     final _$actionInfo = _$_SupportContactStateActionController.startAction();
     try {
       return super.setContactType(type);

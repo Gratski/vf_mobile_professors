@@ -169,6 +169,7 @@
   "SETTINGS_SUPPORT_SEND_SUBTILE_TWO": "How can we help you?",
   "SETTINGS_SUPPORT_SEND_MESSAGE_HINT": "Write us a message",
   "SETTINGS_SUPPORT_SEND_BUTTON_LABEL": "Send",
+  "SETTINGS_SUPPORT_SEND_SUCCESS_TEXT": "Thank you for your contact. We will reply shortly",
 
   "SETTINGS_SECURITY_MAIN_TOP_HEADER": "Security Definitions",
   "SETTINGS_SECURITY_MAIN_SUBTITLE": "Your data is safe with us %s.",

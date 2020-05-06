@@ -11,5 +11,6 @@ class SupportContactConstants {
   String get contactSendSubTitleTwo => "SETTINGS_SUPPORT_SEND_SUBTILE_TWO";
   String get contactSendMessageHint => "SETTINGS_SUPPORT_SEND_MESSAGE_HINT";
   String get contactSendButtonLabel => "SETTINGS_SUPPORT_SEND_BUTTON_LABEL";
+  String get contactSendSuccessTextLabel => "SETTINGS_SUPPORT_SEND_SUCCESS_TEXT";
 
 }

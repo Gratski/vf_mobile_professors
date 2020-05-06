@@ -132,4 +132,8 @@ abstract class AbstractRestService {
   decodeBody(Response rsp) {
     return jsonDecode(Utf8Decoder().convert(rsp.bodyBytes));
   }
+
+  enumToString(dynamic e) {
+    return '${e.toString().substring(e.toString().indexOf('.')+1)}';
+  }
 }
