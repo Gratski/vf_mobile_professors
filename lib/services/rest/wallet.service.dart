@@ -17,8 +17,7 @@ class WalletService extends AbstractRestService {
     paymentsStore.setIsLoading(true);
     try {
       final rsp = await performJsonGet(context, '$REST_URL/wallet/me/payment-methods');
-      Map<String, dynamic> resultMap = decodeBody(rsp);
-      List<dynamic> list = resultMap["items"];
+      List<dynamic> list = rsp["items"];
       List<PaymentMethodModel> result = List.of([]);
       list.forEach((elem) {
         result.add(PaymentMethodModel(

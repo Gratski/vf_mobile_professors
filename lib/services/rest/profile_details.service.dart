@@ -16,11 +16,10 @@ class ProfileDetailsService extends AbstractRestService {
     try {
       final rsp = await performJsonGet(
           context, '$REST_URL/professors/me/profile-details/$languageId');
-      Map<String, dynamic> result = decodeBody(rsp);
-      profileDetailsStore.setId(result["id"]);
-      profileDetailsStore.setDesignation(result["designation"]);
-      profileDetailsStore.setDescription(result["description"]);
-      profileDetailsStore.setQuote(result["quote"]);
+      profileDetailsStore.setId(rsp["id"]);
+      profileDetailsStore.setDesignation(rsp["designation"]);
+      profileDetailsStore.setDescription(rsp["description"]);
+      profileDetailsStore.setQuote(rsp["quote"]);
     } on ApiException catch (e) {
       throw e;
     } on Exception catch (e) {
@@ -48,8 +47,7 @@ class ProfileDetailsService extends AbstractRestService {
           }));
 
       // update profile details in foreground
-      Map<String, dynamic> result = decodeBody(rsp);
-      profileDetailsStore.setId(result["id"]);
+      profileDetailsStore.setId(rsp["id"]);
 
       // show success message
       ToasterBuilder.buildSuccessToaster(context, "created!");

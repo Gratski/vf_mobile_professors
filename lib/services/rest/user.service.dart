@@ -2,12 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:professors/globals/global_vars.dart';
-import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/models/notification_preference_type.model.dart';
 import 'package:professors/services/dto/notifications/get_notifications.response.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
 import 'package:professors/services/rest/abstract_rest.service.dart';
-import 'package:professors/store/user/edit_profile_details_state.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 
 class UserService extends AbstractRestService {
@@ -18,19 +16,18 @@ class UserService extends AbstractRestService {
     userStore.setIsLoading(true);
     try {
       final rsp = await this.performJsonGet(context, "$REST_URL/auth/me");
-      Map<String, dynamic> resultMap = decodeBody(rsp);
-      userStore.setFirstName(resultMap["firstName"]);
-      userStore.setLastName(resultMap["lastName"]);
-      userStore.setEmail(resultMap["email"]);
-      userStore.setGender(resultMap["gender"]);
-      userStore.setBirthday(DateTime.parse(resultMap["birthday"]));
-      userStore.setPhoneNumber(resultMap["phoneNumber"]);
-      userStore.setCountry(resultMap["nationality"]["id"],
-          resultMap["nationality"]["countryName"]);
+      userStore.setFirstName(rsp["firstName"]);
+      userStore.setLastName(rsp["lastName"]);
+      userStore.setEmail(rsp["email"]);
+      userStore.setGender(rsp["gender"]);
+      userStore.setBirthday(DateTime.parse(rsp["birthday"]));
+      userStore.setPhoneNumber(rsp["phoneNumber"]);
+      userStore.setCountry(rsp["nationality"]["id"],
+          rsp["nationality"]["countryName"]);
 
       // make this validation to optimize the resource consumption
-      if (resultMap["pictureUrl"] != userStore.pictureUrl) {
-        userStore.setPictureUrl(resultMap["pictureUrl"]);
+      if (rsp["pictureUrl"] != userStore.pictureUrl) {
+        userStore.setPictureUrl(rsp["pictureUrl"]);
       }
     } on ApiException catch (e) {
       throw e;
@@ -50,7 +47,7 @@ class UserService extends AbstractRestService {
 
       // update each type of notification
       GetNotificationPreferencesResponse response =
-          GetNotificationPreferencesResponse.fromJson(jsonDecode(rsp.body));
+          GetNotificationPreferencesResponse.fromJson(rsp);
       response.items.forEach(
         (e) {
           switch(e.type) {

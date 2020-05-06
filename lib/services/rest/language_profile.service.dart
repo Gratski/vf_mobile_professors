@@ -19,7 +19,7 @@ class LanguageProfileService extends AbstractRestService {
     generalStore.setIsExistingLanguagesLoading(true);
     try{
       final rsp = await this.performJsonGet(context, '$REST_URL/professors/me/profile-details/existing-languages');
-      final languages = GetLanguagesResponse.fromJson(jsonDecode(rsp.body));
+      final languages = GetLanguagesResponse.fromJson(rsp);
 
       // update existing languages in general store
       generalStore.setExistingLanguages(languages.languages);
@@ -40,7 +40,7 @@ class LanguageProfileService extends AbstractRestService {
     generalStore.setIsAvailableLanguagesLoading(true);
     try{
       final rsp = await this.performJsonGet(context, '$REST_URL/professors/me/profile-details/available-languages');
-      final languages = GetLanguagesResponse.fromJson(jsonDecode(rsp.body));
+      final languages = GetLanguagesResponse.fromJson(rsp);
 
       // update available languages in general store
       generalStore.setAvailableLanguages(languages.languages);
@@ -59,7 +59,7 @@ class LanguageProfileService extends AbstractRestService {
     CreateLanguageProfileRequest req = CreateLanguageProfileRequest(languageId, description, description, quote);
     try {
       final rsp =  await this.performJsonPost(context, '$REST_URL/professors/me/profile-details', req.toJson());
-      return CreateOperationResponse.fromJson(jsonDecode(rsp.body));
+      return CreateOperationResponse.fromJson(rsp);
     } on ApiException catch(e) {
       throw e;
     }
