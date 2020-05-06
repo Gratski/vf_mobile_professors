@@ -84,7 +84,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   context,
                                   oldPasswordController.text,
                                   newPasswordController.text).then((_){
-                                ToasterBuilder.buildSuccessToaster(context, "Password Changed");
+                                ToasterBuilder.buildSuccessToaster(context, AppLocalizations.of(context).translate(screenConstants.confirmationText));
                                 setState(() {
                                   oldPasswordController.text = "";
                                   newPasswordController.text = "";
@@ -112,7 +112,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     restServices.getSecurityService().changePassword(context,
         oldPasswordController.text,
         newPasswordController.text).then((value) {
-          ToasterBuilder.buildSuccessToaster(context, "Password Changed");
+          ToasterBuilder.buildSuccessToaster(context, AppLocalizations.of(context).translate(screenConstants.confirmationText));
           setState(() {
             oldPasswordController.text = "";
             newPasswordController.text = "";

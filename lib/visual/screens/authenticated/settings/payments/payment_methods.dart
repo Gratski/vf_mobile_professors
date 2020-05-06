@@ -27,7 +27,8 @@ class PaymentsMethodsScreen extends StatelessWidget {
         slivers: <Widget>[
 
           CustomAppBar([
-            ButtonsBuilder.transparentButton("ADD", () {
+            ButtonsBuilder.transparentButton(
+                AppLocalizations.of(context).translate(generalConstants.buttonAddLabel), () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => PaymentsMethodsTermsScreen()),
@@ -47,7 +48,7 @@ class PaymentsMethodsScreen extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
                         onLongPress: () {
-                          DialogsBuilder(context).editPaymenMethodDialog(() {
+                          DialogsBuilder(context).editPaymentMethodDialog(() {
                             restServices.getWalletService().setPaymentMethodAsDefault(context, paymentsStore.paymentMethods[index].id)
                                 .then((value) => restServices.getWalletService().getPaymentMethods(context))
                                 .catchError((e){

@@ -69,10 +69,6 @@ class ClassDetailsPage extends StatelessWidget {
                                   child: Container(
                                     child: Row(
                                       children: <Widget>[
-                                        // parent category
-                                        _buildBadge(TextsBuilder.regularText(
-                                            '${editOrCreateClassStore.subCategory.parent.designation}')),
-
                                         // class category
                                         _buildBadge(TextsBuilder.regularText(
                                             '${editOrCreateClassStore.subCategory.designation}')),

@@ -1,7 +1,6 @@
 import 'package:after_init/after_init.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/visual/screens/authenticated/profile/profile.screen.dart';
 import 'package:professors/visual/styles/colors.dart';

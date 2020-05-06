@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/settings/payments/payments_constants.dart';
-import 'package:professors/models/payments/accounts/PaymentAccountListItem.dart';
 import 'package:professors/store/payments/add_payment_method_state.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/styles/colors.dart';
@@ -82,7 +80,7 @@ class AddPaymentMethodScreen extends StatelessWidget {
                                     restServices.getWalletService().createPaymentMethod(context, emailController.text)
                                     .then((value){
                                       restServices.getWalletService().getPaymentMethods(context);
-                                      ToasterBuilder.buildSuccessToaster(context, "Payment Method Created");
+                                      ToasterBuilder.buildSuccessToaster(context, AppLocalizations.of(context).translate(screenConstants.addPaymentMethodCreated));
                                       _goBackToPaymentMethodsList(context);
                                     }).catchError((e){
                                       ToasterBuilder.buildErrorToaster(context, e.cause);

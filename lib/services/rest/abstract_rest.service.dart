@@ -32,10 +32,25 @@ abstract class AbstractRestService {
     return response;
   }
 
-  Future<Response> performJsonGet(BuildContext context, String path, {bool useAuth = true}) async {
+  Future<Response> performJsonGet(BuildContext context, String path, {bool useAuth = true, bool useCache = false}) async {
     try {
+
+      // check cache
+      if (useCache) {
+       final cachedContent = await fetchFromCache(path);
+       if (cachedContent != null && cachedContent.isNotEmpty) {
+         return Response(cachedContent, 200);
+       }
+      }
+
       final response = await http.get(path, headers: await _authHeaders(context, useAuth: useAuth));
       await _handleError(context, response);
+
+      // update cache
+      if (useCache) {
+        updateCache(path, response);
+      }
+
       return response;
     } on Exception catch(e) {
       print("");
@@ -59,7 +74,6 @@ abstract class AbstractRestService {
     ToasterBuilder.buildErrorToaster(context, "Something went wrong");
     return;
   }
-
   Future<void> _handleError(BuildContext context, Response response ) async {
     if( response.statusCode >= 400 ) {
 
@@ -75,6 +89,9 @@ abstract class AbstractRestService {
     return;
   }
 
+  ////////////////////////////////////////
+  // Helpers
+  ////////////////////////////////////////
   Future<Map<String, String>> _authHeaders(BuildContext context, {bool useAuth = true}) async {
     Map<String, String> map = {
       "content-type": "application/json",
@@ -94,6 +111,22 @@ abstract class AbstractRestService {
       }
     }
     return map;
+  }
+
+  Future<String> fetchFromCache(String url) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic cachedContent = prefs.getString(url);
+    if ( cachedContent != null ) {
+      return cachedContent;
+    } else {
+      return null;
+    }
+  }
+
+  Future<void> updateCache(String url, Response rsp) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(url, decodeBody(rsp));
+    return;
   }
 
   decodeBody(Response rsp) {

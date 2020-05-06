@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/constants/settings/payments/payments_constants.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
@@ -19,6 +20,7 @@ class SendInvoiceScreen extends StatefulWidget {
 class _SendInvoiceScreenState extends State<SendInvoiceScreen> {
 
   PaymentsConstants screenConstants = PaymentsConstants();
+  GeneralConstants generalConstants = GeneralConstants();
 
   Future getImage(ImageSource _source) async {
     var image = await ImagePicker.pickImage(source: _source);
@@ -31,20 +33,20 @@ class _SendInvoiceScreenState extends State<SendInvoiceScreen> {
       builder: (BuildContext context) => CupertinoActionSheet(
         cancelButton: CupertinoActionSheetAction(
           child: Text(
-            "Cancel",
+            AppLocalizations.of(context).translate(generalConstants.buttonCancelLabel),
             style: TextStyle(color: Colors.red),
           ),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text('Select file source'),
-        message: Text("From one of the options"),
+        title: Text(AppLocalizations.of(context).translate(generalConstants.selectFileSourceLabel)),
+        message: Text(AppLocalizations.of(context).translate(generalConstants.selectFileSourceSubLabel)),
         actions: <Widget>[
           CupertinoActionSheetAction(
             child: CupertinoNavigationBar(
               middle: Text(
-                'File System',
+                AppLocalizations.of(context).translate(generalConstants.buttonFileSystemLabel),
               ),
               leading: Icon(Icons.camera_alt, color: Colors.red),
               backgroundColor: Colors.transparent,
@@ -59,7 +61,7 @@ class _SendInvoiceScreenState extends State<SendInvoiceScreen> {
           CupertinoActionSheetAction(
             child: CupertinoNavigationBar(
               middle: Text(
-                'Photo Library',
+                AppLocalizations.of(context).translate(generalConstants.buttonPhotoLibraryLabel),
               ),
               leading: Icon(Icons.photo_library),
               backgroundColor: Colors.transparent,

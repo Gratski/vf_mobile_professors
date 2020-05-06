@@ -1,10 +1,9 @@
 class CategoryModel {
 
   int id;
-  CategoryModel parent;
   String designation;
   String description;
 
-  CategoryModel(this.id, this.parent, this.designation, this.description);
+  CategoryModel(this.id, this.designation, this.description);
 
 }

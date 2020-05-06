@@ -6,7 +6,6 @@ import 'package:professors/localization/constants/settings/profile/settings_edit
 import 'package:professors/visual/screens/authenticated/settings/profile/settings_edit_profile_in_language.screen.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
-import 'package:professors/visual/widgets/structural/lists/list_tile_model.dart';
 import 'package:professors/visual/widgets/structural/lists/regular_list_tile.dart';
 
 class EditProfileAddNewLanguageScreen extends StatelessWidget {

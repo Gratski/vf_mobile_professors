@@ -22,6 +22,8 @@ class PaymentsConstants {
   String get addPaymentMethodEmailLabel => "SETTINGS_ADD_PAYMENT_METHODS_EMAIL_LABEL";
   String get addPaymentMethodEmailHint => "SETTINGS_ADD_PAYMENT_METHODS_EMAIL_HINT";
   String get addPaymentMethodEmailAddButton => "SETTINGS_ADD_PAYMENT_METHODS_ADD_BUTTON";
+  String get addPaymentMethodCreated => "SETTINGS_ADD_PAYMENT_METHODS_SUCCESS_TEXT";
+  String get addPaymentMethodFailure => "SETTINGS_ADD_PAYMENT_METHODS_FAILURE_TEXT";
 
   String get sendInvoiceTopHeader => "SETTINGS_ADD_PAYMENT_SEND_INVOICE_TOP_HEADER";
   String get sendInvoiceSubTitle => "SETTINGS_ADD_PAYMENT_SEND_INVOICE_SUB_TITLE";

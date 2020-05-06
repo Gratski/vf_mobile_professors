@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
@@ -9,9 +10,8 @@ import 'package:professors/visual/screens/authenticated/settings/personal_detail
 import 'package:professors/visual/screens/authenticated/settings/profile/settings_edit_profile_select_language.screen.dart';
 import 'package:professors/visual/screens/authenticated/settings/security/security_definitions.dart';
 import 'package:professors/visual/screens/authenticated/settings/support/support_type.dart';
-import 'package:professors/visual/screens/permitted/auth/login.screen.dart';
-import 'package:professors/visual/screens/permitted/auth/registration.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
+import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/visual/widgets/structural/lists/regular_list_tile.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
@@ -57,8 +57,11 @@ class SettingsScreen extends StatelessWidget {
                             return CircleAvatar(
                               backgroundColor: AppColors.bgMainColor,
                               maxRadius: MediaQuery.of(context).size.width * 0.15,
-                              backgroundImage: userStore.pictureUrl != null ? NetworkImage(
-                                  userStore.pictureUrl) : AssetImage(
+                              backgroundImage: userStore.pictureUrl != null ? CachedNetworkImage(
+                                errorWidget: (context, url, error) => Icon(Icons.error),
+                                placeholder: (context, url) => DefaultLoaderWidget(),
+                                imageUrl: userStore.pictureUrl,
+                              ) : AssetImage(
                                 'assets/images/logo.png'
                               )
                             );

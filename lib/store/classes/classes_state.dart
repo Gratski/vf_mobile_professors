@@ -44,12 +44,6 @@ abstract class _ClassesState with Store {
         ),
           CategoryModel(
               4,
-              CategoryModel(
-                  1,
-                  null,
-                  'Parent Category',
-                  ''
-              ),
               'Pure Cardio',
               'Pure Cardio Workout Training'
           )
@@ -67,12 +61,6 @@ abstract class _ClassesState with Store {
           ),
           CategoryModel(
               4,
-              CategoryModel(
-                  1,
-                  null,
-                  'Parent Category',
-                  ''
-              ),
               'Pure Cardio',
               'Pure Cardio Workout Training'
           )
@@ -90,12 +78,6 @@ abstract class _ClassesState with Store {
           ),
           CategoryModel(
               4,
-              CategoryModel(
-                  1,
-                  null,
-                  'Parent Category',
-                  ''
-              ),
               'Pure Cardio',
               'Pure Cardio Workout Training'
           )
@@ -113,12 +95,6 @@ abstract class _ClassesState with Store {
           ),
           CategoryModel(
               4,
-              CategoryModel(
-                  1,
-                  null,
-                  'Parent Category',
-                  ''
-              ),
               'Pure Cardio',
               'Pure Cardio Workout Training'
           )
@@ -136,12 +112,6 @@ abstract class _ClassesState with Store {
           ),
           CategoryModel(
               4,
-              CategoryModel(
-                  1,
-                  null,
-                  'Parent Category',
-                  ''
-              ),
               'Pure Cardio',
               'Pure Cardio Workout Training'
           )

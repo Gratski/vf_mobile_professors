@@ -83,23 +83,11 @@ abstract class _EditClassState with Store {
   ObservableList<CategoryModel> subCategoriesList = ObservableList.of([
     CategoryModel(
       4,
-      CategoryModel(
-        1,
-        null,
-        'Parent Category',
-        ''
-      ),
       'Pure Cardio',
       'Pure Cardio Workout Training'
     ),
     CategoryModel(
         4,
-        CategoryModel(
-            1,
-            null,
-            'Parent Category',
-            ''
-        ),
         'Pure Cardio',
         'Pure Cardio Workout Training'
     ),

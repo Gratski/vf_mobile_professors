@@ -12,7 +12,6 @@ import 'package:professors/visual/screens/authenticated/settings/personal_detail
 import 'package:professors/visual/screens/authenticated/settings/personal_details/settings_nationality.screen.dart';
 import 'package:professors/store/user/edit_profile_details_state.dart';
 import 'package:professors/visual/styles/colors.dart';
-import 'package:professors/visual/styles/margins.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/styles/sizes.dart';
 import 'package:professors/utils/date_utils.dart';

@@ -22,7 +22,7 @@ class DialogsBuilder {
     );
   }
 
-  editPaymenMethodDialog(VoidCallback makeDefaultCallback, VoidCallback deleteCallback) {
+  editPaymentMethodDialog(VoidCallback makeDefaultCallback, VoidCallback deleteCallback) {
     showDialog(
       context: context,
       builder: (BuildContext context) => EditPaymentMethodDialog(makeDefaultCallback, deleteCallback),

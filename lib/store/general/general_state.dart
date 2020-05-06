@@ -27,28 +27,7 @@ abstract class _GeneralState with Store {
   @observable
   bool isCategoriesLoading = false;
   @observable
-  ObservableList<CategoryModel> categories = ObservableList.of(
-    [
-      CategoryModel(
-        1,
-        null,
-        'Mind',
-        'Mindfullness Category'
-      ),
-      CategoryModel(
-          2,
-          null,
-          'HIIT',
-          'High Intensity Training'
-      ),
-      CategoryModel(
-          3,
-          null,
-          'Dance',
-          'All about dance'
-      )
-    ],
-  );
+  ObservableList<CategoryModel> categories = ObservableList.of([],);
 
   /// Second level of Categories
   @observable
