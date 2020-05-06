@@ -5,16 +5,13 @@ import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/constants/nationality.constants.dart';
-import 'package:professors/store/nationalities/nationalities_state.dart';
 import 'package:professors/store/user/edit_profile_details_state.dart';
-import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/visual/widgets/structural/lists/regular_list_tile.dart';
 
 class SettingsNationalityScreen extends StatefulWidget {
 
-  NationalitiesState store = NationalitiesState();
   EditProfileDetailsState screenStore;
   SettingsNationalityScreen(this.screenStore);
 
@@ -44,18 +41,18 @@ class _SettingsNationalityScreen extends State<SettingsNationalityScreen> with A
                 return SliverList(
                   delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
                     return RegularListTile(
-                      label: widget.store.nationalities[index].countryName,
+                      label: nationalitiesStore.nationalities[index].countryName,
                       callback: () {
                         widget.screenStore.setCountry(
-                            widget.store.nationalities[index].id,
-                            widget.store.nationalities[index].countryName);
+                            nationalitiesStore.nationalities[index].id,
+                            nationalitiesStore.nationalities[index].countryName);
                         Navigator.pop(context);
                       },
-                      selected: widget.store.nationalities[index].id == widget.screenStore.countryId,
-                      hideTrailing: widget.store.nationalities[index].id != widget.screenStore.countryId,
+                      selected: nationalitiesStore.nationalities[index].id == widget.screenStore.countryId,
+                      hideTrailing: nationalitiesStore.nationalities[index].id != widget.screenStore.countryId,
                     );
                   },
-                    childCount: widget.store.nationalities.length,
+                    childCount: nationalitiesStore.nationalities.length,
                   ),
                 );
               },
@@ -68,17 +65,12 @@ class _SettingsNationalityScreen extends State<SettingsNationalityScreen> with A
 
   @override
   void didInitState() {
-    restServices.getCountriesService().getCountries(context)
-        .then((value) => widget.store.setNationalities(value.countries))
-        .catchError((e) {
-          ToasterBuilder.buildErrorToaster(context, e);
-    });
-
+    restServices.getCountriesService().getCountries(context);
   }
 
   @override
   void dispose() {
-    widget.store.clearNationalities();
+    nationalitiesStore.clearNationalities();
     super.dispose();
   }
 }

@@ -23,7 +23,7 @@ class AuthService extends AbstractRestService {
     LoginRequest request = LoginRequest(email, pwd);
     try {
       final response = await this.performJsonPost(context, '$REST_URL/auth/signin', request.toJson(), useAuth: false);
-      LoginResponse loginRsp = LoginResponse.fromJson(response);
+      LoginResponse loginRsp = LoginResponse.fromJson(jsonDecode(response.body));
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('authToken', loginRsp.token);
       authStore.setAuthToken(loginRsp.token);
