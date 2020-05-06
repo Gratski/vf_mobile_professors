@@ -14,7 +14,7 @@ class CountriesService extends AbstractRestService {
   Future<void> getCountries(BuildContext context) async {
     nationalitiesStore.setIsLoading(true);
     try {
-      final rsp = await this.performJsonGet(context, '$REST_URL/countries', useAuth: false);
+      final rsp = await this.performJsonGet(context, '$REST_URL/countries');
       GetCountriesResponse result = GetCountriesResponse.fromJson(jsonDecode(rsp.body));
       nationalitiesStore.setNationalities(result.countries);
     } on ApiException catch(e) {

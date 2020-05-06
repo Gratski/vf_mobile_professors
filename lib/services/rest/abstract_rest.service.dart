@@ -1,13 +1,18 @@
 import 'dart:convert';
-
+import 'dart:io';
+import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:path/path.dart';
+import 'package:async/async.dart';
+import 'dart:math' as math;
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:professors/globals/global_vars.dart';
-import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/localization.config.dart';
 import 'package:professors/services/dto/errors/http_error.dto.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
+import 'package:professors/services/exceptions/file_size.exception.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -69,9 +74,81 @@ abstract class AbstractRestService {
     }
   }
 
+  Future<void> uploadFile(BuildContext context, File file, String url) async {
+    try {
+      var compressedFile = await compressAndGetFile(file);
+      var stream = new http.ByteStream(DelegatingStream.typed(compressedFile.openRead()));
+      var length = await compressedFile.length();
+
+      var imageSize = await compressedFile.length();
+      if ( imageSize > 80000 ) {
+        throw ApiException("Please choose a smaller picture");
+      }
+
+      var uri = Uri.parse(url);
+
+      Map<String, String> headers = await _authHeaders(context);
+      var request = new http.MultipartRequest("POST", uri);
+      var multipartFile = new http.MultipartFile('file', stream, length,
+          filename: basename(compressedFile.path));
+
+      request.headers.addAll(headers);
+      request.files.add(multipartFile);
+      var response = await request.send();
+
+      response.stream.transform(utf8.decoder).listen((value) {
+        Map<String, dynamic> result = jsonDecode(value);
+        int status = result["status"];
+        String pictureUrl = result["pictureUrl"];
+        if ( (pictureUrl != null && pictureUrl.isNotEmpty) || (status == 200 || status == 201) ) {
+          restServices.getUserService().getUserPersonalDetails(context);
+          ToasterBuilder.buildSuccessToaster(context, "Picture changed!");
+          return;
+        } else if (status == 500){
+          throw ToasterBuilder.buildErrorToaster(context, "Please consider a smaller file");
+        } else {
+          throw ToasterBuilder.buildErrorToaster(context, "Something went wrong. Please try again later");
+        }
+      });
+    } on FileSizeException catch(e) {
+      throw ApiException(e.cause);
+    } on Exception catch(e) {
+      throw ApiException("Something went wrong.. Please try again");
+    }
+  }
+
   ////////////////////////////////////////
-// Error Handlers
-////////////////////////////////////////
+  // Compression Helper
+  ////////////////////////////////////////
+  Future<File> compressAndGetFile(File file) async {
+    String filename = basename(file.path);
+    Directory dir = await path_provider.getTemporaryDirectory();
+    final targetPath = dir.absolute.path + "/vfit_${DateTime.now().toIso8601String()}_$filename";
+
+    var compressedFile = await FlutterImageCompress.compressAndGetFile(
+      file.absolute.path, targetPath, minWidth: 400, quality: 25
+    );
+
+    return compressedFile;
+  }
+
+  double _calcScale({
+    double srcWidth,
+    double srcHeight,
+    double minWidth,
+    double minHeight,
+  }) {
+    var scaleW = srcWidth / minWidth;
+    var scaleH = srcHeight / minHeight;
+
+    var scale = math.max(1.0, math.min(scaleW, scaleH));
+
+    return scale;
+  }
+
+  ////////////////////////////////////////
+  // Error Handlers
+  ////////////////////////////////////////
   Future<void> handleUnknownError(BuildContext context) async {
     // TODO: Localize this
     ToasterBuilder.buildErrorToaster(context, "Something went wrong");
@@ -83,7 +160,7 @@ abstract class AbstractRestService {
       // not authenticated
       if ( response.statusCode == 401 || response.statusCode == 403 ) {
         await restServices.getAuthRestService().signOut();
-        Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
+        Navigator.pushNamedAndRemoveUntil(context, "/login", (r) => false);
       }
 
       HttpError error = HttpError.fromJson(jsonDecode(response.body));

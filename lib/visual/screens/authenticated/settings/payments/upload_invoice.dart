@@ -26,60 +26,62 @@ class _SendInvoiceScreenState extends State<SendInvoiceScreen> {
     var image = await ImagePicker.pickImage(source: _source);
   }
 
-  showDialog(BuildContext context) {
-    showCupertinoDialog(
-      useRootNavigator: true,
-      context: context,
-      builder: (BuildContext context) => CupertinoActionSheet(
-        cancelButton: CupertinoActionSheetAction(
-          child: Text(
-            AppLocalizations.of(context).translate(generalConstants.buttonCancelLabel),
-            style: TextStyle(color: Colors.red),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(AppLocalizations.of(context).translate(generalConstants.selectFileSourceLabel)),
-        message: Text(AppLocalizations.of(context).translate(generalConstants.selectFileSourceSubLabel)),
-        actions: <Widget>[
-          CupertinoActionSheetAction(
-            child: CupertinoNavigationBar(
-              middle: Text(
-                AppLocalizations.of(context).translate(generalConstants.buttonFileSystemLabel),
-              ),
-              leading: Icon(Icons.camera_alt, color: Colors.red),
-              backgroundColor: Colors.transparent,
-              border: Border(bottom: BorderSide(style: BorderStyle.none)),
-            ),
-            onPressed: () async {
-              File file = await FilePicker.getFile(
-                  type: FileType.custom,
-                  allowedExtensions: ['jpg', 'pdf', 'doc']);
-            },
-          ),
-          CupertinoActionSheetAction(
-            child: CupertinoNavigationBar(
-              middle: Text(
-                AppLocalizations.of(context).translate(generalConstants.buttonPhotoLibraryLabel),
-              ),
-              leading: Icon(Icons.photo_library),
-              backgroundColor: Colors.transparent,
-              border: Border(bottom: BorderSide(style: BorderStyle.none)),
+  showDialog(BuildContext context, GlobalKey<ScaffoldState> key) {
+    key.currentState.showBottomSheet((context){
+      return CupertinoActionSheet(
+          cancelButton: CupertinoActionSheetAction(
+            child: Text(
+              AppLocalizations.of(context).translate(generalConstants.buttonCancelLabel),
+              style: TextStyle(color: Colors.red),
             ),
             onPressed: () {
               Navigator.pop(context);
-              getImage(ImageSource.gallery);
             },
           ),
-        ],
-      ),
+          title: Text(AppLocalizations.of(context).translate(generalConstants.selectFileSourceLabel)),
+          message: Text(AppLocalizations.of(context).translate(generalConstants.selectFileSourceSubLabel)),
+          actions: <Widget>[
+            CupertinoActionSheetAction(
+              child: CupertinoNavigationBar(
+                middle: Text(
+                  AppLocalizations.of(context).translate(generalConstants.buttonFileSystemLabel),
+                ),
+                leading: Icon(Icons.camera_alt, color: Colors.red),
+                backgroundColor: Colors.transparent,
+                border: Border(bottom: BorderSide(style: BorderStyle.none)),
+              ),
+              onPressed: () async {
+                File file = await FilePicker.getFile(
+                    type: FileType.custom,
+                    allowedExtensions: ['jpg', 'pdf', 'doc']);
+              },
+            ),
+            CupertinoActionSheetAction(
+              child: CupertinoNavigationBar(
+                middle: Text(
+                  AppLocalizations.of(context).translate(generalConstants.buttonPhotoLibraryLabel),
+                ),
+                leading: Icon(Icons.photo_library),
+                backgroundColor: Colors.transparent,
+                border: Border(bottom: BorderSide(style: BorderStyle.none)),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+                getImage(ImageSource.gallery);
+              },
+            ),
+          ],
+      );
+    }
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final sKey = new GlobalKey<ScaffoldState>();
+
     return Scaffold(
+      key: sKey,
       body: CustomScrollView(
         slivers: <Widget>[
 
@@ -114,11 +116,11 @@ class _SendInvoiceScreenState extends State<SendInvoiceScreen> {
                             TargetPlatform.android) {
                           File file = await FilePicker.getFile(
                             type: FileType.custom,
-                            allowedExtensions: ['jpg', 'pdf', 'doc'],
+                            allowedExtensions: ['jpg', 'png', 'jpeg'],
                           );
                         } else if (Theme.of(context).platform ==
                             TargetPlatform.iOS) {
-                          showDialog(context);
+                          showDialog(context, sKey);
                         }
                       },
                       Icon(

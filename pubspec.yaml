@@ -26,6 +26,7 @@ dependencies:
   fluttertoast: ^4.0.0
   after_init: ^0.1.2
   cached_network_image: ^2.2.0+1
+  flutter_image_compress: ^0.6.7
 
 dev_dependencies:
   build_runner: ^1.8.1

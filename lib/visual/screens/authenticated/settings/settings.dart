@@ -1,9 +1,16 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/services/dto/auth/signout/signout.dto.dart';
+import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/authenticated/profile/profile.screen.dart';
 import 'package:professors/visual/screens/authenticated/settings/payments/payments.dart';
 import 'package:professors/visual/screens/authenticated/settings/personal_details/settings_personal_details.dart';
@@ -21,6 +28,13 @@ import 'package:professors/localization/constants/settings/settings_constants.da
 import 'notifications/settings_notifications.dart';
 
 class SettingsScreen extends StatelessWidget {
+
+  GeneralConstants generalConstants = GeneralConstants();
+
+  Future<File> getImage(ImageSource _source) async {
+    return await ImagePicker.pickImage(source: _source);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,16 +68,41 @@ class SettingsScreen extends StatelessWidget {
                         flex: 5,
                         child: Observer(
                           builder: (_) {
-                            return CircleAvatar(
-                              backgroundColor: AppColors.bgMainColor,
-                              maxRadius: MediaQuery.of(context).size.width * 0.15,
-                              backgroundImage: userStore.pictureUrl != null ? CachedNetworkImage(
-                                errorWidget: (context, url, error) => Icon(Icons.error),
-                                placeholder: (context, url) => DefaultLoaderWidget(),
-                                imageUrl: userStore.pictureUrl,
-                              ) : AssetImage(
-                                'assets/images/logo.png'
-                              )
+                            return GestureDetector(
+                              onTap: () async {
+                                File file;
+                                if (Theme.of(context).platform ==
+                                    TargetPlatform.android) {
+                                  file = await FilePicker.getFile(
+                                    type: FileType.custom,
+                                    allowedExtensions: ['jpg', 'png', 'jpeg'],
+                                  );
+                                } else if (Theme.of(context).platform ==
+                                    TargetPlatform.iOS) {
+                                  file = await getImage(ImageSource.gallery);
+                                }
+
+                                // check if the file as been set
+                                if ( file != null ) {
+                                  print("sending file");
+                                  restServices.getUserService().changeProfilePicture(context, file)
+                                  .then((value) {
+                                  })
+                                  .catchError((e) {
+                                    ToasterBuilder.buildErrorToaster(context, e.cause);
+                                  });
+                                }
+
+                              },
+                              child: CircleAvatar(
+                                backgroundColor: AppColors.bgMainColor,
+                                maxRadius: MediaQuery.of(context).size.width * 0.15,
+                                backgroundImage: userStore.pictureUrl != null ? CachedNetworkImageProvider(
+                                    userStore.pictureUrl
+                                ) : AssetImage(
+                                    'assets/images/logo.png'
+                                )
+                            ),
                             );
                           },
                         )

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:professors/globals/global_vars.dart';
@@ -75,6 +76,9 @@ class UserService extends AbstractRestService {
     }
   }
 
+  ///
+  /// Toggles a given notification preference
+  ///
   Future<void> toggleUserNotificationPreference(
       BuildContext context,
       NotificationPreferenceTypeModel type,
@@ -127,6 +131,14 @@ class UserService extends AbstractRestService {
       throw e;
     } on Exception catch (e) {
       throw e;
+    }
+  }
+
+  Future<void> changeProfilePicture(BuildContext context, File file) async {
+    try {
+      final uploadedFile = uploadFile(context, file, '$REST_URL/users/me/picture');
+    } on Exception catch(e) {
+      throw ApiException("Something went wrong. Try again later");
     }
   }
 }
