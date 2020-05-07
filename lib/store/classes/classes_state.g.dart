@@ -60,21 +60,38 @@ mixin _$ClassesState on _ClassesState, Store {
     }, _$isLoadingNextAtom, name: '${_$isLoadingNextAtom.name}_set');
   }
 
-  final _$pageAtom = Atom(name: '_ClassesState.page');
+  final _$pageNumberAtom = Atom(name: '_ClassesState.pageNumber');
 
   @override
-  int get page {
-    _$pageAtom.context.enforceReadPolicy(_$pageAtom);
-    _$pageAtom.reportObserved();
-    return super.page;
+  int get pageNumber {
+    _$pageNumberAtom.context.enforceReadPolicy(_$pageNumberAtom);
+    _$pageNumberAtom.reportObserved();
+    return super.pageNumber;
   }
 
   @override
-  set page(int value) {
-    _$pageAtom.context.conditionallyRunInAction(() {
-      super.page = value;
-      _$pageAtom.reportChanged();
-    }, _$pageAtom, name: '${_$pageAtom.name}_set');
+  set pageNumber(int value) {
+    _$pageNumberAtom.context.conditionallyRunInAction(() {
+      super.pageNumber = value;
+      _$pageNumberAtom.reportChanged();
+    }, _$pageNumberAtom, name: '${_$pageNumberAtom.name}_set');
+  }
+
+  final _$itemsPerPageAtom = Atom(name: '_ClassesState.itemsPerPage');
+
+  @override
+  int get itemsPerPage {
+    _$itemsPerPageAtom.context.enforceReadPolicy(_$itemsPerPageAtom);
+    _$itemsPerPageAtom.reportObserved();
+    return super.itemsPerPage;
+  }
+
+  @override
+  set itemsPerPage(int value) {
+    _$itemsPerPageAtom.context.conditionallyRunInAction(() {
+      super.itemsPerPage = value;
+      _$itemsPerPageAtom.reportChanged();
+    }, _$itemsPerPageAtom, name: '${_$itemsPerPageAtom.name}_set');
   }
 
   final _$sizeAtom = Atom(name: '_ClassesState.size');

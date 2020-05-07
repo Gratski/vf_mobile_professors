@@ -27,7 +27,10 @@ abstract class _ClassesState with Store {
   bool isLoadingNext = false;
 
   @observable
-  int page = 0;
+  int pageNumber = 0;
+
+  @observable
+  int itemsPerPage = 10;
 
   @observable
   int size = 20;
@@ -53,6 +56,7 @@ abstract class _ClassesState with Store {
   @action
   addNextPageClasses(List<ClassListItemModel> page){
     this.classes.addAll(page);
+    this.pageNumber++;
   }
 
   @action

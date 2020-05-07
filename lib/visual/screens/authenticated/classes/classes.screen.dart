@@ -10,109 +10,161 @@ import 'package:professors/visual/screens/authenticated/classes/class_details.sc
 import 'package:professors/visual/screens/authenticated/classes/create_class_select_language.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
+import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/visual/widgets/text/badges.builder.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class ClassesScreen extends StatefulWidget {
-
   ClassConstants screenConstants = ClassConstants();
+  ScrollController scrollController = ScrollController();
 
   @override
   _ClassesScreenState createState() => _ClassesScreenState();
 }
 
-class _ClassesScreenState extends State<ClassesScreen> with AfterInitMixin<ClassesScreen> {
+class _ClassesScreenState extends State<ClassesScreen>
+    with AfterInitMixin<ClassesScreen> {
   @override
   Widget build(BuildContext context) {
     double sectionTopMargin = MediaQuery.of(context).size.height / 20;
 
     return Scaffold(
       body: Container(
+        /*
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/classes_bg.png"),
             fit: BoxFit.cover,
           ),
-        ),
+        ),*/
         child: CustomScrollView(
           slivers: <Widget>[
-            CustomAppBar(
-              [
-                Container(
-                  margin: EdgeInsets.only(
-                      right: MediaQuery.of(context).size.width / 20),
-                  child: FlatButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  CreateClassSelectLanguageScreen()));
-                    },
-                    child: Row(
-                      children: <Widget>[
-                        //Icon(FontAwesomeIcons.plus, color: AppColors.fontColor,),
-                        Container(
-                          margin: EdgeInsets.only(left: 10),
-                          child: TextsBuilder.h4Bold('ADD CLASS'.toUpperCase()),
+            Observer(
+              builder: (_) {
+                if (classesStore.classes.length != 0 &&
+                    !classesStore.isLoading) {
+                  return CustomAppBar(
+                    [
+                      Container(
+                        margin: EdgeInsets.only(
+                            right: MediaQuery.of(context).size.width / 20),
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        CreateClassSelectLanguageScreen()));
+                          },
+                          child: Row(
+                            children: <Widget>[
+                              //Icon(FontAwesomeIcons.plus, color: AppColors.fontColor,),
+                              Container(
+                                margin: EdgeInsets.only(left: 10),
+                                child: TextsBuilder.h4Bold(
+                                    'ADD CLASS'.toUpperCase()),
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-              hideBackButton: true,
+                      ),
+                    ],
+                    hideBackButton: true,
+                  );
+                } else {
+                  return SliverToBoxAdapter(
+                    child: Container(),
+                  );
+                }
+              },
             ),
 
             /// CUSTOM SCREEN TITLE
-            SliverToBoxAdapter(
-              child: Container(
-                padding: AppPaddings.topTitlePadding(context),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    /// Left
-                    Flexible(
-                      flex: 4,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+            Observer(
+              builder: (_) {
+                if (classesStore.classes.length != 0 &&
+                    !classesStore.isLoading) {
+                  return SliverToBoxAdapter(
+                    child: Container(
+                      padding: AppPaddings.topTitlePadding(context),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
-                          TextsBuilder.h2Bold('ALL'),
-                          TextsBuilder.h2Bold('YOUR', color: Colors.red),
+                          /// Left
+                          Flexible(
+                            flex: 4,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                TextsBuilder.h2Bold('ALL'),
+                                TextsBuilder.h2Bold('YOUR', color: Colors.red),
+                              ],
+                            ),
+                          ),
+
+                          Flexible(
+                            flex: 10,
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width / 40),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: <Widget>[
+                                  TextsBuilder.jumboBold('CLASSES')
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
-
-                    Flexible(
-                      flex: 10,
-                      child: Container(
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 40),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[TextsBuilder.jumboBold('CLASSES')],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                  );
+                } else {
+                  return SliverToBoxAdapter(
+                    child: Container(),
+                  );
+                }
+              },
             ),
 
-            /// Classes list
+            /// Add button if no classes were found
             Observer(
-              builder: (BuildContext context) {
-                return SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                          (BuildContext context, int index) {
+              builder: (_) {
+                if (classesStore.classes.length == 0 &&
+                    !classesStore.isLoading) {
+                  return SliverToBoxAdapter(
+                    child: Container(
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 4),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          TextsBuilder.h1Bold(
+                              "Welcome ${userStore.firstName}!"),
+                          TextsBuilder.h4Bold("Create your first class"),
+                          Container(
+                            margin: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height / 20),
+                            child: ButtonsBuilder.redFlatButton(
+                                "CREATE CLASS", () {}),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                } else {
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ClassesDetailsScreen()));
+                                    builder: (context) =>
+                                        ClassesDetailsScreen()));
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -121,7 +173,8 @@ class _ClassesScreenState extends State<ClassesScreen> with AfterInitMixin<Class
                             margin: EdgeInsets.only(
                                 left: MediaQuery.of(context).size.width * 0.05,
                                 right: MediaQuery.of(context).size.width * 0.05,
-                                bottom: MediaQuery.of(context).size.height * 0.03),
+                                bottom:
+                                    MediaQuery.of(context).size.height * 0.03),
                             child: Stack(
                               children: <Widget>[
                                 AspectRatio(
@@ -138,7 +191,10 @@ class _ClassesScreenState extends State<ClassesScreen> with AfterInitMixin<Class
                                     child: Container(
                                       foregroundDecoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                            colors: [AppColors.bgMainColor, Colors.transparent],
+                                            colors: [
+                                              AppColors.bgMainColor,
+                                              Colors.transparent
+                                            ],
                                             begin: Alignment.bottomCenter,
                                             end: Alignment.topCenter),
                                       ),
@@ -165,9 +221,7 @@ class _ClassesScreenState extends State<ClassesScreen> with AfterInitMixin<Class
                                   top: 10,
                                   right: 10,
                                   child: GestureDetector(
-                                    onTap: () {
-
-                                    },
+                                    onTap: () {},
                                     child: Icon(
                                       FontAwesomeIcons.edit,
                                       color: AppColors.fontColor,
@@ -185,7 +239,8 @@ class _ClassesScreenState extends State<ClassesScreen> with AfterInitMixin<Class
                                         color: AppColors.regularRed,
                                         borderRadius: BorderRadius.circular(5)),
                                     child: TextsBuilder.regularText(
-                                        classesStore.classes[index].languageCode,
+                                        classesStore
+                                            .classes[index].languageCode,
                                         color: Colors.white),
                                   ),
                                 ),
@@ -194,33 +249,38 @@ class _ClassesScreenState extends State<ClassesScreen> with AfterInitMixin<Class
                                   left: 10,
                                   child:
 
-                                  /// LABEL
-                                  Container(
+                                      /// LABEL
+                                      Container(
                                     margin: EdgeInsets.only(
-                                      top: MediaQuery.of(context).size.height / 6,
+                                      top: MediaQuery.of(context).size.height /
+                                          6,
                                     ),
                                     child: Row(
                                       children: <Widget>[
                                         Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                           children: <Widget>[
                                             /// STATUS LABEL
                                             Container(
                                               child: (classesStore
-                                                  .classes[index].isActive)
+                                                      .classes[index].isActive)
                                                   ? BadgesBuilder.label(
-                                                  AppLocalizations.of(context)
-                                                      .translate(widget.screenConstants
-                                                      .classesActiveLabel)
-                                                      .toUpperCase(),
-                                                  AppColors.regularGreen)
+                                                      AppLocalizations.of(
+                                                              context)
+                                                          .translate(widget
+                                                              .screenConstants
+                                                              .classesActiveLabel)
+                                                          .toUpperCase(),
+                                                      AppColors.regularGreen)
                                                   : BadgesBuilder.label(
-                                                  AppLocalizations.of(context)
-                                                      .translate(widget.screenConstants
-                                                      .classesInactiveLabel)
-                                                      .toUpperCase(),
-                                                  AppColors.regularRed),
+                                                      AppLocalizations.of(
+                                                              context)
+                                                          .translate(widget
+                                                              .screenConstants
+                                                              .classesInactiveLabel)
+                                                          .toUpperCase(),
+                                                      AppColors.regularRed),
                                             ),
 
                                             /// DETAILS
@@ -235,8 +295,8 @@ class _ClassesScreenState extends State<ClassesScreen> with AfterInitMixin<Class
                                                               .classes[index]
                                                               .designation),
                                                       Container(
-                                                        margin:
-                                                        EdgeInsets.only(top: 5),
+                                                        margin: EdgeInsets.only(
+                                                            top: 5),
                                                         child: Row(
                                                           children: <Widget>[
                                                             Icon(
@@ -246,19 +306,20 @@ class _ClassesScreenState extends State<ClassesScreen> with AfterInitMixin<Class
                                                                   .fontColor,
                                                             ),
                                                             Container(
-                                                              margin:
-                                                              EdgeInsets.only(
-                                                                  left: 10),
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      left: 10),
                                                               child: TextsBuilder
                                                                   .regularText(
-                                                                  '${classesStore.classes[index].duration} min'),
+                                                                      '${classesStore.classes[index].duration} min'),
                                                             ),
                                                           ],
                                                         ),
                                                       ),
                                                     ],
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                   ),
                                                 ],
                                               ),
@@ -279,7 +340,7 @@ class _ClassesScreenState extends State<ClassesScreen> with AfterInitMixin<Class
                                           Container(
                                             child: Row(
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                               children: <Widget>[],
                                             ),
                                           ),
@@ -292,10 +353,13 @@ class _ClassesScreenState extends State<ClassesScreen> with AfterInitMixin<Class
                             ),
                           ),
                         );
-                      }, childCount: classesStore.classes.length),
-                );
+                      },
+                      childCount: classesStore.classes.length,
+                    ),
+                  );
+                }
               },
-            )
+            ),
           ],
         ),
       ),
@@ -304,11 +368,21 @@ class _ClassesScreenState extends State<ClassesScreen> with AfterInitMixin<Class
 
   @override
   void didInitState() {
+    widget.scrollController.addListener(() {
+      if (widget.scrollController.position.pixels ==
+          widget.scrollController.position.maxScrollExtent) {
+        print("Get More Data");
+      }
+    });
+
     classesStore.setIsLoading(true);
-    restServices.getClassService().getUserClasses(context, 0, 10)
+    restServices
+        .getClassService()
+        .getUserClasses(
+            context, classesStore.pageNumber, classesStore.itemsPerPage)
         .then((classes) => classesStore.addNextPageClasses(classes))
-        .catchError((error) => ToasterBuilder.buildErrorToaster(context, error.cause))
+        .catchError(
+            (error) => ToasterBuilder.buildErrorToaster(context, error.cause))
         .whenComplete(() => classesStore.setIsLoading(false));
   }
-
 }
