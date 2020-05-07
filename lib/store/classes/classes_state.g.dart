@@ -180,4 +180,14 @@ mixin _$ClassesState on _ClassesState, Store {
       _$_ClassesStateActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  dynamic setPageNumber(int pageNumber) {
+    final _$actionInfo = _$_ClassesStateActionController.startAction();
+    try {
+      return super.setPageNumber(pageNumber);
+    } finally {
+      _$_ClassesStateActionController.endAction(_$actionInfo);
+    }
+  }
 }

@@ -64,4 +64,9 @@ abstract class _ClassesState with Store {
     this.classes.addAll(page);
   }
 
+  @action
+  setPageNumber(int pageNumber) {
+    this.pageNumber = pageNumber;
+  }
+
 }
