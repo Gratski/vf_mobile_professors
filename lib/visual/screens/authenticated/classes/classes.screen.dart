@@ -1,21 +1,28 @@
+import 'package:after_init/after_init.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
+import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/authenticated/classes/class_details.screen.dart';
 import 'package:professors/visual/screens/authenticated/classes/create_class_select_language.screen.dart';
-import 'package:professors/visual/screens/authenticated/classes/edit_create/create_or_edit_class.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/visual/widgets/text/badges.builder.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
-class ClassesScreen extends StatelessWidget {
+class ClassesScreen extends StatefulWidget {
+
   ClassConstants screenConstants = ClassConstants();
 
+  @override
+  _ClassesScreenState createState() => _ClassesScreenState();
+}
+
+class _ClassesScreenState extends State<ClassesScreen> with AfterInitMixin<ClassesScreen> {
   @override
   Widget build(BuildContext context) {
     double sectionTopMargin = MediaQuery.of(context).size.height / 20;
@@ -94,259 +101,198 @@ class ClassesScreen extends StatelessWidget {
               ),
             ),
 
-            /*
-            SliverToBoxAdapter(
-              child: Container(
-                padding: AppPaddings.regularPadding(context),
-                child: Row(
-                  children: <Widget>[
-                    /// CALENDAR
-                    Expanded(
-                      flex: 6,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.only(
-                              top: 5, bottom: 5, left: 10, right: 10),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: AppColors.bgGreyColor, width: 2.0)),
-                          child: TextsBuilder.h4Bold(
-                              AppLocalizations.of(context).translate(
-                                  screenConstants.classesCalendarLabel),
-                              color: AppColors.regularGreen),
-                        ),
-                      ),
-                    ),
-
-                    /// SCHEDULE
-                    Expanded(
-                      flex: 6,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.only(
-                              top: 5, bottom: 5, left: 10, right: 10),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: AppColors.bgGreyColor, width: 2.0)),
-                          child: TextsBuilder.h4Bold(
-                              AppLocalizations.of(context).translate(
-                                  screenConstants.classesScheduleLabel),
-                              color: AppColors.regularGreen),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            */
-
             /// Classes list
             Observer(
               builder: (BuildContext context) {
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ClassesDetailsScreen()));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.05,
-                            right: MediaQuery.of(context).size.width * 0.05,
-                            bottom: MediaQuery.of(context).size.height * 0.03),
-                        child: Stack(
-                          children: <Widget>[
-                            AspectRatio(
-                              aspectRatio: 3 / 2,
-                              child: Image.network(
-                                classesStore.classes[index].pictureUrl,
-                                fit: BoxFit.fill,
-                              ),
+                          (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ClassesDetailsScreen()));
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            AspectRatio(
-                              aspectRatio: 3 / 2,
-                              child: Opacity(
-                                opacity: 0.65,
-                                child: Container(
-                                  foregroundDecoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                        colors: [AppColors.bgMainColor, Colors.transparent],
-                                        begin: Alignment.bottomCenter,
-                                        end: Alignment.topCenter),
+                            margin: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width * 0.05,
+                                right: MediaQuery.of(context).size.width * 0.05,
+                                bottom: MediaQuery.of(context).size.height * 0.03),
+                            child: Stack(
+                              children: <Widget>[
+                                AspectRatio(
+                                  aspectRatio: 3 / 2,
+                                  child: Image.network(
+                                    classesStore.classes[index].pictureUrl,
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
-                              ),
-                            ),
-                            Positioned(
-                                top: 10,
-                                left: 10,
-                                child: Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      FontAwesomeIcons.solidSquare,
-                                      color: AppColors.regularRed,
-                                      size: 15,
+                                AspectRatio(
+                                  aspectRatio: 3 / 2,
+                                  child: Opacity(
+                                    opacity: 0.65,
+                                    child: Container(
+                                      foregroundDecoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                            colors: [AppColors.bgMainColor, Colors.transparent],
+                                            begin: Alignment.bottomCenter,
+                                            end: Alignment.topCenter),
+                                      ),
                                     ),
-                                    Icon(FontAwesomeIcons.solidSquare,
-                                        color: Colors.white, size: 15),
-                                    Icon(FontAwesomeIcons.solidSquare,
-                                        color: Colors.white, size: 15)
-                                  ],
-                                )),
-                            Positioned(
-                              top: 10,
-                              right: 10,
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          CreateOrEditClassScreen(
-                                              classesStore.classes[index]
-                                                  .languageContext,
-                                              cd: classesStore.classes[index]),
-                                    ),
-                                  );
-                                },
-                                child: Icon(
-                                  FontAwesomeIcons.edit,
-                                  color: AppColors.fontColor,
-                                  size: 20,
+                                  ),
                                 ),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 10,
-                              right: 10,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                margin: EdgeInsets.only(top: 5),
-                                decoration: BoxDecoration(
-                                    color: AppColors.regularRed,
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: TextsBuilder.regularText(
-                                    classesStore.classes[index].languageContext
-                                        .languageCode,
-                                    color: Colors.white),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 10,
-                              left: 10,
-                              child:
+                                Positioned(
+                                    top: 10,
+                                    left: 10,
+                                    child: Row(
+                                      children: <Widget>[
+                                        Icon(
+                                          FontAwesomeIcons.solidSquare,
+                                          color: AppColors.regularRed,
+                                          size: 15,
+                                        ),
+                                        Icon(FontAwesomeIcons.solidSquare,
+                                            color: Colors.white, size: 15),
+                                        Icon(FontAwesomeIcons.solidSquare,
+                                            color: Colors.white, size: 15)
+                                      ],
+                                    )),
+                                Positioned(
+                                  top: 10,
+                                  right: 10,
+                                  child: GestureDetector(
+                                    onTap: () {
+
+                                    },
+                                    child: Icon(
+                                      FontAwesomeIcons.edit,
+                                      color: AppColors.fontColor,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 10,
+                                  right: 10,
+                                  child: Container(
+                                    padding: EdgeInsets.all(5),
+                                    margin: EdgeInsets.only(top: 5),
+                                    decoration: BoxDecoration(
+                                        color: AppColors.regularRed,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: TextsBuilder.regularText(
+                                        classesStore.classes[index].languageCode,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 10,
+                                  left: 10,
+                                  child:
 
                                   /// LABEL
                                   Container(
-                                margin: EdgeInsets.only(
-                                  top: MediaQuery.of(context).size.height / 6,
-                                ),
-                                child: Row(
-                                  children: <Widget>[
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                    margin: EdgeInsets.only(
+                                      top: MediaQuery.of(context).size.height / 6,
+                                    ),
+                                    child: Row(
                                       children: <Widget>[
-                                        /// STATUS LABEL
-                                        Container(
-                                          child: (classesStore
+                                        Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            /// STATUS LABEL
+                                            Container(
+                                              child: (classesStore
                                                   .classes[index].isActive)
-                                              ? BadgesBuilder.label(
+                                                  ? BadgesBuilder.label(
                                                   AppLocalizations.of(context)
-                                                      .translate(screenConstants
-                                                          .classesActiveLabel)
+                                                      .translate(widget.screenConstants
+                                                      .classesActiveLabel)
                                                       .toUpperCase(),
                                                   AppColors.regularGreen)
-                                              : BadgesBuilder.label(
+                                                  : BadgesBuilder.label(
                                                   AppLocalizations.of(context)
-                                                      .translate(screenConstants
-                                                          .classesInactiveLabel)
+                                                      .translate(widget.screenConstants
+                                                      .classesInactiveLabel)
                                                       .toUpperCase(),
                                                   AppColors.regularRed),
-                                        ),
+                                            ),
 
-                                        /// DETAILS
-                                        Container(
-                                          margin: EdgeInsets.only(top: 5),
-                                          child: Row(
-                                            children: <Widget>[
-                                              Column(
+                                            /// DETAILS
+                                            Container(
+                                              margin: EdgeInsets.only(top: 5),
+                                              child: Row(
                                                 children: <Widget>[
-                                                  TextsBuilder.h3Bold(
-                                                      classesStore
-                                                          .classes[index]
-                                                          .designation),
-                                                  Container(
-                                                    margin:
+                                                  Column(
+                                                    children: <Widget>[
+                                                      TextsBuilder.h3Bold(
+                                                          classesStore
+                                                              .classes[index]
+                                                              .designation),
+                                                      Container(
+                                                        margin:
                                                         EdgeInsets.only(top: 5),
-                                                    child: Row(
-                                                      children: <Widget>[
-                                                        Icon(
-                                                          FontAwesomeIcons
-                                                              .clock,
-                                                          color: AppColors
-                                                              .fontColor,
-                                                        ),
-                                                        Container(
-                                                          margin:
+                                                        child: Row(
+                                                          children: <Widget>[
+                                                            Icon(
+                                                              FontAwesomeIcons
+                                                                  .clock,
+                                                              color: AppColors
+                                                                  .fontColor,
+                                                            ),
+                                                            Container(
+                                                              margin:
                                                               EdgeInsets.only(
                                                                   left: 10),
-                                                          child: TextsBuilder
-                                                              .regularText(
+                                                              child: TextsBuilder
+                                                                  .regularText(
                                                                   '${classesStore.classes[index].duration} min'),
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                    ],
+                                                    crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                   ),
                                                 ],
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 10),
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
+                                Container(
+                                  margin: EdgeInsets.only(left: 10),
+                                  child: Column(
                                     children: <Widget>[
-                                      /// DIFFICULTY
-                                      Container(
-                                        child: Row(
-                                          crossAxisAlignment:
+                                      Row(
+                                        children: <Widget>[
+                                          /// DIFFICULTY
+                                          Container(
+                                            child: Row(
+                                              crossAxisAlignment:
                                               CrossAxisAlignment.start,
-                                          children: <Widget>[],
-                                        ),
+                                              children: <Widget>[],
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }, childCount: classesStore.classes.length),
+                          ),
+                        );
+                      }, childCount: classesStore.classes.length),
                 );
               },
             )
@@ -355,4 +301,14 @@ class ClassesScreen extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void didInitState() {
+    classesStore.setIsLoading(true);
+    restServices.getClassService().getUserClasses(context, 0, 10)
+        .then((classes) => classesStore.addNextPageClasses(classes))
+        .catchError((error) => ToasterBuilder.buildErrorToaster(context, error.cause))
+        .whenComplete(() => classesStore.setIsLoading(false));
+  }
+
 }

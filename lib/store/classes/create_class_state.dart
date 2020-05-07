@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:professors/models/category/category.model.dart';
 import 'package:professors/models/classes/class.model.dart';
 
 part 'create_class_state.g.dart';
@@ -16,6 +17,20 @@ abstract class _CreateClassState with Store {
   @observable
   int currentPageNumber = 0;
 
+  /// loading flags
+  @observable
+  bool isLoadingContext = true; // discipline details
+  @observable
+  bool isLoadingCategories = true; // categories list
+  @observable
+  bool isLoadingSubCategories = true; // sub categories list
+
+  /// required data for context
+  @observable
+  ObservableList<CategoryModel> categoriesList = ObservableList.of([]);
+  @observable
+  ObservableList<CategoryModel> subCategoriesList = ObservableList.of([]);
+
   /// Class Attributes
   @observable
   int languageContextId;
@@ -31,6 +46,13 @@ abstract class _CreateClassState with Store {
 
   @observable
   int categoryId;
+  @observable
+  String categoryName;
+
+  @observable
+  int subCategoryId;
+  @observable
+  String subCategoryName;
 
   @observable
   String equipment;
@@ -45,6 +67,29 @@ abstract class _CreateClassState with Store {
   @action
   nextPage() {
     this.currentPageNumber++;
+  }
+
+  setCategories(List<CategoryModel> categories) {
+    this.categoriesList.clear();
+    this.categoriesList.addAll(categories);
+  }
+  setSubCategories(List<CategoryModel> subCategories) {
+    this.subCategoriesList.clear();
+    this.subCategoriesList.addAll(subCategories);
+  }
+
+  /// Loaders related
+  @action
+  setIsLoadingContext(bool isLoading) {
+    this.isLoadingContext = isLoading;
+  }
+  @action
+  setIsLoadingCategories(bool isLoading) {
+    this.isLoadingCategories = isLoading;
+  }
+  @action
+  setIsLoadingSubCategories(bool isLoading) {
+    this.isLoadingSubCategories = isLoading;
   }
 
   /// Screen Actions
@@ -64,10 +109,24 @@ abstract class _CreateClassState with Store {
   setDuration(int newDuration) {
     this.duration = newDuration;
   }
+
   @action
   setCategoryId(int newCategoryId) {
     this.categoryId = newCategoryId;
   }
+  @action
+  setCategoryName(String name) {
+    this.categoryName = name;
+  }
+  @action
+  setSubCategoryId(int newSubCategoryId) {
+    this.subCategoryId = newSubCategoryId;
+  }
+  @action
+  setSubCategoryName(String name) {
+    this.subCategoryName = name;
+  }
+
   @action
   setEquipment(String equipment){
     this.equipment = equipment;

@@ -19,36 +19,43 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class AbstractRestService {
   String REST_URL = "http://192.168.1.103:2222/api/v1";
 
-  Future<Response> performJsonPost(BuildContext context, String path, String body, {bool useAuth = true}) async {
+  Future<Response> performJsonPost(
+      BuildContext context, String path, String body,
+      {bool useAuth = true}) async {
     try {
-      final response = await http.post(path, body: body, headers: await _authHeaders(context, useAuth: useAuth));
+      final response = await http.post(path,
+          body: body, headers: await _authHeaders(context, useAuth: useAuth));
       await _handleError(context, response);
       return response;
-    } on ApiException catch(e) {
+    } on ApiException catch (e) {
       throw e;
-    } on Exception catch(e) {
+    } on Exception catch (e) {
       throw ApiException("Internet Error");
     }
   }
 
-  Future<Response> performJsonPut(BuildContext context, String path, String body, {bool useAuth: true}) async {
-    final response = await http.put(path, body: body, headers: await _authHeaders(context));
+  Future<Response> performJsonPut(
+      BuildContext context, String path, String body,
+      {bool useAuth: true}) async {
+    final response =
+        await http.put(path, body: body, headers: await _authHeaders(context));
     await _handleError(context, response);
     return response;
   }
 
-  Future<Response> performJsonGet(BuildContext context, String path, {bool useAuth = true, bool useCache = false}) async {
+  Future<Response> performJsonGet(BuildContext context, String path,
+      {bool useAuth = true, bool useCache = false}) async {
     try {
-
       // check cache
       if (useCache) {
-       final cachedContent = await fetchFromCache(path);
-       if (cachedContent != null && cachedContent.isNotEmpty) {
-         return Response(cachedContent, 200);
-       }
+        final cachedContent = await fetchFromCache(path);
+        if (cachedContent != null && cachedContent.isNotEmpty) {
+          return Response(cachedContent, 200);
+        }
       }
 
-      final response = await http.get(path, headers: await _authHeaders(context, useAuth: useAuth));
+      final response = await http.get(path,
+          headers: await _authHeaders(context, useAuth: useAuth));
       await _handleError(context, response);
 
       // update cache
@@ -57,19 +64,21 @@ abstract class AbstractRestService {
       }
 
       return response;
-    } on Exception catch(e) {
+    } on Exception catch (e) {
       print("");
     }
   }
 
-  Future<Response> performJsonDelete(BuildContext context, String path, {bool useAuth = true}) async {
+  Future<Response> performJsonDelete(BuildContext context, String path,
+      {bool useAuth = true}) async {
     try {
-      final response = await http.delete(path, headers: await _authHeaders(context, useAuth: useAuth));
+      final response = await http.delete(path,
+          headers: await _authHeaders(context, useAuth: useAuth));
       await _handleError(context, response);
       return response;
-    } on ApiException catch(e) {
+    } on ApiException catch (e) {
       throw e;
-    } on Exception catch(e) {
+    } on Exception catch (e) {
       ToasterBuilder.buildErrorToaster(context, "Internet Connection Error");
     }
   }
@@ -77,11 +86,12 @@ abstract class AbstractRestService {
   Future<void> uploadFile(BuildContext context, File file, String url) async {
     try {
       var compressedFile = await compressAndGetFile(file);
-      var stream = new http.ByteStream(DelegatingStream.typed(compressedFile.openRead()));
+      var stream = new http.ByteStream(
+          DelegatingStream.typed(compressedFile.openRead()));
       var length = await compressedFile.length();
 
       var imageSize = await compressedFile.length();
-      if ( imageSize > 80000 ) {
+      if (imageSize > 80000) {
         throw ApiException("Please choose a smaller picture");
       }
 
@@ -100,19 +110,22 @@ abstract class AbstractRestService {
         Map<String, dynamic> result = jsonDecode(value);
         int status = result["status"];
         String pictureUrl = result["pictureUrl"];
-        if ( (pictureUrl != null && pictureUrl.isNotEmpty) || (status == 200 || status == 201) ) {
+        if ((pictureUrl != null && pictureUrl.isNotEmpty) ||
+            (status == 200 || status == 201)) {
           restServices.getUserService().getUserPersonalDetails(context);
           ToasterBuilder.buildSuccessToaster(context, "Picture changed!");
           return;
-        } else if (status == 500){
-          throw ToasterBuilder.buildErrorToaster(context, "Please consider a smaller file");
+        } else if (status == 500) {
+          throw ToasterBuilder.buildErrorToaster(
+              context, "Please consider a smaller file");
         } else {
-          throw ToasterBuilder.buildErrorToaster(context, "Something went wrong. Please try again later");
+          throw ToasterBuilder.buildErrorToaster(
+              context, "Something went wrong. Please try again later");
         }
       });
-    } on FileSizeException catch(e) {
+    } on FileSizeException catch (e) {
       throw ApiException(e.cause);
-    } on Exception catch(e) {
+    } on Exception catch (e) {
       throw ApiException("Something went wrong.. Please try again");
     }
   }
@@ -123,11 +136,12 @@ abstract class AbstractRestService {
   Future<File> compressAndGetFile(File file) async {
     String filename = basename(file.path);
     Directory dir = await path_provider.getTemporaryDirectory();
-    final targetPath = dir.absolute.path + "/vfit_${DateTime.now().toIso8601String()}_$filename";
+    final targetPath = dir.absolute.path +
+        "/vfit_${DateTime.now().toIso8601String()}_$filename";
 
     var compressedFile = await FlutterImageCompress.compressAndGetFile(
-      file.absolute.path, targetPath, minWidth: 400, quality: 25
-    );
+        file.absolute.path, targetPath,
+        minWidth: 400, quality: 25);
 
     return compressedFile;
   }
@@ -154,11 +168,11 @@ abstract class AbstractRestService {
     ToasterBuilder.buildErrorToaster(context, "Something went wrong");
     return;
   }
-  Future<void> _handleError(BuildContext context, Response response ) async {
-    if( response.statusCode >= 400 ) {
 
+  Future<void> _handleError(BuildContext context, Response response) async {
+    if (response.statusCode >= 400) {
       // not authenticated
-      if ( response.statusCode == 401 || response.statusCode == 403 ) {
+      if (response.statusCode == 401 || response.statusCode == 403) {
         await restServices.getAuthRestService().signOut();
         Navigator.pushNamedAndRemoveUntil(context, "/login", (r) => false);
       }
@@ -169,16 +183,18 @@ abstract class AbstractRestService {
     return;
   }
 
-////////////////////////////////////////
-// Helpers
-////////////////////////////////////////
-  Future<Map<String, String>> _authHeaders(BuildContext context, {bool useAuth = true}) async {
+  ////////////////////////////////////////
+  // Helpers
+  ////////////////////////////////////////
+  Future<Map<String, String>> _authHeaders(BuildContext context,
+      {bool useAuth = true}) async {
     Map<String, String> map = {
       "content-type": "application/json",
-      "Accept-Language": LocalizationConfig.extractCurrentLocale(context).languageCode,
+      "Accept-Language":
+          LocalizationConfig.extractCurrentLocale(context).languageCode,
     };
 
-    if ( useAuth ) {
+    if (useAuth) {
       String token = "";
       if (authStore.authToken == null || authStore.authToken.isEmpty) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -186,7 +202,7 @@ abstract class AbstractRestService {
       } else {
         token = authStore.authToken;
       }
-      if ( token != null && token.isNotEmpty ) {
+      if (token != null && token.isNotEmpty) {
         map["Authorization"] = "Bearer $token";
       }
     }
@@ -205,13 +221,13 @@ abstract class AbstractRestService {
     return jsonDecode(rsp);
   }
 
-////////////////////////////////////////
-// Cache Handlers
-////////////////////////////////////////
+  ////////////////////////////////////////
+  // Cache Handlers
+  ////////////////////////////////////////
   Future<String> fetchFromCache(String url) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String cachedContent = prefs.getString(url);
-    if ( cachedContent != null ) {
+    if (cachedContent != null) {
       return cachedContent;
     } else {
       return null;
@@ -225,6 +241,6 @@ abstract class AbstractRestService {
   }
 
   String enumToString(dynamic e) {
-    return '${e.toString().substring(e.toString().indexOf('.')+1)}';
+    return '${e.toString().substring(e.toString().indexOf('.') + 1)}';
   }
 }

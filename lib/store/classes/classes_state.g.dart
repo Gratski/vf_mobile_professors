@@ -9,21 +9,21 @@ part of 'classes_state.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ClassesState on _ClassesState, Store {
-  final _$isLoadingNextAtom = Atom(name: '_ClassesState.isLoadingNext');
+  final _$isLoadingAtom = Atom(name: '_ClassesState.isLoading');
 
   @override
-  bool get isLoadingNext {
-    _$isLoadingNextAtom.context.enforceReadPolicy(_$isLoadingNextAtom);
-    _$isLoadingNextAtom.reportObserved();
-    return super.isLoadingNext;
+  bool get isLoading {
+    _$isLoadingAtom.context.enforceReadPolicy(_$isLoadingAtom);
+    _$isLoadingAtom.reportObserved();
+    return super.isLoading;
   }
 
   @override
-  set isLoadingNext(bool value) {
-    _$isLoadingNextAtom.context.conditionallyRunInAction(() {
-      super.isLoadingNext = value;
-      _$isLoadingNextAtom.reportChanged();
-    }, _$isLoadingNextAtom, name: '${_$isLoadingNextAtom.name}_set');
+  set isLoading(bool value) {
+    _$isLoadingAtom.context.conditionallyRunInAction(() {
+      super.isLoading = value;
+      _$isLoadingAtom.reportChanged();
+    }, _$isLoadingAtom, name: '${_$isLoadingAtom.name}_set');
   }
 
   final _$isLoadingPreviousAtom = Atom(name: '_ClassesState.isLoadingPrevious');
@@ -41,6 +41,23 @@ mixin _$ClassesState on _ClassesState, Store {
       super.isLoadingPrevious = value;
       _$isLoadingPreviousAtom.reportChanged();
     }, _$isLoadingPreviousAtom, name: '${_$isLoadingPreviousAtom.name}_set');
+  }
+
+  final _$isLoadingNextAtom = Atom(name: '_ClassesState.isLoadingNext');
+
+  @override
+  bool get isLoadingNext {
+    _$isLoadingNextAtom.context.enforceReadPolicy(_$isLoadingNextAtom);
+    _$isLoadingNextAtom.reportObserved();
+    return super.isLoadingNext;
+  }
+
+  @override
+  set isLoadingNext(bool value) {
+    _$isLoadingNextAtom.context.conditionallyRunInAction(() {
+      super.isLoadingNext = value;
+      _$isLoadingNextAtom.reportChanged();
+    }, _$isLoadingNextAtom, name: '${_$isLoadingNextAtom.name}_set');
   }
 
   final _$pageAtom = Atom(name: '_ClassesState.page');
@@ -80,14 +97,14 @@ mixin _$ClassesState on _ClassesState, Store {
   final _$classesAtom = Atom(name: '_ClassesState.classes');
 
   @override
-  ObservableList<ClassModel> get classes {
+  ObservableList<ClassListItemModel> get classes {
     _$classesAtom.context.enforceReadPolicy(_$classesAtom);
     _$classesAtom.reportObserved();
     return super.classes;
   }
 
   @override
-  set classes(ObservableList<ClassModel> value) {
+  set classes(ObservableList<ClassListItemModel> value) {
     _$classesAtom.context.conditionallyRunInAction(() {
       super.classes = value;
       _$classesAtom.reportChanged();
@@ -98,10 +115,50 @@ mixin _$ClassesState on _ClassesState, Store {
       ActionController(name: '_ClassesState');
 
   @override
-  dynamic addClasses(List<ClassModel> newClasses) {
+  dynamic setIsLoading(bool isLoading) {
     final _$actionInfo = _$_ClassesStateActionController.startAction();
     try {
-      return super.addClasses(newClasses);
+      return super.setIsLoading(isLoading);
+    } finally {
+      _$_ClassesStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setIsLoadingPrevious(bool isLoading) {
+    final _$actionInfo = _$_ClassesStateActionController.startAction();
+    try {
+      return super.setIsLoadingPrevious(isLoading);
+    } finally {
+      _$_ClassesStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setIsLoadingNext(bool isLoading) {
+    final _$actionInfo = _$_ClassesStateActionController.startAction();
+    try {
+      return super.setIsLoadingNext(isLoading);
+    } finally {
+      _$_ClassesStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic addNextPageClasses(List<ClassListItemModel> page) {
+    final _$actionInfo = _$_ClassesStateActionController.startAction();
+    try {
+      return super.addNextPageClasses(page);
+    } finally {
+      _$_ClassesStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic addPreviousPageClasses(List<ClassListItemModel> page) {
+    final _$actionInfo = _$_ClassesStateActionController.startAction();
+    try {
+      return super.addPreviousPageClasses(page);
     } finally {
       _$_ClassesStateActionController.endAction(_$actionInfo);
     }

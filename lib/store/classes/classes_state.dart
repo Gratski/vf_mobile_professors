@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:professors/models/category/category.model.dart';
 import 'package:professors/models/classes/class.model.dart';
+import 'package:professors/models/classes/class_list_item.dart';
 import 'package:professors/models/language_context/language_context.model.dart';
 
 part 'classes_state.g.dart';
@@ -16,11 +17,14 @@ abstract class _ClassesState with Store {
 
   /// When scrolling down
   @observable
-  bool isLoadingNext;
+  bool isLoading = true;
 
   /// When already scrolled a lot and is going back up
   @observable
-  bool isLoadingPrevious;
+  bool isLoadingPrevious = false;
+
+  @observable
+  bool isLoadingNext = false;
 
   @observable
   int page = 0;
@@ -29,99 +33,31 @@ abstract class _ClassesState with Store {
   int size = 20;
 
   @observable
-  ObservableList<ClassModel> classes = ObservableList.of(
-    [
-      ClassModel(
-        1,
-        'Class Title Here',
-        'Class description is going here',
-          'Required Equipment',
-        'https://image.shutterstock.com/image-photo/fitness-sport-training-gym-lifestyle-260nw-238400998.jpg',
-        true,
-        30,
-        LanguageContextModel(
-          1, 10, 'PT'
-        ),
-          CategoryModel(
-              4,
-              'Pure Cardio',
-              'Pure Cardio Workout Training'
-          )
-      ),
-      ClassModel(
-          1,
-          'Class Title Here',
-          'Class description is going here',
-          'Required Equipment',
-          'https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-          true,
-          30,
-          LanguageContextModel(
-              1, 10, 'PT'
-          ),
-          CategoryModel(
-              4,
-              'Pure Cardio',
-              'Pure Cardio Workout Training'
-          )
-      ),
-      ClassModel(
-          1,
-          'Class Title Here',
-          'Class description is going here',
-          'Required Equipment',
-          'https://yourdailywire.com/wp-content/uploads/2019/02/6-Reasons-You-Should-Never-Open-a-Gym.jpg',
-          true,
-          30,
-          LanguageContextModel(
-              1, 10, 'PT'
-          ),
-          CategoryModel(
-              4,
-              'Pure Cardio',
-              'Pure Cardio Workout Training'
-          )
-      ),
-      ClassModel(
-          1,
-          'Class Title Here',
-          'Class description is going here',
-          'Required Equipment',
-          'https://image.shutterstock.com/image-photo/fitness-sport-training-gym-lifestyle-260nw-238400998.jpg',
-          true,
-          30,
-          LanguageContextModel(
-              1, 10, 'PT'
-          ),
-          CategoryModel(
-              4,
-              'Pure Cardio',
-              'Pure Cardio Workout Training'
-          )
-      ),
-      ClassModel(
-          1,
-          'Class Title Here',
-          'Class description is going here',
-          'Required Equipment',
-          'https://image.shutterstock.com/image-photo/fitness-sport-training-gym-lifestyle-260nw-238400998.jpg',
-          false,
-          45,
-          LanguageContextModel(
-              1, 11, 'EN'
-          ),
-          CategoryModel(
-              4,
-              'Pure Cardio',
-              'Pure Cardio Workout Training'
-          )
-      )
-    ],
-  );
+  ObservableList<ClassListItemModel> classes = ObservableList.of([]);
 
   @action
-  addClasses(List<ClassModel> newClasses){
-    this.classes.addAll(newClasses);
+  setIsLoading(bool isLoading) {
+    this.isLoading = isLoading;
+  }
+
+  @action
+  setIsLoadingPrevious(bool isLoading) {
+    this.isLoadingPrevious = isLoading;
+  }
+
+  @action
+  setIsLoadingNext(bool isLoading) {
+    this.isLoadingNext = isLoading;
+  }
+
+  @action
+  addNextPageClasses(List<ClassListItemModel> page){
+    this.classes.addAll(page);
+  }
+
+  @action
+  addPreviousPageClasses(List<ClassListItemModel> page) {
+    this.classes.addAll(page);
   }
 
 }

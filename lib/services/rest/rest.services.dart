@@ -1,4 +1,6 @@
 import 'package:professors/services/rest/auth.service.dart';
+import 'package:professors/services/rest/categories.service.dart';
+import 'package:professors/services/rest/class.service.dart';
 import 'package:professors/services/rest/countries.service.dart';
 import 'package:professors/services/rest/language_profile.service.dart';
 import 'package:professors/services/rest/profile_details.service.dart';
@@ -21,6 +23,13 @@ class RestServices {
   ///
   UserService getUserService() {
     return UserService();
+  }
+
+  ///
+  /// Gets the Category Service
+  ///
+  CategoryService getCategories() {
+    return CategoryService();
   }
 
   ///
@@ -63,6 +72,10 @@ class RestServices {
   ///
   SupportService getSupportService() {
     return SupportService();
+  }
+
+  ClassService getClassService() {
+    return ClassService();
   }
 
 }

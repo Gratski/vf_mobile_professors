@@ -262,7 +262,7 @@ class DashboardScreen extends StatelessWidget {
                         children: <Widget>[
                           Observer(
                             builder: (_) {
-                              if (dashboardStore.isNextClassesLoading) {
+                              if (dashboardStore.isClassesLoading) {
                                 return Text('');
                               } else {
                                 return TextsBuilder.h1Bold(
@@ -274,16 +274,16 @@ class DashboardScreen extends StatelessWidget {
                           ),
                           Observer(
                             builder: (_) {
-                              if (!dashboardStore.isNextClassesLoading) {
+                              if (!dashboardStore.isClassesLoading) {
                                 // show next classes list if there any
-                                if (dashboardStore.nextClasses.length > 0) {
+                                if (dashboardStore.classes.length > 0) {
                                   return ListView.builder(
                                     shrinkWrap: true,
                                     itemCount:
-                                        dashboardStore.nextClasses.length,
+                                        dashboardStore.classes.length,
                                     itemBuilder: (_, int index) {
                                       return Text(
-                                          '${dashboardStore.nextClasses[index].designation}');
+                                          '${dashboardStore.classes[index].designation}');
                                     },
                                   );
                                 } else {

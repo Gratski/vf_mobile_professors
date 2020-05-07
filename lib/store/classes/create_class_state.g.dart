@@ -27,6 +27,99 @@ mixin _$CreateClassState on _CreateClassState, Store {
     }, _$currentPageNumberAtom, name: '${_$currentPageNumberAtom.name}_set');
   }
 
+  final _$isLoadingContextAtom =
+      Atom(name: '_CreateClassState.isLoadingContext');
+
+  @override
+  bool get isLoadingContext {
+    _$isLoadingContextAtom.context.enforceReadPolicy(_$isLoadingContextAtom);
+    _$isLoadingContextAtom.reportObserved();
+    return super.isLoadingContext;
+  }
+
+  @override
+  set isLoadingContext(bool value) {
+    _$isLoadingContextAtom.context.conditionallyRunInAction(() {
+      super.isLoadingContext = value;
+      _$isLoadingContextAtom.reportChanged();
+    }, _$isLoadingContextAtom, name: '${_$isLoadingContextAtom.name}_set');
+  }
+
+  final _$isLoadingCategoriesAtom =
+      Atom(name: '_CreateClassState.isLoadingCategories');
+
+  @override
+  bool get isLoadingCategories {
+    _$isLoadingCategoriesAtom.context
+        .enforceReadPolicy(_$isLoadingCategoriesAtom);
+    _$isLoadingCategoriesAtom.reportObserved();
+    return super.isLoadingCategories;
+  }
+
+  @override
+  set isLoadingCategories(bool value) {
+    _$isLoadingCategoriesAtom.context.conditionallyRunInAction(() {
+      super.isLoadingCategories = value;
+      _$isLoadingCategoriesAtom.reportChanged();
+    }, _$isLoadingCategoriesAtom,
+        name: '${_$isLoadingCategoriesAtom.name}_set');
+  }
+
+  final _$isLoadingSubCategoriesAtom =
+      Atom(name: '_CreateClassState.isLoadingSubCategories');
+
+  @override
+  bool get isLoadingSubCategories {
+    _$isLoadingSubCategoriesAtom.context
+        .enforceReadPolicy(_$isLoadingSubCategoriesAtom);
+    _$isLoadingSubCategoriesAtom.reportObserved();
+    return super.isLoadingSubCategories;
+  }
+
+  @override
+  set isLoadingSubCategories(bool value) {
+    _$isLoadingSubCategoriesAtom.context.conditionallyRunInAction(() {
+      super.isLoadingSubCategories = value;
+      _$isLoadingSubCategoriesAtom.reportChanged();
+    }, _$isLoadingSubCategoriesAtom,
+        name: '${_$isLoadingSubCategoriesAtom.name}_set');
+  }
+
+  final _$categoriesListAtom = Atom(name: '_CreateClassState.categoriesList');
+
+  @override
+  ObservableList<CategoryModel> get categoriesList {
+    _$categoriesListAtom.context.enforceReadPolicy(_$categoriesListAtom);
+    _$categoriesListAtom.reportObserved();
+    return super.categoriesList;
+  }
+
+  @override
+  set categoriesList(ObservableList<CategoryModel> value) {
+    _$categoriesListAtom.context.conditionallyRunInAction(() {
+      super.categoriesList = value;
+      _$categoriesListAtom.reportChanged();
+    }, _$categoriesListAtom, name: '${_$categoriesListAtom.name}_set');
+  }
+
+  final _$subCategoriesListAtom =
+      Atom(name: '_CreateClassState.subCategoriesList');
+
+  @override
+  ObservableList<CategoryModel> get subCategoriesList {
+    _$subCategoriesListAtom.context.enforceReadPolicy(_$subCategoriesListAtom);
+    _$subCategoriesListAtom.reportObserved();
+    return super.subCategoriesList;
+  }
+
+  @override
+  set subCategoriesList(ObservableList<CategoryModel> value) {
+    _$subCategoriesListAtom.context.conditionallyRunInAction(() {
+      super.subCategoriesList = value;
+      _$subCategoriesListAtom.reportChanged();
+    }, _$subCategoriesListAtom, name: '${_$subCategoriesListAtom.name}_set');
+  }
+
   final _$languageContextIdAtom =
       Atom(name: '_CreateClassState.languageContextId');
 
@@ -113,6 +206,57 @@ mixin _$CreateClassState on _CreateClassState, Store {
     }, _$categoryIdAtom, name: '${_$categoryIdAtom.name}_set');
   }
 
+  final _$categoryNameAtom = Atom(name: '_CreateClassState.categoryName');
+
+  @override
+  String get categoryName {
+    _$categoryNameAtom.context.enforceReadPolicy(_$categoryNameAtom);
+    _$categoryNameAtom.reportObserved();
+    return super.categoryName;
+  }
+
+  @override
+  set categoryName(String value) {
+    _$categoryNameAtom.context.conditionallyRunInAction(() {
+      super.categoryName = value;
+      _$categoryNameAtom.reportChanged();
+    }, _$categoryNameAtom, name: '${_$categoryNameAtom.name}_set');
+  }
+
+  final _$subCategoryIdAtom = Atom(name: '_CreateClassState.subCategoryId');
+
+  @override
+  int get subCategoryId {
+    _$subCategoryIdAtom.context.enforceReadPolicy(_$subCategoryIdAtom);
+    _$subCategoryIdAtom.reportObserved();
+    return super.subCategoryId;
+  }
+
+  @override
+  set subCategoryId(int value) {
+    _$subCategoryIdAtom.context.conditionallyRunInAction(() {
+      super.subCategoryId = value;
+      _$subCategoryIdAtom.reportChanged();
+    }, _$subCategoryIdAtom, name: '${_$subCategoryIdAtom.name}_set');
+  }
+
+  final _$subCategoryNameAtom = Atom(name: '_CreateClassState.subCategoryName');
+
+  @override
+  String get subCategoryName {
+    _$subCategoryNameAtom.context.enforceReadPolicy(_$subCategoryNameAtom);
+    _$subCategoryNameAtom.reportObserved();
+    return super.subCategoryName;
+  }
+
+  @override
+  set subCategoryName(String value) {
+    _$subCategoryNameAtom.context.conditionallyRunInAction(() {
+      super.subCategoryName = value;
+      _$subCategoryNameAtom.reportChanged();
+    }, _$subCategoryNameAtom, name: '${_$subCategoryNameAtom.name}_set');
+  }
+
   final _$equipmentAtom = Atom(name: '_CreateClassState.equipment');
 
   @override
@@ -178,6 +322,36 @@ mixin _$CreateClassState on _CreateClassState, Store {
   }
 
   @override
+  dynamic setIsLoadingContext(bool isLoading) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setIsLoadingContext(isLoading);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setIsLoadingCategories(bool isLoading) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setIsLoadingCategories(isLoading);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setIsLoadingSubCategories(bool isLoading) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setIsLoadingSubCategories(isLoading);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setLanguageContextId(int languageContextId) {
     final _$actionInfo = _$_CreateClassStateActionController.startAction();
     try {
@@ -222,6 +396,36 @@ mixin _$CreateClassState on _CreateClassState, Store {
     final _$actionInfo = _$_CreateClassStateActionController.startAction();
     try {
       return super.setCategoryId(newCategoryId);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setCategoryName(String name) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setCategoryName(name);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setSubCategoryId(int newSubCategoryId) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setSubCategoryId(newSubCategoryId);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setSubCategoryName(String name) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setSubCategoryName(name);
     } finally {
       _$_CreateClassStateActionController.endAction(_$actionInfo);
     }

@@ -26,24 +26,21 @@ mixin _$DashboardState on _DashboardState, Store {
     }, _$isLoadingAtom, name: '${_$isLoadingAtom.name}_set');
   }
 
-  final _$isNextClassesLoadingAtom =
-      Atom(name: '_DashboardState.isNextClassesLoading');
+  final _$isClassesLoadingAtom = Atom(name: '_DashboardState.isClassesLoading');
 
   @override
-  bool get isNextClassesLoading {
-    _$isNextClassesLoadingAtom.context
-        .enforceReadPolicy(_$isNextClassesLoadingAtom);
-    _$isNextClassesLoadingAtom.reportObserved();
-    return super.isNextClassesLoading;
+  bool get isClassesLoading {
+    _$isClassesLoadingAtom.context.enforceReadPolicy(_$isClassesLoadingAtom);
+    _$isClassesLoadingAtom.reportObserved();
+    return super.isClassesLoading;
   }
 
   @override
-  set isNextClassesLoading(bool value) {
-    _$isNextClassesLoadingAtom.context.conditionallyRunInAction(() {
-      super.isNextClassesLoading = value;
-      _$isNextClassesLoadingAtom.reportChanged();
-    }, _$isNextClassesLoadingAtom,
-        name: '${_$isNextClassesLoadingAtom.name}_set');
+  set isClassesLoading(bool value) {
+    _$isClassesLoadingAtom.context.conditionallyRunInAction(() {
+      super.isClassesLoading = value;
+      _$isClassesLoadingAtom.reportChanged();
+    }, _$isClassesLoadingAtom, name: '${_$isClassesLoadingAtom.name}_set');
   }
 
   final _$scoreAtom = Atom(name: '_DashboardState.score');
@@ -179,21 +176,21 @@ mixin _$DashboardState on _DashboardState, Store {
         name: '${_$currentMonthCancellationsAtom.name}_set');
   }
 
-  final _$nextClassesAtom = Atom(name: '_DashboardState.nextClasses');
+  final _$classesAtom = Atom(name: '_DashboardState.classes');
 
   @override
-  ObservableList<ClassListItem> get nextClasses {
-    _$nextClassesAtom.context.enforceReadPolicy(_$nextClassesAtom);
-    _$nextClassesAtom.reportObserved();
-    return super.nextClasses;
+  ObservableList<ClassListItemModel> get classes {
+    _$classesAtom.context.enforceReadPolicy(_$classesAtom);
+    _$classesAtom.reportObserved();
+    return super.classes;
   }
 
   @override
-  set nextClasses(ObservableList<ClassListItem> value) {
-    _$nextClassesAtom.context.conditionallyRunInAction(() {
-      super.nextClasses = value;
-      _$nextClassesAtom.reportChanged();
-    }, _$nextClassesAtom, name: '${_$nextClassesAtom.name}_set');
+  set classes(ObservableList<ClassListItemModel> value) {
+    _$classesAtom.context.conditionallyRunInAction(() {
+      super.classes = value;
+      _$classesAtom.reportChanged();
+    }, _$classesAtom, name: '${_$classesAtom.name}_set');
   }
 
   final _$_DashboardStateActionController =
@@ -210,10 +207,20 @@ mixin _$DashboardState on _DashboardState, Store {
   }
 
   @override
-  dynamic setNextClassesLoading(bool isLoading) {
+  dynamic setClassesLoading(bool isLoading) {
     final _$actionInfo = _$_DashboardStateActionController.startAction();
     try {
-      return super.setNextClassesLoading(isLoading);
+      return super.setClassesLoading(isLoading);
+    } finally {
+      _$_DashboardStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setClasses(List<ClassListItemModel> classes) {
+    final _$actionInfo = _$_DashboardStateActionController.startAction();
+    try {
+      return super.setClasses(classes);
     } finally {
       _$_DashboardStateActionController.endAction(_$actionInfo);
     }

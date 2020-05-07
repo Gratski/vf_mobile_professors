@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
+class ClassListItemModel {
 
-class ClassListItem {
+  final String designation, description, pictureUrl, languageCode;
+  final int id, difficultyLevel, duration;
+  final bool isActive;
 
-  final String designation;
-  final String description;
-  final String pictureUrl;
-
-  ClassListItem({ @required this.designation, @required this.description, @required this.pictureUrl});
+  ClassListItemModel(this.id, this.designation, this.description, this.pictureUrl, this.languageCode, this.difficultyLevel, this.duration, this.isActive);
 
 }

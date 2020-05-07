@@ -7,6 +7,7 @@ import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/models/category/category.model.dart';
 import 'package:professors/models/classes/class.model.dart';
 import 'package:professors/models/language_context/language_context.model.dart';
+import 'package:professors/store/classes/create_class_state.dart';
 import 'package:professors/visual/screens/authenticated/classes/edit_create/pages/class_details.page.dart';
 import 'package:professors/visual/screens/authenticated/classes/edit_create/pages/select_category.page.dart';
 import 'package:professors/visual/screens/authenticated/classes/edit_create/pages/select_sub_category.page.dart';
@@ -21,6 +22,7 @@ class CreateOrEditClassScreen extends StatelessWidget {
   PageController pageController;
 
   // store
+  CreateClassState store = CreateClassState();
 
   // form controllers
   static GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
@@ -88,28 +90,25 @@ class CreateOrEditClassScreen extends StatelessWidget {
       physics:new NeverScrollableScrollPhysics(),
       controller: pageController,
       children: <Widget>[
-        SelectCategoryPage(
+        SelectCategoryScreen(
           (CategoryModel category) {
-            editOrCreateClassStore.setParentCategory(category);
-            editOrCreateClassStore.setParentCategory(category);
-            editOrCreateClassStore.setCurrentPageNumber(1);
+            store.setCategoryId(category.id);
+            store.setCategoryName(category.designation);
             pageController.animateToPage(1,
                 duration: Duration(milliseconds: 300),
                 curve: Cubic(1, 1, 1, 1));
-          },
+          }, store
         ),
         SelectSubCategoryPage(
           (CategoryModel category) {
-            editOrCreateClassStore.setSubCategory(category);
-            editOrCreateClassStore.setSubCategory(category);
-            editOrCreateClassStore.setCurrentPageNumber(2);
+            store.setSubCategoryId(category.id);
+            store.setSubCategoryName(category.designation);
             pageController.animateToPage(2,
                 duration: Duration(milliseconds: 300),
                 curve: Cubic(1, 1, 1, 1));
-          },
+          }, store
         ),
-        ClassDetailsPage(cm, () {}, (BuildContext context){
-          editOrCreateClassStore.setCurrentPageNumber(0);
+        ClassDetailsPage(null, () {}, (BuildContext context){
           pageController.animateToPage(0,
               duration: Duration(milliseconds: 300),
               curve: Cubic(1, 1, 1, 1));

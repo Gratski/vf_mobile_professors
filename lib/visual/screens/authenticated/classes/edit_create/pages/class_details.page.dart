@@ -1,15 +1,17 @@
+import 'package:after_init/after_init.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/models/classes/class.model.dart';
+import 'package:professors/store/classes/create_class_state.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/sizes.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
-class ClassDetailsPage extends StatelessWidget {
-  static GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+class ClassDetailsPage extends StatefulWidget {
+
   TextEditingController designationController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController equipmentController = TextEditingController();
@@ -18,17 +20,22 @@ class ClassDetailsPage extends StatelessWidget {
 
   Function onNextCallback;
   Function editCategoryCallBack;
-  ClassModel cm;
+  int classId;
+  CreateClassState store;
 
-  ClassDetailsPage(this.cm, this.onNextCallback, this.editCategoryCallBack) {
-    if (cm != null) {
-      designationController.text = cm.designation;
-      descriptionController.text = cm.description;
-      equipmentController.text = cm.equipment;
-      goalsController.text = cm.goals;
-      caloriesController.text = (cm.calories != null) ? '${cm.calories}' : '0';
+  ClassDetailsPage(this.classId, this.onNextCallback, this.editCategoryCallBack, {CreateClassState store}) {
+    if (store == null) {
+      this.store = CreateClassState();
     }
   }
+
+  @override
+  _ClassDetailsPageState createState() => _ClassDetailsPageState();
+}
+
+class _ClassDetailsPageState extends State<ClassDetailsPage> with AfterInitMixin<ClassDetailsPage> {
+
+  static GlobalKey<FormState> formKey = new GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +44,7 @@ class ClassDetailsPage extends StatelessWidget {
         AppHeaderWidget(
           'Class Details',
           subTitle:
-              'Language: ${editOrCreateClassStore.languageContext.languageCode}',
+          'Language: ${editOrCreateClassStore.languageContext.languageCode}',
         ),
         // fields to edit
         SliverList(
@@ -45,7 +52,7 @@ class ClassDetailsPage extends StatelessWidget {
           delegate: SliverChildListDelegate(
             [
               Form(
-                key: _formKey,
+                key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -64,7 +71,7 @@ class ClassDetailsPage extends StatelessWidget {
                                 TextsBuilder.h4Bold('Category'),
                                 GestureDetector(
                                   onTap: () {
-                                    editCategoryCallBack(context);
+                                    widget.editCategoryCallBack(context);
                                   },
                                   child: Container(
                                     child: Row(
@@ -95,29 +102,29 @@ class ClassDetailsPage extends StatelessWidget {
                     /// Title
                     _buildTextField('Title', 'Class Title', (value) {
                       editOrCreateClassStore.setDesignation(value);
-                    }, designationController, false),
+                    }, widget.designationController, false),
 
                     /// Description
                     _buildTextField('Description', 'Describe this class',
-                        (value) {
-                      editOrCreateClassStore.setDescription(value);
-                    }, descriptionController, true, maxChars: 255),
+                            (value) {
+                          editOrCreateClassStore.setDescription(value);
+                        }, widget.descriptionController, true, maxChars: 255),
 
                     /// Equipment
                     _buildTextField('Equipment', 'Required equipment', (value) {
                       editOrCreateClassStore.setGoals(value);
-                    }, equipmentController, true, maxChars: 255),
+                    }, widget.equipmentController, true, maxChars: 255),
 
                     /// Goals
                     _buildTextField('Goals', 'What are this class goals',
-                        (value) {
-                      editOrCreateClassStore.setEquipment(value);
-                    }, equipmentController, true, maxChars: 255),
+                            (value) {
+                          editOrCreateClassStore.setEquipment(value);
+                        }, widget.equipmentController, true, maxChars: 255),
 
                     /// Burned Calories
                     _buildTextField('Expected KCal loss', '30,9', (value) {
                       editOrCreateClassStore.setCalories(value);
-                    }, caloriesController, false,
+                    }, widget.caloriesController, false,
                         inputFormat: TextInputType.number),
 
                     /// Duration
@@ -150,8 +157,8 @@ class ClassDetailsPage extends StatelessWidget {
                                             padding: EdgeInsets.all(20),
                                             decoration: BoxDecoration(
                                               color: (editOrCreateClassStore
-                                                          .duration ==
-                                                      d)
+                                                  .duration ==
+                                                  d)
                                                   ? AppColors.regularGreen
                                                   : AppColors.bgMainColor,
                                               border: Border.all(
@@ -189,28 +196,28 @@ class ClassDetailsPage extends StatelessWidget {
                                       .possibleDifficultyLevels
                                       .map((l) {
                                     return GestureDetector(
-                                          onTap: () {
-                                            editOrCreateClassStore.setDifficultyLevel(l);
-                                          },
-                                          child: Container(
-                                            margin: EdgeInsets.only(
-                                                left: 5, right: 5, bottom: 10),
-                                            padding: EdgeInsets.all(20),
-                                            decoration: BoxDecoration(
-                                              color: (editOrCreateClassStore.difficultyLevel != null &&
-                                                      editOrCreateClassStore.difficultyLevel.id == l.id)
-                                                  ? AppColors.regularGreen
-                                                  : AppColors.bgMainColor,
-                                              border: Border.all(
-                                                  color: AppColors.regularGreen,
-                                                  width: 1.0),
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(25),
-                                              ),
-                                            ),
-                                            child: TextsBuilder.h4Bold('${l.designation}'),
+                                      onTap: () {
+                                        editOrCreateClassStore.setDifficultyLevel(l);
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.only(
+                                            left: 5, right: 5, bottom: 10),
+                                        padding: EdgeInsets.all(20),
+                                        decoration: BoxDecoration(
+                                          color: (editOrCreateClassStore.difficultyLevel != null &&
+                                              editOrCreateClassStore.difficultyLevel.id == l.id)
+                                              ? AppColors.regularGreen
+                                              : AppColors.bgMainColor,
+                                          border: Border.all(
+                                              color: AppColors.regularGreen,
+                                              width: 1.0),
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(25),
                                           ),
-                                        );
+                                        ),
+                                        child: TextsBuilder.h4Bold('${l.designation}'),
+                                      ),
+                                    );
                                   }).toList()),
                             );
                           })
@@ -228,7 +235,7 @@ class ClassDetailsPage extends StatelessWidget {
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.93,
                             child:
-                                ButtonsBuilder.greenFlatButton('SUBMIT', () {}),
+                            ButtonsBuilder.greenFlatButton('SUBMIT', () {}),
                           )
                         ],
                       ),
@@ -285,5 +292,12 @@ class ClassDetailsPage extends StatelessWidget {
         backgroundColor: AppColors.regularGreen,
       ),
     );
+  }
+
+  @override
+  void didInitState() {
+    if (widget.classId != null) {
+      restServices.getClassService().getUserClasses(context, 0, 10);
+    }
   }
 }

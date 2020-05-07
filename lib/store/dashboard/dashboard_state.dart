@@ -17,7 +17,7 @@ abstract class _DashboardState with Store {
   bool isLoading = false;
 
   @observable
-  bool isNextClassesLoading = false;
+  bool isClassesLoading = false;
 
   @observable
   double score = 2.7;
@@ -41,16 +41,7 @@ abstract class _DashboardState with Store {
   int currentMonthCancellations = 0;
 
   @observable
-  ObservableList<ClassListItem> nextClasses = ObservableList.of(
-    [
-      ClassListItem(
-        designation: 'Class 1',
-        description: 'Description of class 1',
-        pictureUrl:
-            'https://www.active.com/Assets/Fitness/group-fitness-benefits.jpg',
-      ),
-    ],
-  );
+  ObservableList<ClassListItemModel> classes = ObservableList.of([]);
 
   @action
   setLoading(bool isLoading) {
@@ -58,8 +49,14 @@ abstract class _DashboardState with Store {
   }
 
   @action
-  setNextClassesLoading(bool isLoading) {
-    this.isNextClassesLoading = isLoading;
+  setClassesLoading(bool isLoading) {
+    this.isClassesLoading = isLoading;
+  }
+
+  @action
+  setClasses(List<ClassListItemModel> classes) {
+    this.classes.clear();
+    this.classes.addAll(classes);
   }
 
   @action

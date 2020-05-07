@@ -7,8 +7,10 @@ import 'package:professors/visual/builders/toaster.builder.dart';
 
 class CategoryService extends AbstractRestService {
 
-  Future<void> getCategories(BuildContext context) async {
-    generalStore.setIsCategoriesLoading(true);
+  ///
+  /// Gets the top level categories
+  ///
+  Future<List<CategoryModel>> getCategories(BuildContext context) async {
     try {
       final rsp = await performJsonGet(context, '$REST_URL/categories');
       List<dynamic> list = decodeBody(rsp)["items"];
@@ -20,18 +22,17 @@ class CategoryService extends AbstractRestService {
           elem["description"]
         ),);
       },);
-
-      // set categories
-      generalStore.setCategories(categories);
+      return categories;
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {
       ToasterBuilder.buildErrorToaster(context, "Internet Error");
-    } finally {
-      generalStore.setIsCategoriesLoading(false);
     }
   }
 
+  ///
+  /// Gets the top level sub categories
+  ///
   Future<List<CategoryModel>> getSubCategories(BuildContext context, parentId) async {
     try {
       final rsp = await performJsonGet(context, '$REST_URL/categories/$parentId/sub-categories');
