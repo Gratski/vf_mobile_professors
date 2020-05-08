@@ -3,15 +3,12 @@ import 'dart:io';
 import 'package:after_init/after_init.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
-import 'package:professors/models/classes/class.model.dart';
 import 'package:professors/store/classes/create_class_state.dart';
 import 'package:professors/utils/compression.utils.dart';
 import 'package:professors/utils/picture.utils.dart';
@@ -488,9 +485,11 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
       restServices.getClassService().getClassById(context, widget.store.id)
           .then((d) {
         widget.store.setLanguageId(d.languageId);
-         widget.store.setCategoryId(d.categoryId);
-         widget.store.setCategoryName(d.categoryName);
-         widget.store.setCategoryName(d.categoryName);
+         widget.store.setCategoryId(d.parentCategoryId);
+         widget.store.setCategoryName(d.parentCategoryName);
+
+        widget.store.setSubCategoryId(d.categoryId);
+         widget.store.setSubCategoryName(d.categoryName);
 
          designationController.text = d.designation;
         widget.store.setDesignation(d.designation);
