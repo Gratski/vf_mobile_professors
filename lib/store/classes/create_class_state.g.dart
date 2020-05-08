@@ -365,6 +365,40 @@ mixin _$CreateClassState on _CreateClassState, Store {
     }, _$equipmentAtom, name: '${_$equipmentAtom.name}_set');
   }
 
+  final _$statusAtom = Atom(name: '_CreateClassState.status');
+
+  @override
+  int get status {
+    _$statusAtom.context.enforceReadPolicy(_$statusAtom);
+    _$statusAtom.reportObserved();
+    return super.status;
+  }
+
+  @override
+  set status(int value) {
+    _$statusAtom.context.conditionallyRunInAction(() {
+      super.status = value;
+      _$statusAtom.reportChanged();
+    }, _$statusAtom, name: '${_$statusAtom.name}_set');
+  }
+
+  final _$isActiveAtom = Atom(name: '_CreateClassState.isActive');
+
+  @override
+  bool get isActive {
+    _$isActiveAtom.context.enforceReadPolicy(_$isActiveAtom);
+    _$isActiveAtom.reportObserved();
+    return super.isActive;
+  }
+
+  @override
+  set isActive(bool value) {
+    _$isActiveAtom.context.conditionallyRunInAction(() {
+      super.isActive = value;
+      _$isActiveAtom.reportChanged();
+    }, _$isActiveAtom, name: '${_$isActiveAtom.name}_set');
+  }
+
   final _$goalsAtom = Atom(name: '_CreateClassState.goals');
 
   @override
@@ -571,6 +605,36 @@ mixin _$CreateClassState on _CreateClassState, Store {
     final _$actionInfo = _$_CreateClassStateActionController.startAction();
     try {
       return super.setDuration(newDuration);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setPictureUrl(String url) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setPictureUrl(url);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setStatus(int status) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setStatus(status);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setIsActive(bool isActive) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setIsActive(isActive);
     } finally {
       _$_CreateClassStateActionController.endAction(_$actionInfo);
     }

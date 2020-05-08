@@ -89,6 +89,12 @@ abstract class _CreateClassState with Store {
   String equipment;
 
   @observable
+  int status;
+
+  @observable
+  bool isActive;
+
+  @observable
   String goals;
 
   @observable
@@ -166,6 +172,19 @@ abstract class _CreateClassState with Store {
   @action
   setDuration(int newDuration) {
     this.duration = newDuration;
+  }
+
+  @action
+  setPictureUrl(String url) {
+    this.pictureUrl = url;
+  }
+  @action
+  setStatus(int status) {
+    this.status = status;
+  }
+  @action
+  setIsActive(bool isActive) {
+    this.isActive = isActive;
   }
 
   @action

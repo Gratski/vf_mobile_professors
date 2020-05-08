@@ -12,6 +12,7 @@ import 'package:professors/globals/global_vars.dart';
 import 'package:professors/models/classes/class.model.dart';
 import 'package:professors/store/classes/create_class_state.dart';
 import 'package:professors/utils/picture.utils.dart';
+import 'package:professors/visual/builders/dialog.builder.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/sizes.dart';
@@ -32,7 +33,9 @@ class ClassDetailsPage extends StatefulWidget {
       this.store = CreateClassState();
     } else {
       this.store = store;
+      this.store.setCurrentPageNumber(2);
     }
+    this.store.setId(this.classId);
   }
 
   @override
@@ -339,24 +342,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                               width: MediaQuery.of(context).size.width * 0.93,
                               child:
                               ButtonsBuilder.greenFlatButton('SUBMIT', () {
-
-                                // validate fields here
-                                restServices.getClassService().createClass(context,
-                                    widget.store.subCategoryId,
-                                    widget.store.languageId,
-                                    widget.store.designation,
-                                    widget.store.description,
-                                    widget.store.equipment,
-                                    widget.store.goals,
-                                    widget.store.difficultyLevel,
-                                    widget.store.calories,
-                                    widget.store.duration)
-                                    .then((value) {
-                                  ToasterBuilder.buildSuccessToaster(context, "Class Created");
-                                }).catchError((e) {
-                                  ToasterBuilder.buildErrorToaster(context, e.cause);
-                                });
-
+                                _save(context);
                               }),
                             )
                           ],
@@ -417,10 +403,97 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
     );
   }
 
+  _toggleIsActive(BuildContext context) {
+    widget.store.setIsLoadingContext(true);
+    restServices.getClassService().toggleIsActive(context, widget.store.id, widget.store.isActive)
+    .then((value) => widget.store.setIsActive(!widget.store.isActive))
+    .catchError((e) => ToasterBuilder.buildErrorToaster(context, e.cause))
+    .whenComplete(() => widget.store.setIsLoadingContext(false));
+  }
+
+  ///
+  /// Show Delete Dialog
+  ///
+  _delete(BuildContext context) {
+
+    DialogsBuilder(context).confirmationDialog(
+        "Are you sure?",
+        "You will all the data related to this class.",
+            () {
+              widget.store.setIsLoadingContext(true);
+              restServices.getClassService().deleteClass(context, widget.store.id)
+                  .then((v) {
+                ToasterBuilder.buildSuccessToaster(context, "Class Removed");
+                Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+              })
+                  .catchError((e) => ToasterBuilder.buildErrorToaster(context, e.cause))
+                  .whenComplete(() => widget.store.setIsLoadingContext(false));
+            },
+            () {},
+    );
+  }
+
+  ///
+  /// Submits either for save an existing Class
+  ///
+  _save(BuildContext context) {
+    // validate fields here
+    restServices.getClassService().createClass(context,
+        widget.store.subCategoryId,
+        widget.store.languageId,
+        widget.store.designation,
+        widget.store.description,
+        widget.store.equipment,
+        widget.store.goals,
+        widget.store.difficultyLevel,
+        widget.store.calories,
+        widget.store.duration)
+        .then((value) {
+      ToasterBuilder.buildSuccessToaster(context, "Class Created");
+    }).catchError((e) {
+      ToasterBuilder.buildErrorToaster(context, e.cause);
+    });
+  }
+
   @override
   void didInitState() {
     if (widget.classId != null) {
-      restServices.getClassService().getClassById(context, widget.store.id);
+      widget.store.setIsLoadingContext(true);
+      restServices.getClassService().getClassById(context, widget.store.id)
+          .then((d) {
+        widget.store.setLanguageId(d.languageId);
+         widget.store.setCategoryId(d.categoryId);
+         widget.store.setCategoryName(d.categoryName);
+         widget.store.setCategoryName(d.categoryName);
+
+         designationController.text = d.designation;
+        widget.store.setDesignation(d.designation);
+
+        descriptionController.text = d.description;
+        widget.store.setDescription(d.description);
+
+        widget.store.setDuration(d.duration);
+
+        equipmentController.text = d.equipment;
+        widget.store.setEquipment(d.equipment);
+
+        goalsController.text = d.goals;
+        widget.store.setGoals(d.goals);
+
+        widget.store.setDifficultyLevel(d.difficultyLevel);
+
+        caloriesController.text = '${d.calories}';
+        widget.store.setCalories(d.calories);
+
+        widget.store.setPictureUrl(d.imageUrl);
+        widget.store.setStatus(d.status);
+        widget.store.setIsActive(d.isActive);
+      })
+          .catchError((e) {
+        ToasterBuilder.buildErrorToaster(context, e.cause);
+      }).whenComplete((){
+        widget.store.setIsLoadingContext(false);
+      });
     }
   }
 }

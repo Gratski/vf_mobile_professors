@@ -8,12 +8,35 @@ class ClassModel {
   String equipment;
   String goals;
   double calories;
-  String pictureUrl;
+  String imageUrl;
   bool isActive;
   int duration;
-  LanguageContextModel languageContext;
-  CategoryModel category;
+  int status;
+  int languageId;
 
-  ClassModel(this.id, this.designation, this.description, this.equipment, this.pictureUrl,
-      this.isActive, this.duration, this.languageContext, this.category);
+  int difficultyLevel;
+
+  int categoryId;
+  String categoryName;
+  int parentCategoryId;
+  String parentCategoryName;
+
+  ClassModel(
+      this.id,
+      this.languageId,
+      this.categoryId,
+      this.categoryName,
+      this.parentCategoryId,
+      this.parentCategoryName,
+      this.designation,
+      this.description,
+      this.duration,
+      this.equipment,
+      this.goals,
+      this.difficultyLevel,
+      this.calories,
+      this.imageUrl,
+      this.status,
+      this.isActive
+      );
 }

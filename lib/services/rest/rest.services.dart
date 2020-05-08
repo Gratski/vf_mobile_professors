@@ -74,6 +74,9 @@ class RestServices {
     return SupportService();
   }
 
+  ///
+  /// Gets the Class Services
+  ///
   ClassService getClassService() {
     return ClassService();
   }

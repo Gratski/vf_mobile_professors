@@ -8,6 +8,9 @@ import 'package:professors/services/rest/abstract_rest.service.dart';
 
 class ClassService extends AbstractRestService {
 
+  ///
+  /// Creates a new class
+  ///
   Future<void> createClass(BuildContext context, int categoryId, int languageId,
       String designation, String description, String equipment, String goal,
       int difficultyLevel, double calories, int duration) async {
@@ -35,7 +38,47 @@ class ClassService extends AbstractRestService {
   /// Gets a class by id
   ///
   Future<ClassModel> getClassById(BuildContext context, int classId) async {
+    try {
+      final rsp = await performJsonGet(context, '$REST_URL/disciplines/$classId');
+      Map<String, dynamic> result = decodeBody(rsp);
+      return ClassModel(
+        result["id"],
+        result["languageId"],
+        result["category"]["id"],
+        result["category"]["designation"],
+        result["parentCategory"]["id"],
+        result["parentCategory"]["designation"],
+        result["designation"],
+        result["description"],
+        result["duration"],
+        result["equipment"],
+        result["goals"],
+        result["difficultyLevel"],
+        result["calories"],
+        result["imageUrl"],
+        result["status"],
+        result["isActive"],
+      );
+    } on ApiException catch(e) {
+      throw e;
+    } on Exception catch(e) {
+      throw ApiException("Something went wrong...");
+    }
+  }
 
+  ///
+  /// Toggles is active status
+  ///
+  Future<void> toggleIsActive(BuildContext context, int classId, bool isActive) async {
+    String routeSuffix = isActive ? 'enable' : 'disable';
+    try {
+      final rsp = await performJsonPut(context, '$REST_URL/disciplines/$classId/$routeSuffix', jsonEncode({}));
+      return;
+    } on ApiException catch(e) {
+      throw e;
+    } on Exception catch(e) {
+      throw ApiException("Something went wrong");
+    }
   }
 
   ///
@@ -50,17 +93,33 @@ class ClassService extends AbstractRestService {
         result.add(
           ClassListItemModel(
             elem["id"],
+            elem["languageId"],
             elem["designation"],
             elem["description"],
             elem["pictureUrl"],
             elem["languageCode"],
             elem["difficultyLevel"],
             elem["duration"],
+            elem["status"],
             elem["isActive"]
           )
         );
       },);
       return result;
+    } on ApiException catch(e) {
+      throw e;
+    } on Exception catch(e) {
+      throw ApiException("Something went wrong");
+    }
+  }
+
+  ///
+  /// Deletes an existing class
+  ///
+  Future<void> deleteClass(BuildContext context, int classId) async {
+    try {
+      final rsp = await performJsonDelete(context, '$REST_URL/disciplines/$classId');
+      return;
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:professors/visual/widgets/dialogs/comment_options.dialog.dart';
+import 'package:professors/visual/widgets/dialogs/confirmation.dialog.dart';
 import 'package:professors/visual/widgets/dialogs/edit_payment_method.dialog.dart';
 import 'package:professors/visual/widgets/dialogs/unavailable_operation.dialog.dart';
 
@@ -26,6 +27,13 @@ class DialogsBuilder {
     showDialog(
       context: context,
       builder: (BuildContext context) => EditPaymentMethodDialog(makeDefaultCallback, deleteCallback),
+    );
+  }
+
+  confirmationDialog(String title, String subTitle, VoidCallback confirmationCallBack, VoidCallback cancelCallback) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => ConfirmationDialog(title, subTitle, confirmationCallBack, cancelCallback),
     );
   }
 
