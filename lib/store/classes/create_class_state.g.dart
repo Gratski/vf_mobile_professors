@@ -82,6 +82,25 @@ mixin _$CreateClassState on _CreateClassState, Store {
     }, _$currentPageNumberAtom, name: '${_$currentPageNumberAtom.name}_set');
   }
 
+  final _$previousPageNumberAtom =
+      Atom(name: '_CreateClassState.previousPageNumber');
+
+  @override
+  int get previousPageNumber {
+    _$previousPageNumberAtom.context
+        .enforceReadPolicy(_$previousPageNumberAtom);
+    _$previousPageNumberAtom.reportObserved();
+    return super.previousPageNumber;
+  }
+
+  @override
+  set previousPageNumber(int value) {
+    _$previousPageNumberAtom.context.conditionallyRunInAction(() {
+      super.previousPageNumber = value;
+      _$previousPageNumberAtom.reportChanged();
+    }, _$previousPageNumberAtom, name: '${_$previousPageNumberAtom.name}_set');
+  }
+
   final _$isLoadingContextAtom =
       Atom(name: '_CreateClassState.isLoadingContext');
 
@@ -475,6 +494,16 @@ mixin _$CreateClassState on _CreateClassState, Store {
     final _$actionInfo = _$_CreateClassStateActionController.startAction();
     try {
       return super.setCurrentPageNumber(number);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setPreviousPageNumber(int number) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setPreviousPageNumber(number);
     } finally {
       _$_CreateClassStateActionController.endAction(_$actionInfo);
     }

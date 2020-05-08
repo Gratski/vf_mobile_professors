@@ -25,6 +25,10 @@ class ButtonsBuilder {
     return createFlatButton(text, callback, Colors.transparent, ( color != null ) ? color : AppColors.linksColor);
   }
 
+  static FlatButton transparentCustomButton(Widget widget, VoidCallback callback, {Color color}) {
+    return createCustomFlatButton(widget, callback, Colors.transparent, ( color != null ) ? color : AppColors.linksColor);
+  }
+
   static blackButton(String text, VoidCallback callback) {
     return createFlatButton(text, callback, AppColors.bgMainColor, AppColors.linksColor);
   }
@@ -36,6 +40,16 @@ class ButtonsBuilder {
       textColor: textColor,
       onPressed: callback,
       child: TextsBuilder.regularText(text, color: textColor),
+    );
+  }
+
+  static FlatButton createCustomFlatButton(Widget widget, VoidCallback callback, Color bgColor, Color textColor){
+    return FlatButton(
+      padding: EdgeInsets.all(15.0),
+      color: bgColor,
+      textColor: textColor,
+      onPressed: callback,
+      child: widget,
     );
   }
 

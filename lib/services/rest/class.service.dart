@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:professors/models/classes/class.model.dart';
@@ -11,22 +12,37 @@ class ClassService extends AbstractRestService {
   ///
   /// Creates a new class
   ///
-  Future<void> createClass(BuildContext context, int categoryId, int languageId,
+  Future<int> createOrUpdateClass(BuildContext context, int classId, int categoryId, int languageId,
       String designation, String description, String equipment, String goal,
       int difficultyLevel, double calories, int duration) async {
     try {
-      final rsp = await performJsonPost(context, '$REST_URL/disciplines', jsonEncode({
-        "categoryId": categoryId,
-        "languageId": languageId,
-        "designation": designation,
-        "description": description,
-        "equipment": equipment,
-        "goal": goal,
-        "difficultyLevel": difficultyLevel,
-        "calories": calories,
-        "duration": duration
-      },),);
-      return;
+      if ( classId == null ) {
+        final rsp = await performJsonPost(context, '$REST_URL/disciplines', jsonEncode({
+          "categoryId": categoryId,
+          "languageId": languageId,
+          "designation": designation,
+          "description": description,
+          "equipment": equipment,
+          "goal": goal,
+          "difficultyLevel": difficultyLevel,
+          "calories": calories,
+          "duration": duration
+        },),);
+        return decodeBody(rsp)["id"];
+      } else {
+        await performJsonPut(context, '$REST_URL/disciplines/$classId', jsonEncode({
+          "categoryId": categoryId,
+          "languageId": languageId,
+          "designation": designation,
+          "description": description,
+          "equipment": equipment,
+          "goal": goal,
+          "difficultyLevel": difficultyLevel,
+          "calories": calories,
+          "duration": duration
+        },),);
+        return classId;
+      }
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {
@@ -63,6 +79,20 @@ class ClassService extends AbstractRestService {
       throw e;
     } on Exception catch(e) {
       throw ApiException("Something went wrong...");
+    }
+  }
+
+  ///
+  /// Changes the class picture
+  ///
+  Future<void> changeClassPicture(BuildContext context, int classId, File file) async {
+    try {
+      final rsp = await uploadFile(context, file, '$REST_URL/disciplines/$classId/picture');
+      return;
+    } on ApiException catch(e) {
+      throw e;
+    } on Exception catch(e) {
+      throw ApiException("Something went wrong");
     }
   }
 

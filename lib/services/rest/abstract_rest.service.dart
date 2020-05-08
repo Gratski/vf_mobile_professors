@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
-import 'dart:math' as math;
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:professors/globals/global_vars.dart';
@@ -13,6 +12,7 @@ import 'package:professors/localization/localization.config.dart';
 import 'package:professors/services/dto/errors/http_error.dto.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
 import 'package:professors/services/exceptions/file_size.exception.dart';
+import 'package:professors/utils/compression.utils.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -85,14 +85,14 @@ abstract class AbstractRestService {
 
   Future<void> uploadFile(BuildContext context, File file, String url) async {
     try {
-      var compressedFile = await compressAndGetFile(file);
+      var compressedFile = await CompressionUtils().compressAndGetFile(file);
       var stream = new http.ByteStream(
           DelegatingStream.typed(compressedFile.openRead()));
       var length = await compressedFile.length();
 
       var imageSize = await compressedFile.length();
       if (imageSize > 80000) {
-        throw ApiException("Please choose a smaller picture");
+        throw FileSizeException("Please choose a smaller picture");
       }
 
       var uri = Uri.parse(url);
@@ -128,36 +128,6 @@ abstract class AbstractRestService {
     } on Exception catch (e) {
       throw ApiException("Something went wrong.. Please try again");
     }
-  }
-
-  ////////////////////////////////////////
-  // Compression Helper
-  ////////////////////////////////////////
-  Future<File> compressAndGetFile(File file) async {
-    String filename = basename(file.path);
-    Directory dir = await path_provider.getTemporaryDirectory();
-    final targetPath = dir.absolute.path +
-        "/vfit_${DateTime.now().toIso8601String()}_$filename";
-
-    var compressedFile = await FlutterImageCompress.compressAndGetFile(
-        file.absolute.path, targetPath,
-        minWidth: 400, quality: 25);
-
-    return compressedFile;
-  }
-
-  double _calcScale({
-    double srcWidth,
-    double srcHeight,
-    double minWidth,
-    double minHeight,
-  }) {
-    var scaleW = srcWidth / minWidth;
-    var scaleH = srcHeight / minHeight;
-
-    var scale = math.max(1.0, math.min(scaleW, scaleH));
-
-    return scale;
   }
 
   ////////////////////////////////////////

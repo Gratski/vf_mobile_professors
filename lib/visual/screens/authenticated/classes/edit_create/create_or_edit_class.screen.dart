@@ -1,22 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
-import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/models/category/category.model.dart';
 import 'package:professors/models/classes/class.model.dart';
 import 'package:professors/models/language.model.dart';
-import 'package:professors/models/language_context/language_context.model.dart';
 import 'package:professors/store/classes/create_class_state.dart';
 import 'package:professors/visual/screens/authenticated/classes/edit_create/pages/class_details.page.dart';
 import 'package:professors/visual/screens/authenticated/classes/edit_create/pages/select_category.page.dart';
 import 'package:professors/visual/screens/authenticated/classes/edit_create/pages/select_sub_category.page.dart';
 import 'package:professors/visual/styles/padding.dart';
-import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
-import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
-import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class CreateOrEditClassScreen extends StatelessWidget {
   // constants for localization
@@ -72,7 +65,6 @@ class CreateOrEditClassScreen extends StatelessWidget {
       padding: AppPaddings.regularPadding(context),
       child: CustomScrollView(
         slivers: <Widget>[
-          buildAppBar(context),
 
           /// Pages
           SliverToBoxAdapter(
@@ -81,7 +73,7 @@ class CreateOrEditClassScreen extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.85,
-                  child: buildPageView(),
+                  child: buildPageView(context),
                 ),
               ],
             ),
@@ -91,92 +83,55 @@ class CreateOrEditClassScreen extends StatelessWidget {
     ));
   }
 
-  PageView buildPageView() {
+  PageView buildPageView(BuildContext context) {
     return PageView(
       physics:new NeverScrollableScrollPhysics(),
       controller: pageController,
       children: <Widget>[
         SelectCategoryScreen(
+            () {
+              if (store.previousPageNumber == null || store.previousPageNumber == 1) {
+                Navigator.pop(context);
+              } else {
+                store.setCurrentPageNumber(store.previousPageNumber);
+                store.setPreviousPageNumber(0);
+                pageController.animateToPage(store.currentPageNumber,
+                    duration: Duration(milliseconds: 300),
+                    curve: Cubic(1, 1, 1, 1));
+              }
+            },
           (CategoryModel category) {
+            store.setPreviousPageNumber(store.currentPageNumber);
+            store.setCurrentPageNumber(1);
             pageController.animateToPage(1,
                 duration: Duration(milliseconds: 300),
                 curve: Cubic(1, 1, 1, 1));
           }, store
         ),
         SelectSubCategoryPage(
+            () {
+              store.setPreviousPageNumber(store.currentPageNumber);
+              store.setCurrentPageNumber(0);
+              pageController.animateToPage(0,
+                  duration: Duration(milliseconds: 300),
+                  curve: Cubic(1, 1, 1, 1));
+            },
           (CategoryModel category) {
+            store.setPreviousPageNumber(store.currentPageNumber);
+            store.setCurrentPageNumber(2);
             pageController.animateToPage(2,
                 duration: Duration(milliseconds: 300),
                 curve: Cubic(1, 1, 1, 1));
           }, store
         ),
         ClassDetailsPage(this.classId, () {}, (BuildContext context){
+          store.setPreviousPageNumber(store.currentPageNumber);
+          store.setCurrentPageNumber(0);
           pageController.animateToPage(0,
               duration: Duration(milliseconds: 300),
               curve: Cubic(1, 1, 1, 1));
         }, store: store,)
       ],
-    );
-  }
-
-  buildAppBar(BuildContext context) {
-    return Observer(
-      builder: (_) {
-
-        // hide back button to parent catgory selection page and to Class Details Page
-        bool hideBackButton = store.currentPageNumber == 0 || store.currentPageNumber == 2;
-        List<Widget> actions = List.of([]);
-
-        if ( store.currentPageNumber != 2 ) {
-          actions.add(
-            GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: (store.currentPageNumber != 2) ?
-              Icon(FontAwesomeIcons.times) :
-              TextsBuilder.regularText("SAVE"),
-            ),
-          );
-        } else {
-          actions.addAll([
-            GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: (store.currentPageNumber != 2) ?
-              Icon(FontAwesomeIcons.times) :
-              ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(generalConstants.buttonSaveLabel), () { }),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: (store.currentPageNumber != 2) ?
-              Icon(FontAwesomeIcons.times) :
-              TextsBuilder.regularText("SAVE"),
-            ),
-          ]
-
-          );
-        }
-
-        return CustomAppBar(
-          actions,
-
-          hideBackButton: hideBackButton,
-          customBackCallback: (BuildContext context) {
-            if (store.currentPageNumber == 1) {
-              store.setCurrentPageNumber(0);
-              pageController.animateToPage(0,
-                  duration: Duration(milliseconds: 300),
-                  curve: Cubic(1, 1, 1, 1));
-            } else if (store.currentPageNumber == 2) {
-
-            }
-          },
-        );
-      },
     );
   }
 }

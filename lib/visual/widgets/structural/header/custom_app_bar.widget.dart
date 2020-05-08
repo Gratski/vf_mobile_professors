@@ -8,8 +8,9 @@ class CustomAppBar extends StatelessWidget {
   String title;
   bool hideBackButton;
   Function customBackCallback;
+  Widget customBackButton;
 
-  CustomAppBar(this.actions, {this.customBackCallback, this.title, this.hideBackButton = false});
+  CustomAppBar(this.actions, {this.customBackCallback, this.title, this.hideBackButton = false, this.customBackButton});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class CustomAppBar extends StatelessWidget {
             Navigator.pop(context);
           }
         },
-        child: (!hideBackButton) ? Icon(
+        child: (!hideBackButton) ? (customBackButton != null) ? this.customBackButton : Icon(
           Icons.arrow_back_ios,
           color: AppColors.iconRegular,
         ) : Container()

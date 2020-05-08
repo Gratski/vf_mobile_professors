@@ -1,19 +1,23 @@
 import 'package:after_init/after_init.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/store/classes/create_class_state.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
+import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
+import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/visual/widgets/structural/lists/regular_list_tile.dart';
 
 class SelectSubCategoryPage extends StatefulWidget {
 
   // store
-  Function onTapCallback;
+  Function onTapCallback, backCallback;
+  PageController pageController;
   CreateClassState store;
-  SelectSubCategoryPage(this.onTapCallback, this.store);
+  SelectSubCategoryPage(this.backCallback, this.onTapCallback, this.store);
 
   @override
   _SelectSubCategoryPageState createState() => _SelectSubCategoryPageState();
@@ -24,6 +28,8 @@ class _SelectSubCategoryPageState extends State<SelectSubCategoryPage> with Afte
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
+
+        _buildAppbar(),
 
         AppHeaderWidget(
           'What is your class about',
@@ -70,6 +76,15 @@ class _SelectSubCategoryPageState extends State<SelectSubCategoryPage> with Afte
     }).catchError((e) {
       ToasterBuilder.buildErrorToaster(context, e.cause);
     }).whenComplete(() => widget.store.setIsLoadingSubCategories(false));
+  }
+
+  _buildAppbar() {
+    return CustomAppBar(
+        [],
+        customBackButton: ButtonsBuilder.transparentCustomButton(Icon(FontAwesomeIcons.arrowLeft), () {
+          widget.backCallback();
+        })
+    );
   }
 
 }

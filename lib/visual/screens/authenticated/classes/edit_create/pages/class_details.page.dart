@@ -9,8 +9,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:professors/globals/global_vars.dart';
+import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/models/classes/class.model.dart';
 import 'package:professors/store/classes/create_class_state.dart';
+import 'package:professors/utils/compression.utils.dart';
 import 'package:professors/utils/picture.utils.dart';
 import 'package:professors/visual/builders/dialog.builder.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
@@ -18,6 +21,7 @@ import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/sizes.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
+import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class ClassDetailsPage extends StatefulWidget {
@@ -27,15 +31,19 @@ class ClassDetailsPage extends StatefulWidget {
   int classId;
   CreateClassState store;
 
+  GeneralConstants generalConstants = GeneralConstants();
+
   ClassDetailsPage(this.classId, this.onNextCallback, this.editCategoryCallBack,
       {CreateClassState store}) {
     if (store == null) {
       this.store = CreateClassState();
     } else {
       this.store = store;
+    }
+    if (classId != null) {
+      this.store.setId(this.classId);
       this.store.setCurrentPageNumber(2);
     }
-    this.store.setId(this.classId);
   }
 
   @override
@@ -60,6 +68,9 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
       },
       child: CustomScrollView(
         slivers: <Widget>[
+
+          _buildAppbar(),
+
           AppHeaderWidget(
             'Class Details',
             subTitle:
@@ -330,24 +341,6 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                           ],
                         ),
                       ),
-
-                      /// Submit
-                      Container(
-                        margin: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height / 30),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.93,
-                              child:
-                              ButtonsBuilder.greenFlatButton('SUBMIT', () {
-                                _save(context);
-                              }),
-                            )
-                          ],
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -438,7 +431,28 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
   ///
   _save(BuildContext context) {
     // validate fields here
-    restServices.getClassService().createClass(context,
+
+    // validate the image size after compression
+    if ( imageFile != null ) {
+      CompressionUtils().compressAndGetFileSize(imageFile)
+          .then((size) {
+         if ( size > 80000 ) {
+           ToasterBuilder.buildErrorToaster(context, "Please choose a smaller file");
+         } else {
+           _sendCreateOrUpdate();
+         }
+      }).catchError((e) {
+
+      });
+    } else {
+      _sendCreateOrUpdate();
+    }
+
+
+  }
+
+  _sendCreateOrUpdate() {
+    restServices.getClassService().createOrUpdateClass(context, widget.classId,
         widget.store.subCategoryId,
         widget.store.languageId,
         widget.store.designation,
@@ -448,8 +462,20 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
         widget.store.difficultyLevel,
         widget.store.calories,
         widget.store.duration)
-        .then((value) {
-      ToasterBuilder.buildSuccessToaster(context, "Class Created");
+        .then((id) {
+      if (imageFile != null) {
+        restServices.getClassService().changeClassPicture(context, id, imageFile)
+            .then((value) {
+          _navigateToSuccessUpdateScreen(context);
+        })
+            .catchError((e) {
+          _showCreationErrorMessage(context, e.cause);
+        })
+            .whenComplete(() => widget.store.setIsLoadingContext(false));
+      } else {
+        _navigateToSuccessUpdateScreen(context);
+      }
+
     }).catchError((e) {
       ToasterBuilder.buildErrorToaster(context, e.cause);
     });
@@ -496,4 +522,40 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
       });
     }
   }
+
+  _buildAppbar() {
+    return CustomAppBar(
+      [
+        GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: ButtonsBuilder.transparentButton(
+          (widget.classId != null) ?
+              AppLocalizations.of(context).translate(widget.generalConstants.buttonSaveLabel).toUpperCase() :
+          AppLocalizations.of(context).translate(widget.generalConstants.buttonAddLabel).toUpperCase(), () {
+            _save(context);
+          },),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(FontAwesomeIcons.bars),
+        ),
+      ],
+      customBackButton: ButtonsBuilder.transparentCustomButton(Icon(FontAwesomeIcons.times), () {
+        Navigator.pop(context);
+      })
+    );
+  }
+
+  _navigateToSuccessUpdateScreen(BuildContext context) {
+    print("Class successfully updated!");
+  }
+
+  _showCreationErrorMessage(BuildContext context, String msg) {
+    ToasterBuilder.buildErrorToaster(context, msg);
+  }
+
 }

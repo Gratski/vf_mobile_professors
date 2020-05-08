@@ -42,6 +42,9 @@ abstract class _CreateClassState with Store {
   @observable
   int currentPageNumber = 0;
 
+  @observable
+  int previousPageNumber;
+
   /// loading flags
   @observable
   bool isLoadingContext = true; // discipline details
@@ -110,6 +113,11 @@ abstract class _CreateClassState with Store {
   @action
   setCurrentPageNumber(int number) {
     this.currentPageNumber = number;
+  }
+
+  @action
+  setPreviousPageNumber(int number) {
+    this.previousPageNumber = number;
   }
 
   @action

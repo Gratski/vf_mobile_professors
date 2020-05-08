@@ -1,19 +1,22 @@
 import 'package:after_init/after_init.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/store/classes/create_class_state.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
+import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
+import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/visual/widgets/structural/lists/regular_list_tile.dart';
 
 class SelectCategoryScreen extends StatefulWidget {
 
   // store
-  Function onTapCallback;
+  Function onTapCallback, onBackCallback;
   CreateClassState store;
-  SelectCategoryScreen(this.onTapCallback, this.store);
+  SelectCategoryScreen(this.onBackCallback, this.onTapCallback, this.store);
 
   @override
   _SelectCategoryScreenState createState() => _SelectCategoryScreenState();
@@ -24,6 +27,8 @@ class _SelectCategoryScreenState extends State<SelectCategoryScreen> with AfterI
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
+
+        _buildAppbar(),
 
         AppHeaderWidget(
           'Select Category',
@@ -70,6 +75,15 @@ class _SelectCategoryScreenState extends State<SelectCategoryScreen> with AfterI
     }).catchError((e) {
       ToasterBuilder.buildErrorToaster(context, e.cause);
     }).whenComplete(() => widget.store.setIsLoadingCategories(false));
+  }
+
+  _buildAppbar() {
+    return CustomAppBar(
+        [],
+        customBackButton: ButtonsBuilder.transparentCustomButton(Icon(FontAwesomeIcons.times), () {
+          widget.onBackCallback();
+        })
+    );
   }
 
 }
