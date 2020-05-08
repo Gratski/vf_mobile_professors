@@ -37,6 +37,8 @@ class _SelectCategoryScreenState extends State<SelectCategoryScreen> with AfterI
                       (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
+                        widget.store.setCategoryId(widget.store.categoriesList[index].id);
+                        widget.store.setCategoryName(widget.store.categoriesList[index].designation);
                         widget.onTapCallback(widget.store.categoriesList[index]);
                       },
                       child: RegularListTile(

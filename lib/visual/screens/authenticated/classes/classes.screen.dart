@@ -10,7 +10,6 @@ import 'package:professors/localization/constants/classes/classes_constants.dart
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/authenticated/classes/class_details.screen.dart';
 import 'package:professors/visual/screens/authenticated/classes/create_class_select_language.screen.dart';
-import 'package:professors/visual/screens/authenticated/classes/edit_create/create_or_edit_class.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
@@ -50,9 +49,9 @@ class _ClassesScreenState extends State<ClassesScreen>
             slivers: <Widget>[
               Observer(
                 builder: (_) {
-                  if (classesStore.classes.length != 0 &&
-                      !classesStore.isLoading) {
+
                     return CustomAppBar(
+                      (classesStore.classes.length != 0 && !classesStore.isLoading) ?
                       [
                         Container(
                           margin: EdgeInsets.only(
@@ -77,14 +76,9 @@ class _ClassesScreenState extends State<ClassesScreen>
                             ),
                           ),
                         ),
-                      ],
+                      ] : [],
                       hideBackButton: true,
                     );
-                  } else {
-                    return SliverToBoxAdapter(
-                      child: Container(),
-                    );
-                  }
                 },
               ),
 
@@ -211,10 +205,10 @@ class _ClassesScreenState extends State<ClassesScreen>
                                 children: <Widget>[
                                   AspectRatio(
                                     aspectRatio: 3 / 2,
-                                    child: Image.network(
+                                    child: (classesStore.classes[index].pictureUrl != null) ?Image.network(
                                       classesStore.classes[index].pictureUrl,
                                       fit: BoxFit.fill,
-                                    ),
+                                    ): Container(),
                                   ),
                                   AspectRatio(
                                     aspectRatio: 3 / 2,
@@ -400,15 +394,17 @@ class _ClassesScreenState extends State<ClassesScreen>
   }
 
   Future<void> refreshOperation() async {
-    classesStore.setPageNumber(0);
     classesStore.setIsLoading(true);
     restServices
         .getClassService()
         .getUserClasses(
         context, classesStore.pageNumber, classesStore.itemsPerPage)
-        .then((classes) => classesStore.addNextPageClasses(classes))
+        .then((classes) {
+          classesStore.setPageNumber(0);
+          classesStore.setClasses(classes);})
         .catchError(
-            (error) => ToasterBuilder.buildErrorToaster(context, error.cause))
+            (error) {
+              ToasterBuilder.buildErrorToaster(context, error.cause);})
         .whenComplete(() => classesStore.setIsLoading(false));
     return;
   }

@@ -9,6 +9,61 @@ part of 'create_class_state.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CreateClassState on _CreateClassState, Store {
+  final _$possibleDurationsAtom =
+      Atom(name: '_CreateClassState.possibleDurations');
+
+  @override
+  ObservableList<int> get possibleDurations {
+    _$possibleDurationsAtom.context.enforceReadPolicy(_$possibleDurationsAtom);
+    _$possibleDurationsAtom.reportObserved();
+    return super.possibleDurations;
+  }
+
+  @override
+  set possibleDurations(ObservableList<int> value) {
+    _$possibleDurationsAtom.context.conditionallyRunInAction(() {
+      super.possibleDurations = value;
+      _$possibleDurationsAtom.reportChanged();
+    }, _$possibleDurationsAtom, name: '${_$possibleDurationsAtom.name}_set');
+  }
+
+  final _$possibleDifficultyLevelsAtom =
+      Atom(name: '_CreateClassState.possibleDifficultyLevels');
+
+  @override
+  ObservableList<DifficultyLevel> get possibleDifficultyLevels {
+    _$possibleDifficultyLevelsAtom.context
+        .enforceReadPolicy(_$possibleDifficultyLevelsAtom);
+    _$possibleDifficultyLevelsAtom.reportObserved();
+    return super.possibleDifficultyLevels;
+  }
+
+  @override
+  set possibleDifficultyLevels(ObservableList<DifficultyLevel> value) {
+    _$possibleDifficultyLevelsAtom.context.conditionallyRunInAction(() {
+      super.possibleDifficultyLevels = value;
+      _$possibleDifficultyLevelsAtom.reportChanged();
+    }, _$possibleDifficultyLevelsAtom,
+        name: '${_$possibleDifficultyLevelsAtom.name}_set');
+  }
+
+  final _$imageFilePathAtom = Atom(name: '_CreateClassState.imageFilePath');
+
+  @override
+  String get imageFilePath {
+    _$imageFilePathAtom.context.enforceReadPolicy(_$imageFilePathAtom);
+    _$imageFilePathAtom.reportObserved();
+    return super.imageFilePath;
+  }
+
+  @override
+  set imageFilePath(String value) {
+    _$imageFilePathAtom.context.conditionallyRunInAction(() {
+      super.imageFilePath = value;
+      _$imageFilePathAtom.reportChanged();
+    }, _$imageFilePathAtom, name: '${_$imageFilePathAtom.name}_set');
+  }
+
   final _$currentPageNumberAtom =
       Atom(name: '_CreateClassState.currentPageNumber');
 
@@ -120,22 +175,58 @@ mixin _$CreateClassState on _CreateClassState, Store {
     }, _$subCategoriesListAtom, name: '${_$subCategoriesListAtom.name}_set');
   }
 
-  final _$languageContextIdAtom =
-      Atom(name: '_CreateClassState.languageContextId');
+  final _$idAtom = Atom(name: '_CreateClassState.id');
 
   @override
-  int get languageContextId {
-    _$languageContextIdAtom.context.enforceReadPolicy(_$languageContextIdAtom);
-    _$languageContextIdAtom.reportObserved();
-    return super.languageContextId;
+  int get id {
+    _$idAtom.context.enforceReadPolicy(_$idAtom);
+    _$idAtom.reportObserved();
+    return super.id;
   }
 
   @override
-  set languageContextId(int value) {
-    _$languageContextIdAtom.context.conditionallyRunInAction(() {
-      super.languageContextId = value;
-      _$languageContextIdAtom.reportChanged();
-    }, _$languageContextIdAtom, name: '${_$languageContextIdAtom.name}_set');
+  set id(int value) {
+    _$idAtom.context.conditionallyRunInAction(() {
+      super.id = value;
+      _$idAtom.reportChanged();
+    }, _$idAtom, name: '${_$idAtom.name}_set');
+  }
+
+  final _$languageIdAtom = Atom(name: '_CreateClassState.languageId');
+
+  @override
+  int get languageId {
+    _$languageIdAtom.context.enforceReadPolicy(_$languageIdAtom);
+    _$languageIdAtom.reportObserved();
+    return super.languageId;
+  }
+
+  @override
+  set languageId(int value) {
+    _$languageIdAtom.context.conditionallyRunInAction(() {
+      super.languageId = value;
+      _$languageIdAtom.reportChanged();
+    }, _$languageIdAtom, name: '${_$languageIdAtom.name}_set');
+  }
+
+  final _$languageDesignationAtom =
+      Atom(name: '_CreateClassState.languageDesignation');
+
+  @override
+  String get languageDesignation {
+    _$languageDesignationAtom.context
+        .enforceReadPolicy(_$languageDesignationAtom);
+    _$languageDesignationAtom.reportObserved();
+    return super.languageDesignation;
+  }
+
+  @override
+  set languageDesignation(String value) {
+    _$languageDesignationAtom.context.conditionallyRunInAction(() {
+      super.languageDesignation = value;
+      _$languageDesignationAtom.reportChanged();
+    }, _$languageDesignationAtom,
+        name: '${_$languageDesignationAtom.name}_set');
   }
 
   final _$designationAtom = Atom(name: '_CreateClassState.designation');
@@ -308,14 +399,88 @@ mixin _$CreateClassState on _CreateClassState, Store {
     }, _$caloriesAtom, name: '${_$caloriesAtom.name}_set');
   }
 
+  final _$difficultyLevelAtom = Atom(name: '_CreateClassState.difficultyLevel');
+
+  @override
+  int get difficultyLevel {
+    _$difficultyLevelAtom.context.enforceReadPolicy(_$difficultyLevelAtom);
+    _$difficultyLevelAtom.reportObserved();
+    return super.difficultyLevel;
+  }
+
+  @override
+  set difficultyLevel(int value) {
+    _$difficultyLevelAtom.context.conditionallyRunInAction(() {
+      super.difficultyLevel = value;
+      _$difficultyLevelAtom.reportChanged();
+    }, _$difficultyLevelAtom, name: '${_$difficultyLevelAtom.name}_set');
+  }
+
+  final _$pictureUrlAtom = Atom(name: '_CreateClassState.pictureUrl');
+
+  @override
+  String get pictureUrl {
+    _$pictureUrlAtom.context.enforceReadPolicy(_$pictureUrlAtom);
+    _$pictureUrlAtom.reportObserved();
+    return super.pictureUrl;
+  }
+
+  @override
+  set pictureUrl(String value) {
+    _$pictureUrlAtom.context.conditionallyRunInAction(() {
+      super.pictureUrl = value;
+      _$pictureUrlAtom.reportChanged();
+    }, _$pictureUrlAtom, name: '${_$pictureUrlAtom.name}_set');
+  }
+
   final _$_CreateClassStateActionController =
       ActionController(name: '_CreateClassState');
+
+  @override
+  dynamic setCurrentPageNumber(int number) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setCurrentPageNumber(number);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic nextPage() {
     final _$actionInfo = _$_CreateClassStateActionController.startAction();
     try {
       return super.nextPage();
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setImageFilePath(String filePath) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setImageFilePath(filePath);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setCategories(List<CategoryModel> categories) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setCategories(categories);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setSubCategories(List<CategoryModel> subCategories) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setSubCategories(subCategories);
     } finally {
       _$_CreateClassStateActionController.endAction(_$actionInfo);
     }
@@ -352,10 +517,30 @@ mixin _$CreateClassState on _CreateClassState, Store {
   }
 
   @override
-  dynamic setLanguageContextId(int languageContextId) {
+  dynamic setId(int id) {
     final _$actionInfo = _$_CreateClassStateActionController.startAction();
     try {
-      return super.setLanguageContextId(languageContextId);
+      return super.setId(id);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setLanguageId(int languageId) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setLanguageId(languageId);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setLanguageDesignation(String designation) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setLanguageDesignation(designation);
     } finally {
       _$_CreateClassStateActionController.endAction(_$actionInfo);
     }
@@ -456,6 +641,16 @@ mixin _$CreateClassState on _CreateClassState, Store {
     final _$actionInfo = _$_CreateClassStateActionController.startAction();
     try {
       return super.setCalories(newCalories);
+    } finally {
+      _$_CreateClassStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setDifficultyLevel(int difficultyLevel) {
+    final _$actionInfo = _$_CreateClassStateActionController.startAction();
+    try {
+      return super.setDifficultyLevel(difficultyLevel);
     } finally {
       _$_CreateClassStateActionController.endAction(_$actionInfo);
     }

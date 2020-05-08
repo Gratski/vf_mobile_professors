@@ -38,6 +38,8 @@ class _SelectSubCategoryPageState extends State<SelectSubCategoryPage> with Afte
                       (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
+                        widget.store.setSubCategoryId(widget.store.subCategoriesList[index].id);
+                        widget.store.setSubCategoryName(widget.store.subCategoriesList[index].designation);
                         widget.onTapCallback(widget.store.subCategoriesList[index]);
                       },
                       child: RegularListTile(

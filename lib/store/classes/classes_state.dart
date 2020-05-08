@@ -54,6 +54,12 @@ abstract class _ClassesState with Store {
   }
 
   @action
+  setClasses(List<ClassListItemModel> classes) {
+    this.classes.clear();
+    this.classes.addAll(classes);
+  }
+
+  @action
   addNextPageClasses(List<ClassListItemModel> page){
     this.classes.addAll(page);
     this.pageNumber++;

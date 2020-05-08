@@ -6,6 +6,7 @@ import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/models/category/category.model.dart';
 import 'package:professors/models/classes/class.model.dart';
+import 'package:professors/models/language.model.dart';
 import 'package:professors/models/language_context/language_context.model.dart';
 import 'package:professors/store/classes/create_class_state.dart';
 import 'package:professors/visual/screens/authenticated/classes/edit_create/pages/class_details.page.dart';
@@ -36,20 +37,12 @@ class CreateOrEditClassScreen extends StatelessWidget {
   int classId;
   ClassModel cm;
 
-  CreateOrEditClassScreen(LanguageContextModel lcm, {ClassModel cd}) {
-    editOrCreateClassStore.setLanguageContext(lcm);
+  CreateOrEditClassScreen(LanguageModel language, {int classId}) {
+    store.setLanguageId(language.id);
+    store.setLanguageDesignation(language.designation);
+    store.setId(classId);
 
-    if (cd != null) {
-      cm = cd;
-      classId = cd.id;
-      editOrCreateClassStore.setId(cd.id);
-      editOrCreateClassStore.setDesignation(cd.designation);
-      editOrCreateClassStore.setDescription(cd.description);
-      editOrCreateClassStore.setGoals(cd.goals);
-      editOrCreateClassStore.setCalories(cd.calories);
-      editOrCreateClassStore.setDuration(cd.duration);
-      editOrCreateClassStore.setSubCategory(cd.category);
-
+    if (classId != null) {
       title = 'Editing class';
       pageController = PageController(initialPage: 2);
     } else {
@@ -112,7 +105,7 @@ class CreateOrEditClassScreen extends StatelessWidget {
           pageController.animateToPage(0,
               duration: Duration(milliseconds: 300),
               curve: Cubic(1, 1, 1, 1));
-        },)
+        }, store: store,)
       ],
     );
   }
@@ -122,7 +115,7 @@ class CreateOrEditClassScreen extends StatelessWidget {
       builder: (_) {
 
         // hide back button to parent catgory selection page and to Class Details Page
-        bool hideBackButton = editOrCreateClassStore.currentPageNumber == 0 || editOrCreateClassStore.currentPageNumber == 2;
+        bool hideBackButton = store.currentPageNumber == 0 || store.currentPageNumber == 2;
         List<Widget> actions = List.of([]);
         actions.add(
           GestureDetector(
@@ -137,13 +130,13 @@ class CreateOrEditClassScreen extends StatelessWidget {
           actions,
           hideBackButton: hideBackButton,
           customBackCallback: (BuildContext context) {
-            if (editOrCreateClassStore.currentPageNumber == 1) {
-              editOrCreateClassStore.setCurrentPageNumber(0);
+            if (store.currentPageNumber == 1) {
+              store.setCurrentPageNumber(0);
               pageController.animateToPage(0,
                   duration: Duration(milliseconds: 300),
                   curve: Cubic(1, 1, 1, 1));
-            } else if (editOrCreateClassStore.currentPageNumber == 2) {
-              editOrCreateClassStore.setCurrentPageNumber(1);
+            } else if (store.currentPageNumber == 2) {
+              store.setCurrentPageNumber(1);
               pageController.animateToPage(1,
                   duration: Duration(milliseconds: 300),
                   curve: Cubic(1, 1, 1, 1));

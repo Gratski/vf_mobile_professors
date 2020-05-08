@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/constants/classes/create_class.constants.dart';
 import 'package:professors/models/language_context/language_context.model.dart';
 import 'package:professors/visual/screens/authenticated/classes/edit_create/create_or_edit_class.screen.dart';
@@ -40,20 +41,19 @@ class CreateClassSelectLanguageScreen extends StatelessWidget {
 
             /// Language Options List
             SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  RegularListTile(
-                    label: 'Portuguese',
-                    callback: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CreateOrEditClassScreen(
-                                LanguageContextModel(1, 10, 'PT'))),
-                      );
-                    },
-                  ),
-                ],
+              delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+                return RegularListTile(
+                  label: generalStore.existingLanguages[index].designation,
+                  callback: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CreateOrEditClassScreen(generalStore.existingLanguages[index])),
+                    );
+                  },
+                );
+              },
+                childCount: generalStore.existingLanguages.length,
               ),
             ),
           ],

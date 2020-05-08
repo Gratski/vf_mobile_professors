@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:mobx/mobx.dart';
 import 'package:professors/models/category/category.model.dart';
 import 'package:professors/models/classes/class.model.dart';
+import 'package:professors/models/classes/difficulty_level.model.dart';
 
 part 'create_class_state.g.dart';
 
@@ -12,6 +15,28 @@ class CreateClassState extends _CreateClassState with _$CreateClassState {
 
 // The store-class
 abstract class _CreateClassState with Store {
+
+  @observable
+  ObservableList<int> possibleDurations = ObservableList.of([20, 30, 35, 45]);// in minutes
+
+  @observable
+  ObservableList<DifficultyLevel> possibleDifficultyLevels = ObservableList.of([
+    DifficultyLevel(
+        1, 'GENERAL_DIFFICULTY_LEVEL_BEGINNER'
+    ) ,
+    DifficultyLevel(
+        2, 'GENERAL_DIFFICULTY_LEVEL_INTERMEDIATE'
+    ),
+    DifficultyLevel(
+        3, 'GENERAL_DIFFICULTY_LEVEL_ADVANCED'
+    ),
+    DifficultyLevel(
+        4, 'GENERAL_DIFFICULTY_LEVEL_WARRIOR'
+    )
+  ]);// in minutes
+
+  @observable
+  String imageFilePath;
 
   /// Screen Context
   @observable
@@ -33,7 +58,13 @@ abstract class _CreateClassState with Store {
 
   /// Class Attributes
   @observable
-  int languageContextId;
+  int id;
+
+  @observable
+  int languageId;
+  @observable
+  String languageDesignation;
+
 
   @observable
   String designation;
@@ -63,16 +94,34 @@ abstract class _CreateClassState with Store {
   @observable
   double calories;
 
+  @observable
+  int difficultyLevel;
+
+  @observable
+  String pictureUrl;
+
   /// Context Actions
+  @action
+  setCurrentPageNumber(int number) {
+    this.currentPageNumber = number;
+  }
+
   @action
   nextPage() {
     this.currentPageNumber++;
   }
 
+  @action
+  setImageFilePath(String filePath) {
+    this.imageFilePath = filePath;
+  }
+
+  @action
   setCategories(List<CategoryModel> categories) {
     this.categoriesList.clear();
     this.categoriesList.addAll(categories);
   }
+  @action
   setSubCategories(List<CategoryModel> subCategories) {
     this.subCategoriesList.clear();
     this.subCategoriesList.addAll(subCategories);
@@ -94,9 +143,18 @@ abstract class _CreateClassState with Store {
 
   /// Screen Actions
   @action
-  setLanguageContextId(int languageContextId) {
-    this.languageContextId = languageContextId;
+  setId(int id){
+    this.id = id;
   }
+  @action
+  setLanguageId(int languageId) {
+    this.languageId = languageId;
+  }
+  @action
+  setLanguageDesignation(String designation) {
+    this.languageDesignation = designation;
+  }
+
   @action
   setDesignation(String newDesignation) {
     this.designation = newDesignation;
@@ -138,6 +196,11 @@ abstract class _CreateClassState with Store {
   @action
   setCalories(double newCalories){
     this.calories = newCalories;
+  }
+
+  @action
+  setDifficultyLevel(int difficultyLevel) {
+    this.difficultyLevel = difficultyLevel;
   }
 
 }

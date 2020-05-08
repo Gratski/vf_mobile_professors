@@ -162,6 +162,16 @@ mixin _$ClassesState on _ClassesState, Store {
   }
 
   @override
+  dynamic setClasses(List<ClassListItemModel> classes) {
+    final _$actionInfo = _$_ClassesStateActionController.startAction();
+    try {
+      return super.setClasses(classes);
+    } finally {
+      _$_ClassesStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic addNextPageClasses(List<ClassListItemModel> page) {
     final _$actionInfo = _$_ClassesStateActionController.startAction();
     try {
