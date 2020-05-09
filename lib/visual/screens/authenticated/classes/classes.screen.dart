@@ -23,6 +23,7 @@ import 'package:professors/visual/widgets/text/text.builder.dart';
 class ClassesScreen extends StatefulWidget {
   ClassConstants screenConstants = ClassConstants();
   ScrollController scrollController = ScrollController();
+  BuildContext buildContext;
 
   @override
   _ClassesScreenState createState() => _ClassesScreenState();
@@ -33,13 +34,14 @@ class _ClassesScreenState extends State<ClassesScreen>
   @override
   Widget build(BuildContext context) {
     double sectionTopMargin = MediaQuery.of(context).size.height / 20;
-
+    widget.buildContext = context;
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: refreshOperation,
         backgroundColor: AppColors.bgMainColor,
-        color: AppColors.bgMainColor,
+        color: AppColors.regularRed,
         child: Container(
+          padding: AppPaddings.regularPadding(context),
           /*
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -47,27 +49,99 @@ class _ClassesScreenState extends State<ClassesScreen>
             fit: BoxFit.cover,
           ),
         ),*/
-          child: Column(
-            children: <Widget>[
+          child: CustomScrollView(
+            controller: widget.scrollController,
+            slivers: [
 
-              Container(
-                margin: EdgeInsets.only(top: 40),
-                child: TextsBuilder.regularText("Test"),
-              ),
-
+              ////////////////////////////////////////////////////////
+              // If is loading content
+              ////////////////////////////////////////////////////////
               Observer(
                 builder: (_) {
-                  return Expanded(
-                    child: ListView.builder(
-                      controller: widget.scrollController,
-                      itemCount: classesStore.classes.length,
-                      itemBuilder: (context, index) {
+                  return SliverToBoxAdapter(
+                    child: ( classesStore.isLoading ) ? Container(
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 3),
+                      child: DefaultLoaderWidget(),
+                    ) : Container(),
+                  );
+                },
+              ),
+
+              ////////////////////////////////////////////////////////
+              // If has no classes yet
+              ////////////////////////////////////////////////////////
+              Observer(builder: (_) {
+                return SliverToBoxAdapter(
+                  child: (classesStore.classes.length == 0 &&
+                          !classesStore.isLoading)
+                      ? Container(
+                          margin: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height / 4),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              TextsBuilder.h1Bold(
+                                  "Welcome ${userStore.firstName}!"),
+                              TextsBuilder.h4Bold("Create your first class"),
+                              Container(
+                                margin: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.height /
+                                        20),
+                                child: ButtonsBuilder.redFlatButton(
+                                  "CREATE CLASS",
+                                  () {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) =>
+                                            CreateClassSelectLanguageScreen()));
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Container(),
+                );
+              }),
+
+              ////////////////////////////////////////////////////////
+              // If classes have been found
+              ////////////////////////////////////////////////////////
+              Observer(
+                builder: (_){
+                  return SliverToBoxAdapter(
+                    child: (classesStore.classes.length > 0 && !classesStore.isLoading )
+                        ? Container(child: Container(
+                        margin: EdgeInsets.only(top: 40),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ButtonsBuilder.transparentCustomButton(
+                              TextsBuilder.h3Bold("Add Class"), () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      CreateClassSelectLanguageScreen()));
+                            },)
+                          ],
+                        )
+                    ),)
+                        : Container(),
+                  );
+                },
+              ),
+              _buildTitle(context),
+              Observer(
+                builder: (_) {
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
                         return _buildClassItem(context, index);
                       },
+                      childCount: classesStore.classes.length,
                     ),
                   );
                 },
-              )
+              ),
             ],
           ),
         ),
@@ -85,10 +159,8 @@ class _ClassesScreenState extends State<ClassesScreen>
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
         ),
-        margin: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width * 0.05,
-            right: MediaQuery.of(context).size.width * 0.05,
-            bottom: MediaQuery.of(context).size.height * 0.03),
+        margin:
+            EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.03),
         child: Stack(
           children: <Widget>[
             AspectRatio(
@@ -231,13 +303,61 @@ class _ClassesScreenState extends State<ClassesScreen>
     );
   }
 
+  _buildTitle(BuildContext context) {
+    return Observer(
+      builder: (_) {
+        if (classesStore.classes.length != 0 &&
+            !classesStore.isLoading) {
+          return SliverToBoxAdapter(
+            child: Container(
+              padding: AppPaddings.topTitlePadding(context),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  /// Left
+                  Flexible(
+                    flex: 4,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        TextsBuilder.h2Bold(AppLocalizations.of(context).translate(widget.screenConstants.classesAllWord)),
+                        TextsBuilder.h2Bold(AppLocalizations.of(context).translate(widget.screenConstants.classesYourWord), color: Colors.red),
+                      ],
+                    ),
+                  ),
+
+                  Flexible(
+                    flex: 10,
+                    child: Container(
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width / 40),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          TextsBuilder.jumboBold(AppLocalizations.of(context).translate(widget.screenConstants.classesClassesWord))
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        } else {
+          return SliverToBoxAdapter(
+            child: Container(),
+          );
+        }
+      },
+    );
+  }
+
   Future<void> refreshOperation() async {
-    classesStore.setIsLoading(true);
     classesStore.resetOffset();
     restServices
         .getClassService()
-        .getUserClasses(
-            context, classesStore.offset, classesStore.itemsPerPage)
+        .getUserClasses(context, classesStore.offset, classesStore.itemsPerPage)
         .then((resp) {
       classesStore.setClasses(resp.items, resp.total);
     }).catchError((error) {
@@ -249,13 +369,19 @@ class _ClassesScreenState extends State<ClassesScreen>
   @override
   void didInitState() {
     widget.scrollController.addListener(() {
-      if ( widget.scrollController.position.pixels == widget.scrollController.position.maxScrollExtent
-          && classesStore.totalClasses > classesStore.offset && !classesStore.isLoadingNext) {
+      if (widget.scrollController.position.pixels ==
+              widget.scrollController.position.maxScrollExtent &&
+          classesStore.totalClasses > classesStore.offset &&
+          !classesStore.isLoadingNext &&
+          classesStore.classes.length > 0) {
         classesStore.setIsLoadingNext(true);
-        restServices.getClassService().getUserClasses(context, classesStore.offset, 10)
-        .then((resp) => classesStore.addNextClasses(resp.items, resp.total))
-        .catchError((e) => ToasterBuilder.buildErrorToaster(context, "Something went wrong"))
-        .whenComplete(() => classesStore.setIsLoadingNext(false));
+        restServices
+            .getClassService()
+            .getUserClasses(widget.buildContext, classesStore.offset, 10)
+            .then((resp) => classesStore.addNextClasses(resp.items, resp.total))
+            .catchError((e) => ToasterBuilder.buildErrorToaster(
+                context, "Something went wrong"))
+            .whenComplete(() => classesStore.setIsLoadingNext(false));
       }
     });
 
