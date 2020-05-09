@@ -258,18 +258,15 @@ class _ClassesScreenState extends State<ClassesScreen>
             Positioned(
               top: 10,
               right: 10,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
+              child: ButtonsBuilder.transparentCustomButton(Icon(
+                FontAwesomeIcons.edit,
+                color: AppColors.fontColor,
+                size: 20,
+              ), () {
+                Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => CreateOrEditClassScreen(LanguageModel(classesStore.classes[index].languageId, null), classId: classesStore.classes[index].id,)
-                  ));
-                },
-                child: Icon(
-                  FontAwesomeIcons.edit,
-                  color: AppColors.fontColor,
-                  size: 20,
-                ),
-              ),
+                ));
+              })
             ),
             Positioned(
               bottom: 10,

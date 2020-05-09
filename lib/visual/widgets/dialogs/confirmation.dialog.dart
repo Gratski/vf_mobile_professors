@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/visual/styles/colors.dart';
+import 'package:professors/visual/styles/padding.dart';
+import 'package:professors/visual/styles/sizes.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
@@ -16,13 +18,13 @@ class ConfirmationDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
+    return SimpleDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
       elevation: 0.0,
       backgroundColor: Colors.transparent,
-      child: _dialogContent(context),
+      children: <Widget>[_dialogContent(context)],
     );
   }
 
@@ -46,43 +48,46 @@ class ConfirmationDialog extends StatelessWidget {
 
           // Title
           Container(
-            child: TextsBuilder.h4Bold(title),
+            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
+            child: TextsBuilder.h4Bold(title, color: AppColors.bgMainColor),
           ),
 
           // SubTitle
           Container(
-            child: TextsBuilder.regularText(subTitle),
+            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
+            padding: AppPaddings.regularAllPadding(context),
+            child: TextsBuilder.regularText(subTitle, color: AppColors.bgMainColor),
           ),
 
           // Buttons
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
+          SafeArea(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
 
-              Container(
-                padding: EdgeInsets.all(5),
-                child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonYesLabel), () {
-                  confirmationCallback();
-                  Navigator.of(context).pop();
-                }, color: AppColors.regularGreen),
-              ),
-              Container(
-                padding: EdgeInsets.all(5),
-                child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonNoLabel), () {
-                  cancelCallback();
-                  Navigator.of(context).pop();
-                }, color: AppColors.regularRed),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40, bottom: MediaQuery.of(context).size.height / 30),
-                padding: EdgeInsets.all(5),
-                child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.dialogUnavailableOperationDismissLabel), () {
-                  Navigator.of(context).pop();
-                }, color: AppColors.bgMainColor),
-              ),
-
-            ],
-          ),
+                Expanded(
+                  flex: 6,
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonYesLabel), () {
+                      confirmationCallback();
+                      Navigator.of(context).pop();
+                    }, color: AppColors.regularGreen),
+                  ),
+                ),
+                Expanded(
+                  flex: 6,
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonNoLabel), () {
+                      cancelCallback();
+                      Navigator.of(context).pop();
+                    }, color: AppColors.regularRed),
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

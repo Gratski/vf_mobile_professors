@@ -254,5 +254,10 @@
   "CREATE_CLASS_FINISH_MESSAGE": "",
   "CREATE_CLASS_FINISH_SUCCESS_MESSAGE": "",
   "CREATE_CLASS_FINISH_FAILURE_MESSAGE": "",
-  "CREATE_CLASS_ADD_FINISH_BUTTON_LABEL": ""
+  "CREATE_CLASS_ADD_FINISH_BUTTON_LABEL": "",
+
+  "CLASS_CREATED_OR_UPDATED_TOP_HEADER": "Success!",
+  "CLASS_CREATED_OR_UPDATED_SUB_TITLE_CREATED": "Your newly created class has been successfully created.\nIn order to maintain our quality standards our team will review it before it goes online.",
+  "CLASS_CREATED_OR_UPDATED_SUB_TITLE_UPDATED": "Class updated!",
+  "CLASS_CREATED_OR_UPDATED_OK_BUTTON_LABEL": "OK"
 }

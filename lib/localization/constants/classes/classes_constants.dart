@@ -22,4 +22,9 @@ class ClassConstants {
   String get classDetailsCommentsLabel => "CLASS_DETAILS_COMMENTS_LABEL";
   String get classDetailsLoadCommentsLabel => "CLASS_DETAILS_LOAD_COMMENTS_LABEL";
 
+  String get classCreatedOrUpdatedTopHeader => "CLASS_CREATED_OR_UPDATED_TOP_HEADER";
+  String get classCreatedOrUpdatedSubTitleCreated => "CLASS_CREATED_OR_UPDATED_SUB_TITLE_CREATED";
+  String get classCreatedOrUpdatedSubTitleUpdated => "CLASS_CREATED_OR_UPDATED_SUB_TITLE_UPDATED";
+  String get classCreatedOrUpdatedOkButtonLabel => "CLASS_CREATED_OR_UPDATED_OK_BUTTON_LABEL";
+
 }
