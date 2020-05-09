@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:mobx/mobx.dart';
+import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/models/category/category.model.dart';
 import 'package:professors/models/classes/class.model.dart';
 import 'package:professors/models/classes/difficulty_level.model.dart';
@@ -16,22 +17,24 @@ class CreateClassState extends _CreateClassState with _$CreateClassState {
 // The store-class
 abstract class _CreateClassState with Store {
 
+  static GeneralConstants constants = GeneralConstants();
+
   @observable
   ObservableList<int> possibleDurations = ObservableList.of([20, 30, 35, 45]);// in minutes
 
   @observable
   ObservableList<DifficultyLevel> possibleDifficultyLevels = ObservableList.of([
     DifficultyLevel(
-        1, 'GENERAL_DIFFICULTY_LEVEL_BEGINNER'
+        1, constants.difficultyLevelBeginner
     ) ,
     DifficultyLevel(
-        2, 'GENERAL_DIFFICULTY_LEVEL_INTERMEDIATE'
+        2, constants.difficultyLevelIntermediate
     ),
     DifficultyLevel(
-        3, 'GENERAL_DIFFICULTY_LEVEL_ADVANCED'
+        3, constants.difficultyLevelAvanced
     ),
     DifficultyLevel(
-        4, 'GENERAL_DIFFICULTY_LEVEL_WARRIOR'
+        4, constants.difficultyLevelWarrior
     )
   ]);// in minutes
 

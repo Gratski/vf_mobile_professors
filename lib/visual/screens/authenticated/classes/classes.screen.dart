@@ -8,6 +8,7 @@ import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
 import 'package:professors/models/language.model.dart';
+import 'package:professors/utils/classes.utils.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/authenticated/classes/class_details.screen.dart';
 import 'package:professors/visual/screens/authenticated/classes/create_class_select_language.screen.dart';
@@ -17,7 +18,6 @@ import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
-import 'package:professors/visual/widgets/text/badges.builder.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class ClassesScreen extends StatefulWidget {
@@ -71,7 +71,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                                   Container(
                                     margin: EdgeInsets.only(left: 10),
                                     child: TextsBuilder.h4Bold(
-                                        'ADD CLASS'.toUpperCase()),
+                                        AppLocalizations.of(context).translate(widget.screenConstants.classesAddClassButtonLabel).toUpperCase()),
                                   ),
                                 ],
                               ),
@@ -120,8 +120,8 @@ class _ClassesScreenState extends State<ClassesScreen>
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                TextsBuilder.h2Bold('ALL'),
-                                TextsBuilder.h2Bold('YOUR', color: Colors.red),
+                                TextsBuilder.h2Bold(AppLocalizations.of(context).translate(widget.screenConstants.classesAllWord)),
+                                TextsBuilder.h2Bold(AppLocalizations.of(context).translate(widget.screenConstants.classesYourWord), color: Colors.red),
                               ],
                             ),
                           ),
@@ -135,7 +135,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: <Widget>[
-                                  TextsBuilder.jumboBold('CLASSES')
+                                  TextsBuilder.jumboBold(AppLocalizations.of(context).translate(widget.screenConstants.classesClassesWord))
                                 ],
                               ),
                             ),
@@ -231,7 +231,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                 child: Container(
                   foregroundDecoration: BoxDecoration(
                     gradient: LinearGradient(
-                        colors: [AppColors.bgMainColor, Colors.transparent],
+                        colors: [Colors.black, Colors.transparent],
                         begin: Alignment.bottomCenter,
                         end: Alignment.topCenter),
                   ),
@@ -241,33 +241,24 @@ class _ClassesScreenState extends State<ClassesScreen>
             Positioned(
               top: 10,
               left: 10,
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    FontAwesomeIcons.solidSquare,
-                    color: AppColors.regularRed,
-                    size: 15,
-                  ),
-                  Icon(FontAwesomeIcons.solidSquare,
-                      color: Colors.white, size: 15),
-                  Icon(FontAwesomeIcons.solidSquare,
-                      color: Colors.white, size: 15)
-                ],
-              ),
+              child:ClassesUtils().getChipByDifficultyLevel(context, classesStore.classes[index].difficultyLevel),
             ),
             Positioned(
-              top: 10,
-              right: 10,
-              child: ButtonsBuilder.transparentCustomButton(Icon(
-                FontAwesomeIcons.edit,
-                color: AppColors.fontColor,
-                size: 20,
-              ), () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => CreateOrEditClassScreen(LanguageModel(classesStore.classes[index].languageId, null), classId: classesStore.classes[index].id,)
-                ));
-              })
-            ),
+                top: 10,
+                right: 10,
+                child: ButtonsBuilder.transparentCustomButton(
+                    Icon(
+                      FontAwesomeIcons.edit,
+                      color: AppColors.fontColor,
+                      size: 20,
+                    ), () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => CreateOrEditClassScreen(
+                            LanguageModel(
+                                classesStore.classes[index].languageId, null),
+                            classId: classesStore.classes[index].id,
+                          )));
+                })),
             Positioned(
               bottom: 10,
               right: 10,
@@ -278,7 +269,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                     color: AppColors.regularRed,
                     borderRadius: BorderRadius.circular(5)),
                 child: TextsBuilder.regularText(
-                    classesStore.classes[index].languageCode,
+                    classesStore.classes[index].languageCode.toUpperCase(),
                     color: Colors.white),
               ),
             ),
@@ -299,19 +290,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                       children: <Widget>[
                         /// STATUS LABEL
                         Container(
-                          child: (classesStore.classes[index].isActive)
-                              ? BadgesBuilder.label(
-                                  AppLocalizations.of(context)
-                                      .translate(widget
-                                          .screenConstants.classesActiveLabel)
-                                      .toUpperCase(),
-                                  AppColors.regularGreen)
-                              : BadgesBuilder.label(
-                                  AppLocalizations.of(context)
-                                      .translate(widget
-                                          .screenConstants.classesInactiveLabel)
-                                      .toUpperCase(),
-                                  AppColors.regularRed),
+                          child: ClassesUtils().getChipByStatus(context, classesStore.classes[index].status)
                         ),
 
                         /// DETAILS

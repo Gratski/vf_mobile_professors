@@ -5,8 +5,8 @@ class AppColors {
   static Color get linksColor => Colors.white;
   static Color get paypalColor => Color.fromRGBO(0, 107, 192, 1);
   static Color get fontColor => Colors.white;
-  static Color get regularGreen => Colors.teal;
-  static Color get lightGreen => Color.fromRGBO(0, 221, 57, 1);
+  static Color get regularGreen => Color.fromRGBO(30, 215, 97, 1);
+  static Color get lightGreen => Color.fromRGBO(30, 215, 97, 1);
   static Color get regularRed => Color.fromRGBO(254, 0, 47, 1);
 
   /// INPUT
@@ -36,5 +36,29 @@ class AppColors {
   /// ICONS
   static Color get iconRegular => fontColor;
   static Color get iconRed => regularRed;
+
+  ///
+  /// Gets a colors based on the discipline status
+  ///
+  static Color getBgColorByStatus(int status) {
+    switch(status) {
+      case 1: return Colors.amber;
+      case 2: return regularGreen;
+      case 3: return bgMainColor;
+      case 4: return bgMainColor;
+    }
+  }
+
+  ///
+  /// Gets text color by status
+  ///
+  static Color getTextColorByStatus(int status) {
+    switch(status) {
+      case 1: return bgMainColor;
+      case 2: return Colors.white;
+      case 3: return regularRed;
+      case 4: return regularRed;
+    }
+  }
 
 }

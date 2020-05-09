@@ -27,6 +27,11 @@
   "GENERAL_ACTIONS_REMOVE_LABEL": "Remove",
   "GENERAL_ACTIONS_FILE_SYSTEM_LABEL": "File System",
   "GENERAL_ACTIONS_PHOTO_LIBRARY_LABEL": "Photo Library",
+  "GENERAL_DIFFICULTY_LEVEL_BEGINNER": "Beginner",
+  "GENERAL_DIFFICULTY_LEVEL_INTERMEDIATE": "Intermediate",
+  "GENERAL_DIFFICULTY_LEVEL_ADVANCED": "Advanced",
+  "GENERAL_DIFFICULTY_LEVEL_WARRIOR": "Warrior",
+
 
   "GENERAL_LABELS_GENDER_MALE": "Male",
   "GENERAL_LABELS_GENDER_FEMALE": "Female",
@@ -214,12 +219,18 @@
   "NOTIFICATIONS_MESSAGE_SENT_CONFIRMATION_OK_BUTTON_LABEL": "OK",
 
 
-  "CLASSES_TOP_HEADER": "Your Classes",
+  "CLASSES_CLASSES_WORD": "Classes",
+  "CLASSES_ALL_WORD": "All",
+  "CLASSES_YOUR_WORD": "Your",
   "CLASSES_SUB_TITLE": "Here you can find all your classes",
   "CLASSES_SCHEDULE_LABEL": "Agenda",
   "CLASSES_CALENDAR_LABEL": "Calendar",
   "CLASSES_ACTIVE_LABEL": "Active",
   "CLASSES_INACTIVE_LABEL": "Inactive",
+  "CLASSES_WAITING_FOR_APPROVAL_LABEL": "Waiting Approval",
+  "CLASSES_APPROVED_LABEL": "Active",
+  "CLASSES_REJECTED_LABEL": "Rejected",
+  "CLASSES_REPORTED_LABEL": "Reported",
   "CLASSES_DURATION_LABEL": "Duration",
   "CLASSES_VIEW_LABEL": "View",
   "CLASSES_EDIT_LABEL": "Edit",
@@ -259,5 +270,7 @@
   "CLASS_CREATED_OR_UPDATED_TOP_HEADER": "Success!",
   "CLASS_CREATED_OR_UPDATED_SUB_TITLE_CREATED": "Your newly created class has been successfully created.\nIn order to maintain our quality standards our team will review it before it goes online.",
   "CLASS_CREATED_OR_UPDATED_SUB_TITLE_UPDATED": "Class updated!",
-  "CLASS_CREATED_OR_UPDATED_OK_BUTTON_LABEL": "OK"
+  "CLASS_CREATED_OR_UPDATED_OK_BUTTON_LABEL": "OK",
+  "CLASS_DELETED_TOP_HEADER": "Class deleted!",
+  "CLASS_DELETED_SUB_TITLE": "This class has been successfully deleted."
 }

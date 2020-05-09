@@ -16,6 +16,10 @@ class GeneralConstants {
   String get buttonRemoveLabel => "GENERAL_ACTIONS_REMOVE_LABEL";
   String get buttonFileSystemLabel => "GENERAL_ACTIONS_FILE_SYSTEM_LABEL";
   String get buttonPhotoLibraryLabel => "GENERAL_ACTIONS_PHOTO_LIBRARY_LABEL";
+  String get difficultyLevelBeginner => "GENERAL_DIFFICULTY_LEVEL_BEGINNER";
+  String get difficultyLevelIntermediate => "GENERAL_DIFFICULTY_LEVEL_INTERMEDIATE";
+  String get difficultyLevelAvanced => "GENERAL_DIFFICULTY_LEVEL_ADVANCED";
+  String get difficultyLevelWarrior => "GENERAL_DIFFICULTY_LEVEL_WARRIOR";
 
   String get genderMaleLabel => "GENERAL_LABELS_GENDER_MALE";
   String get genderFemaleLabel => "GENERAL_LABELS_GENDER_FEMALE";

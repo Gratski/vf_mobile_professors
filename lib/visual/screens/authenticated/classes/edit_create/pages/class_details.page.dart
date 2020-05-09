@@ -15,6 +15,7 @@ import 'package:professors/utils/picture.utils.dart';
 import 'package:professors/visual/builders/dialog.builder.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/authenticated/classes/edit_create/class_created_or_updated.screen.dart';
+import 'package:professors/visual/screens/authenticated/classes/edit_create/class_deleted.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/sizes.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
@@ -345,7 +346,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                                   ),
                                                 ),
                                                 child: TextsBuilder.h4Bold(
-                                                    '${l.designation}'),
+                                                    '${AppLocalizations.of(context).translate(l.designation)}'),
                                               ),
                                             );
                                           }).toList()),
@@ -450,8 +451,9 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
               widget.store.setIsLoadingContext(true);
               restServices.getClassService().deleteClass(context, widget.store.id)
                   .then((v) {
-                ToasterBuilder.buildSuccessToaster(context, "Class Removed");
-                Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => ClassDeletedScreen()
+                ));
               })
                   .catchError((e) => ToasterBuilder.buildErrorToaster(context, e.cause))
                   .whenComplete(() => widget.store.setIsLoadingContext(false));
