@@ -27,7 +27,10 @@ abstract class _ClassesState with Store {
   bool isLoadingNext = false;
 
   @observable
-  int pageNumber = 0;
+  int offset = 0;
+
+  @observable
+  int totalClasses = 0;
 
   @observable
   int itemsPerPage = 10;
@@ -54,25 +57,23 @@ abstract class _ClassesState with Store {
   }
 
   @action
-  setClasses(List<ClassListItemModel> classes) {
+  resetOffset() {
+    this.offset = 0;
+  }
+
+  @action
+  setClasses(List<ClassListItemModel> classes, int totalClasses) {
     this.classes.clear();
     this.classes.addAll(classes);
+    this.offset = classes.length;
+    this.totalClasses = totalClasses;
   }
 
   @action
-  addNextPageClasses(List<ClassListItemModel> page){
+  addNextClasses(List<ClassListItemModel> page, int totalClasses){
     this.classes.addAll(page);
-    this.pageNumber++;
-  }
-
-  @action
-  addPreviousPageClasses(List<ClassListItemModel> page) {
-    this.classes.addAll(page);
-  }
-
-  @action
-  setPageNumber(int pageNumber) {
-    this.pageNumber = pageNumber;
+    this.offset = this.offset + page.length;
+    this.totalClasses = totalClasses;
   }
 
 }

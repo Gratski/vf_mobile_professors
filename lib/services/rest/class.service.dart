@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:professors/models/classes/class.model.dart';
 import 'package:professors/models/classes/class_list_item.dart';
+import 'package:professors/services/dto/classes/get_classes.dto.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
 import 'package:professors/services/rest/abstract_rest.service.dart';
 
@@ -114,10 +115,12 @@ class ClassService extends AbstractRestService {
   ///
   /// Gets a page of classes
   ///
-  Future<List<ClassListItemModel>> getUserClasses(BuildContext context, int page, int limit) async {
+  Future<GetClassesDTO> getUserClasses(BuildContext context, int offset, int limit) async {
     try {
-      final rsp = await performJsonGet(context, '$REST_URL/professors/me/disciplines?page=$page&limit=$limit');
-      List<dynamic> list = decodeBody(rsp)["items"];
+      final rsp = await performJsonGet(context, '$REST_URL/professors/me/disciplines?offset=$offset&limit=$limit');
+      Map<String, dynamic> resultMap = decodeBody(rsp);
+      int totalItems = resultMap["total"];
+      List<dynamic> list = resultMap["items"];
       List<ClassListItemModel> result = List.of([]);
       list.forEach((elem) {
         result.add(
@@ -135,7 +138,7 @@ class ClassService extends AbstractRestService {
           )
         );
       },);
-      return result;
+      return GetClassesDTO(totalItems, result);
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {

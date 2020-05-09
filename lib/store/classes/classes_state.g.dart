@@ -60,21 +60,38 @@ mixin _$ClassesState on _ClassesState, Store {
     }, _$isLoadingNextAtom, name: '${_$isLoadingNextAtom.name}_set');
   }
 
-  final _$pageNumberAtom = Atom(name: '_ClassesState.pageNumber');
+  final _$offsetAtom = Atom(name: '_ClassesState.offset');
 
   @override
-  int get pageNumber {
-    _$pageNumberAtom.context.enforceReadPolicy(_$pageNumberAtom);
-    _$pageNumberAtom.reportObserved();
-    return super.pageNumber;
+  int get offset {
+    _$offsetAtom.context.enforceReadPolicy(_$offsetAtom);
+    _$offsetAtom.reportObserved();
+    return super.offset;
   }
 
   @override
-  set pageNumber(int value) {
-    _$pageNumberAtom.context.conditionallyRunInAction(() {
-      super.pageNumber = value;
-      _$pageNumberAtom.reportChanged();
-    }, _$pageNumberAtom, name: '${_$pageNumberAtom.name}_set');
+  set offset(int value) {
+    _$offsetAtom.context.conditionallyRunInAction(() {
+      super.offset = value;
+      _$offsetAtom.reportChanged();
+    }, _$offsetAtom, name: '${_$offsetAtom.name}_set');
+  }
+
+  final _$totalClassesAtom = Atom(name: '_ClassesState.totalClasses');
+
+  @override
+  int get totalClasses {
+    _$totalClassesAtom.context.enforceReadPolicy(_$totalClassesAtom);
+    _$totalClassesAtom.reportObserved();
+    return super.totalClasses;
+  }
+
+  @override
+  set totalClasses(int value) {
+    _$totalClassesAtom.context.conditionallyRunInAction(() {
+      super.totalClasses = value;
+      _$totalClassesAtom.reportChanged();
+    }, _$totalClassesAtom, name: '${_$totalClassesAtom.name}_set');
   }
 
   final _$itemsPerPageAtom = Atom(name: '_ClassesState.itemsPerPage');
@@ -162,40 +179,30 @@ mixin _$ClassesState on _ClassesState, Store {
   }
 
   @override
-  dynamic setClasses(List<ClassListItemModel> classes) {
+  dynamic resetOffset() {
     final _$actionInfo = _$_ClassesStateActionController.startAction();
     try {
-      return super.setClasses(classes);
+      return super.resetOffset();
     } finally {
       _$_ClassesStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic addNextPageClasses(List<ClassListItemModel> page) {
+  dynamic setClasses(List<ClassListItemModel> classes, int totalClasses) {
     final _$actionInfo = _$_ClassesStateActionController.startAction();
     try {
-      return super.addNextPageClasses(page);
+      return super.setClasses(classes, totalClasses);
     } finally {
       _$_ClassesStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic addPreviousPageClasses(List<ClassListItemModel> page) {
+  dynamic addNextClasses(List<ClassListItemModel> page, int totalClasses) {
     final _$actionInfo = _$_ClassesStateActionController.startAction();
     try {
-      return super.addPreviousPageClasses(page);
-    } finally {
-      _$_ClassesStateActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setPageNumber(int pageNumber) {
-    final _$actionInfo = _$_ClassesStateActionController.startAction();
-    try {
-      return super.setPageNumber(pageNumber);
+      return super.addNextClasses(page, totalClasses);
     } finally {
       _$_ClassesStateActionController.endAction(_$actionInfo);
     }

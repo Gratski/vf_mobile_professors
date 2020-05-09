@@ -35,168 +35,44 @@ class _ClassesScreenState extends State<ClassesScreen>
     double sectionTopMargin = MediaQuery.of(context).size.height / 20;
 
     return Scaffold(
-        body: RefreshIndicator(
-      onRefresh: refreshOperation,
-      backgroundColor: AppColors.bgMainColor,
-      color: AppColors.bgMainColor,
-      child: Container(
-        /*
+      body: RefreshIndicator(
+        onRefresh: refreshOperation,
+        backgroundColor: AppColors.bgMainColor,
+        color: AppColors.bgMainColor,
+        child: Container(
+          /*
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/classes_bg.png"),
             fit: BoxFit.cover,
           ),
         ),*/
-        child: CustomScrollView(
-          slivers: <Widget>[
-            Observer(
-              builder: (_) {
-                return CustomAppBar(
-                  (classesStore.classes.length != 0 && !classesStore.isLoading)
-                      ? [
-                          Container(
-                            margin: EdgeInsets.only(
-                                right: MediaQuery.of(context).size.width / 20),
-                            child: FlatButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            CreateClassSelectLanguageScreen()));
-                              },
-                              child: Row(
-                                children: <Widget>[
-                                  //Icon(FontAwesomeIcons.plus, color: AppColors.fontColor,),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 10),
-                                    child: TextsBuilder.h4Bold(
-                                        AppLocalizations.of(context).translate(widget.screenConstants.classesAddClassButtonLabel).toUpperCase()),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ]
-                      : [],
-                  hideBackButton: true,
-                );
-              },
-            ),
+          child: Column(
+            children: <Widget>[
 
-            /// LOAD
-            Observer(
-              builder: (_) {
-                if (classesStore.isLoading) {
-                  return SliverToBoxAdapter(
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height / 3),
-                      child: DefaultLoaderWidget(),
-                    ),
-                  );
-                } else {
-                  return SliverToBoxAdapter(
-                    child: Container(),
-                  );
-                }
-              },
-            ),
+              Container(
+                margin: EdgeInsets.only(top: 40),
+                child: TextsBuilder.regularText("Test"),
+              ),
 
-            /// CUSTOM SCREEN TITLE
-            Observer(
-              builder: (_) {
-                if (classesStore.classes.length != 0 &&
-                    !classesStore.isLoading) {
-                  return SliverToBoxAdapter(
-                    child: Container(
-                      padding: AppPaddings.topTitlePadding(context),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          /// Left
-                          Flexible(
-                            flex: 4,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                TextsBuilder.h2Bold(AppLocalizations.of(context).translate(widget.screenConstants.classesAllWord)),
-                                TextsBuilder.h2Bold(AppLocalizations.of(context).translate(widget.screenConstants.classesYourWord), color: Colors.red),
-                              ],
-                            ),
-                          ),
-
-                          Flexible(
-                            flex: 10,
-                            child: Container(
-                              margin: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width / 40),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: <Widget>[
-                                  TextsBuilder.jumboBold(AppLocalizations.of(context).translate(widget.screenConstants.classesClassesWord))
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                } else {
-                  return SliverToBoxAdapter(
-                    child: Container(),
-                  );
-                }
-              },
-            ),
-
-            /// Add button if no classes were found
-            Observer(
-              builder: (_) {
-                if (classesStore.classes.length == 0 &&
-                    !classesStore.isLoading) {
-                  return SliverToBoxAdapter(
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height / 4),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          TextsBuilder.h1Bold(
-                              "Welcome ${userStore.firstName}!"),
-                          TextsBuilder.h4Bold("Create your first class"),
-                          Container(
-                            margin: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.height / 20),
-                            child: ButtonsBuilder.redFlatButton("CREATE CLASS",
-                                () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      CreateClassSelectLanguageScreen()));
-                            }),
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                } else {
-                  return SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
+              Observer(
+                builder: (_) {
+                  return Expanded(
+                    child: ListView.builder(
+                      controller: widget.scrollController,
+                      itemCount: classesStore.classes.length,
+                      itemBuilder: (context, index) {
                         return _buildClassItem(context, index);
                       },
-                      childCount: classesStore.classes.length,
                     ),
                   );
-                }
-              },
-            ),
-          ],
+                },
+              )
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 
   _buildClassItem(BuildContext context, int index) {
@@ -241,7 +117,8 @@ class _ClassesScreenState extends State<ClassesScreen>
             Positioned(
               top: 10,
               left: 10,
-              child:ClassesUtils().getChipByDifficultyLevel(context, classesStore.classes[index].difficultyLevel),
+              child: ClassesUtils().getChipByDifficultyLevel(
+                  context, classesStore.classes[index].difficultyLevel),
             ),
             Positioned(
                 top: 10,
@@ -290,8 +167,8 @@ class _ClassesScreenState extends State<ClassesScreen>
                       children: <Widget>[
                         /// STATUS LABEL
                         Container(
-                          child: ClassesUtils().getChipByStatus(context, classesStore.classes[index].status)
-                        ),
+                            child: ClassesUtils().getChipByStatus(
+                                context, classesStore.classes[index].status)),
 
                         /// DETAILS
                         Container(
@@ -356,13 +233,13 @@ class _ClassesScreenState extends State<ClassesScreen>
 
   Future<void> refreshOperation() async {
     classesStore.setIsLoading(true);
+    classesStore.resetOffset();
     restServices
         .getClassService()
         .getUserClasses(
-            context, classesStore.pageNumber, classesStore.itemsPerPage)
-        .then((classes) {
-      classesStore.setPageNumber(0);
-      classesStore.setClasses(classes);
+            context, classesStore.offset, classesStore.itemsPerPage)
+        .then((resp) {
+      classesStore.setClasses(resp.items, resp.total);
     }).catchError((error) {
       ToasterBuilder.buildErrorToaster(context, error.cause);
     }).whenComplete(() => classesStore.setIsLoading(false));
@@ -372,9 +249,13 @@ class _ClassesScreenState extends State<ClassesScreen>
   @override
   void didInitState() {
     widget.scrollController.addListener(() {
-      if (widget.scrollController.position.pixels ==
-          widget.scrollController.position.maxScrollExtent) {
-        print("Get More Data");
+      if ( widget.scrollController.position.pixels == widget.scrollController.position.maxScrollExtent
+          && classesStore.totalClasses > classesStore.offset && !classesStore.isLoadingNext) {
+        classesStore.setIsLoadingNext(true);
+        restServices.getClassService().getUserClasses(context, classesStore.offset, 10)
+        .then((resp) => classesStore.addNextClasses(resp.items, resp.total))
+        .catchError((e) => ToasterBuilder.buildErrorToaster(context, "Something went wrong"))
+        .whenComplete(() => classesStore.setIsLoadingNext(false));
       }
     });
 
