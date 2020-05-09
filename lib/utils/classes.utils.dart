@@ -22,6 +22,15 @@ class ClassesUtils {
     }
   }
 
+  getDifficultyLevelText(BuildContext context, int level) {
+    switch(level) {
+      case 1: return  AppLocalizations.of(context).translate(constants.difficultyLevelBeginner);
+      case 2: return  AppLocalizations.of(context).translate(constants.difficultyLevelIntermediate);
+      case 3: return  AppLocalizations.of(context).translate(constants.difficultyLevelAvanced);
+      default: return AppLocalizations.of(context).translate(constants.difficultyLevelWarrior);
+    }
+  }
+
   _buildChip(BuildContext context, Color chipColor, String labelConst, Color textColor) {
     return Chip(
       backgroundColor: chipColor,

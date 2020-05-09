@@ -60,6 +60,7 @@ class ClassService extends AbstractRestService {
       Map<String, dynamic> result = decodeBody(rsp);
       return ClassModel(
         result["id"],
+        result["rate"],
         result["languageId"],
         result["category"]["id"],
         result["category"]["designation"],
@@ -75,6 +76,10 @@ class ClassService extends AbstractRestService {
         result["imageUrl"],
         result["status"],
         result["isActive"],
+        result["instructorId"],
+        result["instructorName"],
+        result["instructorRate"],
+        result["instructorPictureUrl"]
       );
     } on ApiException catch(e) {
       throw e;

@@ -1,18 +1,37 @@
+import 'package:after_init/after_init.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
+import 'package:professors/models/language.model.dart';
+import 'package:professors/store/classes/class_details_state.dart';
+import 'package:professors/utils/classes.utils.dart';
 import 'package:professors/visual/builders/dialog.builder.dart';
+import 'package:professors/visual/builders/toaster.builder.dart';
+import 'package:professors/visual/screens/authenticated/classes/edit_create/create_or_edit_class.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/styles/sizes.dart';
+import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/notifications/notification_details_user_details.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
-class ClassesDetailsScreen extends StatelessWidget {
+class ClassDetailsScreen extends StatefulWidget {
 
   ClassConstants screenConstants = ClassConstants();
+  ClassDetailsState store = ClassDetailsState();
+
+  int classId;
+  ClassDetailsScreen(this.classId);
+
+  @override
+  _ClassDetailsScreenState createState() => _ClassDetailsScreenState();
+}
+
+class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitMixin<ClassDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -37,36 +56,46 @@ class ClassesDetailsScreen extends StatelessWidget {
                 ),
               ),
               actions: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
-                  child: Icon(Icons.edit, color: Colors.white, size: AppSizes.iconRegular(context)),
-                ),
-                Container(
-                  margin: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
-                  child: GestureDetector(
-                    onTap: () {
-                      DialogsBuilder(context).unavailableOperation();
-                    },
-                    child: Icon(Icons.share, color: Colors.white, size: AppSizes.iconRegular(context)),
+                GestureDetector(
+                  onTap: () {
+                   Navigator.push(context, MaterialPageRoute(
+                     builder: (context) => CreateOrEditClassScreen(
+                       LanguageModel(
+                           widget.store.languageId, null),
+                       classId: widget.classId,
+                     )
+                   ));
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
+                    child: Icon(Icons.edit, color: Colors.white, size: AppSizes.iconRegular(context)),
                   ),
-                )
+                ),
               ],
               expandedHeight: MediaQuery.of(context).size.height / 2,
               floating: false,
               pinned: false,
               flexibleSpace: FlexibleSpaceBar(
-                background: Container(
-                  foregroundDecoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                          colors: [AppColors.bgMainColor, Colors.transparent])),
-                  child: FadeInImage.assetNetwork(
-                    fit: BoxFit.cover,
-                    placeholder: 'assets/images/loading.gif',
-                    image: 'https://thumbs.dreamstime.com/b/instrutor-yoga-class-no-gym-76292160.jpg',
-                  ),
-                ),
+                background: Observer(
+                  builder: (_) {
+                    if ( widget.store.isLoading ) {
+                      return DefaultLoaderWidget();
+                    } else {
+                      return Container(
+                        foregroundDecoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [AppColors.bgMainColor, Colors.transparent])),
+                        child: FadeInImage.assetNetwork(
+                          fit: BoxFit.cover,
+                          placeholder: 'assets/images/loading.gif',
+                          image: widget.store.imageUrl,
+                        ),
+                      );
+                    }
+                  }
+                )
               ),
             ),
           ];
@@ -74,225 +103,231 @@ class ClassesDetailsScreen extends StatelessWidget {
         body: Column(
           children: <Widget>[
 
-            Expanded(
-              child: CustomScrollView(
-                slivers: <Widget>[
+            Observer(
+              builder: (_) {
+                if ( widget.store.isLoading ) {
+                  return Container(
+                    margin: EdgeInsets.only(top: 10),
+                    child: DefaultLoaderWidget(),
+                  );
+                } else {
+                  return Expanded(
+                    child: CustomScrollView(
+                      slivers: <Widget>[
 
-                  /// HEADER
-                  SliverToBoxAdapter(
-                    child: Container(
-                      margin: EdgeInsets.only(top: sectionTopMargin),
-                      padding: AppPaddings.regularPadding(context),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 10,
+                        /// HEADER
+                        SliverToBoxAdapter(
+                          child: Container(
+                            margin: EdgeInsets.only(top: sectionTopMargin),
+                            padding: AppPaddings.regularPadding(context),
+                            child: Row(
+                              children: <Widget>[
+                                Expanded(
+                                  flex: 10,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      TextsBuilder.regularText('${widget.store.categoryName}, ${widget.store.subCategoryName}'.toUpperCase(), color: Colors.white),
+                                      TextsBuilder.h2Bold('${widget.store.designation}', color: Colors.white),
+                                    ],
+                                  ),
+                                ),
+
+                                Expanded(
+                                  flex: 4,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[
+                                      TextsBuilder.h4Bold('${widget.store.rate}', color: Colors.white),
+                                      Icon(Icons.star, color: AppColors.regularRed,)
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        /// DIFFICULTY
+                        SliverToBoxAdapter(
+                          child: Container(
+                            padding: AppPaddings.regularPadding(context),
+                            margin: EdgeInsets.only(top: sectionTopMargin),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                TextsBuilder.regularText('Mind, Yoga'.toUpperCase(), color: Colors.white),
-                                TextsBuilder.h2Bold('Yoga Relax', color: Colors.white),
+
+                                TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsLevelLabel).toUpperCase(), color: Colors.white),
+                                TextsBuilder.regularText(ClassesUtils().getDifficultyLevelText(context, widget.store.difficultyLevel)),
+
+
                               ],
                             ),
                           ),
+                        ),
 
-                          Expanded(
-                            flex: 4,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                TextsBuilder.h4Bold('4.6', color: Colors.white),
-                                Icon(Icons.star, color: AppColors.regularRed,)
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  /// DIFFICULTY
-                  SliverToBoxAdapter(
-                    child: Container(
-                      padding: AppPaddings.regularPadding(context),
-                      margin: EdgeInsets.only(top: sectionTopMargin),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-
-                          TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(screenConstants.classDetailsLevelLabel).toUpperCase(), color: Colors.white),
-                          TextsBuilder.regularText('Warrior Level', color: Colors.white),
-
-
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  /// DESCRIPTION
-                  SliverToBoxAdapter(
-                    child: Container(
-                      padding: AppPaddings.regularPadding(context),
-                      margin: EdgeInsets.only(top: sectionTopMargin),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-
-                          TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(screenConstants.classDetailsDescriptionLabel).toUpperCase(), color: Colors.white),
-                          TextsBuilder.regularText('gfgfd gdf gfd gfdgdf gdf gfdgdfg fdg fdg '
-                              'fdgfdg fdg fd gfd g dfg fd gdf gdf g dfg fd gfd gfd g df gdf gfd g '
-                              'df gfd g fdg fdg fd gf dg fdfdsfdsfdsf fdsfds fsdfds fdsfssdf '
-                              'dsfsdfsdf fdfdfd fdf d fdfdsfd', color: Colors.white),
-
-
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  /// CLASS DETAILS
-                  SliverToBoxAdapter(
-                    child: Container(
-                      padding: EdgeInsets.only(bottom: sectionTopMargin),
-                      margin: EdgeInsets.only(
-                        top: sectionTopMargin,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-
-                          /// EQUIPMENT
-                          Container(
-                            padding: AppPaddings.regularPadding(context),
-                            margin: EdgeInsets.only(top: 20),
-                            child: TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(screenConstants.classDetailsEquipmentLabel).toUpperCase()),
-                          ),
-
-                          Container(
-                            padding: AppPaddings.regularPadding(context),
-                            child: TextsBuilder.regularText('fsdfsd fsd fdsf dsfs df sdf dsf ds fsd f dsf  fdsfsd f dsfs df dsd'
-                                ' fsd ffdsfdsfdf fsdf sdfsdfdsfsd fsdfsdfdf sdfdffdsfsdfs fsdfdsfdsf fsd'
-                                'fsd fdsfsdfsdfsd fsd fs dfdsdfsdf fds dfsdf sdfsdfsdf sfds fds'),
-                          ),
-
-                          /// CLASS GOALS
-                          Container(
+                        /// DESCRIPTION
+                        SliverToBoxAdapter(
+                          child: Container(
                             padding: AppPaddings.regularPadding(context),
                             margin: EdgeInsets.only(top: sectionTopMargin),
-                            child: TextsBuilder.textSmallBold('Class Objectives'.toUpperCase()),
-                          ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
 
-                          Container(
+                                TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsDescriptionLabel).toUpperCase(), color: Colors.white),
+                                TextsBuilder.regularText('${widget.store.description}'),
+
+
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        /// CLASS DETAILS
+                        SliverToBoxAdapter(
+                          child: Container(
+                            padding: EdgeInsets.only(bottom: sectionTopMargin),
+                            margin: EdgeInsets.only(
+                              top: sectionTopMargin,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+
+                                /// EQUIPMENT
+                                Container(
+                                  padding: AppPaddings.regularPadding(context),
+                                  margin: EdgeInsets.only(top: 20),
+                                  child: TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsEquipmentLabel).toUpperCase()),
+                                ),
+
+                                Container(
+                                  padding: AppPaddings.regularPadding(context),
+                                  child: TextsBuilder.regularText('${widget.store.equipment}'),
+                                ),
+
+                                /// CLASS GOALS
+                                Container(
+                                  padding: AppPaddings.regularPadding(context),
+                                  margin: EdgeInsets.only(top: sectionTopMargin),
+                                  child: TextsBuilder.textSmallBold('Class Objectives'.toUpperCase()),
+                                ),
+
+                                Container(
+                                  padding: AppPaddings.regularPadding(context),
+                                  child: TextsBuilder.regularText('${widget.store.goals}'),
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        /// INSTRUCTOR
+                        SliverToBoxAdapter(
+                          child: Container(
+                            color: AppColors.bgGreyColor,
                             padding: AppPaddings.regularPadding(context),
-                            child: TextsBuilder.regularText('fsdfsd fsd fdsf dsfs df sdf dsf ds fsd f dsf  fdsfsd f dsfs df dsd'
-                                ' fsd ffdsfdsfdf fsdf sdfsdfdsfsd fsdfsdfdf sdfdffdsfsdfs fsdfdsfdsf fsd'
-                                'fsd fdsfsdfsdfsd fsd fs dfdsdfsdf fds dfsdf sdfsdfsdf sfds fds'),
+                            margin: EdgeInsets.only(top: sectionTopMargin),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+
+                                Container(
+                                  margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 40, top: MediaQuery.of(context).size.height / 30),
+                                  child: TextsBuilder.h4Bold(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsInstructorLabel).toUpperCase(), color: AppColors.bgMainColor),
+                                ),
+
+                                CircleAvatar(
+                                    maxRadius: MediaQuery.of(context).size.width * 0.20,
+                                    backgroundColor: AppColors.bgMainColor,
+                                    backgroundImage: NetworkImage(
+                                      widget.store.instructorPictureUrl,
+                                    )
+                                ),
+
+                                Container(
+                                  margin: EdgeInsets.only(top: 20),
+                                  child: TextsBuilder.h4Bold('${widget.store.instructorName}', color: AppColors.bgMainColor),
+                                ),
+
+                                Container(
+                                  margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 30),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: IconsBuilder.startListBasedOnScore(widget.store.instructorRate),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
+                        ),
 
-                        ],
-                      ),
-                    ),
-                  ),
+                        /// COMMENTS
+                        SliverToBoxAdapter(
+                          child: Container(
+                              padding: AppPaddings.regularPadding(context),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
 
-                  /// INSTRUCTOR
-                  SliverToBoxAdapter(
-                    child: Container(
-                      color: AppColors.bgGreyColor,
-                      padding: AppPaddings.regularPadding(context),
-                      margin: EdgeInsets.only(top: sectionTopMargin),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
+                                  /// TITLE COMMENTS
+                                  Container(
+                                    margin: EdgeInsets.only(top: sectionTopMargin),
+                                    child: TextsBuilder.h1Bold(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsCommentsLabel)),
+                                  ),
 
-                          Container(
-                            margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 40, top: MediaQuery.of(context).size.height / 30),
-                            child: TextsBuilder.h4Bold(AppLocalizations.of(context).translate(screenConstants.classDetailsInstructorLabel).toUpperCase(), color: AppColors.bgMainColor),
-                          ),
+                                  /// COMMENTS LIST
+                                  ListView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: 10,
+                                    itemBuilder: (BuildContext context, int index) {
+                                      return Container(
+                                        padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 50, top: MediaQuery.of(context).size.height / 50),
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color: AppColors.dividerMainColor,
+                                                    width: 2.0
+                                                )
+                                            )
+                                        ),
+                                        child: NotificationDetailsUserDetailsWidget(
+                                          1,
+                                          'Rebeka',
+                                          'https://res.cloudinary.com/twenty20/private_images/t_watermark-criss-cross-10/v1498884203000/photosp/5ca84b21-4bd5-4484-a125-4f22db2ddd70/stock-photo-portrait-light-women-competition-face-natural-person-woman-strong-5ca84b21-4bd5-4484-a125-4f22db2ddd70.jpg',
+                                          'tfd gdf gfgf gfdg df gfd g fdg dfg fdg df gdf g dfg df gdf gfd gfd ',
+                                          date: DateTime.now(),
+                                        ),
+                                      );
+                                    },
+                                  ),
 
-                          CircleAvatar(
-                              maxRadius: MediaQuery.of(context).size.width * 0.20,
-                              backgroundColor: AppColors.bgMainColor,
-                              backgroundImage: NetworkImage(
-                                'https://img2.goodfon.com/wallpaper/big/9/89/gym-coach-weightlifting-gym.jpg',
+                                ],
                               )
                           ),
+                        ),
 
-                          Container(
-                            margin: EdgeInsets.only(top: 20),
-                            child: TextsBuilder.h4Bold('João Rodrigues', color: AppColors.bgMainColor),
-                          ),
-
-                          Container(
-                            margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 30),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: IconsBuilder.startListBasedOnScore(3.5),
+                        /// LOAD MORE COMMENTS BUTTON
+                        SliverToBoxAdapter(
+                          child: Container(
+                            color: Colors.white,
+                            child: Center(
+                              child: ButtonsBuilder.createFlatButton(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsLoadCommentsLabel), () { }, Colors.transparent, Colors.black),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ),
-
-                  /// COMMENTS
-                  SliverToBoxAdapter(
-                    child: Container(
-                        padding: AppPaddings.regularPadding(context),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-
-                            /// TITLE COMMENTS
-                            Container(
-                              margin: EdgeInsets.only(top: sectionTopMargin),
-                              child: TextsBuilder.h1Bold(AppLocalizations.of(context).translate(screenConstants.classDetailsCommentsLabel)),
-                            ),
-
-                            /// COMMENTS LIST
-                            ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: 10,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 50, top: MediaQuery.of(context).size.height / 50),
-                                  decoration: BoxDecoration(
-                                      border: Border(
-                                          bottom: BorderSide(
-                                              color: AppColors.dividerMainColor,
-                                              width: 2.0
-                                          )
-                                      )
-                                  ),
-                                  child: NotificationDetailsUserDetailsWidget(
-                                    1,
-                                    'Rebeka',
-                                    'https://res.cloudinary.com/twenty20/private_images/t_watermark-criss-cross-10/v1498884203000/photosp/5ca84b21-4bd5-4484-a125-4f22db2ddd70/stock-photo-portrait-light-women-competition-face-natural-person-woman-strong-5ca84b21-4bd5-4484-a125-4f22db2ddd70.jpg',
-                                    'tfd gdf gfgf gfdg df gfd g fdg dfg fdg df gdf g dfg df gdf gfd gfd ',
-                                    date: DateTime.now(),
-                                  ),
-                                );
-                              },
-                            ),
-
-                          ],
-                        )
-                    ),
-                  ),
-
-                  /// LOAD MORE COMMENTS BUTTON
-                  SliverToBoxAdapter(
-                    child: Container(
-                      color: Colors.white,
-                      child: Center(
-                        child: ButtonsBuilder.createFlatButton(AppLocalizations.of(context).translate(screenConstants.classDetailsLoadCommentsLabel), () { }, Colors.transparent, Colors.black),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                  );
+                }
+              },
             ),
 
+            // bottom fixed book button
+            /*
             Container(
               color: Colors.white,
               padding: EdgeInsets.only(
@@ -316,15 +351,43 @@ class ClassesDetailsScreen extends StatelessWidget {
 
                   Flexible(
                     flex: 4,
-                    child: ButtonsBuilder.redFlatButton(AppLocalizations.of(context).translate(screenConstants.classDetailsBookButtonLabel).toUpperCase(), () { }),
+                    child: ButtonsBuilder.redFlatButton(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsBookButtonLabel).toUpperCase(), () { }),
                   ),
                 ],
               ),
             )
+             */
 
           ],
         ),
       ),
     );
   }
+
+  @override
+  void didInitState() {
+    // load class here
+    restServices.getClassService().getClassById(context, widget.classId)
+        .then((resp){
+          widget.store.setImageUrl(resp.imageUrl);
+          widget.store.setId(resp.id);
+          widget.store.setLanguageId(resp.languageId);
+          widget.store.setCategoryName(resp.parentCategoryName);
+          widget.store.setSubCategoryName(resp.categoryName);
+          widget.store.setRate(resp.rate);
+          widget.store.setDifficultyLevel(resp.difficultyLevel);
+          widget.store.setGoals(resp.goals);
+          widget.store.setEquipment(resp.equipment);
+          widget.store.setDescription(resp.description);
+          widget.store.setDesignation(resp.designation);
+          widget.store.setCalories(resp.calories);
+          widget.store.setInstructorId(resp.instructorId);
+          widget.store.setInstructorName(resp.instructorName);
+          widget.store.setInstructorRate(resp.instructorRate);
+          widget.store.setInstructorPictureUrl(resp.instructorPictureUrl);
+    }).catchError((e) {
+      ToasterBuilder.buildErrorToaster(context, "Someething went wrong");
+    }).whenComplete(() => widget.store.setIsLoading(false));
+  }
+  
 }

@@ -153,7 +153,7 @@ class _ClassesScreenState extends State<ClassesScreen>
     return GestureDetector(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ClassesDetailsScreen()));
+            MaterialPageRoute(builder: (context) => ClassDetailsScreen(classesStore.classes[index].id)));
       },
       child: Container(
         decoration: BoxDecoration(

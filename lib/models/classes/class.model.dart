@@ -3,6 +3,7 @@ import 'package:professors/models/language_context/language_context.model.dart';
 
 class ClassModel {
   int id;
+  double rate;
   String designation;
   String description;
   String equipment;
@@ -21,8 +22,14 @@ class ClassModel {
   int parentCategoryId;
   String parentCategoryName;
 
+  int instructorId;
+  String instructorName;
+  double instructorRate;
+  String instructorPictureUrl;
+
   ClassModel(
       this.id,
+      this.rate,
       this.languageId,
       this.categoryId,
       this.categoryName,
@@ -37,6 +44,10 @@ class ClassModel {
       this.calories,
       this.imageUrl,
       this.status,
-      this.isActive
+      this.isActive,
+      this.instructorId,
+      this.instructorName,
+      this.instructorRate,
+      this.instructorPictureUrl
       );
 }
