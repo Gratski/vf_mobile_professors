@@ -246,6 +246,7 @@
   "CLASS_DETAILS_CLASS_GOALS_LABEL": "Class Objectives",
   "CLASS_DETAILS_COMMENTS_LABEL": "Comments",
   "CLASS_DETAILS_LOAD_COMMENTS_LABEL": "More Comments",
+  "CLASS_DETAILS_NO_COMMENTS_YET": "This class has no comments yet",
 
   "CREATE_CLASS_TOP_HEADER": "Create new class",
   "CREATE_CLASS_DESIGNATION_LABEL": "Title",

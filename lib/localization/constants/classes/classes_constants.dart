@@ -30,6 +30,7 @@ class ClassConstants {
   String get classDetailsClassGoalsLabel => "CLASS_DETAILS_CLASS_GOALS_LABEL";
   String get classDetailsCommentsLabel => "CLASS_DETAILS_COMMENTS_LABEL";
   String get classDetailsLoadCommentsLabel => "CLASS_DETAILS_LOAD_COMMENTS_LABEL";
+  String get classDetailsNoCommentsYetText => "CLASS_DETAILS_NO_COMMENTS_YET";
 
   String get classCreatedOrUpdatedTopHeader => "CLASS_CREATED_OR_UPDATED_TOP_HEADER";
   String get classCreatedOrUpdatedSubTitleCreated => "CLASS_CREATED_OR_UPDATED_SUB_TITLE_CREATED";
