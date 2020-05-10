@@ -27,6 +27,7 @@ class PersonalDetailsConstants {
   String get vatError => "SETTINGS_PERSONAL_DETAILS_VAT_ERROR";
 
   String get nationalityHint => "SETTINGS_PERSONAL_DETAILS_NATIONALITY_HINT";
+  String get currentlyLivingInHint => "SETTINGS_PERSONAL_DETAILS_CURRENTLY_LIVING_IN_HINT";
 
   String get genderScreenTopHeader => "SETTINGS_PERSONAL_DETAILS_GENDER_SCREEN_TOP_HEADER";
   String get genderScreenSubTitle => "SETTINGS_PERSONAL_DETAILS_GENDER_SCREEN_SUB_TITLE";

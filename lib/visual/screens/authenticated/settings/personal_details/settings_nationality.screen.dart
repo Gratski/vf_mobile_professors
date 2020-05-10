@@ -12,8 +12,9 @@ import 'package:professors/visual/widgets/structural/lists/regular_list_tile.dar
 
 class SettingsNationalityScreen extends StatefulWidget {
 
-  EditProfileDetailsState screenStore;
-  SettingsNationalityScreen(this.screenStore);
+  Function callback;
+  int selectedId;
+  SettingsNationalityScreen(this.selectedId, this.callback);
 
   @override
   _SettingsNationalityScreen createState() => _SettingsNationalityScreen();
@@ -43,13 +44,13 @@ class _SettingsNationalityScreen extends State<SettingsNationalityScreen> with A
                     return RegularListTile(
                       label: nationalitiesStore.nationalities[index].countryName,
                       callback: () {
-                        widget.screenStore.setCountry(
+                        widget.callback(
                             nationalitiesStore.nationalities[index].id,
                             nationalitiesStore.nationalities[index].countryName);
                         Navigator.pop(context);
                       },
-                      selected: nationalitiesStore.nationalities[index].id == widget.screenStore.countryId,
-                      hideTrailing: nationalitiesStore.nationalities[index].id != widget.screenStore.countryId,
+                      selected: nationalitiesStore.nationalities[index].id == widget.selectedId,
+                      hideTrailing: nationalitiesStore.nationalities[index].id != widget.selectedId,
                     );
                   },
                     childCount: nationalitiesStore.nationalities.length,

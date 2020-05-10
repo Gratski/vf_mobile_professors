@@ -45,7 +45,7 @@ class ButtonsBuilder {
 
   static FlatButton createCustomFlatButton(Widget widget, VoidCallback callback, Color bgColor, Color textColor){
     return FlatButton(
-      padding: EdgeInsets.all(15.0),
+      padding: EdgeInsets.all(2.0),
       color: bgColor,
       textColor: textColor,
       onPressed: callback,

@@ -129,6 +129,41 @@ mixin _$EditProfileDetailsState on _EditProfileDetailsState, Store {
     }, _$countryIdAtom, name: '${_$countryIdAtom.name}_set');
   }
 
+  final _$livingInLabelAtom =
+      Atom(name: '_EditProfileDetailsState.livingInLabel');
+
+  @override
+  String get livingInLabel {
+    _$livingInLabelAtom.context.enforceReadPolicy(_$livingInLabelAtom);
+    _$livingInLabelAtom.reportObserved();
+    return super.livingInLabel;
+  }
+
+  @override
+  set livingInLabel(String value) {
+    _$livingInLabelAtom.context.conditionallyRunInAction(() {
+      super.livingInLabel = value;
+      _$livingInLabelAtom.reportChanged();
+    }, _$livingInLabelAtom, name: '${_$livingInLabelAtom.name}_set');
+  }
+
+  final _$livingInIdAtom = Atom(name: '_EditProfileDetailsState.livingInId');
+
+  @override
+  int get livingInId {
+    _$livingInIdAtom.context.enforceReadPolicy(_$livingInIdAtom);
+    _$livingInIdAtom.reportObserved();
+    return super.livingInId;
+  }
+
+  @override
+  set livingInId(int value) {
+    _$livingInIdAtom.context.conditionallyRunInAction(() {
+      super.livingInId = value;
+      _$livingInIdAtom.reportChanged();
+    }, _$livingInIdAtom, name: '${_$livingInIdAtom.name}_set');
+  }
+
   final _$birthdayAtom = Atom(name: '_EditProfileDetailsState.birthday');
 
   @override
@@ -205,6 +240,17 @@ mixin _$EditProfileDetailsState on _EditProfileDetailsState, Store {
         _$_EditProfileDetailsStateActionController.startAction();
     try {
       return super.setCountry(countryId, countryLabel);
+    } finally {
+      _$_EditProfileDetailsStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setLivingIn(int countryId, String countryLabel) {
+    final _$actionInfo =
+        _$_EditProfileDetailsStateActionController.startAction();
+    try {
+      return super.setLivingIn(countryId, countryLabel);
     } finally {
       _$_EditProfileDetailsStateActionController.endAction(_$actionInfo);
     }

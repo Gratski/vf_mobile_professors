@@ -73,10 +73,10 @@ class MyApp extends StatelessWidget {
             hintStyle: TextStyle(color: AppColors.textInputBorder),
             labelStyle: TextStyle(color: AppColors.textInputBorder),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColors.textInputBorder, width: 1.0),
+              borderSide: BorderSide(color: AppColors.textInputFocusedBorder, width: 0.5),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.textInputBorder, width: 1.0),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: AppColors.textInputBorder, width: 0.5),
             ),
           ),
           canvasColor: AppColors.bgMainColor

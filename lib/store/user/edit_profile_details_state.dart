@@ -34,6 +34,11 @@ abstract class _EditProfileDetailsState with Store {
   int countryId;
 
   @observable
+  String livingInLabel = "";
+  @observable
+  int livingInId;
+
+  @observable
   DateTime birthday;
 
   @observable
@@ -58,6 +63,12 @@ abstract class _EditProfileDetailsState with Store {
   setCountry(int countryId, String countryLabel) {
     this.countryId = countryId;
     this.countryLabel = countryLabel;
+  }
+
+  @action
+  setLivingIn(int countryId, String countryLabel) {
+    this.livingInId = countryId;
+    this.livingInLabel = countryLabel;
   }
 
   @action

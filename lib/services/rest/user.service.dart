@@ -29,6 +29,8 @@ class UserService extends AbstractRestService {
       userStore.setPhoneNumber(resultMap["phoneNumber"]);
       userStore.setCountry(resultMap["nationality"]["id"],
           resultMap["nationality"]["countryName"]);
+      userStore.setLivingIn(resultMap["livingIn"]["id"],
+          resultMap["livingIn"]["countryName"]);
 
       // make this validation to optimize the resource consumption
       if (resultMap["pictureUrl"] != userStore.pictureUrl) {
@@ -110,6 +112,7 @@ class UserService extends AbstractRestService {
       String lastName,
       String gender,
       int nationalityCountryId,
+      int livingInId,
       String phoneNumber,
       DateTime birthday) async {
     try {
@@ -122,6 +125,7 @@ class UserService extends AbstractRestService {
             "lastName": lastName,
             "gender": gender,
             "nationalityCountryId": nationalityCountryId,
+            "livingInId": livingInId,
             "phoneNumber": phoneNumber,
             "birthday": birthday.millisecondsSinceEpoch,
           },

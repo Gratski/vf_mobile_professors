@@ -36,9 +36,14 @@ abstract class _UserState with Store {
   String phoneNumber = "+351968039230";
 
   @observable
-  String countryLabel = "Portugal";
+  String countryLabel = "";
   @observable
   int countryId = 1;
+
+  @observable
+  String livingInLabel = "";
+  @observable
+  int livingInId = 1;
 
   @observable
   DateTime birthday = DateTime.now().subtract(
@@ -76,6 +81,12 @@ abstract class _UserState with Store {
   setCountry(int countryId, String countryLabel) {
     this.countryId = countryId;
     this.countryLabel = countryLabel;
+  }
+
+  @action
+  setLivingIn(int countryId, String countryLabel) {
+    this.livingInId = countryId;
+    this.livingInLabel = countryLabel;
   }
 
   @action

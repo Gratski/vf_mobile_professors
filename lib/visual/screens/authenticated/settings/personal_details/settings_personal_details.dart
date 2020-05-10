@@ -41,6 +41,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
     this.screenStore.setLastName(userStore.lastName);
     this.screenStore.setEmail(userStore.email);
     this.screenStore.setCountry(userStore.countryId, userStore.countryLabel);
+    this.screenStore.setLivingIn(userStore.livingInId, userStore.livingInLabel);
     this.screenStore.setBirthday(userStore.birthday);
     this.screenStore.setPhoneNumber(userStore.phoneNumber);
 
@@ -61,13 +62,14 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
               [
                 ButtonsBuilder.transparentButton(
                   AppLocalizations.of(context)
-                      .translate(generalConstants.buttonSaveLabel),
+                      .translate(generalConstants.buttonSaveLabel).toUpperCase(),
                   () {
                     restServices.getUserService().updateUserPersonalDetails(context,
                         firstNameController.text,
                         lastNameController.text,
                         screenStore.gender == Gender.MALE ? "MALE" : "FEMALE",
                         screenStore.countryId,
+                        screenStore.livingInId,
                         phoneNumberController.text,
                         screenStore.birthday)
                         .then((value) {
@@ -87,6 +89,8 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                 ),
               ],
             ),
+
+            /// HEADER
             AppHeaderWidget(
               AppLocalizations.of(context).translate(screenConstants.topHeader),
             ),
@@ -94,7 +98,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
             // show only if is not loading
 
 
-            // fields to edit
+            /// FIELDS TO EDIT
             SliverList(
               key: GlobalKey(),
               delegate: SliverChildListDelegate(
@@ -106,33 +110,38 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                       children: <Widget>[
                         /// FIRSTNAME
                         Container(
+                          padding: AppPaddings.regularPadding(context),
+                          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
                           child: TextFormField(
                             style: TextStyle(color: AppColors.fontColor),
                             controller: firstNameController,
                             onChanged: (value) => screenStore.setFirstName(value),
                             decoration: InputDecoration(
-                              hintText: 'write your first name',
-                              labelText: 'First Name',
+                              hintText: AppLocalizations.of(context).translate(screenConstants.firstNameHint),
+                              labelText: AppLocalizations.of(context).translate(screenConstants.firstNameLabel).toUpperCase(),
                             ),
                           ),
                         ),
 
                         /// LASTNAME
                         Container(
+                          padding: AppPaddings.regularPadding(context),
                           margin: EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
                           child: TextFormField(
                             style: TextStyle(color: AppColors.fontColor),
                             controller: lastNameController,
                             onChanged: (value) => screenStore.setLastName(value),
                             decoration: InputDecoration(
-                              hintText: 'write your last name',
-                              labelText: 'Last Name',
+                              hintText: AppLocalizations.of(context).translate(screenConstants.lastNameHint),
+                              labelText: AppLocalizations.of(context).translate(screenConstants.lastNameLabel).toUpperCase(),
                             ),
                           ),
                         ),
 
                         /// EMAIL
+                        /*
                         Container(
+                          padding: AppPaddings.regularPadding(context),
                           margin: EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
                           child: TextFormField(
                             style: TextStyle(color: AppColors.fontColor),
@@ -140,28 +149,31 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                             controller: emailController,
                             onChanged: (value) => screenStore.setFirstName(value),
                             decoration: InputDecoration(
-                              hintText: 'write your email',
-                              labelText: 'Email',
+                              hintText: AppLocalizations.of(context).translate(screenConstants.emailHint),
+                              labelText: AppLocalizations.of(context).translate(screenConstants.emailLabel).toUpperCase(),
                             ),
                           ),
                         ),
+                         */
 
                         /// PHONE NUMBER
                         Container(
+                          padding: AppPaddings.regularPadding(context),
                           margin: EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
                           child: TextFormField(
                             style: TextStyle(color: AppColors.fontColor),
                             controller: phoneNumberController,
                             onChanged: (value) => screenStore.setPhoneNumber(value),
                             decoration: InputDecoration(
-                              hintText: 'write your phone number',
-                              labelText: 'Phone Number',
+                              hintText: AppLocalizations.of(context).translate(screenConstants.phoneNumberHint),
+                              labelText: AppLocalizations.of(context).translate(screenConstants.phoneNumberLabel).toUpperCase(),
                             ),
                           ),
                         ),
 
                         /// BIRTHDAY
                         Container(
+                          padding: AppPaddings.regularPadding(context),
                           margin:
                           EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
                           child: Observer(
@@ -170,7 +182,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   TextsBuilder.textHint(AppLocalizations.of(context)
-                                      .translate(screenConstants.birthdayHint)),
+                                      .translate(screenConstants.birthdayHint).toUpperCase()),
                                   GestureDetector(
                                     onTap: () async {
                                       DateTime newBirthday =
@@ -203,6 +215,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
 
                         /// GENDER
                         Container(
+                          padding: AppPaddings.regularPadding(context),
                           margin:
                           EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
                           child: Observer(
@@ -222,7 +235,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                                   children: <Widget>[
                                     TextsBuilder.textHint(
                                       AppLocalizations.of(context)
-                                          .translate(screenConstants.genderHint),
+                                          .translate(screenConstants.genderHint).toUpperCase(),
                                     ),
                                     Container(
                                       child: TextsBuilder.regularText(GenderUtils()
@@ -237,10 +250,11 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                           ),
                         ),
 
-                        /// NATIONALITY
+                        /// CURRENTLY LIVING IN
                         Container(
+                          padding: AppPaddings.regularPadding(context),
                           margin:
-                          EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
+                          EdgeInsets.only(top: AppSizes.inputTopMargin(context), bottom: AppSizes.inputTopMargin(context) * 2),
                           child: Observer(
                             builder: (_) {
                               return GestureDetector(
@@ -249,7 +263,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            SettingsNationalityScreen(screenStore)),
+                                            SettingsNationalityScreen(screenStore.livingInId, screenStore.setLivingIn)),
                                   );
                                 },
                                 child: Column(
@@ -257,7 +271,42 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                                   children: <Widget>[
                                     TextsBuilder.textHint(
                                       AppLocalizations.of(context)
-                                          .translate(screenConstants.nationalityHint),
+                                          .translate(screenConstants.currentlyLivingInHint).toUpperCase(),
+                                    ),
+                                    Container(
+                                      child: TextsBuilder.regularText(
+                                          screenStore.livingInLabel),
+                                      margin: EdgeInsets.only(top: 10),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+
+                        /// NATIONALITY
+                        Container(
+                          padding: AppPaddings.regularPadding(context),
+                          margin:
+                          EdgeInsets.only(top: AppSizes.inputTopMargin(context), bottom: AppSizes.inputTopMargin(context) * 2),
+                          child: Observer(
+                            builder: (_) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SettingsNationalityScreen(screenStore.countryId, screenStore.setCountry)),
+                                  );
+                                },
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    TextsBuilder.textHint(
+                                      AppLocalizations.of(context)
+                                          .translate(screenConstants.nationalityHint).toUpperCase(),
                                     ),
                                     Container(
                                       child: TextsBuilder.regularText(

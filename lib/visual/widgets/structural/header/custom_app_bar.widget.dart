@@ -17,19 +17,18 @@ class CustomAppBar extends StatelessWidget {
     return SliverAppBar(
       backgroundColor: Colors.transparent,
       elevation: 0.0,
-      leading: GestureDetector(
-        onTap: () {
-          if (customBackCallback != null) {
-            this.customBackCallback();
-          } else {
-            Navigator.pop(context);
-          }
-        },
-        child: (!hideBackButton) ? (customBackButton != null) ? this.customBackButton : Icon(
-          Icons.arrow_back_ios,
-          color: AppColors.iconRegular,
-        ) : Container()
-      ),
+      leading: ButtonsBuilder.transparentCustomButton(
+          (!hideBackButton) ? (customBackButton != null) ? this.customBackButton : Icon(
+            Icons.arrow_back_ios,
+            color: AppColors.iconRegular,
+          ) : Container()
+      , () {
+        if (customBackCallback != null) {
+          this.customBackCallback();
+        } else {
+          Navigator.pop(context);
+        }
+      }),
       actions: actions,
       floating: false,
       pinned: false,

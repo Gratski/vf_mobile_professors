@@ -13,7 +13,7 @@ class TextsBuilder {
   static String _FONT_FAMILY_REGULAR = 'Inter';
 
   static double _FONT_SIZE_JUMBO = 55;
-  static double _FONT_SIZE_H1 = 38.0;
+  static double _FONT_SIZE_H1 = 35.0;
   static double _FONT_SIZE_H2 = 30.0;
   static double _FONT_SIZE_H3 = 24.0;
   static double _FONT_SIZE_H4 = 20.0;

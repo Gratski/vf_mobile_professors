@@ -13,7 +13,7 @@ class AppHeaderWidget extends StatelessWidget {
   SliverToBoxAdapter build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
-        padding: (padding == null) ? AppPaddings.topTitlePadding(context) : padding,
+        padding: AppPaddings.regularPadding(context),
         child: Column(
           children: <Widget>[
             Container(

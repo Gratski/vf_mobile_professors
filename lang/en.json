@@ -93,7 +93,7 @@
   "SETTINGS_TERMS": "Terms and Conditions",
   "SETTINGS_LOGOUT": "Logout",
 
-  "SETTINGS_PERSONAL_DETAILS_TOP_HEADER": "Edit Your Personal Details",
+  "SETTINGS_PERSONAL_DETAILS_TOP_HEADER": "Edit Your\nPersonal Details",
 
   "SETTINGS_PERSONAL_DETAILS_FIRSTNAME_LABEL": "First name",
   "SETTINGS_PERSONAL_DETAILS_FIRSTNAME_HINT": "Enter your first name",
@@ -113,6 +113,7 @@
   "SETTINGS_PERSONAL_DETAILS_VAT_HINT": "Enter your VAT number",
   "SETTINGS_PERSONAL_DETAILS_VAT_ERROR": "Insert a valid VAT number",
   "SETTINGS_PERSONAL_DETAILS_NATIONALITY_HINT": "Nationality",
+  "SETTINGS_PERSONAL_DETAILS_CURRENTLY_LIVING_IN_HINT": "Living in",
 
   "SETTINGS_EDIT_PROFILE_SELECT_LANGUAGE_TOP_HEADER": "Edit your profile in...",
   "SETTINGS_EDIT_PROFILE_SELECT_LANGUAGE_SUB_TITLE": "Select the language you want to edit your profile in",

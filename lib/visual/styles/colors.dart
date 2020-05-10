@@ -11,6 +11,7 @@ class AppColors {
 
   /// INPUT
   static Color get textInputBorder => Colors.grey[500];
+  static Color get textInputFocusedBorder => AppColors.fontColor;
 
   /// Background Colors
   static Color get bgMainColor => Color.fromRGBO(34, 34, 34, 1);
