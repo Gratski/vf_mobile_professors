@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/form_validation.constants.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/constants/settings/personal_details/settings_personal_details.dart';
 import 'package:professors/models/gender.dart';
@@ -21,11 +22,18 @@ import 'package:professors/visual/widgets/structural/header/app_header.widget.da
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
-class SettingsPersonalDetailsScreen extends StatelessWidget {
+class SettingsPersonalDetailsScreen extends StatefulWidget {
+
+  // context
+  BuildContext context;
+
+  // constants
   final GeneralConstants generalConstants = GeneralConstants();
+  final FormValidationConstants formConstants = FormValidationConstants();
   final PersonalDetailsConstants screenConstants = PersonalDetailsConstants();
 
-  static GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  // form key
+  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
   // store
   EditProfileDetailsState screenStore = EditProfileDetailsState();
@@ -35,6 +43,9 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
+
+  // form autovalidate flag
+  bool autoValidate = false;
 
   SettingsPersonalDetailsScreen() {
     this.screenStore.setFirstName(userStore.firstName);
@@ -52,283 +63,305 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
   }
 
   @override
+  _SettingsPersonalDetailsScreenState createState() => _SettingsPersonalDetailsScreenState();
+}
+
+class _SettingsPersonalDetailsScreenState extends State<SettingsPersonalDetailsScreen> {
+  @override
   Widget build(BuildContext context) {
+    widget.context = context;
     return Scaffold(
       body: CustomScrollView(
-          slivers: <Widget>[
-            CustomAppBar(
-              [
-                ButtonsBuilder.transparentButton(
-                  AppLocalizations.of(context)
-                      .translate(generalConstants.buttonSaveLabel).toUpperCase(),
-                  () {
-                    restServices.getUserService().updateUserPersonalDetails(context,
-                        firstNameController.text,
-                        lastNameController.text,
-                        screenStore.gender == Gender.MALE ? "MALE" : "FEMALE",
-                        screenStore.countryId,
-                        screenStore.livingInId,
-                        phoneNumberController.text,
-                        screenStore.birthday)
-                        .then((value) {
-                      restServices.getUserService().getUserPersonalDetails(context);
-                      ToasterBuilder.buildSuccessToaster(context, "successfully updated");
-                    })
-                        .catchError((e) {
-                          String msg = "Something went wrong";
-                          if ( e is ApiException ) {
-                            msg = e.cause;
-                          } else {
-                            print(e);
-                          }
-                          ToasterBuilder.buildErrorToaster(context, msg);
-                    });
-                  },
-                ),
-              ],
-            ),
+        slivers: <Widget>[
+          CustomAppBar(
+            [
+              ButtonsBuilder.transparentButton(
+                AppLocalizations.of(context)
+                    .translate(widget.generalConstants.buttonSaveLabel).toUpperCase(),
+                    () {
+                  _save();
+                },
+              ),
+            ],
+          ),
 
-            /// HEADER
-            AppHeaderWidget(
-              AppLocalizations.of(context).translate(screenConstants.topHeader),
-            ),
+          /// HEADER
+          AppHeaderWidget(
+            AppLocalizations.of(context).translate(widget.screenConstants.topHeader),
+          ),
 
-            // show only if is not loading
-
-
-            /// FIELDS TO EDIT
-            SliverPadding(
-              padding: AppPaddings.regularPadding(context),
-              sliver: SliverList(
-                key: GlobalKey(),
-                delegate: SliverChildListDelegate(
-                  [
-                    Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          /// FIRSTNAME
-                          Container(
-                            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
-                            child: TextFormField(
-                              style: TextStyle(color: AppColors.fontColor),
-                              controller: firstNameController,
-                              onChanged: (value) => screenStore.setFirstName(value),
-                              decoration: InputDecoration(
-                                hintText: AppLocalizations.of(context).translate(screenConstants.firstNameHint),
-                                labelText: AppLocalizations.of(context).translate(screenConstants.firstNameLabel).toUpperCase(),
-                              ),
-                            ),
-                          ),
-
-                          /// LASTNAME
-                          Container(
-                            margin: EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
-                            child: TextFormField(
-                              style: TextStyle(color: AppColors.fontColor),
-                              controller: lastNameController,
-                              onChanged: (value) => screenStore.setLastName(value),
-                              decoration: InputDecoration(
-                                hintText: AppLocalizations.of(context).translate(screenConstants.lastNameHint),
-                                labelText: AppLocalizations.of(context).translate(screenConstants.lastNameLabel).toUpperCase(),
-                              ),
-                            ),
-                          ),
-
-                          /// EMAIL
-                          /*
+          /// FIELDS TO EDIT
+          SliverPadding(
+            padding: AppPaddings.regularPadding(context),
+            sliver: SliverList(
+              key: GlobalKey(),
+              delegate: SliverChildListDelegate(
+                [
+                  Form(
+                    key: widget._formKey,
+                    autovalidate: widget.autoValidate,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        /// FIRSTNAME
                         Container(
-                          padding: AppPaddings.regularPadding(context),
-                          margin: EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
+                          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
                           child: TextFormField(
                             style: TextStyle(color: AppColors.fontColor),
-                            enabled: false,
-                            controller: emailController,
-                            onChanged: (value) => screenStore.setFirstName(value),
+                            controller: widget.firstNameController,
+                            onChanged: (value) => widget.screenStore.setFirstName(value),
+                            validator: _firstNameValidator,
                             decoration: InputDecoration(
-                              hintText: AppLocalizations.of(context).translate(screenConstants.emailHint),
-                              labelText: AppLocalizations.of(context).translate(screenConstants.emailLabel).toUpperCase(),
+                              hintText: AppLocalizations.of(context).translate(widget.screenConstants.firstNameHint),
+                              labelText: AppLocalizations.of(context).translate(widget.screenConstants.firstNameLabel).toUpperCase(),
                             ),
                           ),
                         ),
-                         */
 
-                          /// PHONE NUMBER
-                          Container(
-                            margin: EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
-                            child: TextFormField(
-                              style: TextStyle(color: AppColors.fontColor),
-                              controller: phoneNumberController,
-                              onChanged: (value) => screenStore.setPhoneNumber(value),
-                              decoration: InputDecoration(
-                                hintText: AppLocalizations.of(context).translate(screenConstants.phoneNumberHint),
-                                labelText: AppLocalizations.of(context).translate(screenConstants.phoneNumberLabel).toUpperCase(),
+                        /// LASTNAME
+                        Container(
+                          margin: EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
+                          child: TextFormField(
+                            style: TextStyle(color: AppColors.fontColor),
+                            controller: widget.lastNameController,
+                            onChanged: (value) => widget.screenStore.setLastName(value),
+                            validator: _lastNameValidator,
+                            decoration: InputDecoration(
+                              hintText: AppLocalizations.of(context).translate(widget.screenConstants.lastNameHint),
+                              labelText: AppLocalizations.of(context).translate(widget.screenConstants.lastNameLabel).toUpperCase(),
+                            ),
+                          ),
+                        ),
+
+                        /// PHONE NUMBER
+                        Container(
+                          margin: EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
+                          child: TextFormField(
+                            style: TextStyle(color: AppColors.fontColor),
+                            controller: widget.phoneNumberController,
+                            onChanged: (value) => widget.screenStore.setPhoneNumber(value),
+                            validator: _phoneNumberValidator,
+                            decoration: InputDecoration(
+                              hintText: AppLocalizations.of(context).translate(widget.screenConstants.phoneNumberHint),
+                              labelText: AppLocalizations.of(context).translate(widget.screenConstants.phoneNumberLabel).toUpperCase(),
+                            ),
+                          ),
+                        ),
+
+                        /// BIRTHDAY
+                        Container(
+                          margin:
+                          EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
+                          child: Observer(
+                            builder: (_) => Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  TextsBuilder.textHint(AppLocalizations.of(context)
+                                      .translate(widget.screenConstants.birthdayHint).toUpperCase()),
+                                  GestureDetector(
+                                    onTap: () async {
+                                      DateTime newBirthday =
+                                      await showRoundedDatePicker(
+                                        context: context,
+                                        theme: ThemeData.dark().copyWith(
+                                          accentColor: AppColors.regularRed,
+                                          primaryColor: AppColors.bgMainColor,
+                                          backgroundColor: AppColors.bgMainColor,
+                                          dialogBackgroundColor: AppColors.bgMainColor,
+                                          accentTextTheme: TextTheme(
+                                            body2 : TextStyle(color: AppColors.fontColor),
+                                          ),
+                                        ),
+                                        initialDate: widget.screenStore.birthday,
+                                        firstDate: DateTime.now()
+                                            .subtract(new Duration(days: (365 * 70))),
+                                        lastDate: DateTime.now(),
+                                      );
+
+                                      if (newBirthday != null) {
+                                        widget.screenStore.setBirthday(newBirthday);
+                                      }
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(top: 10),
+                                      child: TextsBuilder.regularText(
+                                        DateUtils(context)
+                                            .fromDateToString(widget.screenStore.birthday),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
+                        ),
 
-                          /// BIRTHDAY
-                          Container(
-                            margin:
-                            EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
-                            child: Observer(
-                              builder: (_) => Container(
+                        /// GENDER
+                        Container(
+                          margin:
+                          EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
+                          child: Observer(
+                            builder: (_) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          SettingsGenderScreen(widget.screenStore),
+                                    ),
+                                  );
+                                },
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    TextsBuilder.textHint(AppLocalizations.of(context)
-                                        .translate(screenConstants.birthdayHint).toUpperCase()),
-                                    GestureDetector(
-                                      onTap: () async {
-                                        DateTime newBirthday =
-                                        await showRoundedDatePicker(
-                                          context: context,
-                                          theme: ThemeData.dark().copyWith(
-                                            accentColor: AppColors.regularRed,
-                                            primaryColor: AppColors.bgMainColor,
-                                            backgroundColor: AppColors.bgMainColor,
-                                            dialogBackgroundColor: AppColors.bgMainColor,
-                                            accentTextTheme: TextTheme(
-                                              body2 : TextStyle(color: AppColors.fontColor),
-                                            ),
-                                          ),
-                                          initialDate: screenStore.birthday,
-                                          firstDate: DateTime.now()
-                                              .subtract(new Duration(days: (365 * 70))),
-                                          lastDate: DateTime.now(),
-                                        );
-
-                                        if (newBirthday != null) {
-                                          screenStore.setBirthday(newBirthday);
-                                        }
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.only(top: 10),
-                                        child: TextsBuilder.regularText(
-                                          DateUtils(context)
-                                              .fromDateToString(screenStore.birthday),
-                                        ),
-                                      ),
+                                    TextsBuilder.textHint(
+                                      AppLocalizations.of(context)
+                                          .translate(widget.screenConstants.genderHint).toUpperCase(),
+                                    ),
+                                    Container(
+                                      child: TextsBuilder.regularText(GenderUtils()
+                                          .getGenderString(
+                                          widget.screenStore.gender, context)),
+                                      margin: EdgeInsets.only(top: 10),
                                     ),
                                   ],
                                 ),
-                              ),
-                            ),
+                              );
+                            },
                           ),
+                        ),
 
-                          /// GENDER
-                          Container(
-                            margin:
-                            EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
-                            child: Observer(
-                              builder: (_) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
+                        /// CURRENTLY LIVING IN
+                        Container(
+                          margin:
+                          EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
+                          child: Observer(
+                            builder: (_) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
                                         builder: (context) =>
-                                            SettingsGenderScreen(screenStore),
-                                      ),
-                                    );
-                                  },
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      TextsBuilder.textHint(
-                                        AppLocalizations.of(context)
-                                            .translate(screenConstants.genderHint).toUpperCase(),
-                                      ),
-                                      Container(
-                                        child: TextsBuilder.regularText(GenderUtils()
-                                            .getGenderString(
-                                            screenStore.gender, context)),
-                                        margin: EdgeInsets.only(top: 10),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
+                                            SettingsNationalityScreen(widget.screenStore.livingInId, widget.screenStore.setLivingIn)),
+                                  );
+                                },
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    TextsBuilder.textHint(
+                                      AppLocalizations.of(context)
+                                          .translate(widget.screenConstants.currentlyLivingInHint).toUpperCase(),
+                                    ),
+                                    Container(
+                                      child: TextsBuilder.regularText(
+                                          widget.screenStore.livingInLabel),
+                                      margin: EdgeInsets.only(top: 10),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                           ),
+                        ),
 
-                          /// CURRENTLY LIVING IN
-                          Container(
-                            margin:
-                            EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
-                            child: Observer(
-                              builder: (_) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              SettingsNationalityScreen(screenStore.livingInId, screenStore.setLivingIn)),
-                                    );
-                                  },
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      TextsBuilder.textHint(
-                                        AppLocalizations.of(context)
-                                            .translate(screenConstants.currentlyLivingInHint).toUpperCase(),
-                                      ),
-                                      Container(
-                                        child: TextsBuilder.regularText(
-                                            screenStore.livingInLabel),
-                                        margin: EdgeInsets.only(top: 10),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
+                        /// NATIONALITY
+                        Container(
+                          margin:
+                          EdgeInsets.only(top: AppSizes.inputTopMargin(context), bottom: AppSizes.inputTopMargin(context) * 2),
+                          child: Observer(
+                            builder: (_) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SettingsNationalityScreen(widget.screenStore.countryId, widget.screenStore.setCountry)),
+                                  );
+                                },
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    TextsBuilder.textHint(
+                                      AppLocalizations.of(context)
+                                          .translate(widget.screenConstants.nationalityHint).toUpperCase(),
+                                    ),
+                                    Container(
+                                      child: TextsBuilder.regularText(
+                                          widget.screenStore.countryLabel),
+                                      margin: EdgeInsets.only(top: 10),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                           ),
-
-                          /// NATIONALITY
-                          Container(
-                            margin:
-                            EdgeInsets.only(top: AppSizes.inputTopMargin(context), bottom: AppSizes.inputTopMargin(context) * 2),
-                            child: Observer(
-                              builder: (_) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              SettingsNationalityScreen(screenStore.countryId, screenStore.setCountry)),
-                                    );
-                                  },
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      TextsBuilder.textHint(
-                                        AppLocalizations.of(context)
-                                            .translate(screenConstants.nationalityHint).toUpperCase(),
-                                      ),
-                                      Container(
-                                        child: TextsBuilder.regularText(
-                                            screenStore.countryLabel),
-                                        margin: EdgeInsets.only(top: 10),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
+      ),
     );
+  }
+
+  String _firstNameValidator(String value) {
+    if ( value == null || value.isEmpty ) {
+      return AppLocalizations.of(this.context).translate(widget.formConstants.firstNameIsRequired);
+    }
+    return null;
+  }
+
+  String _lastNameValidator(String value) {
+    if ( value == null || value.isEmpty ) {
+      return AppLocalizations.of(this.context).translate(widget.formConstants.lastNameIsRequired);
+    }
+    return null;
+  }
+
+  String _phoneNumberValidator(String value) {
+    if ( value == null || value.isEmpty ) {
+      return AppLocalizations.of(this.context).translate(widget.formConstants.phoneNumberIsRequired);
+    }
+    return null;
+  }
+
+  _save() {
+
+    if (!widget._formKey.currentState.validate()) {
+      setState(() {
+        widget.autoValidate = true;
+      });
+      return;
+    }
+
+    restServices.getUserService().updateUserPersonalDetails(context,
+        widget.firstNameController.text,
+        widget.lastNameController.text,
+        widget.screenStore.gender == Gender.MALE ? "MALE" : "FEMALE",
+        widget.screenStore.countryId,
+        widget.screenStore.livingInId,
+        widget.phoneNumberController.text,
+        widget.screenStore.birthday)
+        .then((value) {
+      restServices.getUserService().getUserPersonalDetails(context);
+      ToasterBuilder.buildSuccessToaster(context, "successfully updated");
+    })
+        .catchError((e) {
+      String msg = "Something went wrong";
+      if ( e is ApiException ) {
+        msg = e.cause;
+      } else {
+        print(e);
+      }
+      ToasterBuilder.buildErrorToaster(context, msg);
+    });
   }
 }
