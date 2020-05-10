@@ -25,13 +25,13 @@ class ProfessorAvatarWidget extends StatelessWidget {
           ),
 
           Container(
-            margin: EdgeInsets.only(top: 20),
+            margin: EdgeInsets.only(top: 20, bottom: 10),
             child: TextsBuilder.h4Bold('$greeting $name', color: textColor),
           ),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: IconsBuilder.startListBasedOnScore(0),
+            children: IconsBuilder.startListBasedOnScore(5),
           )
         ],
       ),

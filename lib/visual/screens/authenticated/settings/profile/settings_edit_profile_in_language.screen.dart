@@ -2,6 +2,8 @@ import 'package:after_init/after_init.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
+import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/visual/screens/authenticated/profile/profile.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
@@ -11,6 +13,8 @@ import 'package:professors/visual/widgets/structural/header/custom_app_bar.widge
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class EditProfileInLanguageScreen extends StatefulWidget {
+
+  GeneralConstants generalConstants = GeneralConstants();
 
   int languageId;
   EditProfileInLanguageScreen(this.languageId);
@@ -29,39 +33,6 @@ class _EditProfileInLanguageScreenState extends State<EditProfileInLanguageScree
   Widget build(BuildContext context) {
     double sectionTopMargin = MediaQuery.of(context).size.height / 20;
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          //shape: RoundedRectangleBorder(),
-          onPressed: () {
-            if (_isCreatingProfile()) {
-
-              restServices.getProfileDetailsService().createProfileDetails(
-                  context, widget.languageId,
-                  designationController.text,
-                  descriptionController.text,
-                  quoteController.text).then((_){
-                restServices.getProfileDetailsService().getProfileDetailsByLanguageId(
-                    context, widget.languageId);
-              });
-
-            } else {
-
-              restServices.getProfileDetailsService().updateProfileDetails(context,
-                  profileDetailsStore.id, designationController.text,
-                  descriptionController.text, quoteController.text)
-                  .then((_) {
-                restServices.getLanguageProfileService().getAvailableProfileLanguages(context);
-                restServices.getLanguageProfileService().getExistingProfileLanguages(context);
-                restServices.getProfileDetailsService().getProfileDetailsByLanguageId(
-                    context, widget.languageId).then((_) {
-                  _updateState();
-                });
-              });
-
-            }
-          },
-          child: TextsBuilder.regularText("save"),
-          backgroundColor: AppColors.regularRed,
-        ),
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
@@ -73,12 +44,34 @@ class _EditProfileInLanguageScreenState extends State<EditProfileInLanguageScree
                     if ( profileDetailsStore.id != null ) {
                       return Container(
                           margin: EdgeInsets.only(),
-                          child: ButtonsBuilder.transparentButton('View Profile', () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ProfileScreen(generalStore.existingLanguages.first.id, generalStore.existingLanguages.first.code, userStore.id)),
-                            );
+                          child: ButtonsBuilder.transparentButton(
+                          AppLocalizations.of(context).translate(widget.generalConstants.buttonSaveLabel).toUpperCase(), () {
+                            if (_isCreatingProfile()) {
+
+                              restServices.getProfileDetailsService().createProfileDetails(
+                                  context, widget.languageId,
+                                  designationController.text,
+                                  descriptionController.text,
+                                  quoteController.text).then((_){
+                                restServices.getProfileDetailsService().getProfileDetailsByLanguageId(
+                                    context, widget.languageId);
+                              });
+
+                            } else {
+
+                              restServices.getProfileDetailsService().updateProfileDetails(context,
+                                  profileDetailsStore.id, designationController.text,
+                                  descriptionController.text, quoteController.text)
+                                  .then((_) {
+                                restServices.getLanguageProfileService().getAvailableProfileLanguages(context);
+                                restServices.getLanguageProfileService().getExistingProfileLanguages(context);
+                                restServices.getProfileDetailsService().getProfileDetailsByLanguageId(
+                                    context, widget.languageId).then((_) {
+                                  _updateState();
+                                });
+                              });
+
+                            }
                           })
                       );
                     } else {
@@ -117,7 +110,7 @@ class _EditProfileInLanguageScreenState extends State<EditProfileInLanguageScree
                   /// DETAILS
                   SliverToBoxAdapter(
                     child: Container(
-                      padding: EdgeInsets.only(bottom: sectionTopMargin),
+                      padding: AppPaddings.regularPadding(context).copyWith(bottom: sectionTopMargin),
                       margin: EdgeInsets.only(
                         top: sectionTopMargin,
                       ),
