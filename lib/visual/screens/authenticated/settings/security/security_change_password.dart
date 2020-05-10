@@ -56,7 +56,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
                 SliverToBoxAdapter(
                   child: Container(
-                    padding: AppPaddings.regularPadding(context),
+                    padding: AppPaddings.regularPadding(context).copyWith(top: 10),
                     child: Form(
                       child: ListView(
                         shrinkWrap: true,
@@ -64,38 +64,41 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         children: <Widget>[
                           /// Old Password
                           InputTextWidget(AppLocalizations.of(context)
-                              .translate(screenConstants.changePasswordOldLabel), oldPasswordController),
+                              .translate(screenConstants.changePasswordOldLabel).toUpperCase(), oldPasswordController),
 
                           /// New Password
                           InputTextWidget(AppLocalizations.of(context)
-                              .translate(screenConstants.changePasswordNewLabel), newPasswordController),
+                              .translate(screenConstants.changePasswordNewLabel).toUpperCase(), newPasswordController),
 
                           /// New Password Repeat
                           InputTextWidget(AppLocalizations.of(context).translate(
-                              screenConstants.changePasswordNewRepeatLabel), newPasswordRepeatController),
+                              screenConstants.changePasswordNewRepeatLabel).toUpperCase(), newPasswordRepeatController),
 
                           /// Change Button
-                          ButtonsBuilder.redFlatButton(
-                            AppLocalizations.of(context)
-                                .translate(screenConstants.changePasswordButtonLabel),
-                                () {
-                              store.setIsLoading(true);
-                              restServices.getSecurityService().changePassword(
-                                  context,
-                                  oldPasswordController.text,
-                                  newPasswordController.text).then((_){
-                                ToasterBuilder.buildSuccessToaster(context, AppLocalizations.of(context).translate(screenConstants.confirmationText));
-                                setState(() {
-                                  oldPasswordController.text = "";
-                                  newPasswordController.text = "";
-                                  newPasswordRepeatController.text = "";
+                          Container(
+                            margin: EdgeInsets.only(top: 10),
+                            child: ButtonsBuilder.redFlatButton(
+                              AppLocalizations.of(context)
+                                  .translate(screenConstants.changePasswordButtonLabel),
+                                  () {
+                                store.setIsLoading(true);
+                                restServices.getSecurityService().changePassword(
+                                    context,
+                                    oldPasswordController.text,
+                                    newPasswordController.text).then((_){
+                                  ToasterBuilder.buildSuccessToaster(context, AppLocalizations.of(context).translate(screenConstants.confirmationText));
+                                  setState(() {
+                                    oldPasswordController.text = "";
+                                    newPasswordController.text = "";
+                                    newPasswordRepeatController.text = "";
+                                  });
+                                }).catchError((e) {
+                                  ToasterBuilder.buildErrorToaster(context, e.cause);
+                                }).whenComplete((){
+                                  store.setIsLoading(false);
                                 });
-                              }).catchError((e) {
-                                ToasterBuilder.buildErrorToaster(context, e.cause);
-                              }).whenComplete((){
-                                store.setIsLoading(false);
-                              });
-                            },
+                              },
+                            ),
                           ),
                         ],
                       ),
