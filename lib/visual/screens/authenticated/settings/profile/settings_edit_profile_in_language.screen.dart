@@ -110,7 +110,6 @@ class _EditProfileInLanguageScreenState extends State<EditProfileInLanguageScree
                   /// DETAILS
                   SliverToBoxAdapter(
                     child: Container(
-                      padding: AppPaddings.regularPadding(context).copyWith(bottom: sectionTopMargin),
                       margin: EdgeInsets.only(
                         top: sectionTopMargin,
                       ),

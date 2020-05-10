@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/settings/security/settings_security_constants.dart';
 import 'package:professors/visual/screens/authenticated/settings/security/security_change_password.dart';
+import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/visual/widgets/structural/lists/list_tile_model.dart';
@@ -44,19 +45,22 @@ class _SecurityDefinitionsScreenState extends State<SecurityDefinitionsScreen> {
               screenConstants.mainTopHeader)),
 
           /// Change Password Option
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: listItems[index].callback,
-                  child: RegularListTile(
-                    label: listItems[index].label,
-                  ),
-                );
-              },
-              childCount: listItems.length,
+          SliverPadding(
+            padding: AppPaddings.sliverListPadding(context).copyWith(top: 10),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: listItems[index].callback,
+                    child: RegularListTile(
+                      label: listItems[index].label,
+                    ),
+                  );
+                },
+                childCount: listItems.length,
+              ),
             ),
-          )
+          ),
 
         ],
       ),

@@ -26,47 +26,48 @@ class EditProfileSelectLanguageScreen extends StatelessWidget {
                   right: MediaQuery.of(context).size.width / 20),
               child: ButtonsBuilder.transparentButton(
                 AppLocalizations.of(context)
-                    .translate(screenConstants.selectLanguageAddNewLanguage).toUpperCase(),
+                    .translate(screenConstants.selectLanguageAddNewLanguage)
+                    .toUpperCase(),
                 () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EditProfileAddNewLanguageScreen()),
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            EditProfileAddNewLanguageScreen()),
                   );
                 },
               ),
             ),
           ]),
 
-          
-
           /// Title
-          SliverPadding(
-            padding: AppPaddings.regularPadding(context),
-            sliver: AppHeaderWidget(
-              AppLocalizations.of(context)
-                  .translate(screenConstants.selectLanguageTopHeader),
-              subTitle: AppLocalizations.of(context)
-                  .translate(screenConstants.selectLanguageSubTitle),
-            ),
+          AppHeaderWidget(
+            AppLocalizations.of(context)
+                .translate(screenConstants.selectLanguageTopHeader),
+            subTitle: AppLocalizations.of(context)
+                .translate(screenConstants.selectLanguageSubTitle),
           ),
 
           /// Language Options
           SliverPadding(
-            padding: AppPaddings.regularPadding(context).copyWith(top: 20),
+            padding: AppPaddings.sliverListPadding(context),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                   return GestureDetector(
                     onTap: () {
-
                       // profile details set id to null in order to the page to be render
                       // for a new profile details creation
                       profileDetailsStore.setIsLoading(true);
-                      profileDetailsStore.setId(generalStore.existingLanguages[index].id);
+                      profileDetailsStore
+                          .setId(generalStore.existingLanguages[index].id);
 
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => EditProfileInLanguageScreen(generalStore.existingLanguages[index].id),),
+                        MaterialPageRoute(
+                          builder: (context) => EditProfileInLanguageScreen(
+                              generalStore.existingLanguages[index].id),
+                        ),
                       );
                     },
                     child: RegularListTile(

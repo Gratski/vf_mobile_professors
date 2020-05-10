@@ -10,7 +10,6 @@ import 'package:professors/visual/widgets/structural/header/custom_app_bar.widge
 import 'package:professors/visual/widgets/structural/lists/regular_list_tile.dart';
 
 class EditProfileAddNewLanguageScreen extends StatelessWidget {
-
   GeneralConstants generalConstants = GeneralConstants();
   SettingsEditProfileConstants screenConstants = SettingsEditProfileConstants();
 
@@ -24,32 +23,32 @@ class EditProfileAddNewLanguageScreen extends StatelessWidget {
           CustomAppBar([]),
 
           /// Title
-          SliverPadding(
-            padding: AppPaddings.regularPadding(context).copyWith(bottom: 10),
-            sliver: AppHeaderWidget(
-              AppLocalizations.of(context)
-                  .translate(screenConstants.addNewLanguageSelectScreenTopHeader),
-              subTitle: AppLocalizations.of(context)
-                  .translate(screenConstants.addNewLanguageSelectScreenSubTitle),
-              isSubTitleSmall: true,
-            ),
+
+          AppHeaderWidget(
+            AppLocalizations.of(context)
+                .translate(screenConstants.addNewLanguageSelectScreenTopHeader),
+            subTitle: AppLocalizations.of(context)
+                .translate(screenConstants.addNewLanguageSelectScreenSubTitle),
+            isSubTitleSmall: true,
           ),
 
           /// Language Options
           SliverPadding(
-            padding: AppPaddings.regularPadding(context),
+            padding: AppPaddings.sliverListPadding(context),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                   return GestureDetector(
                     onTap: () {
-
                       profileDetailsStore.setIsLoading(true);
                       profileDetailsStore.setId(null);
 
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => EditProfileInLanguageScreen(generalStore.availableLanguages[index].id),),
+                        MaterialPageRoute(
+                          builder: (context) => EditProfileInLanguageScreen(
+                              generalStore.availableLanguages[index].id),
+                        ),
                       );
                     },
                     child: RegularListTile(
