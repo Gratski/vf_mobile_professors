@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
           '/registration': (context) => RegistrationScreen(),
           '/home': (context) => HomeScreen()
         },
-        initialRoute: (isNew) ? '/splash' : (hasToken) ? '/home' : '/registration',
+        initialRoute: (isNew) ? '/splash' : (hasToken) ? '/home' : '/login',
 
         localizationsDelegates: [
           // app specific localizations

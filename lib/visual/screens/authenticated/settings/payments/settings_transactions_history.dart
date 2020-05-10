@@ -9,6 +9,7 @@ import 'package:professors/models/payments/transactions/transactions_list_item.d
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/utils/date_utils.dart';
+import 'package:professors/visual/widgets/text/text.builder.dart';
 import 'package:professors/visual/widgets/transactions/transaction_list_item.dart';
 
 class SettingsTransactionsHistoryScreen extends StatefulWidget {
@@ -100,38 +101,26 @@ class _SettingsTransactionsHistoryScreenState
         controller: controller,
         children: <Widget>[
           /// CURRENT MONTH TRANSACTIONS
-          Observer(
-            builder: (_) {
-              return Container(
+          Container(
                 padding: AppPaddings.regularPadding(context),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: transactionsHistoryStore.transactions.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return buildTransaction(
-                        transactionsHistoryStore.transactions[index], context);
-                  },
-                ),
-              );
-            },
-          ),
+                child: Center(
+                  child: TextsBuilder.regularText(
+                    AppLocalizations.of(context).translate(screenConstants.noTransactionsYet)
+                  ),
+                )
+              ),
 
           /// TOTAL TRANSACTIONS
-          Observer(
-            builder: (_) {
-              return Container(
-                padding: AppPaddings.regularPadding(context),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: transactionsHistoryStore.transactions.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return buildTransaction(
-                        transactionsHistoryStore.transactions[index], context);
-                  },
-                ),
-              );
-            },
-          ),
+
+              Container(
+                  padding: AppPaddings.regularPadding(context),
+                  child: Center(
+                    child: TextsBuilder.regularText(
+                        AppLocalizations.of(context).translate(screenConstants.noTransactionsYet)
+                    ),
+                  )
+              ),
+
         ],
       ),
     );

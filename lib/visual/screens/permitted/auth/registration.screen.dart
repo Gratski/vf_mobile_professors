@@ -25,7 +25,7 @@ class RegistrationScreen extends AbstractAuthScreen {
   TextEditingController accessCodeController = TextEditingController();
 
   @override
-  getHideBackButton() => true;
+  getHideBackButton() => false;
 
   @override
   getSlivers(BuildContext context) {

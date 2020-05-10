@@ -6,6 +6,7 @@ class AuthenticationConstants {
   String get loginPasswordLabel => "AUTH_LOGIN_PASSWORD_LABEL";
   String get loginButtonLabel => "AUTH_LOGIN_BUTTON_LABEL";
   String get loginForgotPasswordText => "AUTH_LOGIN_FORGOT_PASSWORD_TEXT";
+  String get loginRegisterText => "AUTH_LOGIN_REGISTER_TEXT";
 
   String get registrationTopHeader => "AUTH_REGISTRATION_TOP_HEADER";
   String get registrationSubTitle => "AUTH_REGISTRATION_SUB_TITLE";

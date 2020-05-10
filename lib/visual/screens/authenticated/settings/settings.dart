@@ -297,7 +297,7 @@ class SettingsScreen extends StatelessWidget {
                     .translate(TRANSLATIONS.SettingsConstants.LOGOUT),
                 callback: () async {
                   SignOutResponse rsp = await restServices.getAuthRestService().signOut();
-                  Navigator.pushNamedAndRemoveUntil(context, "/registration", (r) => false);
+                  Navigator.pushNamedAndRemoveUntil(context, "/login", (r) => false);
                 },
                 hideTrailing: true,
               ),

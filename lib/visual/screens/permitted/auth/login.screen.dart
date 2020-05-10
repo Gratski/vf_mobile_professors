@@ -24,7 +24,7 @@ class LoginScreen extends AbstractAuthScreen {
   TextEditingController passwordController = TextEditingController();
 
   @override
-  getHideBackButton() => false;
+  getHideBackButton() => true;
 
   @override
   getSlivers(BuildContext context) {
@@ -152,6 +152,18 @@ class LoginScreen extends AbstractAuthScreen {
                             PasswordRecoveryScreen(emailController.text)),
                   );
                 }, color: AppColors.fontColor)),
+
+            // register
+            Container(
+                padding: AppPaddings.regularPadding(context),
+                margin: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.02),
+                child: ButtonsBuilder.transparentButton(
+                    AppLocalizations.of(context)
+                        .translate(screenConstants.loginRegisterText),
+                        () {
+                      Navigator.pushNamed(context, '/registration');
+                    }, color: AppColors.fontColor)),
           ],
         ),
       ),

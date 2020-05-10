@@ -47,6 +47,7 @@
   "AUTH_LOGIN_PASSWORD_LABEL": "Password",
   "AUTH_LOGIN_BUTTON_LABEL": "Sign in",
   "AUTH_LOGIN_FORGOT_PASSWORD_TEXT": "Forgot your password? Click here",
+  "AUTH_LOGIN_REGISTER_TEXT": "Validate your account. Click here",
   "AUTH_REGISTRATION_TOP_HEADER": "Registration",
   "AUTH_REGISTRATION_SUB_TITLE": "Request your access code. Click here",
   "AUTH_REGISTRATION_EMAIL_LABEL": "E-mail",
@@ -123,6 +124,7 @@
   "SETTINGS_TRANSACTIONS_HISTORY_TOP_HEADER": "Transactions History",
   "SETTINGS_TRANSACTIONS_HISTORY_CURRENT_MONTH": "This Month",
   "SETTINGS_TRANSACTIONS_HISTORY_ALL": "All",
+  "SETTINGS_TRANSACTIONS_HISTORY_NO_TRANSACTIONS_YET": "You have no transactions yet",
 
   "SETTINGS_NOTIFICATIONS_TOP_HEADER": "Notifications",
   "SETTINGS_NOTIFICATIONS_MESSAGES_LABEL": "Messages",
