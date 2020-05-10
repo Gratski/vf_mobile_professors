@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:professors/visual/styles/colors.dart';
 
 class IconsBuilder {
 
@@ -22,15 +23,33 @@ class IconsBuilder {
     return list;
   }
 
-  static Icon difficultyIcon(double level, Color color) {
+  static List<Container> difficultyIcons(int level) {
 
-    if ( level <= 2.5 ) {
-      return Icon(FontAwesomeIcons.spa, color: color,);
-    } else if ( level > 2.5 && level <= 4.0) {
-      return Icon(FontAwesomeIcons.running, color: color);
-    } else {
-      return Icon(FontAwesomeIcons.fire, color: color);
+    List<Container> list = new List<Container>();
+    int maxScore = 4;
+    int counter = 0;
+
+    // add the red icons
+    for(var i = 0; i < level; i++) {
+      list.add(
+        Container(
+          margin: EdgeInsets.only(right: 3),
+          child: Icon(FontAwesomeIcons.squareFull, color: AppColors.regularRed, size: 17,),
+        ),
+      );
+      counter++;
     }
+
+    // add the grey icons
+    for(var i = counter; i < maxScore; i++ ) {
+      list.add(
+          Container(
+            margin: EdgeInsets.only(right: 3),
+            child: Icon(FontAwesomeIcons.squareFull, color: Colors.grey[300], size: 17,),
+          ),);
+    }
+
+    return list;
 
   }
 

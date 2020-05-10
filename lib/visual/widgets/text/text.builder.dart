@@ -117,7 +117,7 @@ class TextsBuilder {
 
   /// TEXT SMALL
   static Text textSmall(String text, {TextAlign align, Color color = Colors.black}) {
-    return createText(text, _FONT_SMALL, _FONT_FAMILY_REGULAR, color: color);
+    return createText(text, 12, _FONT_FAMILY_REGULAR, color: color);
   }
 
   static Text textSmallBold(String text, {Color color}) {

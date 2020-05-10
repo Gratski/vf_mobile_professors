@@ -5,7 +5,7 @@ class AppColors {
   static Color get linksColor => Colors.white;
   static Color get paypalColor => Color.fromRGBO(0, 107, 192, 1);
   static Color get fontColor => Colors.white;
-  static Color get regularGreen => Color.fromRGBO(30, 215, 97, 1);
+  static Color get regularGreen => Color.fromRGBO(6, 197, 18, 1);
   static Color get lightGreen => Color.fromRGBO(30, 215, 97, 1);
   static Color get regularRed => Color.fromRGBO(248, 0, 12, 1);
 
