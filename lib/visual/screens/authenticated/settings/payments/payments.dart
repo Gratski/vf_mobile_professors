@@ -26,37 +26,41 @@ class PaymentsScreen extends StatelessWidget {
           CustomAppBar([]),
           AppHeaderWidget(AppLocalizations.of(context)
               .translate(screenConstants.topHeader),),
-          SliverToBoxAdapter(child: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-            return Container(
-              width: MediaQuery.of(context).size.width / 2,
-              padding: EdgeInsets.all(30),
-              decoration: BoxDecoration(
-                color: AppColors.bgGreyColor,
-                border: Border(top: BorderSide(color: AppColors.regularGreen), bottom: BorderSide(color: AppColors.regularGreen))
+          
+          /// BALANCE
+          SliverToBoxAdapter(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                margin: AppPaddings.regularPadding(context).copyWith(top: 20),
+                width: MediaQuery.of(context).size.width / 2,
+                padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.10),
+                color: AppColors.fontColor,
+                child: Column(
+                  children: <Widget>[
+                    Observer(
+                      builder: (_) {
+                        return TextsBuilder.h4Bold('${AppLocalizations.of(context)
+                            .translate(screenConstants.balanceLabel)} ( ${userWallet.currency.symbol} )', color: AppColors.bgMainColor);
+                      },
+                    ),
+                    Observer(builder: (_) {
+                      return Container(
+                        margin: EdgeInsets.only(top: 15.0),
+                        child: TextsBuilder.h4Bold(
+                            "${userWallet.balance}", color: AppColors.bgMainColor),
+                      );
+                    }),
+                  ],
+                ),
               ),
-              child: Column(
-                children: <Widget>[
-                  Observer(
-                    builder: (_) {
-                      return TextsBuilder.h4Bold('${AppLocalizations.of(context)
-                          .translate(screenConstants.balanceLabel)} ( ${userWallet.currency.symbol} )', color: AppColors.bgMainColor);
-                    },
-                  ),
-                  Observer(builder: (_) {
-                    return Container(
-                      margin: EdgeInsets.only(top: 15.0),
-                      child: TextsBuilder.h4Bold(
-                          "${userWallet.balance}", color: AppColors.bgMainColor),
-                    );
-                  }),
-                ],
-              ),
-            );
-          })),
+            ),
+          ),
+          
+          /// OPTIONS LIST
           SliverToBoxAdapter(
             child: Container(
-              padding: AppPaddings.regularPadding(context),
+              padding: AppPaddings.sliverListPadding(context),
               child: ListView(
                 shrinkWrap: true,
                 children: <Widget>[
