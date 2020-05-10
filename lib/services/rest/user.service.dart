@@ -115,7 +115,7 @@ class UserService extends AbstractRestService {
     try {
       final rsp = await this.performJsonPut(
         context,
-        '$REST_URL/me',
+        '$REST_URL/users/me',
         jsonEncode(
           {
             "firstName": firstName,
