@@ -48,7 +48,7 @@ class RegistrationScreen extends AbstractAuthScreen {
             // Title
             Container(
                 margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
-                child: TextsBuilder.jumboBold(AppLocalizations.of(context)
+                child: TextsBuilder.jumboBold(context, AppLocalizations.of(context)
                     .translate(screenConstants.registrationTopHeader))
             ),
             // Sub Title

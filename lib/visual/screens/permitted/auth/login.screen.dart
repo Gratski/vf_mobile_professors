@@ -49,7 +49,7 @@ class LoginScreen extends AbstractAuthScreen {
                 margin: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height / 40),
                 padding: AppPaddings.regularPadding(context),
-                child: TextsBuilder.jumboBold(AppLocalizations.of(context)
+                child: TextsBuilder.jumboBold(context, AppLocalizations.of(context)
                     .translate(screenConstants.loginTopHeader))),
 
             // Email

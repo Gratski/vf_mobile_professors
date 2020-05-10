@@ -28,6 +28,7 @@ class GeneralConstants {
   String get genderFemaleLabel => "GENERAL_LABELS_GENDER_FEMALE";
 
   String get wordOf => "GENERAL_WORD_OF";
+  String get wordMinutes => "GENERAL_WORD_MINUTES";
 
   String get dialogUnavailableOperationTitle => "GENERAL_DIALOG_UNAVAILABLE_OPERATION_TITLE";
   String get dialogUnavailableOperationBody => "GENERAL_DIALOG_UNAVAILABLE_OPERATION_BODY";
@@ -35,4 +36,6 @@ class GeneralConstants {
 
   String get categoryLabel => "GENERAL_CATEGORY_LABEL";
   String get pictureLabel => "GENERAL_PICTURE_LABEL";
+
+  String get loadMoreButtonLabel => "GENERAL_LOAD_MORE_BUTTON_LABEL";
 }

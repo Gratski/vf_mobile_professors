@@ -83,8 +83,8 @@ class TextsBuilder {
             fontFamily: _FONT_FAMILY_REGULAR));
   }
 
-  static Text jumboBold(String text) {
-    return createText(text, _FONT_SIZE_JUMBO, _FONT_FAMILY_RALE_EXTRA_BOLD);
+  static Text jumboBold(BuildContext context, String text) {
+    return createText(text, MediaQuery.of(context).size.width / 7.9, _FONT_FAMILY_RALE_EXTRA_BOLD);
   }
 
   static Text h1Bold(String text, {Color color}) {

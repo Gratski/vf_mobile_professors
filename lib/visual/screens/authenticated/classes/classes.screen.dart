@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
+import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/models/language.model.dart';
 import 'package:professors/utils/classes.utils.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
@@ -21,6 +22,7 @@ import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class ClassesScreen extends StatefulWidget {
   ClassConstants screenConstants = ClassConstants();
+  GeneralConstants generalConstants = GeneralConstants();
   ScrollController scrollController = ScrollController();
   BuildContext buildContext;
 
@@ -116,7 +118,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             ButtonsBuilder.transparentCustomButton(
-                              TextsBuilder.h3Bold("Add Class"), () {
+                              TextsBuilder.h4Bold("ADD CLASS"), () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) =>
                                       CreateClassSelectLanguageScreen()));
@@ -140,6 +142,28 @@ class _ClassesScreenState extends State<ClassesScreen>
                     ),
                   );
                 },
+              ),
+
+              /// Loading next classes
+              Observer(
+                builder: (_) {
+                  if ( classesStore.isLoadingNext ) {
+                    return SliverToBoxAdapter(
+                      child: DefaultLoaderWidget(),
+                    );
+                  } else {
+                    if ( classesStore.totalClasses > classesStore.offset ) {
+                      return SliverToBoxAdapter(
+                        child: ButtonsBuilder.redFlatButton(
+                        AppLocalizations.of(context).translate(widget.generalConstants.loadMoreButtonLabel), () { }),
+                      );
+                    } else {
+                      return SliverToBoxAdapter(
+                        child: Container(),
+                      );
+                    }
+                  }
+                }
               ),
             ],
           ),
@@ -169,7 +193,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                 child: (classesStore.classes[index].pictureUrl != null)
                     ? Image.network(
                   classesStore.classes[index].pictureUrl,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 )
                     : Container(),
               ),
@@ -201,21 +225,30 @@ class _ClassesScreenState extends State<ClassesScreen>
                 ),
               ),
               Positioned(
-                  top: 10,
-                  right: 10,
-                  child: ButtonsBuilder.transparentCustomButton(
-                      Icon(
-                        FontAwesomeIcons.edit,
-                        color: AppColors.fontColor,
-                        size: 20,
-                      ), () {
+                top: 5,
+                right: 10,
+                child: GestureDetector(
+                  onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => CreateOrEditClassScreen(
                           LanguageModel(
                               classesStore.classes[index].languageId, null, null),
                           classId: classesStore.classes[index].id,
                         )));
-                  })),
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Icon(
+                      FontAwesomeIcons.edit,
+                      color: AppColors.fontColor,
+                      size: 20,
+                    ),
+                  ),
+                )
+              ),
               Positioned(
                 bottom: 10,
                 right: 10,
@@ -257,7 +290,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                               children: <Widget>[
                                 Column(
                                   children: <Widget>[
-                                    TextsBuilder.h3Bold(
+                                    TextsBuilder.h4Bold(
                                         classesStore.classes[index].designation),
                                     Container(
                                       margin: EdgeInsets.only(top: 5),
@@ -270,7 +303,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                                           Container(
                                             margin: EdgeInsets.only(left: 10),
                                             child: TextsBuilder.regularText(
-                                                '${classesStore.classes[index].duration} min'),
+                                                '${classesStore.classes[index].duration} ${AppLocalizations.of(context).translate(widget.generalConstants.wordMinutes)}'),
                                           ),
                                         ],
                                       ),
@@ -344,7 +377,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
-                          TextsBuilder.jumboBold(AppLocalizations.of(context).translate(widget.screenConstants.classesClassesWord))
+                          TextsBuilder.jumboBold(context, AppLocalizations.of(context).translate(widget.screenConstants.classesClassesWord).toUpperCase())
                         ],
                       ),
                     ),
@@ -378,22 +411,26 @@ class _ClassesScreenState extends State<ClassesScreen>
   @override
   void didInitState() {
     widget.scrollController.addListener(() {
-      if (widget.scrollController.position.pixels ==
-              widget.scrollController.position.maxScrollExtent &&
+      if (widget.scrollController.position.pixels >
+              widget.scrollController.position.maxScrollExtent - 50 &&
           classesStore.totalClasses > classesStore.offset &&
           !classesStore.isLoadingNext &&
           classesStore.classes.length > 0) {
-        classesStore.setIsLoadingNext(true);
-        restServices
-            .getClassService()
-            .getUserClasses(widget.buildContext, classesStore.offset, 10)
-            .then((resp) => classesStore.addNextClasses(resp.items, resp.total))
-            .catchError((e) => ToasterBuilder.buildErrorToaster(
-                context, "Something went wrong"))
-            .whenComplete(() => classesStore.setIsLoadingNext(false));
+        _loadMore(context);
       }
     });
 
     refreshOperation();
+  }
+
+  _loadMore(BuildContext context) {
+    classesStore.setIsLoadingNext(true);
+    restServices
+        .getClassService()
+        .getUserClasses(widget.buildContext, classesStore.offset, 10)
+        .then((resp) => classesStore.addNextClasses(resp.items, resp.total))
+        .catchError((e) => ToasterBuilder.buildErrorToaster(
+        context, "Something went wrong"))
+        .whenComplete(() => classesStore.setIsLoadingNext(false));
   }
 }

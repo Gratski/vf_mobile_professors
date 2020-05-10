@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:professors/localization/localization.config.dart';
 import 'package:professors/visual/screens/authenticated/home.dart';
@@ -19,6 +20,9 @@ void main({String env}) async {
 
   String authToken = prefs.getString("auth-token");
   bool hasToken = authToken != null && authToken.isNotEmpty;
+
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp]);
 
   // load our config
   //uncomment for prod "prod"
