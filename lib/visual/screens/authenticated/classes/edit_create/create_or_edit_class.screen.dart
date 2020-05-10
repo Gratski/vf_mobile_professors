@@ -61,9 +61,7 @@ class CreateOrEditClassScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-        body: Padding(
-      padding: AppPaddings.regularPadding(context),
-      child: CustomScrollView(
+        body: CustomScrollView(
         slivers: <Widget>[
 
           /// Pages
@@ -72,7 +70,7 @@ class CreateOrEditClassScreen extends StatelessWidget {
               children: <Widget>[
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.85,
+                  height: MediaQuery.of(context).size.height,
                   child: buildPageView(context),
                 ),
               ],
@@ -80,7 +78,7 @@ class CreateOrEditClassScreen extends StatelessWidget {
           ),
         ],
       ),
-    ));
+    );
   }
 
   PageView buildPageView(BuildContext context) {

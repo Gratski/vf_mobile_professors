@@ -25,9 +25,7 @@ class AddPaymentMethodScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: AppPaddings.regularPadding(context),
-        child: CustomScrollView(
+      body: CustomScrollView(
           slivers: <Widget>[
             CustomAppBar(
               [],
@@ -50,6 +48,7 @@ class AddPaymentMethodScreen extends StatelessWidget {
                       children: <Widget>[
                         /// PAYPAL EMAIL
                         Container(
+                          padding: AppPaddings.regularPadding(context),
                           child: TextFormField(
                             style: TextStyle(color: AppColors.fontColor),
                             controller: emailController,
@@ -89,7 +88,6 @@ class AddPaymentMethodScreen extends StatelessWidget {
                                 ),
                               );
                             }
-
                           },
                         ),
                       ],
@@ -100,7 +98,6 @@ class AddPaymentMethodScreen extends StatelessWidget {
             )
           ],
         ),
-      ),
     );
   }
 

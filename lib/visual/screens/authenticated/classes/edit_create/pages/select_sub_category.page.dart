@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/store/classes/create_class_state.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
+import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
@@ -39,21 +40,24 @@ class _SelectSubCategoryPageState extends State<SelectSubCategoryPage> with Afte
         Observer(
           builder: (_) {
             if ( !widget.store.isLoadingSubCategories ) {
-              return SliverList(
-                delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        widget.store.setSubCategoryId(widget.store.subCategoriesList[index].id);
-                        widget.store.setSubCategoryName(widget.store.subCategoriesList[index].designation);
-                        widget.onTapCallback(widget.store.subCategoriesList[index]);
-                      },
-                      child: RegularListTile(
-                        label: widget.store.subCategoriesList[index].designation,
-                      ),
-                    );
-                  },
-                  childCount: widget.store.subCategoriesList.length,
+              return SliverPadding(
+                padding: AppPaddings.sliverListPadding(context),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          widget.store.setSubCategoryId(widget.store.subCategoriesList[index].id);
+                          widget.store.setSubCategoryName(widget.store.subCategoriesList[index].designation);
+                          widget.onTapCallback(widget.store.subCategoriesList[index]);
+                        },
+                        child: RegularListTile(
+                          label: widget.store.subCategoriesList[index].designation,
+                        ),
+                      );
+                    },
+                    childCount: widget.store.subCategoriesList.length,
+                  ),
                 ),
               );
             } else {

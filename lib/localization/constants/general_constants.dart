@@ -2,7 +2,9 @@ class GeneralConstants {
 
   String get internetConnectionText => "GENERAL_INTERNET_CONNECTION_ERROR";
 
+  String get addLanguageButtonLabel => "GENERAL_ADD_LANGUAGE_BUTTON_LABEL";
   String get languagesLabel => "GENERAL_LANGUAGES_LABEL";
+  String get languageLabel => "GENERAL_LANGUAGE_LABEL";
   String get selectFileSourceLabel => "GENERAL_SELECT_FILE_SOURCE_LABEL";
   String get selectFileSourceSubLabel => "GENERAL_SELECT_FILE_SOURCE_SUB_LABEL";
 
@@ -30,4 +32,7 @@ class GeneralConstants {
   String get dialogUnavailableOperationTitle => "GENERAL_DIALOG_UNAVAILABLE_OPERATION_TITLE";
   String get dialogUnavailableOperationBody => "GENERAL_DIALOG_UNAVAILABLE_OPERATION_BODY";
   String get dialogUnavailableOperationDismissLabel => "GENERAL_DIALOG_UNAVAILABLE_OPERATION_DISMISS_LABEL";
+
+  String get categoryLabel => "GENERAL_CATEGORY_LABEL";
+  String get pictureLabel => "GENERAL_PICTURE_LABEL";
 }

@@ -9,7 +9,7 @@ import 'package:professors/visual/builders/dialog.builder.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/authenticated/settings/payments/add_payment_method_terms.dart';
 import 'package:professors/visual/styles/colors.dart';
-import 'package:professors/visual/styles/padding.dart';
+import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
@@ -28,7 +28,7 @@ class PaymentsMethodsScreen extends StatelessWidget {
 
           CustomAppBar([
             ButtonsBuilder.transparentButton(
-                AppLocalizations.of(context).translate(generalConstants.buttonAddLabel), () {
+                AppLocalizations.of(context).translate(generalConstants.buttonAddLabel).toUpperCase(), () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => PaymentsMethodsTermsScreen()),
@@ -72,7 +72,7 @@ class PaymentsMethodsScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Icon(FontAwesomeIcons.ccPaypal, color: AppColors.paypalColor, size: MediaQuery.of(context).size.width * 0.10,),
+                              Icon(FontAwesomeIcons.paypal, color: AppColors.fontColor, size: MediaQuery.of(context).size.width * 0.10,),
                               Container(
                                 margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.05),
                                 child: TextsBuilder.regularText(paymentsStore.paymentMethods[index].paymentEmail),

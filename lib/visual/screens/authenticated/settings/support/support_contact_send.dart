@@ -32,8 +32,8 @@ class SupportContactSendScreen extends StatelessWidget {
             child: Container(
               padding: AppPaddings.regularPadding(context),
               margin: EdgeInsets.only(top: 20),
-              child: TextsBuilder.regularText(
-                  AppLocalizations.of(context).translate(screenConstants.contactSendSubTitleOne)
+              child: RichText(
+                text: TextsBuilder.subTitleSpan(AppLocalizations.of(context).translate(screenConstants.contactSendSubTitleOne)),
               ),
             ),
           ),

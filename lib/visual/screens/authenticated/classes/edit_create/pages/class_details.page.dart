@@ -8,6 +8,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/classes/create_class.constants.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/store/classes/create_class_state.dart';
 import 'package:professors/utils/compression.utils.dart';
@@ -17,6 +18,7 @@ import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/authenticated/classes/edit_create/class_created_or_updated.screen.dart';
 import 'package:professors/visual/screens/authenticated/classes/edit_create/class_deleted.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
+import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/styles/sizes.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
@@ -32,6 +34,7 @@ class ClassDetailsPage extends StatefulWidget {
   CreateClassState store;
 
   GeneralConstants generalConstants = GeneralConstants();
+  CreateClassScreenConstants screenConstants = CreateClassScreenConstants();
 
   ClassDetailsPage(this.classId, this.onNextCallback, this.editCategoryCallBack,
       {CreateClassState store}) {
@@ -74,9 +77,9 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
           _buildAppbar(),
 
           AppHeaderWidget(
-            'Class Details',
+            AppLocalizations.of(context).translate(widget.screenConstants.classDetailsLabel),
             subTitle:
-            'Language: ${widget.store.languageDesignation}',
+            '${AppLocalizations.of(context).translate(widget.generalConstants.languageLabel)}: ${widget.store.languageDesignation}',
           ),
 
           // Loader And Content
@@ -91,292 +94,312 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                 );
               } else {
                 // fields to edit
-                return SliverList(
-                  key: GlobalKey(),
-                  delegate: SliverChildListDelegate(
-                    [
-                      Form(
-                        key: formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            /// Category
-                            Container(
-                              margin: EdgeInsets.only(
-                                top: AppSizes.inputTopMargin(context),
-                              ),
-                              child: Observer(
-                                builder: (_) {
-                                  return GestureDetector(
-                                    onTap: () {},
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        TextsBuilder.h4Bold('Category'),
-                                        GestureDetector(
-                                          onTap: () {
-                                            widget.editCategoryCallBack(context);
-                                          },
-                                          child: Container(
-                                            child: Row(
-                                              children: <Widget>[
-                                                // class category
-                                                _buildBadge(TextsBuilder.regularText(
-                                                    '${widget.store.categoryName}')),
-                                                _buildBadge(TextsBuilder.regularText(
-                                                    '${widget.store.subCategoryName}')),
-
-                                                Container(
-                                                  margin: EdgeInsets.only(left: 10),
-                                                  child: Icon(
-                                                    Icons.edit,
-                                                    color: AppColors.fontColor,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            margin: EdgeInsets.only(top: 10),
+                return SliverPadding(
+                  padding: AppPaddings.regularPadding(context),
+                  sliver: SliverList(
+                    key: GlobalKey(),
+                    delegate: SliverChildListDelegate(
+                      [
+                        Form(
+                          key: formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              /// Category
+                              Container(
+                                margin: EdgeInsets.only(
+                                  top: AppSizes.inputTopMargin(context),
+                                ),
+                                child: Observer(
+                                  builder: (_) {
+                                    return GestureDetector(
+                                      onTap: () {},
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          TextsBuilder.h4Bold(
+                                            AppLocalizations.of(context).translate(widget.generalConstants.categoryLabel)
                                           ),
-                                        ),
-                                      ],
+                                          GestureDetector(
+                                            onTap: () {
+                                              widget.editCategoryCallBack(context);
+                                            },
+                                            child: Container(
+                                              child: Row(
+                                                children: <Widget>[
+                                                  // class category
+                                                  _buildBadge(TextsBuilder.regularText(
+                                                      '${widget.store.categoryName}')),
+                                                  _buildBadge(TextsBuilder.regularText(
+                                                      '${widget.store.subCategoryName}')),
+
+                                                  Container(
+                                                    margin: EdgeInsets.only(left: 10),
+                                                    child: Icon(
+                                                      Icons.edit,
+                                                      color: AppColors.fontColor,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              margin: EdgeInsets.only(top: 10),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+
+                              /// Class Picture Preview
+                              Container(
+                                margin: EdgeInsets.only(
+                                  top: AppSizes.inputTopMargin(context),
+                                  bottom: 10,
+                                ),
+                                child: TextsBuilder.h4Bold(
+                                    AppLocalizations.of(context).translate(widget.generalConstants.pictureLabel)
+                                ),
+                              ),
+                              Observer(builder: (_) {
+                                if (widget.store.pictureUrl != null &&
+                                    imageFile == null) {
+                                  return GestureDetector(
+                                    onTap: () async {
+                                      File file = await PictureUtils().getImage(context);
+                                      if (file != null) {
+                                        setState(() {
+                                          imageFile = file;
+                                        });
+                                      }
+                                    },
+                                    child: Container(
+                                      child: Image(
+                                        image: CachedNetworkImageProvider(
+                                            widget.store.pictureUrl),
+                                      ),
                                     ),
                                   );
-                                },
-                              ),
-                            ),
-
-                            /// Class Picture Preview
-                            Container(
-                              margin: EdgeInsets.only(
-                                top: AppSizes.inputTopMargin(context),
-                                bottom: 10,
-                              ),
-                              child: TextsBuilder.h4Bold('Picture'),
-                            ),
-                            Observer(builder: (_) {
-                              if (widget.store.pictureUrl != null &&
-                                  imageFile == null) {
-                                return GestureDetector(
-                                  onTap: () async {
-                                    File file = await PictureUtils().getImage(context);
-                                    if (file != null) {
-                                      setState(() {
-                                        imageFile = file;
-                                      });
-                                    }
-                                  },
-                                  child: Container(
-                                    child: Image(
-                                      image: CachedNetworkImageProvider(
-                                          widget.store.pictureUrl),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return GestureDetector(
-                                  onTap: () async {
-                                    File file = await PictureUtils().getImage(context);
-                                    if (file != null) {
-                                      setState(() {
-                                        imageFile = file;
-                                      });
-                                    }
-                                  },
-                                  child: (imageFile == null)
-                                      ? DottedBorder(
-                                    borderType: BorderType.RRect,
-                                    dashPattern: [6, 6, 6, 6],
-                                    strokeWidth: 2.0,
-                                    color: AppColors.fontColor,
-                                    radius: Radius.circular(12),
-                                    padding: EdgeInsets.all(6),
-                                    child: ClipRRect(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        width: MediaQuery.of(context).size.width *
-                                            0.9,
-                                        padding: EdgeInsets.all(
-                                            MediaQuery.of(context).size.height /
-                                                10),
-                                        child: Icon(
-                                          FontAwesomeIcons.camera,
-                                          color: AppColors.bgGreyColor,
+                                } else {
+                                  return GestureDetector(
+                                    onTap: () async {
+                                      File file = await PictureUtils().getImage(context);
+                                      if (file != null) {
+                                        setState(() {
+                                          imageFile = file;
+                                        });
+                                      }
+                                    },
+                                    child: (imageFile == null)
+                                        ? DottedBorder(
+                                      borderType: BorderType.RRect,
+                                      dashPattern: [6, 6, 6, 6],
+                                      strokeWidth: 2.0,
+                                      color: AppColors.fontColor,
+                                      radius: Radius.circular(12),
+                                      padding: EdgeInsets.all(6),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(12)),
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          width: MediaQuery.of(context).size.width *
+                                              0.9,
+                                          padding: EdgeInsets.all(
+                                              MediaQuery.of(context).size.height /
+                                                  10),
+                                          child: Icon(
+                                            FontAwesomeIcons.camera,
+                                            color: AppColors.bgGreyColor,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                        : AspectRatio(
+                                      aspectRatio: 3 / 2,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.file(
+                                          imageFile,
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
                                     ),
-                                  )
-                                      : AspectRatio(
-                                    aspectRatio: 3 / 2,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.file(
-                                        imageFile,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }
-                            }),
+                                  );
+                                }
+                              }),
 
 
-                            /// Title
-                            _buildTextField('Title', 'Class Title', (value) {
-                              widget.store.setDesignation(value);
-                            }, designationController, false),
+                              /// Title
+                              _buildTextField(
+                                  AppLocalizations.of(context).translate(widget.screenConstants.classTitleLabel)
+              , AppLocalizations.of(context).translate(widget.screenConstants.classTitleHint), (value) {
+                                widget.store.setDesignation(value);
+                              }, designationController, false),
 
-                            /// Description
-                            _buildTextField('Description', 'Describe this class',
-                                    (value) {
-                                  widget.store.setDescription(value);
-                                }, descriptionController, true, maxChars: 255),
+                              /// Description
+                              _buildTextField(AppLocalizations.of(context).translate(widget.screenConstants.classDescriptionLabel),
+                                  AppLocalizations.of(context).translate(widget.screenConstants.classDescriptionHint),
+                                      (value) {
+                                    widget.store.setDescription(value);
+                                  }, descriptionController, true, maxChars: 255),
 
-                            /// Equipment
-                            _buildTextField('Equipment', 'Required equipment', (value) {
-                              widget.store.setGoals(value);
-                            }, goalsController, true, maxChars: 255),
+                              /// Equipment
+                              _buildTextField(
+                                  AppLocalizations.of(context).translate(widget.screenConstants.classEquipmentLabel)
+                              , AppLocalizations.of(context).translate(widget.screenConstants.classEquipmentHint), (value) {
+                                widget.store.setGoals(value);
+                              }, goalsController, true, maxChars: 255),
 
-                            /// Goals
-                            _buildTextField('Goals', 'What are this class goals',
-                                    (value) {
-                                  widget.store.setEquipment(value);
-                                }, equipmentController, true, maxChars: 255),
+                              /// Goals
+                              _buildTextField(
+                                  AppLocalizations.of(context).translate(widget.screenConstants.classGoalsLabel),
+                                  AppLocalizations.of(context).translate(widget.screenConstants.classGoalsHint),
+                                      (value) {
+                                    widget.store.setEquipment(value);
+                                  }, equipmentController, true, maxChars: 255),
 
-                            /// Burned Calories
-                            _buildTextField('Expected KCal loss', '30,9', (value) {
-                              if (value != null && (value as String).isNotEmpty)
-                                widget.store.setCalories(double.parse(value));
-                            }, caloriesController, false,
-                                inputFormat: TextInputType.number),
+                              /// Burned Calories
+                              _buildTextField(AppLocalizations.of(context).translate(widget.screenConstants.classCaloriesLabel),
+                                  AppLocalizations.of(context).translate(widget.screenConstants.classCaloriesHint), (value) {
+                                if (value != null && (value as String).isNotEmpty)
+                                  widget.store.setCalories(double.parse(value));
+                              }, caloriesController, false,
+                                  inputFormat: TextInputType.number),
 
-                            /// Duration
-                            Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  // label
-                                  _buildLabelContainer('Duration in minutes'),
+                              /// Duration
+                              Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    // label
+                                    _buildLabelContainer(
+                                        AppLocalizations.of(context).translate(widget.screenConstants.classDurationLabel)),
 
-                                  // options
-                                  Observer(builder: (_) {
-                                    return Container(
-                                      margin: EdgeInsets.only(top: 10),
-                                      child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: widget.store
-                                              .possibleDurations
-                                              .map((d) {
-                                            return Flexible(
-                                                flex: 5,
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    widget.store
-                                                        .setDuration(d);
-                                                  },
-                                                  child: Container(
-                                                    margin: EdgeInsets.only(
-                                                        left: 5, right: 5),
-                                                    padding: EdgeInsets.all(20),
-                                                    decoration: BoxDecoration(
-                                                      color: (widget.store
-                                                          .duration ==
-                                                          d)
-                                                          ? AppColors.regularGreen
-                                                          : AppColors.bgMainColor,
-                                                      border: Border.all(
-                                                          color: AppColors.regularGreen,
-                                                          width: 1.0),
-                                                      borderRadius: BorderRadius.all(
-                                                        Radius.circular(25),
+                                    // options
+                                    Observer(builder: (_) {
+                                      return Container(
+                                        margin: EdgeInsets.only(top: 10),
+                                        child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: widget.store
+                                                .possibleDurations
+                                                .map((d) {
+                                              return Flexible(
+                                                  flex: 5,
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      widget.store
+                                                          .setDuration(d);
+                                                    },
+                                                    child: Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 5, right: 5),
+                                                      padding: EdgeInsets.all(20),
+                                                      decoration: BoxDecoration(
+                                                        color: (widget.store
+                                                            .duration ==
+                                                            d)
+                                                            ? AppColors.regularGreen
+                                                            : AppColors.bgMainColor,
+                                                        border: Border.all(
+                                                            color: AppColors.regularGreen,
+                                                            width: 1.0),
+                                                        borderRadius: BorderRadius.all(
+                                                          Radius.circular(25),
+                                                        ),
                                                       ),
+                                                      child: TextsBuilder.h4Bold('$d'),
                                                     ),
-                                                    child: TextsBuilder.h4Bold('$d'),
-                                                  ),
-                                                ));
-                                          }).toList()),
-                                    );
-                                  })
-                                ],
+                                                  ));
+                                            }).toList()),
+                                      );
+                                    })
+                                  ],
+                                ),
                               ),
-                            ),
 
-                            /// Difficulty Level
-                            Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  // label
-                                  _buildLabelContainer('Difficulty Level'),
+                              /// Difficulty Level
+                              Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    // label
+                                    _buildLabelContainer(
+                                        AppLocalizations.of(context).translate(widget.screenConstants.classDifficultyLevelLabel)
+                                    ),
 
-                                  // options
-                                  Observer(builder: (_) {
-                                    return Container(
-                                      margin: EdgeInsets.only(top: 10),
-                                      child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: widget.store
-                                              .possibleDifficultyLevels
-                                              .map((l) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                widget.store
-                                                    .setDifficultyLevel(l.id);
-                                              },
-                                              child: Container(
-                                                margin: EdgeInsets.only(
-                                                    left: 5, right: 5, bottom: 10),
-                                                padding: EdgeInsets.all(20),
-                                                decoration: BoxDecoration(
-                                                  color: (widget.store
-                                                      .difficultyLevel !=
-                                                      null &&
-                                                      (widget.store
-                                                          .difficultyLevel ==
-                                                          l.id || widget.store
-                                                          .difficultyLevel > widget.store.possibleDifficultyLevels.length))
-                                                      ? AppColors.regularGreen
-                                                      : AppColors.bgMainColor,
-                                                  border: Border.all(
-                                                      color: AppColors.regularGreen,
-                                                      width: 1.0),
-                                                  borderRadius: BorderRadius.all(
-                                                    Radius.circular(25),
+                                    // options
+                                    Observer(builder: (_) {
+                                      return Container(
+                                        margin: EdgeInsets.only(top: 10),
+                                        child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: widget.store
+                                                .possibleDifficultyLevels
+                                                .map((l) {
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  widget.store
+                                                      .setDifficultyLevel(l.id);
+                                                },
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                      left: 5, right: 5, bottom: 10),
+                                                  padding: EdgeInsets.all(20),
+                                                  decoration: BoxDecoration(
+                                                    color: (widget.store
+                                                        .difficultyLevel !=
+                                                        null &&
+                                                        (widget.store
+                                                            .difficultyLevel ==
+                                                            l.id || widget.store
+                                                            .difficultyLevel > widget.store.possibleDifficultyLevels.length))
+                                                        ? AppColors.regularGreen
+                                                        : AppColors.bgMainColor,
+                                                    border: Border.all(
+                                                        color: AppColors.regularGreen,
+                                                        width: 1.0),
+                                                    borderRadius: BorderRadius.all(
+                                                      Radius.circular(25),
+                                                    ),
                                                   ),
+                                                  child: TextsBuilder.h4Bold(
+                                                      '${AppLocalizations.of(context).translate(l.designation)}'),
                                                 ),
-                                                child: TextsBuilder.h4Bold(
-                                                    '${AppLocalizations.of(context).translate(l.designation)}'),
-                                              ),
-                                            );
-                                          }).toList()),
-                                    );
-                                  })
-                                ],
+                                              );
+                                            }).toList()),
+                                      );
+                                    })
+                                  ],
+                                ),
                               ),
-                            ),
-                            
-                            Container(
-                              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FlatButton(
-                                  padding: EdgeInsets.all(15.0),
-                                  color: AppColors.bgGreyColor,
-                                  textColor: AppColors.regularRed,
-                                  onPressed: () {
-                                    _delete(context);
-                                  },
-                                  child: TextsBuilder.h4Bold("DELETE CLASS", color: AppColors.bgMainColor),
+
+                              Container(
+                                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      FlatButton(
+                                        padding: EdgeInsets.all(15.0),
+                                        color: AppColors.bgGreyColor,
+                                        textColor: AppColors.regularRed,
+                                        onPressed: () {
+                                          _delete(context);
+                                        },
+                                        child: TextsBuilder.h4Bold(
+                                            AppLocalizations.of(context).translate(widget.screenConstants.deleteClassButtonLabel)
+                                        , color: AppColors.bgMainColor),
+                                      )
+                                    ],
                                   )
-                                ],
-                              )
-                            ),
-                          ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               }

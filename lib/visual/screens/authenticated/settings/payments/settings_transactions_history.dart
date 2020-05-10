@@ -61,7 +61,7 @@ class _SettingsTransactionsHistoryScreenState
         bottom: TabBar(
           indicatorSize: TabBarIndicatorSize.tab,
           indicator: UnderlineTabIndicator(
-            borderSide: BorderSide(color: Colors.teal),
+            borderSide: BorderSide(color: AppColors.regularGreen),
           ),
           controller: controller,
           isScrollable: true,
@@ -74,7 +74,7 @@ class _SettingsTransactionsHistoryScreenState
                     width: MediaQuery.of(context).size.width / 2,
                     child: Text(
                         AppLocalizations.of(context).translate(screenConstants.currentMonth),
-                      style: TextStyle(color: Colors.teal),
+                      style: TextStyle(color: AppColors.regularGreen),
                     ),
                   );
                 },
@@ -88,7 +88,7 @@ class _SettingsTransactionsHistoryScreenState
                     width: MediaQuery.of(context).size.width / 2,
                     child: Text(
                       AppLocalizations.of(context).translate(screenConstants.all),
-                      style: TextStyle(color: Colors.teal),
+                      style: TextStyle(color: AppColors.regularGreen),
                     ),
                   );
                 },

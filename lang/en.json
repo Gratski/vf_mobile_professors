@@ -13,7 +13,11 @@
   "DATE_MONTH_11": "November",
   "DATE_MONTH_12": "December",
 
+  "GENERAL_CATEGORY_LABEL": "Category",
+  "GENERAL_PICTURE_LABEL": "Picture",
+  "GENERAL_ADD_LANGUAGE_BUTTON_LABEL": "Add Languages",
   "GENERAL_LANGUAGES_LABEL": "Languages",
+  "GENERAL_LANGUAGE_LABEL": "Language",
   "GENERAL_INTERNET_CONNECTION_ERROR": "Internet Error",
   "GENERAL_SELECT_FILE_SOURCE_LABEL": "Select File Source",
   "GENERAL_SELECT_FILE_SOURCE_SUB_LABEL": "From one of the options",
@@ -167,7 +171,7 @@
   "SETTINGS_PAYMENTS_SELECT_CURRENCY_TOP_HEADER": "Select your currency",
   "SETTINGS_PAYMENTS_SELECT_CURRENCY_SUB_TITLE": "This will not affect your current balance",
 
-  "SETTINGS_SUPPORT_TYPE_TOP_HEADER": "How can we help you?",
+  "SETTINGS_SUPPORT_TYPE_TOP_HEADER": "How can\nwe help you?",
   "SETTINGS_SUPPORT_TYPE_PAYMENTS_LABEL": "Payments",
   "SETTINGS_SUPPORT_TYPE_TOP_CLASSES_LABEL": "Classes",
   "SETTINGS_SUPPORT_TYPE_TOP_ACCOUNT_LABEL": "Account",
@@ -271,6 +275,25 @@
   "CREATE_CLASS_FINISH_SUCCESS_MESSAGE": "",
   "CREATE_CLASS_FINISH_FAILURE_MESSAGE": "",
   "CREATE_CLASS_ADD_FINISH_BUTTON_LABEL": "",
+  "CREATE_CLASS_WILL_BE_GIVEN_IN": "Select Class language",
+  "CREATE_CLASS_SELECT_LANGUAGE": "Select the language for your new class",
+
+  "CREATE_CLASS_CLASS_DETAILS_LABEL": "Class Details",
+  "CREATE_CLASS_CLASS_TITLE_LABEL": "Title",
+  "CREATE_CLASS_CLASS_TITLE_HINT": "Your class title",
+  "CREATE_CLASS_CLASS_DESCRIPTION_LABEL": "Description",
+  "CREATE_CLASS_CLASS_DESCRIPTION_HINT": "Describe your class",
+  "CREATE_CLASS_CLASS_EQUIPMENT_LABEL": "Equipment",
+  "CREATE_CLASS_CLASS_EQUIPMENT_HINT": "What is the required equipment",
+  "CREATE_CLASS_CLASS_GOALS_LABEL": "Goals",
+  "CREATE_CLASS_CLASS_GOALS_HINT": "Enter your class goals",
+  "CREATE_CLASS_CLASS_CALORIES_LABEL": "Expected KCal loss",
+  "CREATE_CLASS_CLASS_CALORIES_HINT": "330,8",
+  "CREATE_CLASS_CLASS_DURATION_LABEL": "Duration in minutes",
+  "CREATE_CLASS_CLASS_DIFFICULTY_LEVEL_LABEL": "Difficulty Level",
+  "CREATE_CLASS_CLASS_DELETE_BUTTON_LABEL": "Delete Class",
+
+
 
   "CLASS_CREATED_OR_UPDATED_TOP_HEADER": "Success!",
   "CLASS_CREATED_OR_UPDATED_SUB_TITLE_CREATED": "Your newly created class has been successfully created.\nIn order to maintain our quality standards our team will review it before it goes online.",
