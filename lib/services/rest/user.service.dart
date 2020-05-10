@@ -20,6 +20,7 @@ class UserService extends AbstractRestService {
     try {
       final rsp = await this.performJsonGet(context, "$REST_URL/auth/me");
       Map<String, dynamic> resultMap = decodeBody(rsp);
+      userStore.setId(resultMap["id"]);
       userStore.setFirstName(resultMap["firstName"]);
       userStore.setLastName(resultMap["lastName"]);
       userStore.setEmail(resultMap["email"]);

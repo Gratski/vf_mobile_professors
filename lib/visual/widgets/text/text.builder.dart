@@ -128,7 +128,7 @@ class TextsBuilder {
         color: Colors.grey[500]);
   }
 
-  static Text regularText(String text, {TextAlign alignment, Color color}) {
+  static Text regularText(String text, {TextAlign alignment, Color color, bool bold = false}) {
     TextAlign align = TextAlign.start;
     if (alignment != null) {
       align = alignment;
@@ -138,6 +138,7 @@ class TextsBuilder {
       textAlign: align,
       style: TextStyle(
         color: ( color != null ) ? color : AppColors.textRegularColor,
+          fontWeight: (bold) ? FontWeight.bold : FontWeight.normal,
           fontSize: _FONT_SIZE_REGULAR, fontFamily: _FONT_FAMILY_REGULAR),
     );
   }

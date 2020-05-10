@@ -2,6 +2,7 @@ class GeneralConstants {
 
   String get internetConnectionText => "GENERAL_INTERNET_CONNECTION_ERROR";
 
+  String get languagesLabel => "GENERAL_LANGUAGES_LABEL";
   String get selectFileSourceLabel => "GENERAL_SELECT_FILE_SOURCE_LABEL";
   String get selectFileSourceSubLabel => "GENERAL_SELECT_FILE_SOURCE_SUB_LABEL";
 

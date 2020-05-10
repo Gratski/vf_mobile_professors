@@ -61,7 +61,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                    Navigator.push(context, MaterialPageRoute(
                      builder: (context) => CreateOrEditClassScreen(
                        LanguageModel(
-                           widget.store.languageId, null),
+                           widget.store.languageId, null, null),
                        classId: widget.classId,
                      )
                    ));

@@ -77,7 +77,7 @@ class _EditProfileInLanguageScreenState extends State<EditProfileInLanguageScree
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ProfileScreen(false, false)),
+                                  builder: (context) => ProfileScreen(generalStore.existingLanguages.first.id, generalStore.existingLanguages.first.code, userStore.id)),
                             );
                           })
                       );

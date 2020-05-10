@@ -2,11 +2,49 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:professors/globals/global_vars.dart';
+import 'package:professors/models/category/category.model.dart';
+import 'package:professors/models/profile/profile_details.model.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
 import 'package:professors/services/rest/abstract_rest.service.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 
 class ProfileDetailsService extends AbstractRestService {
+
+  ///
+  /// Gets the professor complete profile for a given language
+  ///
+  Future<ProfileDetailsModel> getProfileDetails(BuildContext context, int professorId, int languageId) async {
+    try {
+      final rsp = await performJsonGet(context, '$REST_URL/professors/$professorId/$languageId');
+      Map<String, dynamic> mapResult = decodeBody(rsp);
+      return ProfileDetailsModel(
+        mapResult["id"],
+        mapResult["firstName"],
+        mapResult["lastName"],
+        mapResult["pictureUrl"],
+        mapResult["about"],
+        mapResult["quote"],
+        _extractCategoriesList(mapResult["teaches"])
+      );
+    } on ApiException catch(e) {
+      throw e;
+    } on Exception catch(e) {
+      throw ApiException("Something went wrong");
+    }
+  }
+
+  _extractCategoriesList(List<dynamic> list) {
+    List<CategoryModel> result = List.of([]);
+    list.forEach((elem) {
+      result.add(CategoryModel(
+        elem["id"],
+        elem["designation"],
+        elem["description"]
+      ));
+    });
+    return result;
+  }
+
   ///
   /// Gets a profile details for a given language
   ///

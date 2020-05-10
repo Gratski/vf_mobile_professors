@@ -204,7 +204,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => CreateOrEditClassScreen(
                             LanguageModel(
-                                classesStore.classes[index].languageId, null),
+                                classesStore.classes[index].languageId, null, null),
                             classId: classesStore.classes[index].id,
                           )));
                 })),

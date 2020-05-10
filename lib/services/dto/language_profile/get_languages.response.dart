@@ -12,7 +12,7 @@ class GetLanguagesResponse {
     List<LanguageModel> result = List.of([]);
     list.forEach(
       (elem) {
-        result.add(LanguageModel(elem["id"], elem["designation"]));
+        result.add(LanguageModel(elem["id"], elem["code"], elem["designation"]));
       },
     );
     return result;

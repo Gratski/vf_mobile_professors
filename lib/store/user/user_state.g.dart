@@ -26,6 +26,23 @@ mixin _$UserState on _UserState, Store {
     }, _$isLoadingAtom, name: '${_$isLoadingAtom.name}_set');
   }
 
+  final _$idAtom = Atom(name: '_UserState.id');
+
+  @override
+  int get id {
+    _$idAtom.context.enforceReadPolicy(_$idAtom);
+    _$idAtom.reportObserved();
+    return super.id;
+  }
+
+  @override
+  set id(int value) {
+    _$idAtom.context.conditionallyRunInAction(() {
+      super.id = value;
+      _$idAtom.reportChanged();
+    }, _$idAtom, name: '${_$idAtom.name}_set');
+  }
+
   final _$firstNameAtom = Atom(name: '_UserState.firstName');
 
   @override
@@ -186,6 +203,16 @@ mixin _$UserState on _UserState, Store {
     final _$actionInfo = _$_UserStateActionController.startAction();
     try {
       return super.setIsLoading(isLoading);
+    } finally {
+      _$_UserStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setId(int id) {
+    final _$actionInfo = _$_UserStateActionController.startAction();
+    try {
+      return super.setId(id);
     } finally {
       _$_UserStateActionController.endAction(_$actionInfo);
     }

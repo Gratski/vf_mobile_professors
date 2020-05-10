@@ -134,7 +134,7 @@ class SettingsScreen extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          ProfileScreen(true, false),
+                                          ProfileScreen(generalStore.existingLanguages.first.id, generalStore.existingLanguages.first.code, userStore.id),
                                     ),
                                   );
                                 },

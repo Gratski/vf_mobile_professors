@@ -13,6 +13,7 @@
   "DATE_MONTH_11": "November",
   "DATE_MONTH_12": "December",
 
+  "GENERAL_LANGUAGES_LABEL": "Languages",
   "GENERAL_INTERNET_CONNECTION_ERROR": "Internet Error",
   "GENERAL_SELECT_FILE_SOURCE_LABEL": "Select File Source",
   "GENERAL_SELECT_FILE_SOURCE_SUB_LABEL": "From one of the options",
@@ -273,5 +274,26 @@
   "CLASS_CREATED_OR_UPDATED_SUB_TITLE_UPDATED": "Class updated!",
   "CLASS_CREATED_OR_UPDATED_OK_BUTTON_LABEL": "OK",
   "CLASS_DELETED_TOP_HEADER": "Class deleted!",
-  "CLASS_DELETED_SUB_TITLE": "This class has been successfully deleted."
+  "CLASS_DELETED_SUB_TITLE": "This class has been successfully deleted.",
+
+  "PROFILE_SCREEN_ABOUT_PT": "Sobre",
+  "PROFILE_SCREEN_QUOTE_PT": "Quote",
+  "PROFILE_SCREEN_TEACHES_PT": "Dá Aulas de",
+  "PROFILE_SCREEN_COMMENTS_PT": "Comentários",
+  "PROFILE_SCREEN_NO_COMMENTS_PT": "Não existem comentários",
+  "PROFILE_SCREEN_ABOUT_EN": "About",
+  "PROFILE_SCREEN_QUOTE_EN": "Quote",
+  "PROFILE_SCREEN_TEACHES_EN": "Teaches",
+  "PROFILE_SCREEN_COMMENTS_EN": "Comments",
+  "PROFILE_SCREEN_NO_COMMENTS_EN": "Has no comments yet",
+  "PROFILE_SCREEN_ABOUT_ES": "Sobre",
+  "PROFILE_SCREEN_QUOTE_ES": "Quote",
+  "PROFILE_SCREEN_TEACHES_ES": "Ensina",
+  "PROFILE_SCREEN_COMMENTS_ES": "Comentarios",
+  "PROFILE_SCREEN_NO_COMMENTS_ES": "Sin comentários",
+  "PROFILE_SCREEN_ABOUT_FR": "About FR",
+  "PROFILE_SCREEN_QUOTE_FR": "Quote FR",
+  "PROFILE_SCREEN_TEACHES_FR": "Teaches FR",
+  "PROFILE_SCREEN_COMMENTS_FR": "Comments FR",
+  "PROFILE_SCREEN_NO_COMMENTS_FR": "Pas de Comentaires"
 }

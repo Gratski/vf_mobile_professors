@@ -31,7 +31,7 @@ class ProfessorAvatarWidget extends StatelessWidget {
 
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: IconsBuilder.startListBasedOnScore(3.5),
+            children: IconsBuilder.startListBasedOnScore(0),
           )
         ],
       ),

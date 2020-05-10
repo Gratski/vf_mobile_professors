@@ -18,6 +18,9 @@ abstract class _UserState with Store {
   bool isLoading = true;
 
   @observable
+  int id;
+
+  @observable
   String firstName = "Joao";
 
   @observable
@@ -47,6 +50,11 @@ abstract class _UserState with Store {
   @action
   setIsLoading(bool isLoading) {
     this.isLoading = isLoading;
+  }
+
+  @action
+  setId(int id) {
+    this.id = id;
   }
 
   @action
