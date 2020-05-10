@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/form_validation.constants.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/visual/screens/authenticated/profile/profile.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
@@ -13,24 +14,32 @@ import 'package:professors/visual/widgets/structural/header/custom_app_bar.widge
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class EditProfileInLanguageScreen extends StatefulWidget {
-
+  FormValidationConstants formConstants = FormValidationConstants();
   GeneralConstants generalConstants = GeneralConstants();
 
+  final _formKey = GlobalKey<FormState>();
+
+  BuildContext context;
   int languageId;
+  bool autoValidate = false;
+
   EditProfileInLanguageScreen(this.languageId);
 
   @override
-  _EditProfileInLanguageScreenState createState() => _EditProfileInLanguageScreenState();
+  _EditProfileInLanguageScreenState createState() =>
+      _EditProfileInLanguageScreenState();
 }
 
-class _EditProfileInLanguageScreenState extends State<EditProfileInLanguageScreen> with AfterInitMixin<EditProfileInLanguageScreen> {
-
+class _EditProfileInLanguageScreenState
+    extends State<EditProfileInLanguageScreen>
+    with AfterInitMixin<EditProfileInLanguageScreen> {
   TextEditingController designationController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController quoteController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    widget.context = context;
     double sectionTopMargin = MediaQuery.of(context).size.height / 20;
     return Scaffold(
       body: NestedScrollView(
@@ -40,40 +49,20 @@ class _EditProfileInLanguageScreenState extends State<EditProfileInLanguageScree
               [
                 Observer(
                   builder: (_) {
-
-                    if ( profileDetailsStore.id != null ) {
+                    if (profileDetailsStore.id != null) {
                       return Container(
                           margin: EdgeInsets.only(),
                           child: ButtonsBuilder.transparentButton(
-                          AppLocalizations.of(context).translate(widget.generalConstants.buttonSaveLabel).toUpperCase(), () {
+                              AppLocalizations.of(context)
+                                  .translate(
+                                      widget.generalConstants.buttonSaveLabel)
+                                  .toUpperCase(), () {
                             if (_isCreatingProfile()) {
-
-                              restServices.getProfileDetailsService().createProfileDetails(
-                                  context, widget.languageId,
-                                  designationController.text,
-                                  descriptionController.text,
-                                  quoteController.text).then((_){
-                                restServices.getProfileDetailsService().getProfileDetailsByLanguageId(
-                                    context, widget.languageId);
-                              });
-
+                              createProfile();
                             } else {
-
-                              restServices.getProfileDetailsService().updateProfileDetails(context,
-                                  profileDetailsStore.id, designationController.text,
-                                  descriptionController.text, quoteController.text)
-                                  .then((_) {
-                                restServices.getLanguageProfileService().getAvailableProfileLanguages(context);
-                                restServices.getLanguageProfileService().getExistingProfileLanguages(context);
-                                restServices.getProfileDetailsService().getProfileDetailsByLanguageId(
-                                    context, widget.languageId).then((_) {
-                                  _updateState();
-                                });
-                              });
-
+                              updateProfile();
                             }
-                          })
-                      );
+                          }));
                     } else {
                       return Text('');
                     }
@@ -83,97 +72,119 @@ class _EditProfileInLanguageScreenState extends State<EditProfileInLanguageScree
             ),
           ];
         },
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              child: CustomScrollView(
-                slivers: <Widget>[
-                  /// Avatar
-                  SliverToBoxAdapter(
-                    child: Container(
-                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 30),
-                      padding: AppPaddings.regularPadding(context),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Observer(
-                              builder: (_) {
-                                return ProfessorAvatarWidget('${userStore.firstName} ${userStore.lastName}',
-                                  userStore.pictureUrl, textColor: AppColors.fontColor,);
-                              }
+        body: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(new FocusNode());
+          },
+          child: Form(
+            key: widget._formKey,
+            autovalidate: widget.autoValidate,
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: CustomScrollView(
+                    slivers: <Widget>[
+                      /// Avatar
+                      SliverToBoxAdapter(
+                        child: Container(
+                          margin: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height / 30),
+                          padding: AppPaddings.regularPadding(context),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Observer(builder: (_) {
+                                return ProfessorAvatarWidget(
+                                  '${userStore.firstName} ${userStore.lastName}',
+                                  userStore.pictureUrl,
+                                  textColor: AppColors.fontColor,
+                                );
+                              }),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
 
-                  /// DETAILS
-                  SliverToBoxAdapter(
-                    child: Container(
-                      margin: EdgeInsets.only(
-                        top: sectionTopMargin,
-                      ),
-                      child: Form(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            /// ABOUT
-                            Container(
-                              padding: AppPaddings.regularPadding(context),
-                              margin: EdgeInsets.only(top: sectionTopMargin / 4),
-                              child: TextsBuilder.h4Bold('About',),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: sectionTopMargin / 2),
-                              padding: AppPaddings.regularPadding(context),
-                              child: TextFormField(
-                                controller: descriptionController,
-                                style: TextStyle(color: AppColors.fontColor),
-                                decoration: InputDecoration(
-                                  fillColor: AppColors.bgInputColor,
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide(
-                                          width: 2.0, color: Colors.grey[300]
-                                      )
+                      /// DETAILS
+                      SliverToBoxAdapter(
+                        child: Container(
+                          margin: EdgeInsets.only(
+                            top: sectionTopMargin,
+                          ),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                /// ABOUT
+                                Container(
+                                  padding: AppPaddings.regularPadding(context),
+                                  margin: EdgeInsets.only(
+                                      top: sectionTopMargin / 4),
+                                  child: TextsBuilder.h4Bold(
+                                    'About',
                                   ),
                                 ),
-                                keyboardType: TextInputType.multiline,
-                                maxLines: 8,
-                                maxLength: 255,
-                              ),
-                            ),
-
-                            /// QUOTE
-                            Container(
-                              padding: AppPaddings.regularPadding(context),
-                              margin: EdgeInsets.only(top: sectionTopMargin / 4),
-                              child: TextsBuilder.h4Bold('Quote',),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: sectionTopMargin / 2, bottom: sectionTopMargin * 2),
-                              padding: AppPaddings.regularWithBottomPadding(context),
-                              child: TextFormField(
-                                controller: quoteController,
-                                style: TextStyle(color: AppColors.fontColor),
-                                decoration: InputDecoration(
-                                  fillColor: AppColors.bgInputColor,
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide(
-                                          width: 2.0, color: Colors.grey[300]
-                                      )
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      top: sectionTopMargin / 2),
+                                  padding: AppPaddings.regularPadding(context),
+                                  child: TextFormField(
+                                    validator: _aboutValidator,
+                                    controller: descriptionController,
+                                    style:
+                                        TextStyle(color: AppColors.fontColor),
+                                    decoration: InputDecoration(
+                                      fillColor: AppColors.bgInputColor,
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: BorderSide(
+                                              width: 2.0,
+                                              color: Colors.grey[300])),
+                                    ),
+                                    keyboardType: TextInputType.multiline,
+                                    maxLines: 8,
+                                    maxLength: 250,
                                   ),
                                 ),
-                                keyboardType: TextInputType.multiline,
-                                maxLines: 8,
-                                maxLength: 255,
-                              ),
-                            ),
 
-                            /*
+                                /// QUOTE
+                                Container(
+                                  padding: AppPaddings.regularPadding(context),
+                                  margin: EdgeInsets.only(
+                                      top: sectionTopMargin / 4),
+                                  child: TextsBuilder.h4Bold(
+                                    'Quote',
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      top: sectionTopMargin / 2,
+                                      bottom: sectionTopMargin * 2),
+                                  padding: AppPaddings.regularWithBottomPadding(
+                                      context),
+                                  child: TextFormField(
+                                    validator: _quoteValidator,
+                                    controller: quoteController,
+                                    style:
+                                        TextStyle(color: AppColors.fontColor),
+                                    decoration: InputDecoration(
+                                      fillColor: AppColors.bgInputColor,
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: BorderSide(
+                                              width: 2.0,
+                                              color: Colors.grey[300])),
+                                    ),
+                                    keyboardType: TextInputType.multiline,
+                                    maxLines: 8,
+                                    maxLength: 25,
+                                  ),
+                                ),
+
+                                /*
                             Container(
                                 alignment: Alignment.center,
                                 padding: AppPaddings.regularPadding(context),
@@ -185,28 +196,104 @@ class _EditProfileInLanguageScreenState extends State<EditProfileInLanguageScree
                             ),
 
                              */
-                          ],
+                              ],
+
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
   }
 
+  createProfile() {
+    if (!widget._formKey.currentState.validate()) {
+      return;
+    }
+
+    restServices
+        .getProfileDetailsService()
+        .createProfileDetails(
+            context,
+            widget.languageId,
+            designationController.text,
+            descriptionController.text,
+            quoteController.text)
+        .then((_) {
+      restServices
+          .getProfileDetailsService()
+          .getProfileDetailsByLanguageId(context, widget.languageId);
+    });
+  }
+  updateProfile() {
+    if (!widget._formKey.currentState.validate()) {
+      return;
+    }
+
+    restServices
+        .getProfileDetailsService()
+        .updateProfileDetails(
+            context,
+            profileDetailsStore.id,
+            designationController.text,
+            descriptionController.text,
+            quoteController.text)
+        .then((_) {
+      restServices
+          .getLanguageProfileService()
+          .getAvailableProfileLanguages(context);
+      restServices
+          .getLanguageProfileService()
+          .getExistingProfileLanguages(context);
+      restServices
+          .getProfileDetailsService()
+          .getProfileDetailsByLanguageId(context, widget.languageId)
+          .then((_) {
+        _updateState();
+      });
+    });
+  }
+
+  String _aboutValidator(String value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context)
+          .translate(widget.formConstants.aboutIsRequired);
+    } else if (value.length > 250) {
+      return AppLocalizations.of(context)
+          .translate(widget.formConstants.maxLengthAsBeenExceeded);
+    } else {
+      return null;
+    }
+  }
+
+  String _quoteValidator(String value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context)
+          .translate(widget.formConstants.quoteIsRequired);
+    } else if (value.length > 250) {
+      return AppLocalizations.of(context)
+          .translate(widget.formConstants.maxLengthAsBeenExceeded);
+    } else {
+      return null;
+    }
+  }
+
   @override
   void didInitState() {
-    if ( profileDetailsStore.id != null ) {
-      restServices.getProfileDetailsService().getProfileDetailsByLanguageId(context, profileDetailsStore.id)
+    if (profileDetailsStore.id != null) {
+      restServices
+          .getProfileDetailsService()
+          .getProfileDetailsByLanguageId(context, profileDetailsStore.id)
           .then((_) {
-             setState(() {
-               _updateState();
-             });
+        setState(() {
+          _updateState();
+        });
       });
     } else {
       profileDetailsStore.setIsLoading(false);
