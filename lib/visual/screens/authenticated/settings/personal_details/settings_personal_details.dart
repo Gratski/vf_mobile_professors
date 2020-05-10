@@ -188,7 +188,15 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                                       DateTime newBirthday =
                                       await showRoundedDatePicker(
                                         context: context,
-                                        theme: ThemeData.dark(),
+                                        theme: ThemeData.dark().copyWith(
+                                          accentColor: AppColors.regularRed,
+                                          primaryColor: AppColors.bgMainColor,
+                                          backgroundColor: AppColors.bgMainColor,
+                                          dialogBackgroundColor: AppColors.bgMainColor,
+                                          accentTextTheme: TextTheme(
+                                            body2 : TextStyle(color: AppColors.fontColor),
+                                          ),
+                                        ),
                                         initialDate: screenStore.birthday,
                                         firstDate: DateTime.now()
                                             .subtract(new Duration(days: (365 * 70))),
@@ -254,7 +262,7 @@ class SettingsPersonalDetailsScreen extends StatelessWidget {
                         Container(
                           padding: AppPaddings.regularPadding(context),
                           margin:
-                          EdgeInsets.only(top: AppSizes.inputTopMargin(context), bottom: AppSizes.inputTopMargin(context) * 2),
+                          EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
                           child: Observer(
                             builder: (_) {
                               return GestureDetector(
