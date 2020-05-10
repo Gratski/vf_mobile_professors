@@ -18,7 +18,7 @@ class TextsBuilder {
   static double _FONT_SIZE_H3 = 24.0;
   static double _FONT_SIZE_H4 = 20.0;
   static double _FONT_SIZE_H5 = 13.0;
-  static double _FONT_SIZE_REGULAR = 15.0;
+  static double _FONT_SIZE_REGULAR = 16.0;
   static double _FONT_SMALL = 11.0;
 
   /// List Item Text

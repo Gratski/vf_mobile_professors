@@ -7,7 +7,7 @@ class AppColors {
   static Color get fontColor => Colors.white;
   static Color get regularGreen => Color.fromRGBO(30, 215, 97, 1);
   static Color get lightGreen => Color.fromRGBO(30, 215, 97, 1);
-  static Color get regularRed => Color.fromRGBO(254, 0, 47, 1);
+  static Color get regularRed => Color.fromRGBO(248, 0, 12, 1);
 
   /// INPUT
   static Color get textInputBorder => Colors.grey[500];

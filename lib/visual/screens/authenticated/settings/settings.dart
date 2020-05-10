@@ -18,7 +18,6 @@ import 'package:professors/visual/screens/authenticated/settings/profile/setting
 import 'package:professors/visual/screens/authenticated/settings/security/security_definitions.dart';
 import 'package:professors/visual/screens/authenticated/settings/support/support_type.dart';
 import 'package:professors/visual/styles/colors.dart';
-import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/visual/widgets/structural/lists/regular_list_tile.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
@@ -38,18 +37,14 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              leading: Text(''),
-              backgroundColor: AppColors.bgMainColor,
-              elevation: 0.0,
-              floating: false,
-              pinned: false,
-              expandedHeight: MediaQuery.of(context).size.height / 4.5,
-              flexibleSpace: Center(
+      body: CustomScrollView(
+          slivers: <Widget>[
+
+
+            SliverToBoxAdapter(
+              child: Center(
                 child: Container(
+                  height: MediaQuery.of(context).size.height / 3,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("assets/images/classes_bg.png"),
@@ -57,7 +52,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     border: Border(
                       bottom: BorderSide(
-                          width: 1, color: AppColors.textInputBorder),
+                          width: 0.5, color: AppColors.textInputBorder),
                     ),
                   ),
                   padding: EdgeInsets.only(bottom: 5),
@@ -65,50 +60,55 @@ class SettingsScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Flexible(
-                        flex: 5,
-                        child: Observer(
-                          builder: (_) {
-                            return GestureDetector(
-                              onTap: () async {
-                                File file;
-                                if (Theme.of(context).platform ==
-                                    TargetPlatform.android) {
-                                  file = await FilePicker.getFile(
-                                    type: FileType.custom,
-                                    allowedExtensions: ['jpg', 'png', 'jpeg'],
-                                  );
-                                } else if (Theme.of(context).platform ==
-                                    TargetPlatform.iOS) {
-                                  file = await getImage(ImageSource.gallery);
-                                }
+                          flex: 5,
+                          child: Observer(
+                            builder: (_) {
+                              return GestureDetector(
+                                onTap: () async {
+                                  File file;
+                                  if (Theme.of(context).platform ==
+                                      TargetPlatform.android) {
+                                    file = await FilePicker.getFile(
+                                      type: FileType.custom,
+                                      allowedExtensions: ['jpg', 'png', 'jpeg'],
+                                    );
+                                  } else if (Theme.of(context).platform ==
+                                      TargetPlatform.iOS) {
+                                    file = await getImage(ImageSource.gallery);
+                                  }
 
-                                // check if the file as been set
-                                if ( file != null ) {
-                                  print("sending file");
-                                  restServices.getUserService().changeProfilePicture(context, file)
-                                  .then((value) {
-                                  })
-                                  .catchError((e) {
-                                    ToasterBuilder.buildErrorToaster(context, e.cause);
-                                  });
-                                }
+                                  // check if the file as been set
+                                  if ( file != null ) {
+                                    restServices.getUserService().changeProfilePicture(context, file)
+                                        .then((value) {
+                                    })
+                                        .catchError((e) {
+                                      ToasterBuilder.buildErrorToaster(context, e.cause);
+                                    });
+                                  }
 
-                              },
-                              child: CircleAvatar(
-                                backgroundColor: AppColors.bgMainColor,
-                                maxRadius: MediaQuery.of(context).size.width * 0.15,
-                                backgroundImage: userStore.pictureUrl != null ? CachedNetworkImageProvider(
-                                    userStore.pictureUrl
-                                ) : AssetImage(
-                                    'assets/images/logo.png'
-                                )
-                            ),
-                            );
-                          },
-                        )
+                                },
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.width / 2.7,
+                                    width: MediaQuery.of(context).size.width / 2.7,
+                                    child: CircleAvatar(
+                                      maxRadius: 90,
+                                        backgroundImage: userStore.pictureUrl != null ? CachedNetworkImageProvider(
+                                            userStore.pictureUrl
+                                        ) : AssetImage(
+                                            'assets/images/logo.png'
+                                        )
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          )
                       ),
-                      Expanded(
-                        flex: 7,
+                      Flexible(
+                        flex: 5,
                         child: Container(
                           margin: EdgeInsets.only(
                               left: MediaQuery.of(context).size.width * 0.05),
@@ -132,9 +132,12 @@ class SettingsScreen extends StatelessWidget {
                               /// RATE
                               Flexible(
                                 flex: 3,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: IconsBuilder.startListBasedOnScore(0.0),
+                                child: Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: IconsBuilder.startListBasedOnScore(0.0),
+                                  ),
                                 ),
                               ),
 
@@ -156,7 +159,7 @@ class SettingsScreen extends StatelessWidget {
                                     child: TextsBuilder.regularText(
                                       AppLocalizations.of(context).translate(
                                           TRANSLATIONS
-                                              .SettingsConstants.VIEW_PROFILE),
+                                              .SettingsConstants.VIEW_PROFILE).toUpperCase(), color: AppColors.regularRed
                                     ),
                                   ),
                                 ),
@@ -170,10 +173,6 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ];
-        },
-        body: CustomScrollView(
-          slivers: <Widget>[
 
             /// EDIT PERSONAL DETAILS
             SliverToBoxAdapter(
@@ -322,7 +321,7 @@ class SettingsScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
     );
+
   }
 }

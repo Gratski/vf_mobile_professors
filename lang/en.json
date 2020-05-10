@@ -79,10 +79,10 @@
   "DASHBOARD_THIS_MONTH": "This Month",
 
   "SETTINGS_VIEW_PROFILE": "View Profile",
-  "SETTINGS_EDIT_PROFILE": "Edit Profile",
-  "SETTINGS_EDIT_PROFILE_HINT": "Edit in different languages",
+  "SETTINGS_EDIT_PROFILE": "Public Profile",
+  "SETTINGS_EDIT_PROFILE_HINT": "Create or Edit in different languages",
   "SETTINGS_PERSONAL_DETAILS": "Personal Details",
-  "SETTINGS_PERSONAL_DETAILS_HINT": "Account Configurations",
+  "SETTINGS_PERSONAL_DETAILS_HINT": "Edit your personal information",
   "SETTINGS_NOTIFICATIONS": "Notifications",
   "SETTINGS_PRIVACY_DEFINITIONS": "Security Definitions",
   "SETTINGS_PAYMENTS": "Wallet",
