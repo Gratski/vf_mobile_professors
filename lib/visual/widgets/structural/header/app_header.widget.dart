@@ -41,7 +41,7 @@ class AppHeaderWidget extends StatelessWidget {
                   text: TextSpan(
                     style: TextStyle(color: Colors.black),
                     children: <TextSpan>[
-                      (!isSubTitleSmall) ? TextsBuilder.regularSpan(subTitle) : TextsBuilder.regularSpan(subTitle),
+                      (!isSubTitleSmall) ? TextsBuilder.subTitleSpan(subTitle) : TextsBuilder.subTitleSpan(subTitle),
                     ],
                   ),
                 ),
