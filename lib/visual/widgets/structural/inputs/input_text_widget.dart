@@ -6,8 +6,10 @@ class InputTextWidget extends StatelessWidget {
   final String hint;
   final String label;
   final TextEditingController controller;
+  final Function validator;
+  final obscureText;
 
-  InputTextWidget(this.label, this.controller, {this.hint});
+  InputTextWidget(this.label, this.controller, {this.hint, this.validator, this.obscureText = false});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,8 @@ class InputTextWidget extends StatelessWidget {
         children: <Widget>[
           TextsBuilder.textHint(label),
           TextFormField(
+            validator: (validator != null) ? this.validator : (value) => null,
+            obscureText: this.obscureText,
             key: Key('input_firstname'),
             controller: controller,
             decoration: InputDecoration(border: InputBorder.none, hintText: hint),

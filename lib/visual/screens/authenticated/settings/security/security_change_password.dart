@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/form_validation.constants.dart';
 import 'package:professors/localization/constants/settings/security/settings_security_constants.dart';
 import 'package:professors/store/security/change_password_state.dart';
+import 'package:professors/utils/form.utils.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
@@ -13,6 +15,9 @@ import 'package:professors/visual/widgets/structural/lists/list_tile_model.dart'
 
 /// Screen where a list of security definitions is presented
 class ChangePasswordScreen extends StatefulWidget {
+  final formConstants = FormValidationConstants();
+  final _formKey = GlobalKey<FormState>();
+
   @override
   _ChangePasswordScreenState createState() => _ChangePasswordScreenState();
 }
@@ -27,7 +32,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   /// controllers
   final TextEditingController oldPasswordController = TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
-  final TextEditingController newPasswordRepeatController = TextEditingController();
+  final TextEditingController newPasswordRepeatController =
+      TextEditingController();
 
   List<ListTileModel> listItems;
 
@@ -49,79 +55,115 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-
           CustomAppBar([]),
           AppHeaderWidget(AppLocalizations.of(context)
               .translate(screenConstants.changePasswordTopHeader)),
+          SliverToBoxAdapter(
+            child: Container(
+              padding: AppPaddings.regularPadding(context).copyWith(top: 10),
+              child: Form(
+                key: widget._formKey,
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: <Widget>[
+                    /// Old Password
+                    InputTextWidget(
+                        AppLocalizations.of(context)
+                            .translate(screenConstants.changePasswordOldLabel)
+                            .toUpperCase(),
+                        oldPasswordController, validator: _validateCurrentPassword, obscureText: true,),
 
-                SliverToBoxAdapter(
-                  child: Container(
-                    padding: AppPaddings.regularPadding(context).copyWith(top: 10),
-                    child: Form(
-                      child: ListView(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: <Widget>[
-                          /// Old Password
-                          InputTextWidget(AppLocalizations.of(context)
-                              .translate(screenConstants.changePasswordOldLabel).toUpperCase(), oldPasswordController),
+                    /// New Password
+                    InputTextWidget(
+                        AppLocalizations.of(context)
+                            .translate(screenConstants.changePasswordNewLabel)
+                            .toUpperCase(),
+                        newPasswordController, validator:_validateNewPassword, obscureText: true),
 
-                          /// New Password
-                          InputTextWidget(AppLocalizations.of(context)
-                              .translate(screenConstants.changePasswordNewLabel).toUpperCase(), newPasswordController),
+                    /// New Password Repeat
+                    InputTextWidget(
+                        AppLocalizations.of(context)
+                            .translate(
+                                screenConstants.changePasswordNewRepeatLabel)
+                            .toUpperCase(),
+                        newPasswordRepeatController, validator: _validateRepeatNewPassword, obscureText: true),
 
-                          /// New Password Repeat
-                          InputTextWidget(AppLocalizations.of(context).translate(
-                              screenConstants.changePasswordNewRepeatLabel).toUpperCase(), newPasswordRepeatController),
-
-                          /// Change Button
-                          Container(
-                            margin: EdgeInsets.only(top: 10),
-                            child: ButtonsBuilder.redFlatButton(
-                              AppLocalizations.of(context)
-                                  .translate(screenConstants.changePasswordButtonLabel),
-                                  () {
-                                store.setIsLoading(true);
-                                restServices.getSecurityService().changePassword(
-                                    context,
-                                    oldPasswordController.text,
-                                    newPasswordController.text).then((_){
-                                  ToasterBuilder.buildSuccessToaster(context, AppLocalizations.of(context).translate(screenConstants.confirmationText));
-                                  setState(() {
-                                    oldPasswordController.text = "";
-                                    newPasswordController.text = "";
-                                    newPasswordRepeatController.text = "";
-                                  });
-                                }).catchError((e) {
-                                  ToasterBuilder.buildErrorToaster(context, e.cause);
-                                }).whenComplete((){
-                                  store.setIsLoading(false);
-                                });
-                              },
-                            ),
-                          ),
-                        ],
+                    /// Change Button
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
+                      child: ButtonsBuilder.redFlatButton(
+                        AppLocalizations.of(context).translate(
+                            screenConstants.changePasswordButtonLabel),
+                        () {
+                          _changePassword();
+                        },
                       ),
                     ),
-                  ),
+                  ],
                 ),
-
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
   _changePassword() {
-    restServices.getSecurityService().changePassword(context,
-        oldPasswordController.text,
-        newPasswordController.text).then((value) {
-          ToasterBuilder.buildSuccessToaster(context, AppLocalizations.of(context).translate(screenConstants.confirmationText));
-          setState(() {
-            oldPasswordController.text = "";
-            newPasswordController.text = "";
-          });
+    if (!widget._formKey.currentState.validate()) {
+      return;
+    }
+
+    store.setIsLoading(true);
+    restServices
+        .getSecurityService()
+        .changePassword(
+            context, oldPasswordController.text, newPasswordController.text)
+        .then((_) {
+      ToasterBuilder.buildSuccessToaster(
+          context,
+          AppLocalizations.of(context)
+              .translate(screenConstants.confirmationText));
+      setState(() {
+        oldPasswordController.text = "";
+        newPasswordController.text = "";
+        newPasswordRepeatController.text = "";
+      });
     }).catchError((e) {
       ToasterBuilder.buildErrorToaster(context, e.cause);
+    }).whenComplete(() {
+      store.setIsLoading(false);
     });
+  }
+
+  String _validateCurrentPassword(String value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context)
+          .translate(widget.formConstants.currentPasswordIsRequired);
+    }
+    return null;
+  }
+
+  String _validateNewPassword(String value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context)
+          .translate(widget.formConstants.newPasswordIsRequired);
+    } else if (!FormUtils().validatePasswordStrength(value)) {
+      return AppLocalizations.of(context)
+          .translate(widget.formConstants.passwordIsTooWeak);
+    }
+    return null;
+  }
+
+  String _validateRepeatNewPassword(String value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context)
+          .translate(widget.formConstants.newPasswordRepeatIsRequired);
+    } else if (newPasswordController.text != newPasswordRepeatController.text) {
+      return AppLocalizations.of(context)
+          .translate(widget.formConstants.passwordsDontMatch);
+    }
+    return null;
   }
 }
