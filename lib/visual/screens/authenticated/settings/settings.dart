@@ -107,7 +107,7 @@ class SettingsScreen extends StatelessWidget {
                           },
                         )
                       ),
-                      Flexible(
+                      Expanded(
                         flex: 7,
                         child: Container(
                           margin: EdgeInsets.only(
@@ -116,37 +116,51 @@ class SettingsScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Observer(
-                               builder: (_) {
-                                 return TextsBuilder.h3Bold(
-                                  "${userStore.firstName} ${userStore.lastName}",
-                                 );
-                               },
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children:
-                                    IconsBuilder.startListBasedOnScore(4.0),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          ProfileScreen(generalStore.existingLanguages.first.id, generalStore.existingLanguages.first.code, userStore.id),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.only(top: 15),
-                                  child: TextsBuilder.regularText(
-                                    AppLocalizations.of(context).translate(
-                                        TRANSLATIONS
-                                            .SettingsConstants.VIEW_PROFILE),
-                                  ),
+
+                              /// USERNAME
+                              Flexible(
+                                flex: 3,
+                                child: Observer(
+                                  builder: (_) {
+                                    return TextsBuilder.h3Bold(
+                                      "${userStore.firstName} ${userStore.lastName}",
+                                    );
+                                  },
                                 ),
                               ),
+
+                              /// RATE
+                              Flexible(
+                                flex: 3,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: IconsBuilder.startListBasedOnScore(0.0),
+                                ),
+                              ),
+
+                              /// VIEW PROFILE
+                              Flexible(
+                                flex: 3,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProfileScreen(generalStore.existingLanguages.first.id, generalStore.existingLanguages.first.code, userStore.id),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.only(top: 15),
+                                    child: TextsBuilder.regularText(
+                                      AppLocalizations.of(context).translate(
+                                          TRANSLATIONS
+                                              .SettingsConstants.VIEW_PROFILE),
+                                    ),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         ),
@@ -160,6 +174,8 @@ class SettingsScreen extends StatelessWidget {
         },
         body: CustomScrollView(
           slivers: <Widget>[
+
+            /// EDIT PERSONAL DETAILS
             SliverToBoxAdapter(
               child: Container(
                 margin: EdgeInsets.only(
@@ -181,6 +197,7 @@ class SettingsScreen extends StatelessWidget {
               ),
             ),
 
+            /// EDIT LANGUAGE PROFILE
             SliverToBoxAdapter(
               child: RegularListTile(
                 label: AppLocalizations.of(context)
@@ -228,6 +245,7 @@ class SettingsScreen extends StatelessWidget {
               ),
             ),
 
+            /// PAYMENTS
             SliverToBoxAdapter(
               child: RegularListTile(
                 label: AppLocalizations.of(context)
