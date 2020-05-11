@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:professors/globals/global_vars.dart';
+import 'package:professors/localization/constants/form_validation.constants.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AbstractAuthScreen extends StatelessWidget {
+
+  FormValidationConstants formConstants = FormValidationConstants();
 
   getSlivers(BuildContext context);
   getHideBackButton();
