@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:after_init/after_init.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -184,18 +185,18 @@ class _ClassesScreenState extends State<ClassesScreen>
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: AppColors.bgMainLightColor)
+          //border: Border.all(color: AppColors.bgGreyColor)
         ),
         margin:
             EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.03),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(23),
+          borderRadius: BorderRadius.circular(15),
           child: Column(
             children: [
               // top bar
               Container(
                 padding: EdgeInsets.all(8),
-                color: AppColors.bgMainColor,
+                color: AppColors.bgGreyColor,
                 child: Row(
                   children: [
                     Expanded(
@@ -208,7 +209,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                           ),
                           Container(
                             margin: EdgeInsets.only(top: 5),
-                            child: TextsBuilder.textSmall(ClassesUtils().getDifficultyLevelText(context, classesStore.classes[index].difficultyLevel).toUpperCase(), color: AppColors.fontColor),
+                            child: TextsBuilder.textSmall(ClassesUtils().getDifficultyLevelText(context, classesStore.classes[index].difficultyLevel).toUpperCase(), color: AppColors.bgMainColor),
                           ),
                         ],
                       ),
@@ -218,7 +219,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          TextsBuilder.h4Bold("4.5"),
+                          TextsBuilder.h4Bold("4.5", color: AppColors.bgMainColor),
                           Icon(Icons.star, color: AppColors.regularRed,),
                         ],
                       )
@@ -229,26 +230,38 @@ class _ClassesScreenState extends State<ClassesScreen>
 
               // picture
               Container(
-                child: AspectRatio(
-                  aspectRatio: 3 / 2,
-                  child: (classesStore.classes[index].pictureUrl != null)
-                      ? Image.network(
-                    classesStore.classes[index].pictureUrl,
-                    fit: BoxFit.cover,
-                  )
-                      : Container(),
+                child: Stack(
+                  children: [
+                    AspectRatio(
+                      aspectRatio: 3 / 2,
+                      child: (classesStore.classes[index].pictureUrl != null)
+                          ? CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: classesStore.classes[index].pictureUrl,
+                        placeholder: (context, value)=> DefaultLoaderWidget(),
+                      )
+                          : Container(),
+                    ),
+
+                    Positioned(
+                      bottom: 10,
+                      left: 10,
+                      child: ClassesUtils().getChipByStatus(
+                          context, classesStore.classes[index].status),
+                    ),
+                  ],
                 ),
               ),
 
               // bottom bar
               Container(
                 padding: EdgeInsets.all(8),
-                color: AppColors.bgMainColor,
+                color: AppColors.bgGreyColor,
                 child: Row(
                   children: [
                     Expanded(
                       flex: 8,
-                      child: TextsBuilder.h4Bold(classesStore.classes[index].designation)
+                      child: TextsBuilder.h4Bold(classesStore.classes[index].designation, color: AppColors.bgMainColor)
                     ),
                     Flexible(
                         flex: 2,
