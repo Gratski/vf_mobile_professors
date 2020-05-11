@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/form_validation.constants.dart';
 import 'package:professors/localization/constants/settings/payments/payments_constants.dart';
 import 'package:professors/store/payments/add_payment_method_state.dart';
+import 'package:professors/utils/form.utils.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
@@ -13,6 +15,7 @@ import 'package:professors/visual/widgets/structural/header/app_header.widget.da
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
 
 class AddPaymentMethodScreen extends StatelessWidget {
+  final formConstants = FormValidationConstants();
   final PaymentsConstants screenConstants = PaymentsConstants();
   static GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
@@ -22,8 +25,11 @@ class AddPaymentMethodScreen extends StatelessWidget {
   // screen state
   AddPaymentMethodState screenStore = AddPaymentMethodState();
 
+  BuildContext context;
+
   @override
   Widget build(BuildContext context) {
+    this.context = context;
     return Scaffold(
       body: CustomScrollView(
           slivers: <Widget>[
@@ -50,6 +56,7 @@ class AddPaymentMethodScreen extends StatelessWidget {
                         Container(
                           padding: AppPaddings.regularPadding(context),
                           child: TextFormField(
+                            validator: _emailValidator,
                             style: TextStyle(color: AppColors.fontColor),
                             controller: emailController,
                             decoration: InputDecoration(
@@ -75,15 +82,7 @@ class AddPaymentMethodScreen extends StatelessWidget {
                                   AppLocalizations.of(context).translate(
                                       screenConstants.addPaymentMethodEmailAddButton),
                                       () {
-                                    screenStore.setIsLoading(true);
-                                    restServices.getWalletService().createPaymentMethod(context, emailController.text)
-                                    .then((value){
-                                      restServices.getWalletService().getPaymentMethods(context);
-                                      ToasterBuilder.buildSuccessToaster(context, AppLocalizations.of(context).translate(screenConstants.addPaymentMethodCreated));
-                                      _goBackToPaymentMethodsList(context);
-                                    }).catchError((e){
-                                      ToasterBuilder.buildErrorToaster(context, e.cause);
-                                    }).whenComplete(() => screenStore.setIsLoading(false));
+                                    _addAccount(context);
                                   },
                                 ),
                               );
@@ -99,6 +98,31 @@ class AddPaymentMethodScreen extends StatelessWidget {
           ],
         ),
     );
+  }
+
+  String _emailValidator(String value) {
+    if ( value == null || value.trim().isEmpty ) {
+      return AppLocalizations.of(context).translate(formConstants.emailIsRequired);
+    } else if (!FormUtils().validateEmail(value)) {
+      return AppLocalizations.of(context).translate(formConstants.invalidInput);
+    }
+    return null;
+  }
+
+  _addAccount(BuildContext context) {
+    if (!_formKey.currentState.validate()) {
+      return;
+    }
+
+    screenStore.setIsLoading(true);
+    restServices.getWalletService().createPaymentMethod(context, emailController.text)
+        .then((value){
+      restServices.getWalletService().getPaymentMethods(context);
+      ToasterBuilder.buildSuccessToaster(context, AppLocalizations.of(context).translate(screenConstants.addPaymentMethodCreated));
+      _goBackToPaymentMethodsList(context);
+    }).catchError((e){
+      ToasterBuilder.buildErrorToaster(context, e.cause);
+    }).whenComplete(() => screenStore.setIsLoading(false));
   }
 
   _goBackToPaymentMethodsList(BuildContext context) {

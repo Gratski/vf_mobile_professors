@@ -155,7 +155,9 @@ class _ClassesScreenState extends State<ClassesScreen>
                     if ( classesStore.totalClasses > classesStore.offset ) {
                       return SliverToBoxAdapter(
                         child: ButtonsBuilder.redFlatButton(
-                        AppLocalizations.of(context).translate(widget.generalConstants.loadMoreButtonLabel), () { }),
+                        AppLocalizations.of(context).translate(widget.generalConstants.loadMoreButtonLabel), () {
+                          _loadMore(context);
+                        }),
                       );
                     } else {
                       return SliverToBoxAdapter(
