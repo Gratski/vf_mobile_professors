@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:professors/globals/global_vars.dart';
+import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/models/category/category.model.dart';
 import 'package:professors/models/profile/profile_details.model.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
@@ -29,7 +30,7 @@ class ProfileDetailsService extends AbstractRestService {
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {
-      throw ApiException("Something went wrong");
+      throw ApiException(AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     }
   }
 
@@ -90,7 +91,7 @@ class ProfileDetailsService extends AbstractRestService {
       profileDetailsStore.setId(result["id"]);
 
       // show success message
-      ToasterBuilder.buildSuccessToaster(context, "created!");
+      ToasterBuilder.buildSuccessToaster(context, AppLocalizations.of(context).translate(constants.successfullyCreatedText));
       return;
     } on ApiException catch (e) {
       throw e;
@@ -117,7 +118,7 @@ class ProfileDetailsService extends AbstractRestService {
             "description": description,
             "quote": quote,
           }));
-      ToasterBuilder.buildSuccessToaster(context, "Saved!");
+      ToasterBuilder.buildSuccessToaster(context, AppLocalizations.of(context).translate(constants.successfullySavedText));
       return;
     } on ApiException catch (e) {
       throw e;

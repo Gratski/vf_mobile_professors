@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:professors/globals/global_vars.dart';
+import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/services/dto/payments/payment_method.model.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
 import 'package:professors/services/rest/abstract_rest.service.dart';
@@ -35,7 +36,7 @@ class WalletService extends AbstractRestService {
     } on ApiException catch (e) {
       throw e;
     } on Exception catch (e) {
-      ToasterBuilder.buildErrorToaster(context, "Something went wrong");
+      ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     }
   }
 
@@ -50,7 +51,7 @@ class WalletService extends AbstractRestService {
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {
-      ToasterBuilder.buildErrorToaster(context, "Something went wrong");
+      ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     }
   }
 
@@ -63,7 +64,7 @@ class WalletService extends AbstractRestService {
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {
-      ToasterBuilder.buildErrorToaster(context, "Something went wrong");
+      ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     }
   }
 
@@ -76,7 +77,7 @@ class WalletService extends AbstractRestService {
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {
-      ToasterBuilder.buildErrorToaster(context, "Something went wrong");
+      ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     }
   }
 

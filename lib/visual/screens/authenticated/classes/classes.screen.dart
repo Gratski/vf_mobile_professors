@@ -120,7 +120,9 @@ class _ClassesScreenState extends State<ClassesScreen>
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             ButtonsBuilder.transparentCustomButton(
-                              TextsBuilder.h4Bold("ADD CLASS"), () {
+                              TextsBuilder.h4Bold(
+                                  AppLocalizations.of(context).translate(widget.screenConstants.classesAddClassButtonLabel)
+                              ), () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) =>
                                       CreateClassSelectLanguageScreen()));

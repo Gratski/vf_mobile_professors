@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:professors/globals/global_vars.dart';
+import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/form_validation.constants.dart';
+import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/localization.config.dart';
 import 'package:professors/services/dto/errors/http_error.dto.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
@@ -18,6 +19,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AbstractRestService {
   String REST_URL = "http://192.168.1.103:2222/api/v1";
+  FormValidationConstants formConstants = FormValidationConstants();
+  GeneralConstants constants = GeneralConstants();
 
   Future<Response> performJsonPost(
       BuildContext context, String path, String body,
@@ -30,7 +33,7 @@ abstract class AbstractRestService {
     } on ApiException catch (e) {
       throw e;
     } on Exception catch (e) {
-      throw ApiException("Internet Error");
+      throw ApiException(AppLocalizations.of(context).translate(constants.internetConnectionText));
     }
   }
 
@@ -79,7 +82,7 @@ abstract class AbstractRestService {
     } on ApiException catch (e) {
       throw e;
     } on Exception catch (e) {
-      ToasterBuilder.buildErrorToaster(context, "Internet Connection Error");
+      ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(constants.internetConnectionText));
     }
   }
 
@@ -92,7 +95,7 @@ abstract class AbstractRestService {
 
       var imageSize = await compressedFile.length();
       if (imageSize > 80000) {
-        throw FileSizeException("Please choose a smaller picture");
+        throw FileSizeException(AppLocalizations.of(context).translate(formConstants.fileIsTooBigError));
       }
 
       var uri = Uri.parse(url);
@@ -113,20 +116,20 @@ abstract class AbstractRestService {
         if ((pictureUrl != null && pictureUrl.isNotEmpty) ||
             (status == 200 || status == 201)) {
           restServices.getUserService().getUserPersonalDetails(context);
-          ToasterBuilder.buildSuccessToaster(context, "Picture changed!");
+          ToasterBuilder.buildSuccessToaster(context, AppLocalizations.of(context).translate(formConstants.pictureSuccessFullyChanged));
           return;
         } else if (status == 500) {
           throw ToasterBuilder.buildErrorToaster(
-              context, "Please consider a smaller file");
+              context, AppLocalizations.of(context).translate(formConstants.fileIsTooBigError));
         } else {
           throw ToasterBuilder.buildErrorToaster(
-              context, "Something went wrong. Please try again later");
+              context, AppLocalizations.of(context).translate(constants.somethingWentWrongText));
         }
       });
     } on FileSizeException catch (e) {
       throw ApiException(e.cause);
     } on Exception catch (e) {
-      throw ApiException("Something went wrong.. Please try again");
+      throw ApiException(AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     }
   }
 
@@ -135,7 +138,7 @@ abstract class AbstractRestService {
   ////////////////////////////////////////
   Future<void> handleUnknownError(BuildContext context) async {
     // TODO: Localize this
-    ToasterBuilder.buildErrorToaster(context, "Something went wrong");
+    ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     return;
   }
 

@@ -43,6 +43,7 @@ class FormValidationConstants {
   // Class Details errors
   //////////////////////////////////////////////////////
   String get pictureIsRequired => "FORM_VALIDATION_PICTURE_IS_REQUIRED";
+  String get pictureSuccessFullyChanged => "FORM_VALIDATION_PICTURE_SUCCESSFULLY_CHANGED";
   String get titleIsRequired => "FORM_VALIDATION_TITLE_IS_REQUIRED";
   String get descriptionIsRequired => "FORM_VALIDATION_DESCRIPTION_IS_REQUIRED";
   String get difficultyIsRequired => "FORM_VALIDATION_DIFFICULTY_IS_REQUIRED";

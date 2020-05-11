@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:professors/globals/global_vars.dart';
+import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/models/category/category.model.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
 import 'package:professors/services/rest/abstract_rest.service.dart';
@@ -26,7 +27,7 @@ class CategoryService extends AbstractRestService {
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {
-      ToasterBuilder.buildErrorToaster(context, "Internet Error");
+      ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(constants.internetConnectionText));
     }
   }
 
@@ -49,7 +50,7 @@ class CategoryService extends AbstractRestService {
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {
-      ToasterBuilder.buildErrorToaster(context, "Internet Error");
+      ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(constants.internetConnectionText));
     } finally {
       generalStore.setIsCategoriesLoading(false);
     }

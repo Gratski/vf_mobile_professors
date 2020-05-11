@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/models/support/support_contact_type.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
 import 'package:professors/services/rest/abstract_rest.service.dart';
@@ -22,7 +23,7 @@ class SupportService extends AbstractRestService {
     } on ApiException catch (e) {
       throw e;
     } on Exception catch (e) {
-      throw ApiException("Internet Error");
+      throw ApiException(AppLocalizations.of(context).translate(constants.internetConnectionText));
     }
   }
 }

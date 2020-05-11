@@ -1,6 +1,7 @@
 class ClassConstants {
 
   String get classesClassesWord => "CLASSES_CLASSES_WORD";
+  String get classesKcalWord => "CLASSES_KCAL_WORD";
   String get classesAllWord => "CLASSES_ALL_WORD";
   String get classesYourWord => "CLASSES_YOUR_WORD";
   String get classesSubTitle => "CLASSES_SUB_TITLE";
@@ -23,6 +24,7 @@ class ClassConstants {
   String get classesAddClassButtonLabel => "CLASSES_ADD_CLASS_BUTTON_LABEL";
 
   String get classDetailsLevelLabel => "CLASS_DETAILS_LEVEL_LABEL";
+  String get classDetailsCaloriesLabel => "CLASS_DETAILS_CALORIES_LABEL";
   String get classDetailsDescriptionLabel => "CLASS_DETAILS_DESCRIPTION_LABEL";
   String get classDetailsBookButtonLabel => "CLASS_DETAILS_BOOK_BUTTON_LABEL";
   String get classDetailsInstructorLabel => "CLASS_DETAILS_INSTRUCTOR_LABEL";

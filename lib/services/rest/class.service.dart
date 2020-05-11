@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/models/classes/class.model.dart';
 import 'package:professors/models/classes/class_list_item.dart';
 import 'package:professors/services/dto/classes/get_classes.dto.dart';
@@ -47,7 +48,7 @@ class ClassService extends AbstractRestService {
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {
-      throw ApiException("Something went wrong");
+      throw ApiException(AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     }
   }
 
@@ -85,7 +86,7 @@ class ClassService extends AbstractRestService {
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {
-      throw ApiException("Something went wrong...");
+      throw ApiException(AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     }
   }
 
@@ -99,7 +100,7 @@ class ClassService extends AbstractRestService {
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {
-      throw ApiException("Something went wrong");
+      throw ApiException(AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     }
   }
 
@@ -114,7 +115,7 @@ class ClassService extends AbstractRestService {
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {
-      throw ApiException("Something went wrong");
+      throw ApiException(AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     }
   }
 
@@ -148,7 +149,7 @@ class ClassService extends AbstractRestService {
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {
-      throw ApiException("Something went wrong");
+      throw ApiException(AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     }
   }
 
@@ -162,7 +163,7 @@ class ClassService extends AbstractRestService {
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {
-      throw ApiException("Something went wrong");
+      throw ApiException(AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     }
   }
 

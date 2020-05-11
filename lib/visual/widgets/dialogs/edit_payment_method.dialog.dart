@@ -47,7 +47,7 @@ class EditPaymentMethodDialog extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40, bottom: MediaQuery.of(context).size.height / 30),
             padding: EdgeInsets.all(5),
-            child: ButtonsBuilder.transparentButton("Make Default", () {
+            child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonMakeDefaultLabel), () {
               makeDefaultCallback();
               Navigator.of(context).pop();
             }, color: AppColors.regularGreen),
@@ -55,7 +55,7 @@ class EditPaymentMethodDialog extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40, bottom: MediaQuery.of(context).size.height / 30),
             padding: EdgeInsets.all(5),
-            child: ButtonsBuilder.transparentButton("Remove", () {
+            child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonRemoveLabel), () {
               deleteCallback();
               Navigator.of(context).pop();
             }, color: AppColors.regularRed),

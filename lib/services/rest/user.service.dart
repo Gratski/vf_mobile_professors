@@ -73,7 +73,7 @@ class UserService extends AbstractRestService {
     } on ApiException catch (e) {
       throw e;
     } on Exception catch (e) {
-      ToasterBuilder.buildErrorToaster(context, "Something went wrong");
+      ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     } finally {
       notificationsStore.setIsLoading(false);
     }
@@ -97,7 +97,7 @@ class UserService extends AbstractRestService {
     } on ApiException catch(e) {
       throw e;
     } on Exception catch(e) {
-      ToasterBuilder.buildErrorToaster(context, "Something went wrong");
+      ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(constants.somethingWentWrongText));
       return;
     }
 
@@ -143,7 +143,7 @@ class UserService extends AbstractRestService {
     try {
       final uploadedFile = uploadFile(context, file, '$REST_URL/users/me/picture');
     } on Exception catch(e) {
-      throw ApiException("Something went wrong. Try again later");
+      throw ApiException(AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     }
   }
 }

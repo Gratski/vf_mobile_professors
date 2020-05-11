@@ -1,6 +1,10 @@
 class GeneralConstants {
 
   String get internetConnectionText => "GENERAL_INTERNET_CONNECTION_ERROR";
+  String get somethingWentWrongText => "GENERAL_SOMETHING_WRONG";
+
+  String get successfullyCreatedText => "GENERAL_SUCCESSFULLY_CREATED";
+  String get successfullySavedText => "GENERAL_SUCCESSFULLY_SAVED";
 
   String get addLanguageButtonLabel => "GENERAL_ADD_LANGUAGE_BUTTON_LABEL";
   String get languagesLabel => "GENERAL_LANGUAGES_LABEL";

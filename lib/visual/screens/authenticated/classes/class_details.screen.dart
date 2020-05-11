@@ -5,6 +5,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
+import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/models/language.model.dart';
 import 'package:professors/store/classes/class_details_state.dart';
 import 'package:professors/utils/classes.utils.dart';
@@ -20,6 +21,7 @@ import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class ClassDetailsScreen extends StatefulWidget {
 
+  GeneralConstants generalConstants = GeneralConstants();
   ClassConstants screenConstants = ClassConstants();
   ClassDetailsState store = ClassDetailsState();
 
@@ -38,7 +40,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
     double sectionTopMargin = MediaQuery.of(context).size.height / 20;
 
     return Scaffold(
-      backgroundColor: AppColors.bgMainColor,
+      backgroundColor: Colors.white,
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
@@ -86,7 +88,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                                 begin: Alignment.bottomCenter,
                                 end: Alignment.topCenter,
                                 stops: [0.0, 0.4],
-                                colors: [AppColors.bgMainColor, Colors.transparent])),
+                                colors: [Colors.white, Colors.transparent])),
                         child: CachedNetworkImage(
                           fit: BoxFit.cover,
                           placeholder: (context, value) => DefaultLoaderWidget(),
@@ -101,10 +103,9 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
           ];
         },
         body: Container(
-          color: AppColors.bgMainColor,
+          color: Colors.white,
           child: Column(
             children: <Widget>[
-
               Observer(
                 builder: (_) {
                   if ( widget.store.isLoading ) {
@@ -116,7 +117,6 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                     return Expanded(
                       child: CustomScrollView(
                         slivers: <Widget>[
-
                           /// HEADER
                           SliverToBoxAdapter(
                             child: Container(
@@ -129,8 +129,8 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        TextsBuilder.regularText('${widget.store.categoryName}, ${widget.store.subCategoryName}'.toUpperCase(), color: Colors.white),
-                                        TextsBuilder.h2Bold('${widget.store.designation}', color: Colors.white),
+                                        TextsBuilder.regularText('${widget.store.categoryName}, ${widget.store.subCategoryName}'.toUpperCase(), color: AppColors.bgMainColor),
+                                        TextsBuilder.h2Bold('${widget.store.designation}', color: AppColors.bgMainColor),
                                       ],
                                     ),
                                   ),
@@ -140,7 +140,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: <Widget>[
-                                        TextsBuilder.h4Bold('${widget.store.rate}', color: Colors.white),
+                                        TextsBuilder.h4Bold('${widget.store.rate}', color: AppColors.bgMainColor),
                                         Icon(Icons.star, color: AppColors.regularRed,)
                                       ],
                                     ),
@@ -158,11 +158,28 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
+                                  TextsBuilder.textSmallBold(
+                                      '${ClassesUtils().getDifficultyLevelText(context, widget.store.difficultyLevel).toUpperCase()} '
+                                      '${AppLocalizations.of(context).translate(widget.screenConstants.classDetailsLevelLabel).toUpperCase()}', color: AppColors.bgMainColor)
+                                  ,
+                                  Row(
+                                    children: IconsBuilder.difficultyIcons(widget.store.difficultyLevel),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
 
-                                  TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsLevelLabel).toUpperCase(), color: Colors.white),
-                                  TextsBuilder.regularText(ClassesUtils().getDifficultyLevelText(context, widget.store.difficultyLevel)),
-
-
+                          /// CALORES
+                          SliverToBoxAdapter(
+                            child: Container(
+                              padding: AppPaddings.regularPadding(context),
+                              margin: EdgeInsets.only(top: sectionTopMargin),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsCaloriesLabel).toUpperCase(), color: AppColors.bgMainColor),
+                                  TextsBuilder.regularText('${widget.store.calories} ${AppLocalizations.of(context).translate(widget.screenConstants.classesKcalWord)}', color: AppColors.bgMainColor),
                                 ],
                               ),
                             ),
@@ -177,8 +194,8 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
 
-                                  TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsDescriptionLabel).toUpperCase(), color: Colors.white),
-                                  TextsBuilder.regularText('${widget.store.description}'),
+                                  TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsDescriptionLabel).toUpperCase(), color: AppColors.bgMainColor),
+                                  TextsBuilder.regularText('${widget.store.description}', color: AppColors.bgMainColor),
 
 
                                 ],
@@ -201,24 +218,24 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                                   Container(
                                     padding: AppPaddings.regularPadding(context),
                                     margin: EdgeInsets.only(top: 20),
-                                    child: TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsEquipmentLabel).toUpperCase()),
+                                    child: TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsEquipmentLabel).toUpperCase(), color: AppColors.bgMainColor),
                                   ),
 
                                   Container(
                                     padding: AppPaddings.regularPadding(context),
-                                    child: TextsBuilder.regularText('${widget.store.equipment}'),
+                                    child: TextsBuilder.regularText('${widget.store.equipment}', color: AppColors.bgMainColor),
                                   ),
 
                                   /// CLASS GOALS
                                   Container(
                                     padding: AppPaddings.regularPadding(context),
                                     margin: EdgeInsets.only(top: sectionTopMargin),
-                                    child: TextsBuilder.textSmallBold('Class Objectives'.toUpperCase()),
+                                    child: TextsBuilder.textSmallBold(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsClassGoalsLabel).toUpperCase(), color: AppColors.bgMainColor),
                                   ),
 
                                   Container(
                                     padding: AppPaddings.regularPadding(context),
-                                    child: TextsBuilder.regularText('${widget.store.goals}'),
+                                    child: TextsBuilder.regularText('${widget.store.goals}', color: AppColors.bgMainColor),
                                   ),
 
                                 ],
@@ -284,13 +301,13 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                                     /// TITLE COMMENTS
                                     Container(
                                       margin: EdgeInsets.only(top: sectionTopMargin),
-                                      child: TextsBuilder.h1Bold(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsCommentsLabel)),
+                                      child: TextsBuilder.h1Bold(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsCommentsLabel), color: AppColors.bgMainColor),
                                     ),
 
                                     Container(
                                         margin: EdgeInsets.only(top: sectionTopMargin, bottom: sectionTopMargin ),
                                         child: Center(
-                                          child: TextsBuilder.regularText(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsNoCommentsYetText)),
+                                          child: TextsBuilder.regularText(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsNoCommentsYetText), color: AppColors.bgMainColor),
                                         )
                                     ),
 
@@ -336,7 +353,6 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
               ),
             )
              */
-
             ],
           ),
         ),
@@ -367,7 +383,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
           widget.store.setInstructorRate(resp.instructorRate);
           widget.store.setInstructorPictureUrl(resp.instructorPictureUrl);
     }).catchError((e) {
-      ToasterBuilder.buildErrorToaster(context, "Someething went wrong");
+      ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(widget.generalConstants.internetConnectionText));
     }).whenComplete(() => widget.store.setIsLoading(false));
   }
   

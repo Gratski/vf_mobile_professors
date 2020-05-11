@@ -29,6 +29,7 @@
   "GENERAL_LANGUAGES_LABEL": "Languages",
   "GENERAL_LANGUAGE_LABEL": "Language",
   "GENERAL_INTERNET_CONNECTION_ERROR": "Internet Error",
+  "GENERAL_SOMETHING_WRONG": "Something went wrong",
   "GENERAL_SELECT_FILE_SOURCE_LABEL": "Select File Source",
   "GENERAL_SELECT_FILE_SOURCE_SUB_LABEL": "From one of the options",
   "GENERAL_ACTIONS_ADD_LABEL": "Add",
@@ -46,6 +47,8 @@
   "GENERAL_DIFFICULTY_LEVEL_INTERMEDIATE": "Intermediate",
   "GENERAL_DIFFICULTY_LEVEL_ADVANCED": "Advanced",
   "GENERAL_DIFFICULTY_LEVEL_WARRIOR": "Warrior",
+  "GENERAL_SUCCESSFULLY_CREATED": "Successfully Created!",
+  "GENERAL_SUCCESSFULLY_SAVED": "Successfully Saved!",
 
 
   "GENERAL_LABELS_GENDER_MALE": "Male",
@@ -55,7 +58,7 @@
   "GENERAL_LOAD_MORE_BUTTON_LABEL": "Load more",
   "GENERAL_DIALOG_UNAVAILABLE_OPERATION_TITLE": "Unavailable Operation",
   "GENERAL_DIALOG_UNAVAILABLE_OPERATION_BODY": "This operation is not permitted during Pre-Launch Stage. It is present in your screen for you to have the correct look and feel!",
-  "GENERAL_DIALOG_UNAVAILABLE_OPERATION_DISMISS_LABEL": "Ok, Got it!",
+  "GENERAL_DIALOG_UNAVAILABLE_OPERATION_DISMISS_LABEL": "Cancel",
 
   "AUTH_LOGIN_TOP_HEADER": "Sign in",
   "AUTH_LOGIN_SUB_TITLE": "Sign into your existing account",
@@ -240,6 +243,7 @@
 
 
   "CLASSES_CLASSES_WORD": "Classes",
+  "CLASSES_KCAL_WORD": "KCAL",
   "CLASSES_ALL_WORD": "All",
   "CLASSES_YOUR_WORD": "Your",
   "CLASSES_SUB_TITLE": "Here you can find all your classes",
@@ -259,6 +263,7 @@
   "CLASSES_ADD_CLASS_BUTTON_LABEL": "Add Class",
 
   "CLASS_DETAILS_LEVEL_LABEL": "Level",
+  "CLASS_DETAILS_CALORIES_LABEL": "Calories",
   "CLASS_DETAILS_DESCRIPTION_LABEL": "Class Description",
   "CLASS_DETAILS_BOOK_BUTTON_LABEL": "BOOK",
   "CLASS_DETAILS_INSTRUCTOR_LABEL": "Instructor",
@@ -364,6 +369,7 @@
   "FORM_VALIDATION_DURATION_IS_REQUIRED": "Duration is required",
   "FORM_VALIDATION_CATEGORY_IS_REQUIRED": "Category is required",
   "FORM_VALIDATION_FILE_IS_TOO_BIG": "Choose a smaller file",
-  "FORM_VALIDATION_ACCESS_CODE_IS_REQUIRED":"Access code is required"
+  "FORM_VALIDATION_ACCESS_CODE_IS_REQUIRED":"Access code is required",
+  "FORM_VALIDATION_PICTURE_SUCCESSFULLY_CHANGED": "Picture Successfully changed!"
 
 }
