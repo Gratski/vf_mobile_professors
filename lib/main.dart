@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
               borderSide: BorderSide(color: AppColors.textInputBorder, width: 0.5),
             ),
           ),
-          canvasColor: AppColors.bgMainColor
+          canvasColor: Colors.white
         )
     );
   }

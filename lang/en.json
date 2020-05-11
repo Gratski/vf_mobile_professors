@@ -319,6 +319,8 @@
   "CLASS_DELETED_TOP_HEADER": "Class deleted!",
   "CLASS_DELETED_SUB_TITLE": "This class has been successfully deleted.",
 
+  "PROFILE_SCREEN_ABOUT_DEFAULT": "About",
+  "PROFILE_SCREEN_QUOTE_DEFAULT": "Quote",
   "PROFILE_SCREEN_ABOUT_PT": "Sobre",
   "PROFILE_SCREEN_QUOTE_PT": "Quote",
   "PROFILE_SCREEN_TEACHES_PT": "Dá Aulas de",

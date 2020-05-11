@@ -82,7 +82,8 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                     if ( widget.store.isLoading ) {
                       return DefaultLoaderWidget();
                     } else {
-                      return Container(
+                      return (widget.store.imageUrl != null) ?
+                      Container(
                         foregroundDecoration: BoxDecoration(
                             gradient: LinearGradient(
                                 begin: Alignment.bottomCenter,
@@ -94,7 +95,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                           placeholder: (context, value) => DefaultLoaderWidget(),
                           imageUrl: widget.store.imageUrl,
                         ),
-                      );
+                      ) : Container();
                     }
                   }
                 )

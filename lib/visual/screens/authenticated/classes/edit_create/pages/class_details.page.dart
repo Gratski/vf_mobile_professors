@@ -131,17 +131,10 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                                 children: <Widget>[
                                                   // class category
                                                   _buildBadge(TextsBuilder.regularText(
-                                                      '${widget.store.categoryName}')),
+                                                      '${widget.store.categoryName}', color: Colors.white)),
                                                   _buildBadge(TextsBuilder.regularText(
-                                                      '${widget.store.subCategoryName}')),
+                                                      '${widget.store.subCategoryName}', color: Colors.white)),
 
-                                                  Container(
-                                                    margin: EdgeInsets.only(left: 10),
-                                                    child: Icon(
-                                                      Icons.edit,
-                                                      color: AppColors.fontColor,
-                                                    ),
-                                                  )
                                                 ],
                                               ),
                                               margin: EdgeInsets.only(top: 10),
@@ -176,13 +169,19 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                         });
                                       }
                                     },
-                                    child: Container(
-                                      child: Image(
-                                        image: CachedNetworkImageProvider(
-                                            widget.store.pictureUrl),
-                                      ),
-                                    ),
-                                  );
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: AspectRatio(
+                                        aspectRatio: 3 / 2,
+                                        child: Container(
+                                          child: Image(
+                                            fit: BoxFit.cover,
+                                            image: CachedNetworkImageProvider(
+                                                widget.store.pictureUrl),
+                                          ),
+                                        ),
+                                      )
+                                  ));
                                 } else {
                                   return GestureDetector(
                                     onTap: () async {
@@ -303,7 +302,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                                             .duration ==
                                                             d)
                                                             ? AppColors.regularGreen
-                                                            : AppColors.bgMainColor,
+                                                            : Colors.white,
                                                         border: Border.all(
                                                             color: AppColors.regularGreen,
                                                             width: 1.0),
@@ -311,7 +310,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                                           Radius.circular(25),
                                                         ),
                                                       ),
-                                                      child: TextsBuilder.h4Bold('$d'),
+                                                      child: TextsBuilder.h4Bold('$d', color: (widget.store.duration == d) ? Colors.white : AppColors.bgMainColor),
                                                     ),
                                                   ));
                                             }).toList()),
@@ -358,7 +357,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                                             l.id || widget.store
                                                             .difficultyLevel > widget.store.possibleDifficultyLevels.length))
                                                         ? AppColors.regularGreen
-                                                        : AppColors.bgMainColor,
+                                                        : Colors.white,
                                                     border: Border.all(
                                                         color: AppColors.regularGreen,
                                                         width: 1.0),
@@ -367,7 +366,15 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                                     ),
                                                   ),
                                                   child: TextsBuilder.h4Bold(
-                                                      '${AppLocalizations.of(context).translate(l.designation)}'),
+                                                      '${AppLocalizations.of(context).translate(l.designation)}', color: (widget.store
+                                                      .difficultyLevel !=
+                                                      null &&
+                                                      (widget.store
+                                                          .difficultyLevel ==
+                                                          l.id || widget.store
+                                                          .difficultyLevel > widget.store.possibleDifficultyLevels.length))
+                                                      ? Colors.white
+                                                      : AppColors.bgMainColor),
                                                 ),
                                               );
                                             }).toList()),

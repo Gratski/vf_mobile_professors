@@ -45,7 +45,6 @@ class _ClassesScreenState extends State<ClassesScreen>
         color: AppColors.regularRed,
         child: Container(
           padding: AppPaddings.regularPadding(context),
-
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/classes_bg.png"),
@@ -115,13 +114,13 @@ class _ClassesScreenState extends State<ClassesScreen>
                   return SliverToBoxAdapter(
                     child: (classesStore.classes.length > 0 && !classesStore.isLoading )
                         ? Container(child: Container(
-                        margin: EdgeInsets.only(top: 40),
+                        margin: EdgeInsets.only(top: 20, bottom: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             ButtonsBuilder.transparentCustomButton(
-                              TextsBuilder.h4Bold(
-                                  AppLocalizations.of(context).translate(widget.screenConstants.classesAddClassButtonLabel)
+                              TextsBuilder.regularText(
+                                  AppLocalizations.of(context).translate(widget.screenConstants.classesAddClassButtonLabel).toUpperCase(), bold: true
                               ), () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) =>
@@ -135,6 +134,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                 },
               ),
               _buildTitle(context),
+
               Observer(
                 builder: (_) {
                   return SliverList(
@@ -310,8 +310,8 @@ class _ClassesScreenState extends State<ClassesScreen>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        TextsBuilder.h2Bold(AppLocalizations.of(context).translate(widget.screenConstants.classesAllWord)),
-                        TextsBuilder.h2Bold(AppLocalizations.of(context).translate(widget.screenConstants.classesYourWord), color: Colors.red),
+                        TextsBuilder.h3Bold(AppLocalizations.of(context).translate(widget.screenConstants.classesAllWord).toUpperCase()),
+                        TextsBuilder.h3Bold(AppLocalizations.of(context).translate(widget.screenConstants.classesYourWord).toUpperCase(), color: AppColors.regularRed),
                       ],
                     ),
                   ),

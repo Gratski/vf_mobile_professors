@@ -18,16 +18,13 @@ abstract class _UserWalletState with Store {
   bool isLoading = false;
 
   @observable
-  double balance = 0.0;
+  double balance = 0;
 
   @observable
   CurrencyModel currency = CurrencyModel(1, 'EUR', '€');
 
   @observable
-  ObservableList<PaymentAccountListItem> accounts = ObservableList.of([
-    PaymentAccountListItem(
-        email: 'rodrigues.at.work@gmail.com', isDefault: true),
-  ]);
+  ObservableList<PaymentAccountListItem> accounts = ObservableList.of([]);
 
   @observable
   ObservableList<CurrencyModel> availableCurrencies = ObservableList.of([

@@ -9,7 +9,7 @@ class ProfessorAvatarWidget extends StatelessWidget {
   String greeting;
   String pictureUrl;
   Color textColor;
-  ProfessorAvatarWidget(this.name, this.pictureUrl, {this.greeting = '', this.textColor = Colors.white});
+  ProfessorAvatarWidget(this.name, this.pictureUrl, {this.greeting = '', this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class ProfessorAvatarWidget extends StatelessWidget {
 
           Container(
             margin: EdgeInsets.only(top: 20, bottom: 10),
-            child: TextsBuilder.h4Bold('$greeting $name', color: textColor),
+            child: TextsBuilder.h4Bold('$greeting $name', color: (textColor != null) ? textColor : AppColors.fontColor),
           ),
 
           Row(
