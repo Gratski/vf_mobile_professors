@@ -300,7 +300,8 @@ class _ClassesScreenState extends State<ClassesScreen>
             !classesStore.isLoading) {
           return SliverToBoxAdapter(
             child: Container(
-              padding: AppPaddings.topTitlePadding(context),
+              color: Colors.white,
+              padding: AppPaddings.topTitlePadding(context).copyWith(top: 5),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
