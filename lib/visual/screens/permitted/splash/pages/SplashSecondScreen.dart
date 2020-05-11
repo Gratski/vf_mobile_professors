@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/splash.constants.dart';
 import 'package:professors/visual/screens/permitted/splash/pages/abstract_splash.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
@@ -7,6 +9,7 @@ import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class SplashSecondScreen extends AbstractSplashScreen {
 
+  SplashConstants splashConstants = SplashConstants();
   VoidCallback callback;
   SplashSecondScreen(this.callback);
 
@@ -39,14 +42,18 @@ class SplashSecondScreen extends AbstractSplashScreen {
 
                     // header
                     Container(
-                      child: TextsBuilder.h3Bold('EDIT PHOTO EASY'),
+                      child: TextsBuilder.h3Bold(
+                          AppLocalizations.of(context).translate(splashConstants.secondPageHeader)
+                      ),
                     ),
 
                     // body text
                     Container(
                       padding: AppPaddings.regularPadding(context),
                       margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
-                      child: TextsBuilder.regularText('fdfd fd f dsf sdf ds sd f df ds fd sf ds fds f dsf ds fd sf dsf dsf sdf ds f'),
+                      child: TextsBuilder.regularText(
+                          AppLocalizations.of(context).translate(splashConstants.secondPageText)
+                      ),
                     ),
 
                     Container(

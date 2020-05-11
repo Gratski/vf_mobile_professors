@@ -219,7 +219,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          TextsBuilder.h4Bold("4.5", color: AppColors.bgMainColor),
+                          TextsBuilder.h4Bold("5", color: AppColors.bgMainColor),
                           Icon(Icons.star, color: AppColors.regularRed,),
                         ],
                       )

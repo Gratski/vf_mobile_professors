@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/splash.constants.dart';
 import 'package:professors/visual/screens/authenticated/home.dart';
 import 'package:professors/visual/screens/permitted/splash/pages/abstract_splash.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
@@ -10,6 +12,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashFourthScreen extends AbstractSplashScreen {
   VoidCallback callback;
+
+  SplashConstants splashConstants = SplashConstants();
 
   SplashFourthScreen(this.callback);
 
@@ -44,7 +48,9 @@ class SplashFourthScreen extends AbstractSplashScreen {
                   children: <Widget>[
                     // header
                     Container(
-                      child: TextsBuilder.h3Bold('EDIT PHOTO EASY'),
+                      child: TextsBuilder.h3Bold(
+                          AppLocalizations.of(context).translate(splashConstants.fourthPageHeader)
+                      ),
                     ),
 
                     // body text
@@ -53,18 +59,19 @@ class SplashFourthScreen extends AbstractSplashScreen {
                       margin: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height / 40),
                       child: TextsBuilder.regularText(
-                          'fdfd fd f dsf sdf ds sd f df ds fd sf ds fds f dsf ds fd sf dsf dsf sdf ds f'),
+                          AppLocalizations.of(context).translate(splashConstants.fourthPageText)
+                      ),
                     ),
 
                     Container(
                       margin: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height / 20),
-                      child: ButtonsBuilder.transparentButton(
-                        'Ok, Got it!',
+                      child: ButtonsBuilder.redFlatButton(
+                        AppLocalizations.of(context).translate(splashConstants.okButtonLabel),
                         () async {
                           SharedPreferences prefs = await SharedPreferences.getInstance();
                           prefs.setBool('showedOnboarding', true);
-                          Navigator.pushNamedAndRemoveUntil(context, "/registration", (r) => false);
+                          Navigator.pushNamedAndRemoveUntil(context, "/login", (r) => false);
                         },
                       ),
                     ),
