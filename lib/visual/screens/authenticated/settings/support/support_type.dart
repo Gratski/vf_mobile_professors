@@ -5,6 +5,7 @@ import 'package:professors/localization/constants/settings/support/support_conta
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/models/support/support_contact_type.dart';
 import 'package:professors/visual/screens/authenticated/settings/support/support_contact_send.dart';
+import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
@@ -98,10 +99,29 @@ class SupportTypeScreen extends StatelessWidget {
             alignment: Alignment.bottomRight,
             child: Container(
               padding: AppPaddings.regularAllPadding(context),
-              color: Color.fromRGBO(50, 50, 50, 1),
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(50, 50, 50, 1),
+                border: Border.all(color: AppColors.regularRed),
+                borderRadius: BorderRadius.circular(10),
+              ),
               height: 120,
               width: 120,
-              child: TextsBuilder.regularText("text"),
+              child: Center(
+                child: Column(
+                  children: [
+
+                    Image(
+                      image: AssetImage('assets/icons/$img.png'),
+                    ),
+
+                    Container(
+                      margin: EdgeInsets.only(top: 5),
+                      child: TextsBuilder.regularText(label),
+                    ),
+
+                  ],
+                ),
+              ),
             ),
           ),
         ),

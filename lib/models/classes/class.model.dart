@@ -14,6 +14,7 @@ class ClassModel {
   int duration;
   int status;
   int languageId;
+  String languageCode;
 
   int difficultyLevel;
 
@@ -31,6 +32,7 @@ class ClassModel {
       this.id,
       this.rate,
       this.languageId,
+      this.languageCode,
       this.categoryId,
       this.categoryName,
       this.parentCategoryId,

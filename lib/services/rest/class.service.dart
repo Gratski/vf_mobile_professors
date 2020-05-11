@@ -62,6 +62,7 @@ class ClassService extends AbstractRestService {
         result["id"],
         result["rate"],
         result["languageId"],
+        result["languageCode"],
         result["category"]["id"],
         result["category"]["designation"],
         result["parentCategory"]["id"],

@@ -25,6 +25,9 @@ abstract class _ClassDetailsState with Store {
   int languageId;
 
   @observable
+  String languageCode;
+
+  @observable
   String imageUrl;
 
   @observable
@@ -82,6 +85,11 @@ abstract class _ClassDetailsState with Store {
   @action
   setLanguageId(int id) {
     this.languageId = id;
+  }
+
+  @action
+  setLanguageCode(String code) {
+    this.languageCode = code;
   }
 
   @action

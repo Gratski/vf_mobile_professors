@@ -49,23 +49,21 @@ class _EditProfileInLanguageScreenState
               [
                 Observer(
                   builder: (_) {
-                    if (profileDetailsStore.id != null) {
-                      return Container(
-                          margin: EdgeInsets.only(),
-                          child: ButtonsBuilder.transparentButton(
-                              AppLocalizations.of(context)
-                                  .translate(
-                                      widget.generalConstants.buttonSaveLabel)
-                                  .toUpperCase(), () {
-                            if (_isCreatingProfile()) {
-                              createProfile();
-                            } else {
-                              updateProfile();
-                            }
-                          }));
-                    } else {
-                      return Text('');
-                    }
+                    return Container(
+                      margin: EdgeInsets.only(),
+                      child: ButtonsBuilder.transparentButton(
+                        AppLocalizations.of(context)
+                            .translate((profileDetailsStore.id != null ? widget.generalConstants.buttonSaveLabel : widget.generalConstants.buttonAddLabel))
+                            .toUpperCase(),
+                            () {
+                          if (_isCreatingProfile()) {
+                            createProfile();
+                          } else {
+                            updateProfile();
+                          }
+                        },
+                      ),
+                    );
                   },
                 )
               ],

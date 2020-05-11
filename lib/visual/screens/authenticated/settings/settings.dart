@@ -136,7 +136,7 @@ class SettingsScreen extends StatelessWidget {
                                   margin: EdgeInsets.only(top: 10),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    children: IconsBuilder.startListBasedOnScore(0.0),
+                                    children: IconsBuilder.startListBasedOnScore(5),
                                   ),
                                 ),
                               ),
@@ -159,7 +159,7 @@ class SettingsScreen extends StatelessWidget {
                                     child: TextsBuilder.regularText(
                                       AppLocalizations.of(context).translate(
                                           TRANSLATIONS
-                                              .SettingsConstants.VIEW_PROFILE).toUpperCase(), color: AppColors.regularRed
+                                              .SettingsConstants.VIEW_PROFILE).toUpperCase()
                                     ),
                                   ),
                                 ),

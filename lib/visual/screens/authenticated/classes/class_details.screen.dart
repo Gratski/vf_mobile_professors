@@ -7,15 +7,13 @@ import 'package:professors/localization/constants/classes/classes_constants.dart
 import 'package:professors/models/language.model.dart';
 import 'package:professors/store/classes/class_details_state.dart';
 import 'package:professors/utils/classes.utils.dart';
-import 'package:professors/visual/builders/dialog.builder.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/authenticated/classes/edit_create/create_or_edit_class.screen.dart';
+import 'package:professors/visual/screens/authenticated/profile/profile.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/styles/sizes.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
-import 'package:professors/visual/widgets/notifications/notification_details_user_details.widget.dart';
-import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
@@ -239,12 +237,19 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                                   child: TextsBuilder.h4Bold(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsInstructorLabel).toUpperCase(), color: AppColors.bgMainColor),
                                 ),
 
-                                CircleAvatar(
-                                    maxRadius: MediaQuery.of(context).size.width * 0.20,
-                                    backgroundColor: AppColors.bgMainColor,
-                                    backgroundImage: NetworkImage(
-                                      widget.store.instructorPictureUrl,
-                                    )
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) => ProfileScreen(widget.store.languageId, widget.store.languageCode, widget.store.instructorId, hideLanguageChange: true,)
+                                    ));
+                                  },
+                                  child: CircleAvatar(
+                                      maxRadius: MediaQuery.of(context).size.width * 0.20,
+                                      backgroundColor: AppColors.bgMainColor,
+                                      backgroundImage: NetworkImage(
+                                        widget.store.instructorPictureUrl,
+                                      ),
+                                  ),
                                 ),
 
                                 Container(
@@ -256,7 +261,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                                   margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 30),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: IconsBuilder.startListBasedOnScore(widget.store.instructorRate),
+                                    children: IconsBuilder.startListBasedOnScore(5),
                                   ),
                                 ),
                               ],
@@ -342,6 +347,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
           widget.store.setImageUrl(resp.imageUrl);
           widget.store.setId(resp.id);
           widget.store.setLanguageId(resp.languageId);
+          widget.store.setLanguageCode(resp.languageCode);
           widget.store.setCategoryName(resp.parentCategoryName);
           widget.store.setSubCategoryName(resp.categoryName);
           widget.store.setRate(resp.rate);

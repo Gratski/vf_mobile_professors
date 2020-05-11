@@ -60,6 +60,23 @@ mixin _$ClassDetailsState on _ClassDetailsState, Store {
     }, _$languageIdAtom, name: '${_$languageIdAtom.name}_set');
   }
 
+  final _$languageCodeAtom = Atom(name: '_ClassDetailsState.languageCode');
+
+  @override
+  String get languageCode {
+    _$languageCodeAtom.context.enforceReadPolicy(_$languageCodeAtom);
+    _$languageCodeAtom.reportObserved();
+    return super.languageCode;
+  }
+
+  @override
+  set languageCode(String value) {
+    _$languageCodeAtom.context.conditionallyRunInAction(() {
+      super.languageCode = value;
+      _$languageCodeAtom.reportChanged();
+    }, _$languageCodeAtom, name: '${_$languageCodeAtom.name}_set');
+  }
+
   final _$imageUrlAtom = Atom(name: '_ClassDetailsState.imageUrl');
 
   @override
@@ -348,6 +365,16 @@ mixin _$ClassDetailsState on _ClassDetailsState, Store {
     final _$actionInfo = _$_ClassDetailsStateActionController.startAction();
     try {
       return super.setLanguageId(id);
+    } finally {
+      _$_ClassDetailsStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setLanguageCode(String code) {
+    final _$actionInfo = _$_ClassDetailsStateActionController.startAction();
+    try {
+      return super.setLanguageCode(code);
     } finally {
       _$_ClassDetailsStateActionController.endAction(_$actionInfo);
     }

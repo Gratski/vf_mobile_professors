@@ -23,8 +23,9 @@ class ProfileScreen extends StatefulWidget {
   int languageId;
   String languageCode;
   int professorId;
+  bool hideLanguageChange;
 
-  ProfileScreen(this.languageId, this.languageCode, this.professorId);
+  ProfileScreen(this.languageId, this.languageCode, this.professorId, {this.hideLanguageChange = false});
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -56,20 +57,24 @@ class _ProfileScreenState extends State<ProfileScreen>
               actions: [
                 Observer(
                   builder: (_) {
-                    return ButtonsBuilder.transparentCustomButton(
-                        TextsBuilder.h4Bold(
-                            widget.store.languageCode.toUpperCase()), () {
-                      DialogsBuilder(context).selectLanguageDialog(
-                          AppLocalizations.of(context).translate(
-                              widget.generalConstants.languagesLabel),
-                          generalStore.existingLanguages,
-                          widget.languageId, (selected) {
-                        widget.languageId = selected.id;
-                        widget.languageCode = selected.code;
-                        widget.store.setLanguageCode(selected.code);
-                        didInitState();
+                    if (!widget.hideLanguageChange) {
+                      return ButtonsBuilder.transparentCustomButton(
+                          TextsBuilder.h4Bold(
+                              widget.store.languageCode.toUpperCase()), () {
+                        DialogsBuilder(context).selectLanguageDialog(
+                            AppLocalizations.of(context).translate(
+                                widget.generalConstants.languagesLabel),
+                            generalStore.existingLanguages,
+                            widget.languageId, (selected) {
+                          widget.languageId = selected.id;
+                          widget.languageCode = selected.code;
+                          widget.store.setLanguageCode(selected.code);
+                          didInitState();
+                        });
                       });
-                    });
+                    } else {
+                      return Container();
+                    }
                   },
                 )
               ],
