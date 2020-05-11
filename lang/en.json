@@ -351,6 +351,8 @@
   "FORM_VALIDATION_EQUIPMENT_IS_REQUIRED": "Equipment field is required",
   "FORM_VALIDATION_GOALS_IS_REQUIRED": "Goals field is required",
   "FORM_VALIDATION_CALORIES_IS_REQUIRED": "Calories field is required",
-  "FORM_VALIDATION_DURATION_IS_REQUIRED": "Duration is required"
+  "FORM_VALIDATION_DURATION_IS_REQUIRED": "Duration is required",
+  "FORM_VALIDATION_CATEGORY_IS_REQUIRED": "Category is required",
+  "FORM_VALIDATION_FILE_IS_TOO_BIG": "Choose a smaller file"
 
 }

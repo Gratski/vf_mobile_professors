@@ -50,5 +50,7 @@ class FormValidationConstants {
   String get goalsIsRequired => "FORM_VALIDATION_GOALS_IS_REQUIRED";
   String get caloriesIsRequired => "FORM_VALIDATION_CALORIES_IS_REQUIRED";
   String get durationIsRequired => "FORM_VALIDATION_DURATION_IS_REQUIRED";
+  String get categoryIsRequired => "FORM_VALIDATION_CATEGORY_IS_REQUIRED";
+  String get fileIsTooBigError => "FORM_VALIDATION_FILE_IS_TOO_BIG";
 
 }

@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/create_class.constants.dart';
+import 'package:professors/localization/constants/form_validation.constants.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/store/classes/create_class_state.dart';
 import 'package:professors/utils/compression.utils.dart';
@@ -34,6 +35,7 @@ class ClassDetailsPage extends StatefulWidget {
   CreateClassState store;
 
   GeneralConstants generalConstants = GeneralConstants();
+  final formConstants = FormValidationConstants();
   CreateClassScreenConstants screenConstants = CreateClassScreenConstants();
 
   ClassDetailsPage(this.classId, this.onNextCallback, this.editCategoryCallBack,
@@ -57,12 +59,12 @@ class ClassDetailsPage extends StatefulWidget {
 
 class _ClassDetailsPageState extends State<ClassDetailsPage>
     with AfterInitMixin<ClassDetailsPage> {
-  static GlobalKey<FormState> formKey = new GlobalKey<FormState>();
-  static TextEditingController designationController = TextEditingController();
-  static TextEditingController descriptionController = TextEditingController();
-  static TextEditingController equipmentController = TextEditingController();
-  static TextEditingController goalsController = TextEditingController();
-  static TextEditingController caloriesController = TextEditingController();
+  final GlobalKey<FormState> formKey = new GlobalKey<FormState>();
+  final TextEditingController designationController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController equipmentController = TextEditingController();
+  final TextEditingController goalsController = TextEditingController();
+  final TextEditingController caloriesController = TextEditingController();
 
   File imageFile;
   @override
@@ -230,27 +232,26 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                 }
                               }),
 
-
                               /// Title
                               _buildTextField(
                                   AppLocalizations.of(context).translate(widget.screenConstants.classTitleLabel)
               , AppLocalizations.of(context).translate(widget.screenConstants.classTitleHint), (value) {
                                 widget.store.setDesignation(value);
-                              }, designationController, false),
+                              }, designationController, false, maxChars: 35, validator: _titleValidator),
 
                               /// Description
                               _buildTextField(AppLocalizations.of(context).translate(widget.screenConstants.classDescriptionLabel),
                                   AppLocalizations.of(context).translate(widget.screenConstants.classDescriptionHint),
                                       (value) {
                                     widget.store.setDescription(value);
-                                  }, descriptionController, true, maxChars: 255),
+                                  }, descriptionController, true, maxChars: 250, validator: _descriptionValidator),
 
                               /// Equipment
                               _buildTextField(
                                   AppLocalizations.of(context).translate(widget.screenConstants.classEquipmentLabel)
                               , AppLocalizations.of(context).translate(widget.screenConstants.classEquipmentHint), (value) {
                                 widget.store.setGoals(value);
-                              }, goalsController, true, maxChars: 255),
+                              }, goalsController, true, maxChars: 250, validator: _equipmentValidator),
 
                               /// Goals
                               _buildTextField(
@@ -258,7 +259,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                   AppLocalizations.of(context).translate(widget.screenConstants.classGoalsHint),
                                       (value) {
                                     widget.store.setEquipment(value);
-                                  }, equipmentController, true, maxChars: 255),
+                                  }, equipmentController, true, maxChars: 250, validator: _goalsValidator),
 
                               /// Burned Calories
                               _buildTextField(AppLocalizations.of(context).translate(widget.screenConstants.classCaloriesLabel),
@@ -266,7 +267,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                 if (value != null && (value as String).isNotEmpty)
                                   widget.store.setCalories(double.parse(value));
                               }, caloriesController, false,
-                                  inputFormat: TextInputType.number),
+                                  inputFormat: TextInputType.number, validator: _caloriesValidator),
 
                               /// Duration
                               Container(
@@ -376,24 +377,32 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                 ),
                               ),
 
-                              Container(
-                                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      FlatButton(
-                                        padding: EdgeInsets.all(15.0),
-                                        color: AppColors.bgGreyColor,
-                                        textColor: AppColors.regularRed,
-                                        onPressed: () {
-                                          _delete(context);
-                                        },
-                                        child: TextsBuilder.h4Bold(
-                                            AppLocalizations.of(context).translate(widget.screenConstants.deleteClassButtonLabel)
-                                        , color: AppColors.bgMainColor),
-                                      )
-                                    ],
-                                  )
+                              Observer(
+                                builder: (_) {
+                                  if ( widget.store.id != null ) {
+                                    return Container(
+                                        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            FlatButton(
+                                              padding: EdgeInsets.all(15.0),
+                                              color: AppColors.bgGreyColor,
+                                              textColor: AppColors.regularRed,
+                                              onPressed: () {
+                                                _delete(context);
+                                              },
+                                              child: TextsBuilder.h4Bold(
+                                                  AppLocalizations.of(context).translate(widget.screenConstants.deleteClassButtonLabel)
+                                                  , color: AppColors.bgMainColor),
+                                            )
+                                          ],
+                                        )
+                                    );
+                                  } else {
+                                    return Container();
+                                  }
+                                },
                               ),
                             ],
                           ),
@@ -419,7 +428,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
 
   _buildTextField(String label, String hintText, Function onChange,
       TextEditingController controller, bool isMultiline,
-      {int maxChars, TextInputType inputFormat = TextInputType.text}) {
+      {int maxChars, TextInputType inputFormat = TextInputType.text, Function validator}) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -428,6 +437,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
           _buildLabelContainer(label),
           // input field
           TextFormField(
+            validator: (validator == null) ? (value)=>null : validator,
             style: TextStyle(color: AppColors.fontColor),
             controller: controller,
             onChanged: (value) => onChange(value),
@@ -462,6 +472,46 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
     .whenComplete(() => widget.store.setIsLoadingContext(false));
   }
 
+  //////////////////////////////////////////////////////
+  // Form Validations
+  //////////////////////////////////////////////////////
+  String _titleValidator(String value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context).translate(widget.formConstants.titleIsRequired);
+    }
+    return null;
+  }
+
+  String _descriptionValidator(String value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context).translate(widget.formConstants.descriptionIsRequired);
+    }
+    return null;
+  }
+
+  String _equipmentValidator(String value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context).translate(widget.formConstants.equipmentIsRequired);
+    }
+    return null;
+  }
+
+  String _goalsValidator(String value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context).translate(widget.formConstants.goalsIsRequired);
+    }
+    return null;
+  }
+
+  String _caloriesValidator(String value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context).translate(widget.formConstants.caloriesIsRequired);
+    }
+    return null;
+  }
+
+
+
   ///
   /// Show Delete Dialog
   ///
@@ -490,13 +540,36 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
   ///
   _save(BuildContext context) {
     // validate fields here
+    if (!formKey.currentState.validate()) {
+      return;
+    }
+
+    // verify easy selection fields
+    if (widget.store.difficultyLevel == null) {
+      ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(widget.formConstants.difficultyIsRequired));
+      return;
+    }
+    if (widget.store.duration == null || widget.store.duration == 0) {
+      ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(widget.formConstants.durationIsRequired));
+      return;
+    }
+
+    if (widget.store.pictureUrl == null && imageFile == null) {
+      ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(widget.formConstants.pictureIsRequired));
+      return;
+    }
+
+    if ( widget.store.categoryId == null || widget.store.subCategoryId == null ) {
+      ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(widget.formConstants.categoryIsRequired));
+      return;
+    }
 
     // validate the image size after compression
     if ( imageFile != null ) {
       CompressionUtils().compressAndGetFileSize(imageFile)
           .then((size) {
          if ( size > 80000 ) {
-           ToasterBuilder.buildErrorToaster(context, "Please choose a smaller file");
+           ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(widget.formConstants.fileIsTooBigError));
          } else {
            _sendCreateOrUpdate();
          }
