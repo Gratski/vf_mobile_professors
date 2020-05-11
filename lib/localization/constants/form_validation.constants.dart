@@ -53,4 +53,6 @@ class FormValidationConstants {
   String get categoryIsRequired => "FORM_VALIDATION_CATEGORY_IS_REQUIRED";
   String get fileIsTooBigError => "FORM_VALIDATION_FILE_IS_TOO_BIG";
 
+  String get accessCodeIsRequired => "FORM_VALIDATION_ACCESS_CODE_IS_REQUIRED";
+
 }

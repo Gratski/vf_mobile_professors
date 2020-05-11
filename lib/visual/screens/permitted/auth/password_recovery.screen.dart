@@ -50,6 +50,7 @@ class PasswordRecoveryScreen extends AbstractAuthScreen {
                 margin:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
                 child: TextFormField(
+                  keyboardType: TextInputType.emailAddress,
                   validator: _validateEmail,
                   style: TextStyle(color: AppColors.fontColor),
                   controller: emailController,
