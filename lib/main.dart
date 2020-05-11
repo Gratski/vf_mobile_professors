@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:professors/localization/localization.config.dart';
 import 'package:professors/visual/screens/authenticated/home.dart';
+import 'package:professors/visual/screens/authenticated/settings/settings.dart';
 import 'package:professors/visual/screens/permitted/auth/login.screen.dart';
 import 'package:professors/visual/screens/permitted/auth/registration.screen.dart';
 import 'package:professors/visual/screens/permitted/splash/SplashPagesScreen.dart';
@@ -45,7 +46,8 @@ class MyApp extends StatelessWidget {
           '/splash': (context) => SplashPagesScreen(),
           '/login': (context) => LoginScreen(),
           '/registration': (context) => RegistrationScreen(),
-          '/home': (context) => HomeScreen()
+          '/home': (context) => HomeScreen(),
+          '/settings': (context) => SettingsScreen()
         },
         initialRoute: (isNew) ? '/splash' : (hasToken) ? '/home' : '/login',
 

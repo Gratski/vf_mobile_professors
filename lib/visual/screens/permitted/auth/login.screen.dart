@@ -57,7 +57,7 @@ class LoginScreen extends AbstractAuthScreen {
                       top: MediaQuery.of(context).size.height / 40),
                   padding: AppPaddings.regularPadding(context),
                   child: TextsBuilder.jumboBold(context, AppLocalizations.of(context)
-                      .translate(screenConstants.loginTopHeader))),
+                      .translate(screenConstants.loginTopHeader), color: Colors.white)),
 
               // Email
               Container(
@@ -68,10 +68,10 @@ class LoginScreen extends AbstractAuthScreen {
                     keyboardType: TextInputType.emailAddress,
                     validator: _emailValidator,
                     controller: emailController,
-                    style: TextStyle(color: AppColors.fontColor),
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                        labelStyle: TextStyle(color: AppColors.fontColor),
-                        hintStyle: TextStyle(color: AppColors.fontColor),
+                        labelStyle: TextStyle(color: Colors.white),
+                        hintStyle: TextStyle(color: Colors.white),
                         hintText: AppLocalizations.of(context)
                             .translate(screenConstants.loginEmailLabel)),
                   )),
@@ -85,10 +85,10 @@ class LoginScreen extends AbstractAuthScreen {
                     obscureText: true,
                     validator: _passwordValidator,
                     controller: passwordController,
-                    style: TextStyle(color: AppColors.fontColor),
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                        labelStyle: TextStyle(color: AppColors.fontColor),
-                        hintStyle: TextStyle(color: AppColors.fontColor),
+                        labelStyle: TextStyle(color: Colors.white),
+                        hintStyle: TextStyle(color: Colors.white),
                         hintText: AppLocalizations.of(context)
                             .translate(screenConstants.loginPasswordLabel)),
                   )),
@@ -146,7 +146,7 @@ class LoginScreen extends AbstractAuthScreen {
                               builder: (context) =>
                                   PasswordRecoveryScreen(emailController.text)),
                         );
-                      }, color: AppColors.fontColor)),
+                      }, color: Colors.white)),
 
               // register
               Container(
@@ -158,7 +158,7 @@ class LoginScreen extends AbstractAuthScreen {
                           .translate(screenConstants.loginRegisterText),
                           () {
                         Navigator.pushNamed(context, '/registration');
-                      }, color: AppColors.fontColor)),
+                      }, color: Colors.white)),
             ],
           ),
         ),

@@ -54,7 +54,7 @@ class RegistrationScreen extends AbstractAuthScreen {
               Container(
                   margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
                   child: TextsBuilder.jumboBold(context, AppLocalizations.of(context)
-                      .translate(screenConstants.registrationTopHeader))
+                      .translate(screenConstants.registrationTopHeader), color: Colors.white)
               ),
               // Sub Title
               GestureDetector(
@@ -64,7 +64,7 @@ class RegistrationScreen extends AbstractAuthScreen {
                 child: Container(
                     margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01),
                     child: TextsBuilder.regularText(AppLocalizations.of(context)
-                        .translate(screenConstants.registrationSubTitle))
+                        .translate(screenConstants.registrationSubTitle), color: Colors.white)
                 ),
               ),
 
@@ -75,7 +75,7 @@ class RegistrationScreen extends AbstractAuthScreen {
                   child: TextFormField(
                     keyboardType: TextInputType.emailAddress,
                     validator: _validateEmail,
-                    style: TextStyle(color: AppColors.fontColor),
+                    style: TextStyle(color: Colors.white),
                     controller: emailController,
                     decoration: InputDecoration(
                         hintText: AppLocalizations.of(context).translate(screenConstants.registrationEmailLabel)
@@ -90,7 +90,7 @@ class RegistrationScreen extends AbstractAuthScreen {
                   child: TextFormField(
                     obscureText: true,
                     validator: _passwordValidator,
-                    style: TextStyle(color: AppColors.fontColor),
+                    style: TextStyle(color: Colors.white),
                     controller: passwordController,
                     decoration: InputDecoration(
                         hintText: AppLocalizations.of(context).translate(screenConstants.registrationPasswordLabel)
@@ -104,7 +104,7 @@ class RegistrationScreen extends AbstractAuthScreen {
                   margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
                   child: TextFormField(
                     validator: _accessCodeValidator,
-                    style: TextStyle(color: AppColors.fontColor),
+                    style: TextStyle(color: Colors.white),
                     controller: accessCodeController,
                     decoration: InputDecoration(
                         hintText: AppLocalizations.of(context).translate(screenConstants.registrationAccessCodeLabel)
@@ -157,7 +157,7 @@ class RegistrationScreen extends AbstractAuthScreen {
                     Navigator.push(context, MaterialPageRoute(
                         builder: (context) => LoginScreen()
                     ),);
-                  }, color: AppColors.fontColor)
+                  }, color: Colors.white)
               ),
 
             ],

@@ -27,7 +27,7 @@ class RegularListTile extends StatelessWidget {
         ): Icon(
           Icons.check,
           color: AppColors.regularGreen,
-        ): Icon(Icons.check, color: AppColors.bgMainColor,),
+        ): Icon(Icons.check, color: Colors.white,),
         title: _createListItemText( label, hint));
   }
 

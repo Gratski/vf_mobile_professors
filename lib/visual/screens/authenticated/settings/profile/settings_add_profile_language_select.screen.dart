@@ -8,6 +8,7 @@ import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/visual/widgets/structural/lists/regular_list_tile.dart';
+import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class EditProfileAddNewLanguageScreen extends StatelessWidget {
   GeneralConstants generalConstants = GeneralConstants();
@@ -23,7 +24,6 @@ class EditProfileAddNewLanguageScreen extends StatelessWidget {
           CustomAppBar([]),
 
           /// Title
-
           AppHeaderWidget(
             AppLocalizations.of(context)
                 .translate(screenConstants.addNewLanguageSelectScreenTopHeader),
@@ -33,6 +33,7 @@ class EditProfileAddNewLanguageScreen extends StatelessWidget {
           ),
 
           /// Language Options
+          (generalStore.availableLanguages.length > 0) ? 
           SliverPadding(
             padding: AppPaddings.sliverListPadding(context),
             sliver: SliverList(
@@ -42,7 +43,6 @@ class EditProfileAddNewLanguageScreen extends StatelessWidget {
                     onTap: () {
                       profileDetailsStore.setIsLoading(true);
                       profileDetailsStore.setId(null);
-
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -58,6 +58,12 @@ class EditProfileAddNewLanguageScreen extends StatelessWidget {
                 },
                 childCount: generalStore.availableLanguages.length,
               ),
+            ),
+          ) : SliverToBoxAdapter(
+            child: Container(
+              margin: EdgeInsets.only(top: 20),
+              padding: AppPaddings.regularPadding(context),
+              child: TextsBuilder.regularText(AppLocalizations.of(context).translate(screenConstants.addNewLanguageAlreadyHaveAllLanguages)),
             ),
           ),
         ],

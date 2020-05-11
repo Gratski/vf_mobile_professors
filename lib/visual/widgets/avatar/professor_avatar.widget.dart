@@ -19,7 +19,7 @@ class ProfessorAvatarWidget extends StatelessWidget {
           Container(
             child: CircleAvatar(
               maxRadius: MediaQuery.of(context).size.width * 0.20,
-              backgroundColor: AppColors.bgMainColor,
+              backgroundColor: AppColors.regularRed,
               backgroundImage: (pictureUrl != null) ? NetworkImage(pictureUrl) : AssetImage('assets/images/logo.png'),
             ),
           ),

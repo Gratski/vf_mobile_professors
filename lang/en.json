@@ -140,6 +140,7 @@
 
   "SETTINGS_ADD_NEW_LANGUAGE_SELECT_SCREEN_TOP_HEADER": "Add Languages to your profile",
   "SETTINGS_ADD_NEW_LANGUAGE_SELECT_SCREEN_SUB_TITLE": "The more profile languages you have the more you monetize your classes. We made this available to you, so you can stream to every country in the world! All you need is to fluently speak that language and create classes for that specific language.",
+  "SETTINGS_ADD_NEW_LANGUAGE_HAVE_ALL_LANGUAGES": "Congratulations!\nYou already have a profile for all supported languages.",
 
   "SETTINGS_TRANSACTIONS_HISTORY_TOP_HEADER": "Transactions History",
   "SETTINGS_TRANSACTIONS_HISTORY_CURRENT_MONTH": "This Month",

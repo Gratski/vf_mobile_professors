@@ -6,4 +6,5 @@ class SettingsEditProfileConstants {
 
   String get addNewLanguageSelectScreenTopHeader => "SETTINGS_ADD_NEW_LANGUAGE_SELECT_SCREEN_TOP_HEADER";
   String get addNewLanguageSelectScreenSubTitle => "SETTINGS_ADD_NEW_LANGUAGE_SELECT_SCREEN_SUB_TITLE";
+  String get addNewLanguageAlreadyHaveAllLanguages => "SETTINGS_ADD_NEW_LANGUAGE_HAVE_ALL_LANGUAGES";
 }

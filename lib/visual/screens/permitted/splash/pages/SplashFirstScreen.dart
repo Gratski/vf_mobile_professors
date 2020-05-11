@@ -17,7 +17,7 @@ class SplashFirstScreen extends AbstractSplashScreen {
   Widget build(BuildContext context) {
     return Material(
       child: Container(
-        color: AppColors.bgMainColor,
+        color: Colors.white,
         alignment: Alignment.topCenter,
         child: Column(
           children: <Widget>[

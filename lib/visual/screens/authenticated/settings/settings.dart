@@ -30,14 +30,21 @@ class SettingsScreen extends StatelessWidget {
 
   GeneralConstants generalConstants = GeneralConstants();
 
+  BuildContext context;
+
   Future<File> getImage(ImageSource _source) async {
     return await ImagePicker.pickImage(source: _source);
   }
 
   @override
   Widget build(BuildContext context) {
+    this.context = context;
     return Scaffold(
-      body: CustomScrollView(
+      body: RefreshIndicator(
+        onRefresh: refreshOperation,
+        backgroundColor: AppColors.bgMainColor,
+        color: AppColors.regularRed,
+        child: CustomScrollView(
           slivers: <Widget>[
             SliverToBoxAdapter(
               child: Center(
@@ -92,7 +99,8 @@ class SettingsScreen extends StatelessWidget {
                                     height: MediaQuery.of(context).size.width / 2.7,
                                     width: MediaQuery.of(context).size.width / 2.7,
                                     child: CircleAvatar(
-                                      maxRadius: 90,
+                                      backgroundColor: AppColors.regularRed,
+                                        maxRadius: 90,
                                         backgroundImage: userStore.pictureUrl != null ? CachedNetworkImageProvider(
                                             userStore.pictureUrl
                                         ) : AssetImage(
@@ -155,9 +163,9 @@ class SettingsScreen extends StatelessWidget {
                                   child: Container(
                                     margin: EdgeInsets.only(top: 15),
                                     child: TextsBuilder.regularText(
-                                      AppLocalizations.of(context).translate(
-                                          TRANSLATIONS
-                                              .SettingsConstants.VIEW_PROFILE).toUpperCase()
+                                        AppLocalizations.of(context).translate(
+                                            TRANSLATIONS
+                                                .SettingsConstants.VIEW_PROFILE).toUpperCase()
                                     ),
                                   ),
                                 ),
@@ -319,7 +327,12 @@ class SettingsScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
     );
 
+  }
+
+  Future<Null> refreshOperation() async {
+    restServices.getUserService().getUserPersonalDetails(context);
   }
 }

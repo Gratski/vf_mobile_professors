@@ -30,7 +30,7 @@ abstract class AbstractAuthScreen extends StatelessWidget {
               return [CustomAppBar([], hideBackButton: getHideBackButton(), customBackCallback: () {
                 onBackButtonTap();
                 Navigator.pop(context);
-              },)];
+              }, leadingColor: Colors.white )];
             },
             body: CustomScrollView(
               slivers: getSlivers(context)

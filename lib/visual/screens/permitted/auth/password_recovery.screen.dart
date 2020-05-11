@@ -38,6 +38,7 @@ class PasswordRecoveryScreen extends AbstractAuthScreen {
         subTitle: AppLocalizations.of(context)
             .translate(screenConstants.passwordRecoverySubTitle),
         padding: AppPaddings.regularPadding(context),
+        color: Colors.white,
       ),
       SliverToBoxAdapter(
         child: Form(
@@ -52,7 +53,7 @@ class PasswordRecoveryScreen extends AbstractAuthScreen {
                 child: TextFormField(
                   keyboardType: TextInputType.emailAddress,
                   validator: _validateEmail,
-                  style: TextStyle(color: AppColors.fontColor),
+                  style: TextStyle(color: Colors.white),
                   controller: emailController,
                   decoration: InputDecoration(
                       hintText: AppLocalizations.of(context)

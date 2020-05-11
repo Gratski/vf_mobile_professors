@@ -301,10 +301,10 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                                         color: (widget.store
                                                             .duration ==
                                                             d)
-                                                            ? AppColors.regularGreen
+                                                            ? AppColors.regularRed
                                                             : Colors.white,
                                                         border: Border.all(
-                                                            color: AppColors.regularGreen,
+                                                            color: AppColors.regularRed,
                                                             width: 1.0),
                                                         borderRadius: BorderRadius.all(
                                                           Radius.circular(25),
@@ -356,10 +356,10 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                                             .difficultyLevel ==
                                                             l.id || widget.store
                                                             .difficultyLevel > widget.store.possibleDifficultyLevels.length))
-                                                        ? AppColors.regularGreen
+                                                        ? AppColors.regularRed
                                                         : Colors.white,
                                                     border: Border.all(
-                                                        color: AppColors.regularGreen,
+                                                        color: AppColors.regularRed,
                                                         width: 1.0),
                                                     borderRadius: BorderRadius.all(
                                                       Radius.circular(25),
@@ -388,7 +388,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                 builder: (_) {
                                   if ( widget.store.id != null ) {
                                     return Container(
-                                        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
+                                        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20, bottom: MediaQuery.of(context).size.height / 20),
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
@@ -399,9 +399,14 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                               onPressed: () {
                                                 _delete(context);
                                               },
-                                              child: TextsBuilder.h4Bold(
-                                                  AppLocalizations.of(context).translate(widget.screenConstants.deleteClassButtonLabel)
-                                                  , color: AppColors.bgMainColor),
+                                              child: Row(
+                                                children: [
+                                                  TextsBuilder.h4Bold(
+                                                      AppLocalizations.of(context).translate(widget.screenConstants.deleteClassButtonLabel) + ' '
+                                                      , color: Colors.grey),
+                                                  Icon(FontAwesomeIcons.trashAlt, color: Colors.grey,),
+                                                ],
+                                              ),
                                             )
                                           ],
                                         )
@@ -466,7 +471,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
       child: Chip(
         label: text,
         padding: EdgeInsets.all(0),
-        backgroundColor: AppColors.regularGreen,
+        backgroundColor: AppColors.regularRed,
       ),
     );
   }

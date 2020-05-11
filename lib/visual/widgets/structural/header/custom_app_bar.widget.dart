@@ -9,8 +9,9 @@ class CustomAppBar extends StatelessWidget {
   bool hideBackButton;
   Function customBackCallback;
   Widget customBackButton;
+  Color leadingColor;
 
-  CustomAppBar(this.actions, {this.customBackCallback, this.title, this.hideBackButton = false, this.customBackButton});
+  CustomAppBar(this.actions, {this.customBackCallback, this.title, this.hideBackButton = false, this.customBackButton, this.leadingColor});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class CustomAppBar extends StatelessWidget {
       leading: ButtonsBuilder.transparentCustomButton(
           (!hideBackButton) ? (customBackButton != null) ? this.customBackButton : Icon(
             Icons.arrow_back_ios,
-            color: AppColors.iconRegular,
+            color: (this.leadingColor != null) ? leadingColor : AppColors.iconRegular,
           ) : Container()
       , () {
         if (customBackCallback != null) {
