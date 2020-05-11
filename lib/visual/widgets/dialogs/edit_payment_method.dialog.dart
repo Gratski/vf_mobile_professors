@@ -43,33 +43,74 @@ class EditPaymentMethodDialog extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          Row(
+            children: [
+              Expanded(
+                flex: 10,
+                child: Container(
+                  margin: _margin(context),
+                  padding: EdgeInsets.all(5),
+                  child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonMakeDefaultLabel), () {
+                    makeDefaultCallback();
+                    Navigator.of(context).pop();
+                  }, color: AppColors.bgMainColor),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                flex: 10,
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      top: BorderSide(
+                        color: Colors.grey[300],
+                        width: 1.0,
+                      ),
+                    ),
+                  ),
+                  margin: _margin(context),
+                  padding: EdgeInsets.all(5).copyWith(top: MediaQuery.of(context).size.height / 40),
+                  child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonRemoveLabel), () {
+                    deleteCallback();
+                    Navigator.of(context).pop();
+                  }, color: AppColors.bgMainColor),
+                ),
+              ),
+            ],
+          ),
 
-          Container(
-            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40, bottom: MediaQuery.of(context).size.height / 30),
-            padding: EdgeInsets.all(5),
-            child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonMakeDefaultLabel), () {
-              makeDefaultCallback();
-              Navigator.of(context).pop();
-            }, color: AppColors.regularGreen),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40, bottom: MediaQuery.of(context).size.height / 30),
-            padding: EdgeInsets.all(5),
-            child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonRemoveLabel), () {
-              deleteCallback();
-              Navigator.of(context).pop();
-            }, color: AppColors.regularRed),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40, bottom: MediaQuery.of(context).size.height / 30),
-            padding: EdgeInsets.all(5),
-            child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.dialogUnavailableOperationDismissLabel), () {
-              Navigator.of(context).pop();
-            }, color: AppColors.bgMainColor),
+          Row(
+            children: [
+              Expanded(
+                flex: 10,
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      top: BorderSide(
+                        color: Colors.grey[300],
+                        width: 1.0,
+                      ),
+                    ),
+                  ),
+                  margin: _margin(context).copyWith(bottom: MediaQuery.of(context).size.height / 40),
+                  padding: EdgeInsets.all(5).copyWith(top: MediaQuery.of(context).size.height / 40),
+                  child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.dialogUnavailableOperationDismissLabel), () {
+                    Navigator.of(context).pop();
+                  }, color: AppColors.bgMainColor),
+                ),
+              ),
+            ],
           ),
 
         ],
       ),
     );
+  }
+
+  EdgeInsets _margin(BuildContext context) {
+    return EdgeInsets.only(top: MediaQuery.of(context).size.height / 40);
   }
 }

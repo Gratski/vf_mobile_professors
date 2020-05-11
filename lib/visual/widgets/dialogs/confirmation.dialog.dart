@@ -60,34 +60,44 @@ class ConfirmationDialog extends StatelessWidget {
           ),
 
           // Buttons
-          SafeArea(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-
-                Expanded(
-                  flex: 6,
-                  child: Container(
-                    padding: EdgeInsets.all(5),
-                    child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonYesLabel), () {
-                      confirmationCallback();
-                      Navigator.of(context).pop();
-                    }, color: AppColors.regularGreen),
-                  ),
+          Container(
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: Colors.grey[300],
+                  width: 1.0,
                 ),
-                Expanded(
-                  flex: 6,
-                  child: Container(
-                    padding: EdgeInsets.all(5),
-                    child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonNoLabel), () {
-                      cancelCallback();
-                      Navigator.of(context).pop();
-                    }, color: AppColors.regularRed),
-                  ),
-                ),
-              ],
+              ),
             ),
-          )
+            child: SafeArea(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+
+                  Expanded(
+                    flex: 6,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonYesLabel), () {
+                        confirmationCallback();
+                        Navigator.of(context).pop();
+                      }, color: AppColors.fontColor),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 6,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonNoLabel), () {
+                        cancelCallback();
+                        Navigator.of(context).pop();
+                      }, color: AppColors.fontColor),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
