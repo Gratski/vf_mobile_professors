@@ -18,6 +18,7 @@ import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
+import 'package:professors/visual/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class ClassesScreen extends StatefulWidget {
@@ -182,166 +183,96 @@ class _ClassesScreenState extends State<ClassesScreen>
       },
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: AppColors.bgMainLightColor)
         ),
         margin:
             EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.03),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(23),
-          child: Stack(
-            children: <Widget>[
-              AspectRatio(
-                aspectRatio: 3 / 2,
-                child: (classesStore.classes[index].pictureUrl != null)
-                    ? Image.network(
-                  classesStore.classes[index].pictureUrl,
-                  fit: BoxFit.cover,
-                )
-                    : Container(),
-              ),
-              AspectRatio(
-                aspectRatio: 3 / 2,
-                child: Opacity(
-                  opacity: 0.65,
-                  child: Container(
-                    foregroundDecoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          colors: [Color.fromRGBO(3, 3, 3, 0.4), Color.fromRGBO(3, 3, 3, 0.01)],
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 10,
-                left: 10,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
+            children: [
+              // top bar
+              Container(
+                padding: EdgeInsets.all(8),
+                color: AppColors.bgMainColor,
+                child: Row(
                   children: [
-                    Row(
-                      children: ClassesUtils().getDifficultyLevelSquares(classesStore.classes[index].difficultyLevel),
-                    ),
-                    TextsBuilder.textSmall(ClassesUtils().getDifficultyLevelText(context, classesStore.classes[index].difficultyLevel).toUpperCase(), color: Colors.white),
-                  ],
-                ),
-              ),
-              Positioned(
-                top: 5,
-                right: 10,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => CreateOrEditClassScreen(
-                          LanguageModel(
-                              classesStore.classes[index].languageId, null, null),
-                          classId: classesStore.classes[index].id,
-                        )));
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(5)),
-                    child: Icon(
-                      FontAwesomeIcons.edit,
-                      color: AppColors.fontColor,
-                      size: 20,
-                    ),
-                  ),
-                )
-              ),
-              Positioned(
-                bottom: 10,
-                right: 10,
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  margin: EdgeInsets.only(top: 5),
-                  decoration: BoxDecoration(
-                      color: AppColors.regularRed,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: TextsBuilder.regularText(
-                      classesStore.classes[index].languageCode.toUpperCase(),
-                      color: Colors.white),
-                ),
-              ),
-              Positioned(
-                bottom: 10,
-                left: 10,
-                child:
-
-                /// LABEL
-                Container(
-                  margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height / 6,
-                  ),
-                  child: Row(
-                    children: <Widget>[
-                      Column(
+                    Expanded(
+                      flex: 8,
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          /// STATUS LABEL
-                          Container(
-                              child: ClassesUtils().getChipByStatus(
-                                  context, classesStore.classes[index].status)),
-
-                          /// DETAILS
+                        children: [
+                          Row(
+                            children: IconsBuilder.difficultyIcons(classesStore.classes[index].difficultyLevel),
+                          ),
                           Container(
                             margin: EdgeInsets.only(top: 5),
-                            child: Row(
-                              children: <Widget>[
-                                Column(
-                                  children: <Widget>[
-                                    TextsBuilder.h4Bold(
-                                        classesStore.classes[index].designation),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 5),
-                                      child: Row(
-                                        children: <Widget>[
-                                          Icon(
-                                            FontAwesomeIcons.clock,
-                                            color: AppColors.fontColor,
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.only(left: 10),
-                                            child: TextsBuilder.regularText(
-                                                '${classesStore.classes[index].duration} ${AppLocalizations.of(context).translate(widget.generalConstants.wordMinutes)}'),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                ),
-                              ],
-                            ),
+                            child: TextsBuilder.textSmall(ClassesUtils().getDifficultyLevelText(context, classesStore.classes[index].difficultyLevel).toUpperCase(), color: AppColors.fontColor),
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextsBuilder.h4Bold("4.5"),
+                          Icon(Icons.star, color: AppColors.regularRed,),
+                        ],
+                      )
+                    ),
+                  ],
                 ),
               ),
+
+              // picture
               Container(
-                margin: EdgeInsets.only(left: 10),
-                child: Column(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        /// DIFFICULTY
-                        Container(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[],
-                          ),
-                        ),
-                      ],
+                child: AspectRatio(
+                  aspectRatio: 3 / 2,
+                  child: (classesStore.classes[index].pictureUrl != null)
+                      ? Image.network(
+                    classesStore.classes[index].pictureUrl,
+                    fit: BoxFit.cover,
+                  )
+                      : Container(),
+                ),
+              ),
+
+              // bottom bar
+              Container(
+                padding: EdgeInsets.all(8),
+                color: AppColors.bgMainColor,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 8,
+                      child: TextsBuilder.h4Bold(classesStore.classes[index].designation)
+                    ),
+                    Flexible(
+                        flex: 2,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              margin: EdgeInsets.only(top: 5),
+                              decoration: BoxDecoration(
+                                  color: AppColors.regularRed,
+                                  borderRadius: BorderRadius.circular(2)),
+                              child: TextsBuilder.regularText(
+                                  classesStore.classes[index].languageCode.toUpperCase(),
+                                  color: Colors.white),
+                            ),
+                          ],
+                        )
                     ),
                   ],
                 ),
               ),
             ],
-          ),
+          )
         ),
       ),
     );

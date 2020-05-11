@@ -34,7 +34,7 @@ class IconsBuilder {
       list.add(
         Container(
           margin: EdgeInsets.only(right: 3),
-          child: Icon(FontAwesomeIcons.squareFull, color: AppColors.regularRed, size: 17,),
+          child: Icon(FontAwesomeIcons.solidSquare, color: AppColors.regularRed, size: 16,),
         ),
       );
       counter++;
@@ -45,7 +45,7 @@ class IconsBuilder {
       list.add(
           Container(
             margin: EdgeInsets.only(right: 3),
-            child: Icon(FontAwesomeIcons.squareFull, color: Colors.grey[300], size: 17,),
+            child: Icon(FontAwesomeIcons.square, color: AppColors.regularRed, size: 16,),
           ),);
     }
 
