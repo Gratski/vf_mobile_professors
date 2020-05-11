@@ -20,7 +20,7 @@ abstract class _CreateClassState with Store {
   static GeneralConstants constants = GeneralConstants();
 
   @observable
-  ObservableList<int> possibleDurations = ObservableList.of([20, 30, 35, 45]);// in minutes
+  ObservableList<int> possibleDurations = ObservableList.of([30, 35, 45, 60]);// in minutes
 
   @observable
   ObservableList<DifficultyLevel> possibleDifficultyLevels = ObservableList.of([

@@ -35,20 +35,16 @@ class PaymentsScreen extends StatelessWidget {
                 margin: AppPaddings.regularPadding(context).copyWith(top: 20),
                 width: MediaQuery.of(context).size.width / 2,
                 padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.10),
-                color: AppColors.fontColor,
+                color: Colors.white,
                 child: Column(
                   children: <Widget>[
-                    Observer(
-                      builder: (_) {
-                        return TextsBuilder.h4Bold('${AppLocalizations.of(context)
-                            .translate(screenConstants.balanceLabel)} ( ${userWallet.currency.symbol} )', color: AppColors.bgMainColor);
-                      },
-                    ),
+                    TextsBuilder.h4Bold('${AppLocalizations.of(context)
+                            .translate(screenConstants.balanceLabel)}', color: AppColors.bgMainColor),
                     Observer(builder: (_) {
                       return Container(
                         margin: EdgeInsets.only(top: 15.0),
                         child: TextsBuilder.h4Bold(
-                            "${userWallet.balance}", color: AppColors.bgMainColor),
+                            "${userWallet.balance} ${userWallet.currency.symbol}", color: AppColors.bgMainColor),
                       );
                     }),
                   ],

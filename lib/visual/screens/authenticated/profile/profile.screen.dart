@@ -49,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 },
                 child: Icon(
                   Icons.arrow_back_ios,
-                  color: Colors.white,
+                  color: AppColors.bgMainColor,
                 ),
               ),
               floating: false,
@@ -141,12 +141,12 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   padding: AppPaddings.regularPadding(context),
                                   margin: EdgeInsets.only(
                                       top: sectionTopMargin / 4),
-                                  child: TextsBuilder.h3Bold(
+                                  child: TextsBuilder.textSmallBold(
                                       AppLocalizations.of(context)
                                           .translate(widget.screenConstants
                                               .aboutLabel(widget.languageCode))
                                           .toUpperCase(),
-                                      color: AppColors.textDarkRegularColor),
+                                      color: AppColors.bgMainColor),
                                 ),
 
                                 Observer(
@@ -159,7 +159,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                       child: TextsBuilder.regularText(
                                           '${widget.store.about}',
                                           color:
-                                              AppColors.textDarkRegularColor),
+                                              AppColors.fontColor),
                                     );
                                   },
                                 ),
@@ -169,12 +169,12 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   padding: AppPaddings.regularPadding(context),
                                   margin:
                                       EdgeInsets.only(top: sectionTopMargin),
-                                  child: TextsBuilder.h3Bold(
+                                  child: TextsBuilder.textSmallBold(
                                       AppLocalizations.of(context)
                                           .translate(widget.screenConstants
                                               .quoteLabel(widget.languageCode))
                                           .toUpperCase(),
-                                      color: AppColors.textDarkRegularColor),
+                                      color: AppColors.fontColor),
                                 ),
                                 Container(
                                   margin: EdgeInsets.only(
@@ -188,7 +188,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                         flex: 1,
                                         child: Icon(
                                           Icons.format_quote,
-                                          color: AppColors.textDarkRegularColor,
+                                          color: AppColors.fontColor,
                                         ),
                                       ),
                                       Observer(builder: (_) {
@@ -196,15 +196,14 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           flex: 10,
                                           child: TextsBuilder.regularText(
                                               '${widget.store.quote}',
-                                              color: AppColors
-                                                  .textDarkRegularColor),
+                                              color: AppColors.fontColor),
                                         );
                                       }),
                                       Expanded(
                                         flex: 1,
                                         child: Icon(
                                           Icons.format_quote,
-                                          color: AppColors.textDarkRegularColor,
+                                          color: AppColors.bgMainColor,
                                         ),
                                       ),
                                     ],

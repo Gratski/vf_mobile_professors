@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/classes/classes_constants.dart';
 import 'package:professors/localization/constants/form_validation.constants.dart';
 import 'package:professors/localization/constants/general_constants.dart';
+import 'package:professors/localization/constants/profile_screen.constants.dart';
 import 'package:professors/visual/screens/authenticated/profile/profile.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
@@ -14,8 +16,10 @@ import 'package:professors/visual/widgets/structural/header/custom_app_bar.widge
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class EditProfileInLanguageScreen extends StatefulWidget {
+
   FormValidationConstants formConstants = FormValidationConstants();
   GeneralConstants generalConstants = GeneralConstants();
+  ProfileScreenConstants profileConstants = ProfileScreenConstants();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -118,7 +122,7 @@ class _EditProfileInLanguageScreenState
                                   margin: EdgeInsets.only(
                                       top: sectionTopMargin / 4),
                                   child: TextsBuilder.h4Bold(
-                                    'About',
+                                    AppLocalizations.of(context).translate(widget.profileConstants.defaultAboutLabel),
                                   ),
                                 ),
                                 Container(
@@ -152,7 +156,7 @@ class _EditProfileInLanguageScreenState
                                   margin: EdgeInsets.only(
                                       top: sectionTopMargin / 4),
                                   child: TextsBuilder.h4Bold(
-                                    'Quote',
+                                    AppLocalizations.of(context).translate(widget.profileConstants.defaultQuoteLabel),
                                   ),
                                 ),
                                 Container(

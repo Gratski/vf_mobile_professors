@@ -39,8 +39,6 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
           slivers: <Widget>[
-
-
             SliverToBoxAdapter(
               child: Center(
                 child: Container(

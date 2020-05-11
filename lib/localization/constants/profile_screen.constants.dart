@@ -1,5 +1,8 @@
 class ProfileScreenConstants {
 
+  String get defaultAboutLabel => "PROFILE_SCREEN_ABOUT_DEFAULT";
+  String get defaultQuoteLabel => "PROFILE_SCREEN_QUOTE_DEFAULT";
+
   String aboutLabel(String code) {
     return "PROFILE_SCREEN_ABOUT_${suffixByLanguageCode(code)}";
   }

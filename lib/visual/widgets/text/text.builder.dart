@@ -16,7 +16,7 @@ class TextsBuilder {
   static double _FONT_SIZE_H1 = 35.0;
   static double _FONT_SIZE_H2 = 30.0;
   static double _FONT_SIZE_H3 = 24.0;
-  static double _FONT_SIZE_H4 = 20.0;
+  static double _FONT_SIZE_H4 = 16.0;
   static double _FONT_SIZE_H5 = 13.0;
   static double _FONT_SIZE_REGULAR = 16.0;
   static double _FONT_SMALL = 14.0;
@@ -30,11 +30,11 @@ class TextsBuilder {
   }
 
   /// SPAN
-  static TextSpan h1BoldSpan(String text, {Color color = Colors.white}) {
+  static TextSpan h1BoldSpan(String text, {Color color}) {
     return TextSpan(
         text: text,
         style:
-            TextStyle(fontSize: _FONT_SIZE_H1, fontFamily: _FONT_FAMILY_RALE_EXTRA_BOLD, color: color));
+            TextStyle(fontSize: _FONT_SIZE_H1, fontFamily: _FONT_FAMILY_RALE_EXTRA_BOLD, color: (color != null) ? color : AppColors.bgMainColor ));
   }
 
   /// SPAN
@@ -53,11 +53,11 @@ class TextsBuilder {
             fontSize: _FONT_SIZE_H3, fontFamily: _FONT_FAMILY_REGULAR, color: color));
   }
 
-  static TextSpan regularSpan(String text, {Color color = Colors.white}) {
+  static TextSpan regularSpan(String text, {Color color}) {
     return TextSpan(
         text: text,
         style: TextStyle(
-            fontSize: _FONT_SIZE_REGULAR, fontFamily: _FONT_FAMILY_REGULAR, color: color));
+            fontSize: _FONT_SIZE_REGULAR, fontFamily: _FONT_FAMILY_REGULAR, color: (color != null) ? color : AppColors.bgMainColor ));
   }
 
   static TextSpan subTitleSpan(String text, {Color color = Colors.grey}) {
@@ -83,8 +83,15 @@ class TextsBuilder {
             fontFamily: _FONT_FAMILY_REGULAR));
   }
 
-  static Text jumboBold(BuildContext context, String text) {
-    return createText(text, MediaQuery.of(context).size.width / 7.9, _FONT_FAMILY_RALE_EXTRA_BOLD);
+  static Stack jumboBold(BuildContext context, String text) {
+    return Stack(
+      children: <Widget>[
+        // Stroked text as border.
+
+        // Solid text as fill.
+        createText(text, MediaQuery.of(context).size.width / 7.8, _FONT_FAMILY_RALE_EXTRA_BOLD)
+      ],
+    );
   }
 
   static Text h1Bold(String text, {Color color}) {
@@ -144,7 +151,7 @@ class TextsBuilder {
       text,
       textAlign: align,
       style: TextStyle(
-        color: ( color != null ) ? color : AppColors.textRegularColor,
+        color: ( color != null ) ? color : AppColors.fontColor,
           fontWeight: (bold) ? FontWeight.bold : FontWeight.normal,
           fontSize: _FONT_SIZE_REGULAR, fontFamily: _FONT_FAMILY_REGULAR),
     );
@@ -154,7 +161,7 @@ class TextsBuilder {
       {Color color, TextAlign align = TextAlign.start}) {
     return Text(text,
       textAlign: align,
-      style: TextStyle(fontSize: size, fontFamily: fontFamily, color: ( color != null ) ? color : AppColors.textRegularColor),
+      style: TextStyle(fontSize: size, fontFamily: fontFamily, color: ( color != null ) ? color : AppColors.fontColor),
       overflow: TextOverflow.visible,);
   }
 }
