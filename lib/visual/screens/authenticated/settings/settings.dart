@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mobx/mobx.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
@@ -18,6 +19,7 @@ import 'package:professors/visual/screens/authenticated/settings/profile/setting
 import 'package:professors/visual/screens/authenticated/settings/security/security_definitions.dart';
 import 'package:professors/visual/screens/authenticated/settings/support/support_type.dart';
 import 'package:professors/visual/styles/colors.dart';
+import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/visual/widgets/structural/lists/regular_list_tile.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
@@ -42,7 +44,7 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: refreshOperation,
-        backgroundColor: AppColors.bgMainColor,
+        backgroundColor: Colors.white,
         color: AppColors.regularRed,
         child: CustomScrollView(
           slivers: <Widget>[
@@ -68,48 +70,53 @@ class SettingsScreen extends StatelessWidget {
                           flex: 5,
                           child: Observer(
                             builder: (_) {
-                              return GestureDetector(
-                                onTap: () async {
-                                  File file;
-                                  if (Theme.of(context).platform ==
-                                      TargetPlatform.android) {
-                                    file = await FilePicker.getFile(
-                                      type: FileType.custom,
-                                      allowedExtensions: ['jpg', 'png', 'jpeg'],
-                                    );
-                                  } else if (Theme.of(context).platform ==
-                                      TargetPlatform.iOS) {
-                                    file = await getImage(ImageSource.gallery);
-                                  }
+                              if ( userStore.isPictureLoading ) {
+                                return DefaultLoaderWidget();
+                              } else {
+                                return GestureDetector(
+                                  onTap: () async {
+                                    File file;
+                                    if (Theme.of(context).platform ==
+                                        TargetPlatform.android) {
+                                      file = await FilePicker.getFile(
+                                        type: FileType.custom,
+                                        allowedExtensions: ['jpg', 'png', 'jpeg'],
+                                      );
+                                    } else if (Theme.of(context).platform ==
+                                        TargetPlatform.iOS) {
+                                      file = await getImage(ImageSource.gallery);
+                                    }
 
-                                  // check if the file as been set
-                                  if ( file != null ) {
-                                    restServices.getUserService().changeProfilePicture(context, file)
-                                        .then((value) {
-                                    })
-                                        .catchError((e) {
-                                      ToasterBuilder.buildErrorToaster(context, e.cause);
-                                    });
-                                  }
+                                    // check if the file as been set
+                                    if ( file != null ) {
+                                      userStore.setPictureIsLoading(true);
+                                      restServices.getUserService().changeProfilePicture(context, file)
+                                          .then((value) {
+                                      })
+                                          .catchError((e) {
+                                        ToasterBuilder.buildErrorToaster(context, e.cause);
+                                      }).whenComplete(() => userStore.setPictureIsLoading(false));
+                                    }
 
-                                },
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Container(
-                                    height: MediaQuery.of(context).size.width / 2.7,
-                                    width: MediaQuery.of(context).size.width / 2.7,
-                                    child: CircleAvatar(
-                                      backgroundColor: AppColors.regularRed,
-                                        maxRadius: 90,
-                                        backgroundImage: userStore.pictureUrl != null ? CachedNetworkImageProvider(
-                                            userStore.pictureUrl
-                                        ) : AssetImage(
-                                            'assets/images/logo.png'
-                                        )
+                                  },
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.width / 2.7,
+                                      width: MediaQuery.of(context).size.width / 2.7,
+                                      child: CircleAvatar(
+                                          backgroundColor: Colors.white,
+                                          maxRadius: 90,
+                                          backgroundImage: userStore.pictureUrl != null ? CachedNetworkImageProvider(
+                                              userStore.pictureUrl
+                                          ) : AssetImage(
+                                              'assets/images/logo.png'
+                                          )
+                                      ),
                                     ),
                                   ),
-                                ),
-                              );
+                                );
+                              }
                             },
                           )
                       ),
@@ -332,7 +339,7 @@ class SettingsScreen extends StatelessWidget {
 
   }
 
-  Future<Null> refreshOperation() async {
-    restServices.getUserService().getUserPersonalDetails(context);
+  Future<void> refreshOperation() async {
+    return restServices.getUserService().getUserPersonalDetails(context);
   }
 }

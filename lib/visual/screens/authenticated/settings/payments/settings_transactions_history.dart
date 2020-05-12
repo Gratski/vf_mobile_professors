@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/constants/settings/payments/settings_transactions_history_constants.dart';
@@ -42,7 +40,7 @@ class _SettingsTransactionsHistoryScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.bgMainColor,
+        backgroundColor: Colors.white,
         elevation: 0.0,
         leading: GestureDetector(
           onTap: (){
@@ -61,7 +59,7 @@ class _SettingsTransactionsHistoryScreenState
         bottom: TabBar(
           indicatorSize: TabBarIndicatorSize.tab,
           indicator: UnderlineTabIndicator(
-            borderSide: BorderSide(color: AppColors.regularGreen),
+            borderSide: BorderSide(color: AppColors.regularRed),
           ),
           controller: controller,
           isScrollable: true,
@@ -74,7 +72,7 @@ class _SettingsTransactionsHistoryScreenState
                     width: MediaQuery.of(context).size.width / 2,
                     child: Text(
                         AppLocalizations.of(context).translate(screenConstants.currentMonth),
-                      style: TextStyle(color: AppColors.regularGreen),
+                      style: TextStyle(color: AppColors.regularRed),
                     ),
                   );
                 },
@@ -88,7 +86,7 @@ class _SettingsTransactionsHistoryScreenState
                     width: MediaQuery.of(context).size.width / 2,
                     child: Text(
                       AppLocalizations.of(context).translate(screenConstants.all),
-                      style: TextStyle(color: AppColors.regularGreen),
+                      style: TextStyle(color: AppColors.regularRed),
                     ),
                   );
                 },

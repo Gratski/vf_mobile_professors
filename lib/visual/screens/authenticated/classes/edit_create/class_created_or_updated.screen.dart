@@ -39,8 +39,9 @@ class ClassCreatedOrUpdatedScreen extends StatelessWidget {
 
                   // SUB TITLE
                   Container(
+                    padding: AppPaddings.regularPadding(context),
                     margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 10),
-                    child: TextsBuilder.h2Bold(
+                    child: TextsBuilder.h4Bold(
                   (hasCreated) ?
                         AppLocalizations.of(context).translate(screenConstants.classCreatedOrUpdatedSubTitleCreated) :
                         AppLocalizations.of(context).translate(screenConstants.classCreatedOrUpdatedSubTitleUpdated),)

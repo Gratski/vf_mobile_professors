@@ -29,9 +29,10 @@ abstract class _UserWalletState with Store {
   @observable
   ObservableList<CurrencyModel> availableCurrencies = ObservableList.of([
     CurrencyModel(1, 'EUR', '€'),
-    CurrencyModel(2, 'USD', '\$'),
-    CurrencyModel(3, 'AUD', '\$'),
+    CurrencyModel(2, 'USD', '\$ USD'),
+    CurrencyModel(3, 'AUD', '\$ AUD'),
     CurrencyModel(4, 'UK', '£'),
+    CurrencyModel(5, 'Real', 'Real'),
   ],);
 
   @action

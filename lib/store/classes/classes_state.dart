@@ -19,6 +19,9 @@ abstract class _ClassesState with Store {
   @observable
   bool isLoading = true;
 
+  @observable
+  bool isRefreshing = false;
+
   /// When already scrolled a lot and is going back up
   @observable
   bool isLoadingPrevious = false;
@@ -47,6 +50,11 @@ abstract class _ClassesState with Store {
   }
 
   @action
+  setIsRefreshing(bool isRefreshing) {
+    this.isRefreshing = isRefreshing;
+  }
+
+  @action
   setIsLoadingPrevious(bool isLoading) {
     this.isLoadingPrevious = isLoading;
   }
@@ -59,6 +67,7 @@ abstract class _ClassesState with Store {
   @action
   resetOffset() {
     this.offset = 0;
+    this.classes.clear();
   }
 
   @action

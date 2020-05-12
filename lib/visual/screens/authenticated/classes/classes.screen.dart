@@ -41,7 +41,7 @@ class _ClassesScreenState extends State<ClassesScreen>
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: refreshOperation,
-        backgroundColor: AppColors.bgMainColor,
+        backgroundColor: Colors.white,
         color: AppColors.regularRed,
         child: Container(
           padding: AppPaddings.regularPadding(context),
@@ -61,7 +61,7 @@ class _ClassesScreenState extends State<ClassesScreen>
               Observer(
                 builder: (_) {
                   return SliverToBoxAdapter(
-                    child: ( classesStore.isLoading ) ? Container(
+                    child: ( classesStore.isLoading && !classesStore.isRefreshing ) ? Container(
                       margin: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height / 3),
                       child: DefaultLoaderWidget(),
@@ -76,7 +76,7 @@ class _ClassesScreenState extends State<ClassesScreen>
               Observer(builder: (_) {
                 return SliverToBoxAdapter(
                   child: (classesStore.classes.length == 0 &&
-                          !classesStore.isLoading)
+                          !classesStore.isLoading && !classesStore.isRefreshing)
                       ? Container(
                           margin: EdgeInsets.only(
                               top: MediaQuery.of(context).size.height / 4),
@@ -156,7 +156,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                       child: DefaultLoaderWidget(),
                     );
                   } else {
-                    if ( classesStore.totalClasses > classesStore.offset ) {
+                    if ( classesStore.totalClasses > classesStore.offset && !classesStore.isLoading && !classesStore.isRefreshing ) {
                       return SliverToBoxAdapter(
                         child: ButtonsBuilder.redFlatButton(
                         AppLocalizations.of(context).translate(widget.generalConstants.loadMoreButtonLabel), () {
@@ -345,16 +345,16 @@ class _ClassesScreenState extends State<ClassesScreen>
   }
 
   Future<void> refreshOperation() async {
+    classesStore.setIsRefreshing(true);
     classesStore.resetOffset();
-    restServices
+    return restServices
         .getClassService()
         .getUserClasses(context, classesStore.offset, classesStore.itemsPerPage)
         .then((resp) {
       classesStore.setClasses(resp.items, resp.total);
     }).catchError((error) {
       ToasterBuilder.buildErrorToaster(context, error.cause);
-    }).whenComplete(() => classesStore.setIsLoading(false));
-    return;
+    }).whenComplete(() => classesStore.setIsRefreshing(false));
   }
 
   @override

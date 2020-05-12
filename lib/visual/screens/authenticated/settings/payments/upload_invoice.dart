@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/constants/settings/payments/payments_constants.dart';
+import 'package:professors/visual/builders/dialog.builder.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
@@ -113,7 +114,9 @@ class _SendInvoiceScreenState extends State<SendInvoiceScreen> {
                       AppLocalizations.of(context).translate(
                           screenConstants.sendInvoiceUploadButtonLabel),
                           () async {
+                        DialogsBuilder(context).unavailableOperation();
                         // if is android
+                            /*
                         if (Theme.of(context).platform ==
                             TargetPlatform.android) {
                           File file = await FilePicker.getFile(
@@ -124,6 +127,8 @@ class _SendInvoiceScreenState extends State<SendInvoiceScreen> {
                             TargetPlatform.iOS) {
                           showDialog(context, sKey);
                         }
+
+                             */
                       },
                       Icon(
                         Icons.file_upload,

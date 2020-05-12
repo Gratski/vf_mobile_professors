@@ -18,6 +18,9 @@ abstract class _UserState with Store {
   bool isLoading = true;
 
   @observable
+  bool isPictureLoading = false;
+
+  @observable
   int id;
 
   @observable
@@ -55,6 +58,11 @@ abstract class _UserState with Store {
   @action
   setIsLoading(bool isLoading) {
     this.isLoading = isLoading;
+  }
+
+  @action
+  setPictureIsLoading(bool isLoading) {
+    this.isPictureLoading = isLoading;
   }
 
   @action

@@ -45,7 +45,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.white,
               elevation: 0.0,
               leading: GestureDetector(
                 onTap: () {
@@ -53,7 +53,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                 },
                 child: Icon(
                   Icons.arrow_back_ios,
-                  color: Colors.white,
+                  color: AppColors.bgMainColor,
                 ),
               ),
               actions: <Widget>[
@@ -69,13 +69,13 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                   },
                   child: Container(
                     margin: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
-                    child: Icon(Icons.edit, color: Colors.white, size: AppSizes.iconRegular(context)),
+                    child: Icon(Icons.edit, color: AppColors.bgMainColor, size: AppSizes.iconRegular(context)),
                   ),
                 ),
               ],
               expandedHeight: MediaQuery.of(context).size.height / 1.6,
-              floating: false,
-              pinned: false,
+              floating: true,
+              pinned: true,
               flexibleSpace: FlexibleSpaceBar(
                 background: Observer(
                   builder: (_) {
@@ -88,7 +88,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                             gradient: LinearGradient(
                                 begin: Alignment.bottomCenter,
                                 end: Alignment.topCenter,
-                                stops: [0.0, 0.4],
+                                stops: [0.0, 0.0],
                                 colors: [Colors.white, Colors.transparent])),
                         child: CachedNetworkImage(
                           fit: BoxFit.cover,
@@ -268,9 +268,9 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                                     child: CircleAvatar(
                                       maxRadius: MediaQuery.of(context).size.width * 0.20,
                                       backgroundColor: AppColors.bgMainColor,
-                                      backgroundImage: NetworkImage(
+                                      backgroundImage: ( widget.store.instructorPictureUrl != null ) ? CachedNetworkImageProvider(
                                         widget.store.instructorPictureUrl,
-                                      ),
+                                      ) : AssetImage("assets/images/logo.png")
                                     ),
                                   ),
 
