@@ -60,7 +60,12 @@ class _SelectCategoryScreenState extends State<SelectCategoryScreen> with AfterI
               );
             } else {
               return SliverToBoxAdapter(
-                child: DefaultLoaderWidget(),
+                child: Center(
+                  child: Container(
+                    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 5),
+                    child: DefaultLoaderWidget(),
+                  ),
+                ),
               );
             }
           },

@@ -62,7 +62,12 @@ class _SelectSubCategoryPageState extends State<SelectSubCategoryPage> with Afte
               );
             } else {
               return SliverToBoxAdapter(
-                child: DefaultLoaderWidget(),
+                child: Center(
+                  child: Container(
+                    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 5),
+                    child: DefaultLoaderWidget(),
+                  ),
+                ),
               );
             }
           },
