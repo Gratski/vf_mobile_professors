@@ -80,7 +80,10 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> with AfterInitM
                 background: Observer(
                   builder: (_) {
                     if ( widget.store.isLoading ) {
-                      return DefaultLoaderWidget();
+                      return Container(
+                        color: Colors.grey[100],
+                        child: Container(),
+                      );
                     } else {
                       return (widget.store.imageUrl != null) ?
                       Container(
