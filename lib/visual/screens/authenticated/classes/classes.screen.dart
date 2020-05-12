@@ -60,13 +60,19 @@ class _ClassesScreenState extends State<ClassesScreen>
               ////////////////////////////////////////////////////////
               Observer(
                 builder: (_) {
-                  return SliverToBoxAdapter(
-                    child: ( classesStore.isLoading && !classesStore.isRefreshing ) ? Container(
-                      margin: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height / 3),
-                      child: DefaultLoaderWidget(),
-                    ) : Container(),
-                  );
+                  if ( classesStore.isLoading && !classesStore.isRefreshing ) {
+                    return SliverToBoxAdapter(
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height / 3),
+                        child: DefaultLoaderWidget(),
+                      ),
+                    );
+                  } else {
+                    return SliverToBoxAdapter(
+                      child: Container(),
+                    );
+                  }
                 },
               ),
 
@@ -74,65 +80,75 @@ class _ClassesScreenState extends State<ClassesScreen>
               // If has no classes yet
               ////////////////////////////////////////////////////////
               Observer(builder: (_) {
-                return SliverToBoxAdapter(
-                  child: (classesStore.classes.length == 0 &&
-                          !classesStore.isLoading && !classesStore.isRefreshing)
-                      ? Container(
-                          margin: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height / 4),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              TextsBuilder.h1Bold(
-                                  "Welcome ${userStore.firstName}!"),
-                              TextsBuilder.h4Bold("Create your first class"),
-                              Container(
-                                margin: EdgeInsets.only(
-                                    top: MediaQuery.of(context).size.height /
-                                        20),
-                                child: ButtonsBuilder.redFlatButton(
-                                  "CREATE CLASS",
+                if (classesStore.classes.length == 0 &&
+                    !classesStore.isLoading && !classesStore.isRefreshing) {
+                  return SliverToBoxAdapter(
+                    child: Container(
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 4),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          TextsBuilder.h1Bold(
+                              "Welcome ${userStore.firstName}!"),
+                          TextsBuilder.h4Bold("Create your first class"),
+                          Container(
+                            margin: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height /
+                                    20),
+                            child: ButtonsBuilder.redFlatButton(
+                              "CREATE CLASS",
                                   () {
-                                    Navigator.of(context).push(MaterialPageRoute(
-                                        builder: (context) =>
-                                            CreateClassSelectLanguageScreen()));
-                                  },
-                                ),
-                              ),
-                            ],
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        CreateClassSelectLanguageScreen()));
+                              },
+                            ),
                           ),
-                        )
-                      : Container(),
-                );
+                        ],
+                      ),
+                    ),
+                  );
+                } else {
+                  return SliverToBoxAdapter(
+                    child: Container(),
+                  );
+                }
               }),
 
               ////////////////////////////////////////////////////////
               // If classes have been found
               ////////////////////////////////////////////////////////
+              // ADD CLASS BUTTON
               Observer(
                 builder: (_){
-                  return SliverToBoxAdapter(
-                    child: (classesStore.classes.length > 0 && !classesStore.isLoading )
-                        ? Container(child: Container(
-                        margin: EdgeInsets.only(top: 20, bottom: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            ButtonsBuilder.transparentCustomButton(
-                              TextsBuilder.regularText(
-                                  AppLocalizations.of(context).translate(widget.screenConstants.classesAddClassButtonLabel).toUpperCase(), bold: true
-                              ), () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      CreateClassSelectLanguageScreen()));
-                            },)
-                          ],
-                        )
-                    ),)
-                        : Container(),
-                  );
+                  if (classesStore.classes.length > 0 && !classesStore.isLoading ) {
+                    return SliverToBoxAdapter(
+                      child: Container(child: Container(
+                          margin: EdgeInsets.only(top: 20, bottom: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ButtonsBuilder.transparentCustomButton(
+                                TextsBuilder.regularText(
+                                    AppLocalizations.of(context).translate(widget.screenConstants.classesAddClassButtonLabel).toUpperCase(), bold: true
+                                ), () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        CreateClassSelectLanguageScreen()));
+                              },)
+                            ],
+                          )
+                      ),)
+                    );
+                  } else {
+                    return SliverToBoxAdapter(
+                      child: Container()
+                    );
+                  }
                 },
               ),
+              // TITLE
               _buildTitle(context),
 
               Observer(
@@ -140,7 +156,15 @@ class _ClassesScreenState extends State<ClassesScreen>
                   return SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                        return _buildClassItem(context, index);
+                        return _buildClassItem(context, index,
+                            classesStore.classes[index].id,
+                            classesStore.classes[index].designation,
+                            classesStore.classes[index].difficultyLevel,
+                            (classesStore.classes[index].pictureUrl != null),
+                            classesStore.classes[index].pictureUrl,
+                            classesStore.classes[index].status,
+                            classesStore.classes[index].languageCode
+                        );
                       },
                       childCount: classesStore.classes.length,
                     ),
@@ -178,11 +202,11 @@ class _ClassesScreenState extends State<ClassesScreen>
     );
   }
 
-  _buildClassItem(BuildContext context, int index) {
+  _buildClassItem(BuildContext context, int index, int id, String designation, int difficultyLevel, bool hasPicture, String pictureUrl, int status, String languageCode) {
     return GestureDetector(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ClassDetailsScreen(classesStore.classes[index].id)));
+            MaterialPageRoute(builder: (context) => ClassDetailsScreen(id)));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -207,11 +231,11 @@ class _ClassesScreenState extends State<ClassesScreen>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            children: IconsBuilder.difficultyIcons(classesStore.classes[index].difficultyLevel),
+                            children: IconsBuilder.difficultyIcons(difficultyLevel),
                           ),
                           Container(
                             margin: EdgeInsets.only(top: 5),
-                            child: TextsBuilder.textSmall(ClassesUtils().getDifficultyLevelText(context, classesStore.classes[index].difficultyLevel).toUpperCase(), color: AppColors.bgMainColor),
+                            child: TextsBuilder.textSmall(ClassesUtils().getDifficultyLevelText(context, difficultyLevel).toUpperCase(), color: AppColors.bgMainColor),
                           ),
                         ],
                       ),
@@ -236,10 +260,10 @@ class _ClassesScreenState extends State<ClassesScreen>
                   children: [
                     AspectRatio(
                       aspectRatio: 3 / 2,
-                      child: (classesStore.classes[index].pictureUrl != null)
+                      child: (hasPicture)
                           ? CachedNetworkImage(
                         fit: BoxFit.cover,
-                        imageUrl: classesStore.classes[index].pictureUrl,
+                        imageUrl: pictureUrl,
                         placeholder: (context, value)=> DefaultLoaderWidget(),
                       )
                           : Container(),
@@ -249,7 +273,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                       bottom: 10,
                       left: 10,
                       child: ClassesUtils().getChipByStatus(
-                          context, classesStore.classes[index].status),
+                          context, status),
                     ),
                   ],
                 ),
@@ -263,7 +287,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                   children: [
                     Expanded(
                       flex: 8,
-                      child: TextsBuilder.h4Bold(classesStore.classes[index].designation, color: AppColors.bgMainColor)
+                      child: TextsBuilder.h4Bold(designation, color: AppColors.bgMainColor)
                     ),
                     Flexible(
                         flex: 2,
@@ -277,7 +301,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                                   color: AppColors.regularRed,
                                   borderRadius: BorderRadius.circular(2)),
                               child: TextsBuilder.regularText(
-                                  classesStore.classes[index].languageCode.toUpperCase(),
+                                  languageCode.toUpperCase(),
                                   color: Colors.white),
                             ),
                           ],
@@ -345,6 +369,7 @@ class _ClassesScreenState extends State<ClassesScreen>
   }
 
   Future<void> refreshOperation() async {
+    classesStore.setIsLoading(true);
     classesStore.setIsRefreshing(true);
     classesStore.resetOffset();
     return restServices
@@ -354,7 +379,10 @@ class _ClassesScreenState extends State<ClassesScreen>
       classesStore.setClasses(resp.items, resp.total);
     }).catchError((error) {
       ToasterBuilder.buildErrorToaster(context, error.cause);
-    }).whenComplete(() => classesStore.setIsRefreshing(false));
+    }).whenComplete(() {
+      classesStore.setIsLoading(false);
+      classesStore.setIsRefreshing(false);
+    });
   }
 
   @override
