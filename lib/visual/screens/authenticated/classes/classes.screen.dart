@@ -10,6 +10,7 @@ import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/models/language.model.dart';
+import 'package:professors/store/classes/classes_state.dart';
 import 'package:professors/utils/classes.utils.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/authenticated/classes/class_details.screen.dart';
@@ -34,6 +35,9 @@ class ClassesScreen extends StatefulWidget {
 
 class _ClassesScreenState extends State<ClassesScreen>
     with AfterInitMixin<ClassesScreen> {
+
+  final classesStore = ClassesState();
+
   @override
   Widget build(BuildContext context) {
     double sectionTopMargin = MediaQuery.of(context).size.height / 20;
@@ -369,7 +373,6 @@ class _ClassesScreenState extends State<ClassesScreen>
   }
 
   Future<void> refreshOperation() async {
-    classesStore.setIsLoading(true);
     classesStore.setIsRefreshing(true);
     classesStore.resetOffset();
     return restServices
@@ -380,7 +383,6 @@ class _ClassesScreenState extends State<ClassesScreen>
     }).catchError((error) {
       ToasterBuilder.buildErrorToaster(context, error.cause);
     }).whenComplete(() {
-      classesStore.setIsLoading(false);
       classesStore.setIsRefreshing(false);
     });
   }
@@ -397,7 +399,16 @@ class _ClassesScreenState extends State<ClassesScreen>
       }
     });
 
-    refreshOperation();
+    restServices
+        .getClassService()
+        .getUserClasses(context, classesStore.offset, classesStore.itemsPerPage)
+        .then((resp) {
+      classesStore.setClasses(resp.items, resp.total);
+    }).catchError((error) {
+      ToasterBuilder.buildErrorToaster(context, error.cause);
+    }).whenComplete(() {
+      classesStore.setIsLoading(false);
+    });
   }
 
   _loadMore(BuildContext context) {
