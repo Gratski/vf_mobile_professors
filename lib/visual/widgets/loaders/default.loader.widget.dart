@@ -7,7 +7,7 @@ class DefaultLoaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: CircularProgressIndicator(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         valueColor: AlwaysStoppedAnimation<Color>(AppColors.regularRed),
       ),
     );
