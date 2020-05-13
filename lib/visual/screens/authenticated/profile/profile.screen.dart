@@ -64,6 +64,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                         DialogsBuilder(context).selectLanguageDialog(
                             AppLocalizations.of(context).translate(
                                 widget.generalConstants.languagesLabel),
+                            AppLocalizations.of(context).translate(
+                                widget.screenConstants.changeLanguageSubTitle),
                             generalStore.existingLanguages,
                             widget.languageId, (selected) {
                           widget.languageId = selected.id;
@@ -215,62 +217,69 @@ class _ProfileScreenState extends State<ProfileScreen>
                         ),
 
                         /// TEACHES
-                        SliverToBoxAdapter(
-                          child: Container(
-                              padding: AppPaddings.regularPadding(context),
-                              color: AppColors.bgGreyColor,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  /// TITLE
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(top: sectionTopMargin),
-                                    child: TextsBuilder.h2Bold(
-                                        AppLocalizations.of(context).translate(
-                                            widget.screenConstants.teachesLabel(
-                                                widget.languageCode)),
-                                        color: AppColors.bgMainColor),
-                                  ),
+                        Observer(
+                          builder: (_) {
+                            if ( widget.store.teaches.length > 0) {
+                              return SliverToBoxAdapter(
+                                child: Container(
+                                    padding: AppPaddings.regularPadding(context),
+                                    color: AppColors.bgGreyColor,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        /// TITLE
+                                        Container(
+                                          margin:
+                                          EdgeInsets.only(top: sectionTopMargin),
+                                          child: TextsBuilder.h2Bold(
+                                              AppLocalizations.of(context).translate(
+                                                  widget.screenConstants.teachesLabel(
+                                                      widget.languageCode)),
+                                              color: AppColors.bgMainColor),
+                                        ),
 
-                                  /// CLASSES CATEGORY LIST
-                                  Observer(
-                                    builder: (_) {
-                                      return Container(
-                                          margin: EdgeInsets.only(
-                                              top: sectionTopMargin / 2,
-                                              bottom: sectionTopMargin),
-                                          height: 50,
-                                          child: ListView.builder(
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.horizontal,
-                                            itemCount:
-                                                widget.store.teaches.length,
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return Container(
-                                                margin: EdgeInsets.only(
-                                                    right:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            20),
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Colors.black)),
-                                                padding: EdgeInsets.all(10),
-                                                child: TextsBuilder.h4Bold(
-                                                    '${widget.store.teaches[index].designation}',
-                                                    color:
-                                                        AppColors.bgMainColor),
-                                              );
-                                            },
-                                          ));
-                                    },
-                                  ),
-                                ],
-                              )),
+                                        /// CLASSES CATEGORY LIST
+                                        Container(
+                                            margin: EdgeInsets.only(
+                                                top: sectionTopMargin / 2,
+                                                bottom: sectionTopMargin),
+                                            height: 50,
+                                            child: ListView.builder(
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.horizontal,
+                                              itemCount:
+                                              widget.store.teaches.length,
+                                              itemBuilder: (BuildContext context,
+                                                  int index) {
+                                                return Container(
+                                                  margin: EdgeInsets.only(
+                                                      right:
+                                                      MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                          20),
+                                                  alignment: Alignment.center,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Colors.black)),
+                                                  padding: EdgeInsets.all(10),
+                                                  child: TextsBuilder.h4Bold(
+                                                      '${widget.store.teaches[index].designation}',
+                                                      color:
+                                                      AppColors.bgMainColor),
+                                                );
+                                              },
+                                            )),
+
+                                      ],
+                                    )),
+                              );
+                            } else {
+                              return SliverToBoxAdapter(
+                                child: Container(),
+                              );
+                            }
+                          },
                         ),
 
                         /// COMMENTS

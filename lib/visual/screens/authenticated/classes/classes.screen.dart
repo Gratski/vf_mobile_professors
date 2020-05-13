@@ -4,18 +4,15 @@ import 'package:after_init/after_init.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
 import 'package:professors/localization/constants/general_constants.dart';
-import 'package:professors/models/language.model.dart';
 import 'package:professors/store/classes/classes_state.dart';
 import 'package:professors/utils/classes.utils.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/authenticated/classes/class_details.screen.dart';
 import 'package:professors/visual/screens/authenticated/classes/create_class_select_language.screen.dart';
-import 'package:professors/visual/screens/authenticated/classes/edit_create/create_or_edit_class.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
@@ -49,14 +46,15 @@ class _ClassesScreenState extends State<ClassesScreen>
         color: AppColors.regularRed,
         child: Container(
           padding: AppPaddings.regularPadding(context),
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/classes_bg.png"),
-            fit: BoxFit.cover,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/classes_bg.png"),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
           child: CustomScrollView(
             controller: widget.scrollController,
+            physics: const AlwaysScrollableScrollPhysics(),
             slivers: [
 
               ////////////////////////////////////////////////////////
@@ -88,6 +86,8 @@ class _ClassesScreenState extends State<ClassesScreen>
                     !classesStore.isLoading && !classesStore.isRefreshing) {
                   return SliverToBoxAdapter(
                     child: Container(
+                      color: Colors.white,
+                      padding: AppPaddings.regularAllPadding(context),
                       margin: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height / 4),
                       child: Column(

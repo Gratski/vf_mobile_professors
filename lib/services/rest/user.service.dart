@@ -18,8 +18,7 @@ class UserService extends AbstractRestService {
   Future<void> getUserPersonalDetails(BuildContext context) async {
     userStore.setIsLoading(true);
     try {
-      final rsp = await this.performJsonGet(context, "$REST_URL/auth/me");
-      Map<String, dynamic> resultMap = decodeBody(rsp);
+      final resultMap = await this.performJsonGet(context, "$REST_URL/auth/me");
       userStore.setId(resultMap["id"]);
       userStore.setFirstName(resultMap["firstName"]);
       userStore.setLastName(resultMap["lastName"]);
@@ -54,7 +53,7 @@ class UserService extends AbstractRestService {
 
       // update each type of notification
       GetNotificationPreferencesResponse response =
-          GetNotificationPreferencesResponse.fromJson(jsonDecode(rsp.body));
+          GetNotificationPreferencesResponse.fromJson(rsp);
       response.items.forEach(
         (e) {
           switch(e.type) {

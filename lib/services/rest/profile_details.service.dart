@@ -16,8 +16,7 @@ class ProfileDetailsService extends AbstractRestService {
   ///
   Future<ProfileDetailsModel> getProfileDetails(BuildContext context, int professorId, int languageId) async {
     try {
-      final rsp = await performJsonGet(context, '$REST_URL/professors/$professorId/$languageId');
-      Map<String, dynamic> mapResult = decodeBody(rsp);
+      final mapResult = await performJsonGet(context, '$REST_URL/professors/$professorId/$languageId');
       return ProfileDetailsModel(
         mapResult["id"],
         mapResult["firstName"],
@@ -53,9 +52,8 @@ class ProfileDetailsService extends AbstractRestService {
       BuildContext context, int languageId) async {
     profileDetailsStore.setIsLoading(true);
     try {
-      final rsp = await performJsonGet(
+      final result = await performJsonGet(
           context, '$REST_URL/professors/me/profile-details/$languageId');
-      Map<String, dynamic> result = decodeBody(rsp);
       profileDetailsStore.setId(result["id"]);
       profileDetailsStore.setDesignation(result["designation"]);
       profileDetailsStore.setDescription(result["description"]);
@@ -63,7 +61,7 @@ class ProfileDetailsService extends AbstractRestService {
     } on ApiException catch (e) {
       throw e;
     } on Exception catch (e) {
-      handleUnknownError(context);
+
     } finally {
       profileDetailsStore.setIsLoading(false);
     }
@@ -76,7 +74,7 @@ class ProfileDetailsService extends AbstractRestService {
       String designation, String description, String quote) async {
     profileDetailsStore.setIsLoading(true);
     try {
-      final rsp = await performJsonPost(
+      final result = await performJsonPost(
           context,
           '$REST_URL/professors/me/profile-details',
           jsonEncode({
@@ -87,7 +85,6 @@ class ProfileDetailsService extends AbstractRestService {
           }));
 
       // update profile details in foreground
-      Map<String, dynamic> result = decodeBody(rsp);
       profileDetailsStore.setId(result["id"]);
 
       // show success message
@@ -96,7 +93,6 @@ class ProfileDetailsService extends AbstractRestService {
     } on ApiException catch (e) {
       throw e;
     } on Exception catch (e) {
-      handleUnknownError(context);
     } finally {
       profileDetailsStore.setIsLoading(false);
     }
@@ -123,7 +119,7 @@ class ProfileDetailsService extends AbstractRestService {
     } on ApiException catch (e) {
       throw e;
     } on Exception catch (e) {
-      handleUnknownError(context);
+
     } finally {
       profileDetailsStore.setIsLoading(false);
     }

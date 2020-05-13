@@ -4,7 +4,9 @@ import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/constants/settings/payments/payments_constants.dart';
+import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/styles/padding.dart';
+import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/visual/widgets/structural/lists/regular_list_tile.dart';
@@ -30,29 +32,46 @@ class PaymentsSelectCurrencyScreen extends StatelessWidget {
                 .translate(screenConstants.selectCurrencySubTitle),),
             Observer(
               builder: (_) {
-                return SliverPadding(
-                  padding: AppPaddings.sliverListPadding(context).copyWith(top: 20),
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-                      return RegularListTile(
-                        label: userWallet.availableCurrencies[index].code,
-                        callback: () {
-                          userWallet.setCurrency(userWallet.availableCurrencies[index]);
-                          Navigator.pop(context);
-                        },
-                        selected: userWallet.availableCurrencies[index].id == userWallet.currency.id,
-                        hideTrailing: userWallet.availableCurrencies[index].id != userWallet.currency.id,
-                      );
-                    },
-                      childCount: userWallet.availableCurrencies.length,
+                if ( userWallet.isUpdating ) {
+                  return DefaultLoaderWidget();
+                } else {
+                  return SliverPadding(
+                    padding: AppPaddings.sliverListPadding(context).copyWith(top: 20),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+                        return RegularListTile(
+                          label: userWallet.availableCurrencies[index].designation,
+                          callback: () {
+                            _changeCurrency(context, userWallet.availableCurrencies[index].id);
+                          },
+                          selected: userWallet.availableCurrencies[index].id == userWallet.currency.id,
+                          hideTrailing: userWallet.availableCurrencies[index].id != userWallet.currency.id,
+                        );
+                      },
+                        childCount: userWallet.availableCurrencies.length,
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }
               },
             ),
           ],
         ),
       ),
     );
+  }
+
+  _changeCurrency(BuildContext context, int id) async {
+    userWallet.setIsUpdating(true);
+    restServices.getWalletService().updateCurrency(context, id)
+    .then((value){
+      restServices.getWalletService().getUserCurrency(context)
+          .then((value) => Navigator.pop(context))
+          .catchError((e) => ToasterBuilder.buildErrorToaster(context, e.cause))
+          .whenComplete(() => userWallet.setIsUpdating(false));
+    }).catchError((e) {
+      ToasterBuilder.buildErrorToaster(context, e.cause);
+      userWallet.setIsUpdating(false);
+    });
   }
 }

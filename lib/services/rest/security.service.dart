@@ -19,7 +19,7 @@ class SecurityService extends AbstractRestService {
     } on ApiException catch (e) {
       throw e;
     } on Exception catch (e) {
-      handleUnknownError(context);
+
     }
   }
 }

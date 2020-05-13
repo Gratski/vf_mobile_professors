@@ -67,11 +67,11 @@ class TextsBuilder {
             fontSize: _FONT_SMALL, fontFamily: _FONT_FAMILY_REGULAR, color: color));
   }
 
-  static textSmallSpan(String text) {
+  static textSmallSpan(String text, {Color color}) {
     return TextSpan(
         text: text,
         style: TextStyle(
-            fontSize: _FONT_SMALL, fontFamily: _FONT_FAMILY_REGULAR));
+            fontSize: _FONT_SMALL, fontFamily: _FONT_FAMILY_REGULAR, color: (color != null) ? color : AppColors.bgMainColor),);
   }
 
   static TextSpan hintSpan(String text) {

@@ -14,7 +14,7 @@ class CategoryService extends AbstractRestService {
   Future<List<CategoryModel>> getCategories(BuildContext context) async {
     try {
       final rsp = await performJsonGet(context, '$REST_URL/categories');
-      List<dynamic> list = decodeBody(rsp)["items"];
+      List<dynamic> list = rsp["items"];
       List<CategoryModel> categories = List.of([]);
       list.forEach((elem) {
         categories.add(new CategoryModel(
@@ -37,7 +37,7 @@ class CategoryService extends AbstractRestService {
   Future<List<CategoryModel>> getSubCategories(BuildContext context, parentId) async {
     try {
       final rsp = await performJsonGet(context, '$REST_URL/categories/$parentId/sub-categories');
-      List<dynamic> list = decodeBody(rsp)["items"];
+      List<dynamic> list = rsp["items"];
       List<CategoryModel> categories = List.of([]);
       list.forEach((elem) {
         categories.add(new CategoryModel(

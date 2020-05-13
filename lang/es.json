@@ -94,7 +94,7 @@
   "DASHBOARD_NEXT_CLASSES_CREATE_CLASS_BUTTON": "Añadir Clase",
   "DASHBOARD_CLASSIFICATION_HIGH_TEXT": "El cálculo de la puntuación se basa en el promedio de los comentarios. Tienes una puntuación increíble. ¡Felicidades!",
   "DASHBOARD_CLASSIFICATION_AVERAGE_TEXT": "El cálculo de la puntuación se basa en el promedio de los comentarios. Tu puntuación está bien, pero sabemos que podrías hacerlo mejor. Sigue trabajando.",
-  "DASHBOARD_CLASSIFICATION_LOW_TEXT": "El cálculo de la puntuación se basa en el promedio de los comentarios. Tu puntuación está por debajo del promedio. Por favor, revisa el contenido de tus clases y la interacción de las mismas"",
+  "DASHBOARD_CLASSIFICATION_LOW_TEXT": "El cálculo de la puntuación se basa en el promedio de los comentarios. Tu puntuación está por debajo del promedio. Por favor, revisa el contenido de tus clases y la interacción de las mismas",
   "DASHBOARD_THIS_MONTH": "Este Mes",
 
   "SETTINGS_VIEW_PROFILE": "Ver Perfil",
@@ -171,7 +171,7 @@
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_SUB_TITLE": "En este momento, PayPal es la única forma de pago disponible",
   "ETIQUETA DE TIEMPO DE EJECUCIÓN DE LA TRANSACCIÓN": "La ejecución de la transacción se procesa cada mes después de la recepción de tu factura. La ejecución de la operación puede tardar hasta 3 días laborables en completarse",
   "ETIQUETA DE IMPUESTOS DE TÉRMINOS DE PAGO": "Puede incluir impuestos según nuestros términos y condiciones, dependiendo del país que emita tus facturas",
-  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_PROCEED_LINK": "¡Entendido! Continúar
+  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_PROCEED_LINK": "¡Entendido! Continúar",
 
   "SETTINGS_ADD_PAYMENT_METHODS_TOP_HEADER": "Añadir cuenta PayPal",
   "SETTINGS_ADD_PAYMENT_METHODS_SUB_TITLE": "Aquí se añade una cuenta PayPal a tu cartera. Para tu seguridad, para convertirla en tu cuenta de pagos predeterminada, añádela aquí y luego edítala",
@@ -224,12 +224,12 @@
   "NOTIFICATIONS_MESSAGE_LABEL": "Mensaje",
   "NOTIFICATIONS_SYSTEM_LABEL": "Equipo VFit",
 
-  "NOTIFICATIONS_CANCELLATION_TOP_HEADER": "Reserva Cancelada
+  "NOTIFICATIONS_CANCELLATION_TOP_HEADER": "Reserva Cancelada",
   "NOTIFICATIONS_CANCELLATION_LABEL": "Reserva de clase cancelada",
   "NOTIFICATIONS_CANCELLATION_MESSAGE_LABEL": " Muestra a tus alumnos cómo aprecias su presencia en tus clases. Adelante, envía un mensaje a tu alumno",
   "NOTIFICATIONS_CANCELLATION_SEND_BUTTON": "Enviar",
 
-  "NOTIFICATIONS_BOOKED_TOP_HEADER": "¡Reservación de plaza en clase!
+  "NOTIFICATIONS_BOOKED_TOP_HEADER": "¡Reservación de plaza en clase!",
   "NOTIFICATIONS_BOOKED_LABEL": "Reservado para tu clase",
   "NOTIFICATIONS_BOOKED_MESSAGE_LABEL": " Muestra a tu alumno lo emocionado que estás de tenerlo en tu clase",
   "NOTIFICATIONS_BOOKED_SEND_BUTTON": "Enviar",
@@ -321,7 +321,8 @@
   "CLASS_DELETED_SUB_TITLE": "Esta clase ha sido eliminada con éxito.",
 
   "PROFILE_SCREEN_ABOUT_DEFAULT": "Sobre",
-  "PROFILE_SCREEN_QUOTE_DEFAULT": "Citação",
+  "PROFILE_SCREEN_QUOTE_DEFAULT": "Cita",
+  "PROFILE_SCREEN_CHANGE_LANGUAGE_SUB_TITLE": "¡Cuantos más idiomas tengas, mayor será tu alcance!",
   "PROFILE_SCREEN_ABOUT_PT": "Sobre",
   "PROFILE_SCREEN_QUOTE_PT": "Citação",
   "PROFILE_SCREEN_TEACHES_PT": "Dá Aulas de",
@@ -352,7 +353,7 @@
   "FORM_VALIDATION_PHONE_NUMBER_IS_REQUIRED": "Se requiere número de teléfono",
   "FORM_VALIDATION_BIRTHDAY_IS_REQUIRED": "Se requiere la Fecha de Nacimiento",
   "FORM_VALIDATION_GENDER_IS_REQUIRED": "Se requiere el género",
-  "FORM_VALIDATION_LIVING_IN_IS_REQUIRED": "El campo "vivir en" se requiere",
+  "FORM_VALIDATION_LIVING_IN_IS_REQUIRED": "El campo \"vivir en\" se requiere",
   "FORM_VALIDATION_NATIONALITY_IS_REQUIRED": "Se requiere la Nacionalidad",
   "FORM_VALIDATION_ABOUT_IS_REQUIRED": "Se requiere acerca de",
   "FORM_VALIDATION_QUOTE_IS_REQUIRED": "Se requiere la citación",
@@ -373,6 +374,8 @@
   "FORM_VALIDATION_CATEGORY_IS_REQUIRED": "Se requiere Categoría",
   "FORM_VALIDATION_FILE_IS_TOO_BIG": "Elige un archivo más pequeño",
   "FORM_VALIDATION_ACCESS_CODE_IS_REQUIRED":"Se requiere código de acceso",
-  "FORM_VALIDATION_PICTURE_SUCCESSFULLY_CHANGED": "¡Imagen cambiada con éxito!"
+  "FORM_VALIDATION_PICTURE_SUCCESSFULLY_CHANGED": "¡Imagen cambiada con éxito!",
+  "FORM_CLASS_DELETE_CONFIRMATION_TITLE": "Seguro?",
+  "FORM_CLASS_DELETE_CONFIRMATION_SUBTITLE": "Perderá todos los datos relacionados con esta clase."
 
 }

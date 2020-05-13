@@ -250,6 +250,7 @@ class _EditProfileInLanguageScreenState
       // back to settings
       Navigator.pop(context);
       Navigator.pop(context);
+      Navigator.pop(context);
     });
   }
   updateProfile() {

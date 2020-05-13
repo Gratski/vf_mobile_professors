@@ -2,6 +2,7 @@ class ProfileScreenConstants {
 
   String get defaultAboutLabel => "PROFILE_SCREEN_ABOUT_DEFAULT";
   String get defaultQuoteLabel => "PROFILE_SCREEN_QUOTE_DEFAULT";
+  String get changeLanguageSubTitle => "PROFILE_SCREEN_CHANGE_LANGUAGE_SUB_TITLE";
 
   String aboutLabel(String code) {
     return "PROFILE_SCREEN_ABOUT_${suffixByLanguageCode(code)}";

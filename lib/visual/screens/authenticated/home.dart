@@ -77,5 +77,7 @@ class _HomeScreenState extends State<HomeScreen> with AfterInitMixin<HomeScreen>
     restServices.getUserService().getUserPersonalDetails(context);
     restServices.getUserService().getUserNotificationPreferences(context);
     restServices.getWalletService().getPaymentMethods(context);
+    restServices.getWalletService().getCurrencies(context);
+    restServices.getWalletService().getUserCurrency(context);
   }
 }

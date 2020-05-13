@@ -79,8 +79,8 @@ class ConfirmationDialog extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.all(5),
                       child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonYesLabel), () {
-                        confirmationCallback();
                         Navigator.of(context).pop();
+                        confirmationCallback();
                       }, color: AppColors.fontColor),
                     ),
                   ),
@@ -89,8 +89,8 @@ class ConfirmationDialog extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.all(5),
                       child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(constants.buttonNoLabel), () {
-                        cancelCallback();
                         Navigator.of(context).pop();
+                        cancelCallback();
                       }, color: AppColors.fontColor),
                     ),
                   ),

@@ -24,19 +24,19 @@ abstract class _UserState with Store {
   int id;
 
   @observable
-  String firstName = "Joao";
+  String firstName = "";
 
   @observable
-  String lastName = "Rodrigues";
+  String lastName = "";
 
   @observable
-  String email = "rodrigues.at.work@gmail.com";
+  String email = "";
 
   @observable
-  String pictureUrl = 'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg';
+  String pictureUrl;
 
   @observable
-  String phoneNumber = "+351968039230";
+  String phoneNumber = "";
 
   @observable
   String countryLabel = "";

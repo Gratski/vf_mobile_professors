@@ -40,7 +40,7 @@ class FormValidationConstants {
   String get contactMessageIsRequired => "FORM_VALIDATION_CONTACT_MESSAGE_IS_REQUIRED";
 
   //////////////////////////////////////////////////////
-  // Class Details errors
+  // Class Details
   //////////////////////////////////////////////////////
   String get pictureIsRequired => "FORM_VALIDATION_PICTURE_IS_REQUIRED";
   String get pictureSuccessFullyChanged => "FORM_VALIDATION_PICTURE_SUCCESSFULLY_CHANGED";
@@ -53,7 +53,12 @@ class FormValidationConstants {
   String get durationIsRequired => "FORM_VALIDATION_DURATION_IS_REQUIRED";
   String get categoryIsRequired => "FORM_VALIDATION_CATEGORY_IS_REQUIRED";
   String get fileIsTooBigError => "FORM_VALIDATION_FILE_IS_TOO_BIG";
+  String get classDeleteConfirmationTitle => "FORM_CLASS_DELETE_CONFIRMATION_TITLE";
+  String get classDeleteConfirmationSubTitle => "FORM_CLASS_DELETE_CONFIRMATION_SUBTITLE";
 
+  //////////////////////////////////////////////////////
+  // Registration details
+  //////////////////////////////////////////////////////
   String get accessCodeIsRequired => "FORM_VALIDATION_ACCESS_CODE_IS_REQUIRED";
 
 }

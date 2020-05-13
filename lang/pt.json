@@ -322,6 +322,7 @@
 
   "PROFILE_SCREEN_ABOUT_DEFAULT": "Sobre",
   "PROFILE_SCREEN_QUOTE_DEFAULT": "Citação",
+  "PROFILE_SCREEN_CHANGE_LANGUAGE_SUB_TITLE": "Quantos mais idiomas tiver maior é o seu alcance!",
   "PROFILE_SCREEN_ABOUT_PT": "Sobre",
   "PROFILE_SCREEN_QUOTE_PT": "Citação",
   "PROFILE_SCREEN_TEACHES_PT": "Dá Aulas de",
@@ -373,6 +374,8 @@
   "FORM_VALIDATION_CATEGORY_IS_REQUIRED": "Categoria é necessária",
   "FORM_VALIDATION_FILE_IS_TOO_BIG": "Escolhe um ficheiro mais pequeno",
   "FORM_VALIDATION_ACCESS_CODE_IS_REQUIRED":"O Código de Acesso é obrigatório",
-  "FORM_VALIDATION_PICTURE_SUCCESSFULLY_CHANGED": "Imagem foi alterada com sucesso!"
+  "FORM_VALIDATION_PICTURE_SUCCESSFULLY_CHANGED": "Imagem foi alterada com sucesso!",
+  "FORM_CLASS_DELETE_CONFIRMATION_TITLE": "Tem a certeza?",
+  "FORM_CLASS_DELETE_CONFIRMATION_SUBTITLE": "Perderá todos os dados relacionados com esta aula."
 
 }
