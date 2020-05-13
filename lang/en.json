@@ -373,6 +373,8 @@
   "FORM_VALIDATION_CATEGORY_IS_REQUIRED": "Category is required",
   "FORM_VALIDATION_FILE_IS_TOO_BIG": "Choose a smaller file",
   "FORM_VALIDATION_ACCESS_CODE_IS_REQUIRED":"Access code is required",
-  "FORM_VALIDATION_PICTURE_SUCCESSFULLY_CHANGED": "Picture Successfully changed!"
+  "FORM_VALIDATION_PICTURE_SUCCESSFULLY_CHANGED": "Picture Successfully changed!",
+  "FORM_CLASS_DELETE_CONFIRMATION_TITLE": "Are you sure?",
+  "FORM_CLASS_DELETE_CONFIRMATION_SUBTITLE": "You will all the data related to this class."
 
 }

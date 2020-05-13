@@ -530,12 +530,13 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
   _delete(BuildContext context) {
 
     DialogsBuilder(context).confirmationDialog(
-        "Are you sure?",
-        "You will all the data related to this class.",
+        AppLocalizations.of(context).translate(widget.formConstants.classDeleteConfirmationTitle),
+      AppLocalizations.of(context).translate(widget.formConstants.classDeleteConfirmationSubTitle),
             () {
               widget.store.setIsLoadingContext(true);
               restServices.getClassService().deleteClass(context, widget.store.id)
                   .then((v) {
+                Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(
                     builder: (context) => ClassDeletedScreen()
                 ));

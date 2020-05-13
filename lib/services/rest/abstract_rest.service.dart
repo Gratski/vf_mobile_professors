@@ -25,7 +25,7 @@ abstract class AbstractRestService {
   GeneralConstants constants = GeneralConstants();
 
   Future<Dio> getHttpClient(BuildContext context, {bool useAuth = true}) async {
-    BaseOptions options = BaseOptions(receiveTimeout: 5000, connectTimeout: 5000);
+    BaseOptions options = BaseOptions(receiveTimeout: 10000, connectTimeout: 10000);
     final dio = Dio(options);
     dio.interceptors.add(AuthInterceptor(context));
     return dio;
@@ -48,8 +48,8 @@ abstract class AbstractRestService {
       {bool useAuth: true}) async {
     try {
       final client = await getHttpClient(context);
-      final response = await client.put(path, data: data);
-      return response.data;
+      await client.put(path, data: data);
+      return;
     } catch (e) {
       throw ApiException(e.error);
     }
@@ -81,12 +81,12 @@ abstract class AbstractRestService {
     }
   }
 
-  Future<Map<String, dynamic>> performJsonDelete(BuildContext context, String path,
+  Future<void> performJsonDelete(BuildContext context, String path,
       {bool useAuth = true}) async {
     try {
       final client = await getHttpClient(context);
       final rsp = await client.delete(path);
-      return rsp.data;
+      return;
     } catch(e) {
       throw ApiException(e.error);
     }

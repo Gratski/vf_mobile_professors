@@ -54,7 +54,8 @@ abstract class _UserWalletState with Store {
 
   @action
   setCurrencies(List<CurrencyModel> currencies) {
-    this.availableCurrencies = currencies;
+    this.availableCurrencies.clear();
+    this.availableCurrencies.addAll(currencies);
   }
 
   @action
