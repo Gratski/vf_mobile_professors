@@ -125,11 +125,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           context,
           AppLocalizations.of(context)
               .translate(screenConstants.confirmationText));
-      setState(() {
-        oldPasswordController.text = "";
-        newPasswordController.text = "";
-        newPasswordRepeatController.text = "";
-      });
+      Navigator.pop(context);
+      Navigator.pop(context);
     }).catchError((e) {
       ToasterBuilder.buildErrorToaster(context, e.cause);
     }).whenComplete(() {
