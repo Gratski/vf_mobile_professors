@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/settings/support/support_contact_constants.dart';
-import 'package:professors/globals/global_vars.dart';
 import 'package:professors/models/support/support_contact_type.dart';
 import 'package:professors/visual/screens/authenticated/settings/support/support_contact_send.dart';
 import 'package:professors/visual/styles/colors.dart';
@@ -12,7 +11,8 @@ import 'package:professors/visual/widgets/structural/header/custom_app_bar.widge
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class SupportTypeScreen extends StatelessWidget {
-  SupportContactConstants screenConstants = SupportContactConstants();
+
+  final SupportContactConstants screenConstants = SupportContactConstants();
 
   @override
   Widget build(BuildContext context) {
@@ -23,55 +23,44 @@ class SupportTypeScreen extends StatelessWidget {
           CustomAppBar([]),
           AppHeaderWidget(AppLocalizations.of(context)
               .translate(screenConstants.topHeader)),
-          SliverPadding(
-            padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.06),
-            sliver: SliverToBoxAdapter(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  listItem(
-                    context,
-                      'payments_icon',
-                      AppLocalizations.of(context)
-                          .translate(screenConstants.paymentsLabel), () {
-                    navigateToNextScreen(
-                        context, SupportContactTypeModel.PAYMENTS);
-                  }),
-                  listItem(
-                    context,
-                      'classes_icon',
-                      AppLocalizations.of(context)
-                          .translate(screenConstants.classesLabel), () {
-                    navigateToNextScreen(
-                        context, SupportContactTypeModel.CLASSES);
-                  }),
-                ],
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                listItem(
+
+          SliverGrid.count(
+            
+            crossAxisCount: 2,
+            children: [
+              listItem(
                   context,
-                    'account_icon',
-                    AppLocalizations.of(context)
-                        .translate(screenConstants.accountLabel), () {
-                  navigateToNextScreen(
-                      context, SupportContactTypeModel.ACCOUNT);
-                }),
-                listItem(
+                  'account_icon',
+                  AppLocalizations.of(context)
+                      .translate(screenConstants.accountLabel), () {
+                navigateToNextScreen(
+                    context, SupportContactTypeModel.CALENDAR);
+              }),
+              listItem(
                   context,
-                    'calendar_icon',
-                    AppLocalizations.of(context)
-                        .translate(screenConstants.calendarLabel), () {
-                  navigateToNextScreen(
-                      context, SupportContactTypeModel.CALENDAR);
-                }),
-              ],
-            ),
+                  'classes_icon',
+                  AppLocalizations.of(context)
+                      .translate(screenConstants.classesLabel), () {
+                navigateToNextScreen(
+                    context, SupportContactTypeModel.CALENDAR);
+              }),
+              listItem(
+                  context,
+                  'payments_icon',
+                  AppLocalizations.of(context)
+                      .translate(screenConstants.paymentsLabel), () {
+                navigateToNextScreen(
+                    context, SupportContactTypeModel.CALENDAR);
+              }),
+              listItem(
+                  context,
+                  'calendar_icon',
+                  AppLocalizations.of(context)
+                      .translate(screenConstants.calendarLabel), () {
+                navigateToNextScreen(
+                    context, SupportContactTypeModel.CALENDAR);
+              }),
+            ],
           ),
         ],
       ),
@@ -89,37 +78,38 @@ class SupportTypeScreen extends StatelessWidget {
 
   Widget listItem(
       BuildContext context, String img, String label, VoidCallback callback) {
-    return GestureDetector(
-      onTap: callback,
-      child: Container(
-        margin: EdgeInsets.all(10),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Align(
-            alignment: Alignment.bottomRight,
-            child: Container(
-              padding: AppPaddings.regularAllPadding(context),
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(50, 50, 50, 1),
-                border: Border.all(color: AppColors.regularRed),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              height: 120,
-              width: 120,
-              child: Center(
-                child: Column(
-                  children: [
+    return Center(
+      child: GestureDetector(
+        onTap: callback,
+        child: Container(
+          padding: AppPaddings.regularPadding(context),
+          margin: EdgeInsets.all(10),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Container(
+                padding: AppPaddings.regularAllPadding(context),
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.regularRed),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
 
-                    Image(
-                      image: AssetImage('assets/icons/$img.png'),
-                    ),
+                      Image(
+                        image: AssetImage('assets/icons/$img.png'),
+                      ),
 
-                    Container(
-                      margin: EdgeInsets.only(top: 5),
-                      child: TextsBuilder.regularText(label),
-                    ),
+                      Container(
+                        margin: EdgeInsets.only(top: 5),
+                        child: TextsBuilder.regularText(label),
+                      ),
 
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

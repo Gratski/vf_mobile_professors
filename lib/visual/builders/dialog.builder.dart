@@ -80,25 +80,6 @@ class DialogsBuilder {
                         Navigator.pop(context);
                       }
                       );
-                      return GestureDetector(
-                        onTap: () {
-                          if ( options[index].id != selectedId ) {
-
-                          }
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(bottom: 15),
-                          padding: EdgeInsets.all(5),
-                          child: Row(
-                            children: [
-                              (selectedId == options[index].id) ?
-                              TextsBuilder.regularText(options[index].designation, color: AppColors.bgMainColor, bold: true) :
-                              TextsBuilder.regularText(options[index].designation, color: AppColors.bgMainColor)
-                            ],
-                          ),
-                        ),
-                      );
                     },
                   ),
                 )
