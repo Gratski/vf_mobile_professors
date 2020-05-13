@@ -4,18 +4,15 @@ import 'package:after_init/after_init.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
 import 'package:professors/localization/constants/general_constants.dart';
-import 'package:professors/models/language.model.dart';
 import 'package:professors/store/classes/classes_state.dart';
 import 'package:professors/utils/classes.utils.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/authenticated/classes/class_details.screen.dart';
 import 'package:professors/visual/screens/authenticated/classes/create_class_select_language.screen.dart';
-import 'package:professors/visual/screens/authenticated/classes/edit_create/create_or_edit_class.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
@@ -57,6 +54,7 @@ class _ClassesScreenState extends State<ClassesScreen>
         ),
           child: CustomScrollView(
             controller: widget.scrollController,
+            physics: const AlwaysScrollableScrollPhysics(),
             slivers: [
 
               ////////////////////////////////////////////////////////
