@@ -30,7 +30,7 @@ class ClassService extends AbstractRestService {
           "calories": calories,
           "duration": duration
         },),);
-        return decodeBody(rsp)["id"];
+        return rsp["id"];
       } else {
         await performJsonPut(context, '$REST_URL/disciplines/$classId', jsonEncode({
           "categoryId": categoryId,
@@ -57,8 +57,7 @@ class ClassService extends AbstractRestService {
   ///
   Future<ClassModel> getClassById(BuildContext context, int classId) async {
     try {
-      final rsp = await performJsonGet(context, '$REST_URL/disciplines/$classId');
-      Map<String, dynamic> result = decodeBody(rsp);
+      final result = await performJsonGet(context, '$REST_URL/disciplines/$classId');
       return ClassModel(
         result["id"],
         result["rate"],
@@ -124,8 +123,7 @@ class ClassService extends AbstractRestService {
   ///
   Future<GetClassesDTO> getUserClasses(BuildContext context, int offset, int limit) async {
     try {
-      final rsp = await performJsonGet(context, '$REST_URL/professors/me/disciplines?offset=$offset&limit=$limit');
-      Map<String, dynamic> resultMap = decodeBody(rsp);
+      final resultMap = await performJsonGet(context, '$REST_URL/professors/me/disciplines?offset=$offset&limit=$limit');
       int totalItems = resultMap["total"];
       List<dynamic> list = resultMap["items"];
       List<ClassListItemModel> result = List.of([]);

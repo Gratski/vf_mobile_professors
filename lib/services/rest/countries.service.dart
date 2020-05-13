@@ -15,7 +15,7 @@ class CountriesService extends AbstractRestService {
     nationalitiesStore.setIsLoading(true);
     try {
       final rsp = await this.performJsonGet(context, '$REST_URL/countries');
-      GetCountriesResponse result = GetCountriesResponse.fromJson(jsonDecode(rsp.body));
+      GetCountriesResponse result = GetCountriesResponse.fromJson(rsp);
       nationalitiesStore.setNationalities(result.countries);
     } on ApiException catch(e) {
       throw e;

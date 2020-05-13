@@ -353,15 +353,10 @@ class _SettingsPersonalDetailsScreenState extends State<SettingsPersonalDetailsS
         .then((value) {
       restServices.getUserService().getUserPersonalDetails(context);
       ToasterBuilder.buildSuccessToaster(context, "successfully updated");
+      Navigator.pop(context);
     })
         .catchError((e) {
-      String msg = "Something went wrong";
-      if ( e is ApiException ) {
-        msg = e.cause;
-      } else {
-        print(e);
-      }
-      ToasterBuilder.buildErrorToaster(context, msg);
+      ToasterBuilder.buildErrorToaster(context, e.cause);
     });
   }
 }

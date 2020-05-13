@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:professors/models/payments/accounts/PaymentAccountListItem.dart';
-import 'package:professors/models/payments/currency.model.dart';
+import 'package:professors/services/dto/payments/currency.model.dart';
 
 part 'user_wallet_state.g.dart';
 
@@ -18,6 +18,9 @@ abstract class _UserWalletState with Store {
   bool isLoading = false;
 
   @observable
+  bool isUpdating = false;
+
+  @observable
   double balance = 0;
 
   @observable
@@ -27,13 +30,17 @@ abstract class _UserWalletState with Store {
   ObservableList<PaymentAccountListItem> accounts = ObservableList.of([]);
 
   @observable
-  ObservableList<CurrencyModel> availableCurrencies = ObservableList.of([
-    CurrencyModel(1, 'EUR', '€'),
-    CurrencyModel(2, 'USD', '\$ USD'),
-    CurrencyModel(3, 'AUD', '\$ AUD'),
-    CurrencyModel(4, 'UK', '£'),
-    CurrencyModel(5, 'Real', 'Real'),
-  ],);
+  ObservableList<CurrencyModel> availableCurrencies = ObservableList.of([],);
+
+  @action
+  setIsLoading(bool isLoading) {
+    this.isLoading = isLoading;
+  }
+
+  @action
+  setIsUpdating(bool isUpdating) {
+    this.isUpdating = isUpdating;
+  }
 
   @action
   setBalance(double balance) {
@@ -43,6 +50,11 @@ abstract class _UserWalletState with Store {
   @action
   setCurrency(CurrencyModel currency) {
     this.currency = currency;
+  }
+
+  @action
+  setCurrencies(List<CurrencyModel> currencies) {
+    this.availableCurrencies = currencies;
   }
 
   @action

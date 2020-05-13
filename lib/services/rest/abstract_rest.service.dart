@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
@@ -13,6 +14,7 @@ import 'package:professors/localization/localization.config.dart';
 import 'package:professors/services/dto/errors/http_error.dto.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
 import 'package:professors/services/exceptions/file_size.exception.dart';
+import 'package:professors/services/rest/interceptors/auth.interceptor.dart';
 import 'package:professors/utils/compression.utils.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,33 +24,41 @@ abstract class AbstractRestService {
   FormValidationConstants formConstants = FormValidationConstants();
   GeneralConstants constants = GeneralConstants();
 
-  Future<Response> performJsonPost(
-      BuildContext context, String path, String body,
+  Future<Dio> getHttpClient(BuildContext context, {bool useAuth = true}) async {
+    BaseOptions options = BaseOptions(receiveTimeout: 5000, connectTimeout: 5000);
+    final dio = Dio(options);
+    dio.interceptors.add(AuthInterceptor(context));
+    return dio;
+  }
+
+  Future<Map<String, dynamic>> performJsonPost(
+      BuildContext context, String path, String data,
       {bool useAuth = true}) async {
     try {
-      final response = await http.post(path,
-          body: body, headers: await _authHeaders(context, useAuth: useAuth));
-      await _handleError(context, response);
-      return response;
-    } on ApiException catch (e) {
-      throw e;
-    } on Exception catch (e) {
-      throw ApiException(AppLocalizations.of(context).translate(constants.internetConnectionText));
+      final client = await getHttpClient(context);
+      final response = await client.post(path, data: data);
+      return response.data;
+    } catch (e) {
+      throw ApiException(e.error);
     }
   }
 
-  Future<Response> performJsonPut(
-      BuildContext context, String path, String body,
+  Future<void> performJsonPut(
+      BuildContext context, String path, String data,
       {bool useAuth: true}) async {
-    final response =
-        await http.put(path, body: body, headers: await _authHeaders(context));
-    await _handleError(context, response);
-    return response;
+    try {
+      final client = await getHttpClient(context);
+      final response = await client.put(path, data: data);
+      return response.data;
+    } catch (e) {
+      throw ApiException(e.error);
+    }
   }
 
-  Future<Response> performJsonGet(BuildContext context, String path,
+  Future<Map<String, dynamic>> performJsonGet(BuildContext context, String path,
       {bool useAuth = true, bool useCache = false}) async {
     try {
+      /*
       // check cache
       if (useCache) {
         final cachedContent = await fetchFromCache(path);
@@ -56,33 +66,29 @@ abstract class AbstractRestService {
           return Response(cachedContent, 200);
         }
       }
-
-      final response = await http.get(path,
-          headers: await _authHeaders(context, useAuth: useAuth));
-      await _handleError(context, response);
-
+      */
+      final client = await getHttpClient(context);
+      final rsp = await client.get(path);
+      return rsp.data;
       // update cache
+      /*
       if (useCache) {
         updateCache(path, response);
       }
-
-      return response;
-    } on Exception catch (e) {
-      print("");
+      */
+    } catch (e) {
+      throw ApiException(e.error);
     }
   }
 
-  Future<Response> performJsonDelete(BuildContext context, String path,
+  Future<Map<String, dynamic>> performJsonDelete(BuildContext context, String path,
       {bool useAuth = true}) async {
     try {
-      final response = await http.delete(path,
-          headers: await _authHeaders(context, useAuth: useAuth));
-      await _handleError(context, response);
-      return response;
-    } on ApiException catch (e) {
-      throw e;
-    } on Exception catch (e) {
-      ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(constants.internetConnectionText));
+      final client = await getHttpClient(context);
+      final rsp = await client.delete(path);
+      return rsp.data;
+    } catch(e) {
+      throw ApiException(e.error);
     }
   }
 
@@ -134,29 +140,6 @@ abstract class AbstractRestService {
   }
 
   ////////////////////////////////////////
-  // Error Handlers
-  ////////////////////////////////////////
-  Future<void> handleUnknownError(BuildContext context) async {
-    // TODO: Localize this
-    ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(constants.somethingWentWrongText));
-    return;
-  }
-
-  Future<void> _handleError(BuildContext context, Response response) async {
-    if (response.statusCode >= 400) {
-      // not authenticated
-      if (response.statusCode == 401 || response.statusCode == 403) {
-        await restServices.getAuthRestService().signOut();
-        Navigator.pushNamedAndRemoveUntil(context, "/login", (r) => false);
-      }
-
-      HttpError error = HttpError.fromJson(jsonDecode(response.body));
-      throw new ApiException(error.message);
-    }
-    return;
-  }
-
-  ////////////////////////////////////////
   // Helpers
   ////////////////////////////////////////
   Future<Map<String, String>> _authHeaders(BuildContext context,
@@ -182,6 +165,7 @@ abstract class AbstractRestService {
     return map;
   }
 
+  /*
   decodeBody(Response rsp) {
     String jsonStr = Utf8Decoder().convert(rsp.bodyBytes);
     if (jsonStr == null || jsonStr.isEmpty) {
@@ -193,6 +177,7 @@ abstract class AbstractRestService {
   decodeBodyPayload(String rsp) {
     return jsonDecode(rsp);
   }
+   */
 
   ////////////////////////////////////////
   // Cache Handlers
@@ -207,13 +192,16 @@ abstract class AbstractRestService {
     }
   }
 
+  /*
   Future<void> updateCache(String url, Response rsp) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(url, jsonEncode(decodeBody(rsp)));
     return;
   }
+   */
 
   String enumToString(dynamic e) {
     return '${e.toString().substring(e.toString().indexOf('.') + 1)}';
   }
+
 }

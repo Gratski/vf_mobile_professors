@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/services/dto/auth/password_recovery/password_recovery.request.dart';
@@ -19,19 +20,18 @@ class AuthService extends AbstractRestService {
   /// Signs the user in
   ///
   Future<LoginResponse> signIn(BuildContext context, String email, String pwd) async {
-
     LoginRequest request = LoginRequest(email, pwd);
     try {
-      final response = await this.performJsonPost(context, '$REST_URL/auth/signin', request.toJson(), useAuth: false);
-      LoginResponse loginRsp = LoginResponse.fromJson(jsonDecode(response.body));
+      final client = await getHttpClient(context);
+      final rsp = await client.post('$REST_URL/auth/signin', data: request.toJson());
+      LoginResponse loginRsp = LoginResponse.fromJson(rsp.data);
+
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('authToken', loginRsp.token);
       authStore.setAuthToken(loginRsp.token);
       return loginRsp;
-    } on ApiException catch(e) {
-      throw AuthenticationException(e.cause);
-    } on Exception catch(e) {
-      throw AuthenticationException('Internet Connection Error');
+    } catch(e) {
+      throw AuthenticationException(e.error);
     }
 
   }
@@ -55,8 +55,8 @@ class AuthService extends AbstractRestService {
       final rsp = await performJsonPost(context, '$REST_URL/registrations/professor/validation', request.toJson(), useAuth: false);
       RegistrationResponse result = RegistrationResponse();
       return result;
-    } on ApiException catch(e) {
-      throw new ApiException(e.cause);
+    } catch(e) {
+      throw ApiException(e.cause);
     }
   }
 
@@ -68,8 +68,8 @@ class AuthService extends AbstractRestService {
       final response = await performJsonPost(context, '$REST_URL/auth/password-recovery', request.toJson(), useAuth: false);
       PasswordRecoveryResponse result = PasswordRecoveryResponse();
       return result;
-    } on ApiException catch(e) {
-      throw new ApiException(e.cause);
+    } catch(e) {
+      throw ApiException(e.error);
     }
   }
 

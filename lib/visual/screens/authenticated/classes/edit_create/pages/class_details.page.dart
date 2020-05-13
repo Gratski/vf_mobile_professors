@@ -127,7 +127,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                               widget.editCategoryCallBack(context);
                                             },
                                             child: Container(
-                                              child: Row(
+                                              child: Wrap(
                                                 children: <Widget>[
                                                   // class category
                                                   _buildBadge(TextsBuilder.regularText(

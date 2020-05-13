@@ -11,7 +11,7 @@ abstract class _SettingsPaymentsState with Store {
   bool isLoading = true;
 
   @observable
-  double balance = 0.0;
+  double balance = 0;
 
   @observable
   ObservableList<PaymentMethodModel> paymentMethods = ObservableList.of([]);
