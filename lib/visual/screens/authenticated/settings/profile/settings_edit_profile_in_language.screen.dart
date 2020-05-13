@@ -189,7 +189,7 @@ class _EditProfileInLanguageScreenState
                                         ),
                                         keyboardType: TextInputType.multiline,
                                         maxLines: 8,
-                                        maxLength: 25,
+                                        maxLength: 250,
                                       ),
                                     ),
 

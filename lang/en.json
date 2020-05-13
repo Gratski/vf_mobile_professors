@@ -244,7 +244,7 @@
 
 
   "CLASSES_CLASSES_WORD": "Classes",
-  "CLASSES_KCAL_WORD": "KCAL",
+  "CLASSES_KCAL_WORD": "Calories",
   "CLASSES_ALL_WORD": "All",
   "CLASSES_YOUR_WORD": "Your",
   "CLASSES_SUB_TITLE": "Here you can find all your classes",
@@ -305,7 +305,7 @@
   "CREATE_CLASS_CLASS_EQUIPMENT_HINT": "What is the required equipment",
   "CREATE_CLASS_CLASS_GOALS_LABEL": "Goals",
   "CREATE_CLASS_CLASS_GOALS_HINT": "Enter your class goals",
-  "CREATE_CLASS_CLASS_CALORIES_LABEL": "Expected KCal loss",
+  "CREATE_CLASS_CLASS_CALORIES_LABEL": "Expected Calories loss",
   "CREATE_CLASS_CLASS_CALORIES_HINT": "330,8",
   "CREATE_CLASS_CLASS_DURATION_LABEL": "Duration in minutes",
   "CREATE_CLASS_CLASS_DIFFICULTY_LEVEL_LABEL": "Difficulty Level",

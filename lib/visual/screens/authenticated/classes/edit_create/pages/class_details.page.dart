@@ -266,7 +266,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                 if (value != null && (value as String).isNotEmpty)
                                   widget.store.setCalories(double.parse(value));
                               }, caloriesController, false,
-                                  inputFormat: TextInputType.number, validator: _caloriesValidator),
+                                  inputFormat: TextInputType.number, validator: _caloriesValidator, maxChars: 6),
 
                               /// Duration
                               Container(
