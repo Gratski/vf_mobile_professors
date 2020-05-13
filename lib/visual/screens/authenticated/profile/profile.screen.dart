@@ -55,30 +55,27 @@ class _ProfileScreenState extends State<ProfileScreen>
               floating: false,
               pinned: false,
               actions: [
-                Observer(
-                  builder: (_) {
-                    if (!widget.hideLanguageChange) {
-                      return ButtonsBuilder.transparentCustomButton(
-                          TextsBuilder.h4Bold(
-                              widget.store.languageCode.toUpperCase()), () {
-                        DialogsBuilder(context).selectLanguageDialog(
-                            AppLocalizations.of(context).translate(
-                                widget.generalConstants.languagesLabel),
-                            AppLocalizations.of(context).translate(
-                                widget.screenConstants.changeLanguageSubTitle),
-                            generalStore.existingLanguages,
-                            widget.languageId, (selected) {
-                          widget.languageId = selected.id;
-                          widget.languageCode = selected.code;
-                          widget.store.setLanguageCode(selected.code);
-                          didInitState();
-                        });
-                      });
-                    } else {
-                      return Container();
-                    }
-                  },
-                )
+                    (!widget.hideLanguageChange) ?
+                      Observer(
+                        builder: (_) {
+                          return ButtonsBuilder.transparentCustomButton(
+                              TextsBuilder.h4Bold(
+                                  widget.store.languageCode.toUpperCase()), () {
+                            DialogsBuilder(context).selectLanguageDialog(
+                                AppLocalizations.of(context).translate(
+                                    widget.generalConstants.languagesLabel),
+                                AppLocalizations.of(context).translate(
+                                    widget.screenConstants.changeLanguageSubTitle),
+                                generalStore.existingLanguages,
+                                widget.languageId, (selected) {
+                              widget.languageId = selected.id;
+                              widget.languageCode = selected.code;
+                              widget.store.setLanguageCode(selected.code);
+                              didInitState();
+                            });
+                          });
+                        },
+                      ): Container()
               ],
             ),
           ];
@@ -276,7 +273,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                               );
                             } else {
                               return SliverToBoxAdapter(
-                                child: Container(),
+                                child: Container()
                               );
                             }
                           },

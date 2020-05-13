@@ -5,13 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/form_validation.constants.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/localization.config.dart';
-import 'package:professors/services/dto/errors/http_error.dto.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
 import 'package:professors/services/exceptions/file_size.exception.dart';
 import 'package:professors/services/rest/interceptors/auth.interceptor.dart';
@@ -20,7 +18,7 @@ import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AbstractRestService {
-  String REST_URL = "http://192.168.1.103:2222/api/v1";
+  String REST_URL = "http://192.168.1.103:8080/api/v1";
   FormValidationConstants formConstants = FormValidationConstants();
   GeneralConstants constants = GeneralConstants();
 
