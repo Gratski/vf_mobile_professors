@@ -46,12 +46,12 @@ class _ClassesScreenState extends State<ClassesScreen>
         color: AppColors.regularRed,
         child: Container(
           padding: AppPaddings.regularPadding(context),
-          decoration: ( classesStore.classes.length > 0 ) ? BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/classes_bg.png"),
               fit: BoxFit.cover,
             ),
-          ) : BoxDecoration(),
+          ),
           child: CustomScrollView(
             controller: widget.scrollController,
             physics: const AlwaysScrollableScrollPhysics(),
@@ -86,6 +86,8 @@ class _ClassesScreenState extends State<ClassesScreen>
                     !classesStore.isLoading && !classesStore.isRefreshing) {
                   return SliverToBoxAdapter(
                     child: Container(
+                      color: Colors.white,
+                      padding: AppPaddings.regularAllPadding(context),
                       margin: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height / 4),
                       child: Column(
