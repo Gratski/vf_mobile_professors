@@ -44,329 +44,333 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
     return Scaffold(
       backgroundColor: Colors.white,
       body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              backgroundColor: Colors.white,
-              elevation: 0.0,
-              leading: ButtonsBuilder.transparentCustomButton(
-                  Icon(
-                    Icons.arrow_back_ios,
-                    color: AppColors.bgMainColor,
-                  ), () {
-                Navigator.pop(context);
-              }),
-              actions: <Widget>[
-                ButtonsBuilder.transparentCustomButton(
-                    Icon(Icons.edit,
-                        color: AppColors.bgMainColor,
-                        size: AppSizes.iconRegular(context)), () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CreateOrEditClassScreen(
-                            LanguageModel(
-                                widget.store.languageId, null, null),
-                            classId: widget.classId,
-                          )));
-                })
-              ],
-              expandedHeight: MediaQuery.of(context).size.height / 1.6,
-              floating: true,
-              pinned: true,
-              flexibleSpace:
-                  FlexibleSpaceBar(background: Observer(builder: (_) {
-                if (widget.store.isLoading) {
-                  return Container(
-                    color: Colors.grey[100],
-                    child: Image(
-                      image: AssetImage('assets/images/vfit_logo_grey.png'),
-                    ),
-                  );
-                } else {
-                  return (widget.store.imageUrl != null)
-                      ? Container(
-                          foregroundDecoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter,
-                                  stops: [0.0, 0.0],
-                                  colors: [Colors.white, Colors.transparent])),
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            placeholder: (context, value) => Image(
-                              image: AssetImage(
-                                  'assets/images/vfit_logo_grey.png'),
-                            ),
-                            imageUrl: widget.store.imageUrl,
-                          ),
-                        )
-                      : Container();
-                }
-              })),
-            ),
-          ];
-        },
-        body: Container(
-          color: Colors.white,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Observer(
-                builder: (_) {
-                    return Expanded(
-                      child: CustomScrollView(
-                        slivers: <Widget>[
-                          /// HEADER
-                          SliverToBoxAdapter(
-                            child: Container(
-                              margin: EdgeInsets.only(top: sectionTopMargin),
-                              padding: AppPaddings.regularPadding(context),
-                              child: Row(
-                                children: <Widget>[
-                                  Expanded(
-                                    flex: 10,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        _buildCategoryLabel(),
-                                        _buildTitleLabel()
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 4,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: _buildRateLabel(),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-
-                          /// DIFFICULTY
-                          SliverToBoxAdapter(
-                            child: Container(
-                              padding: AppPaddings.regularPadding(context),
-                              margin: EdgeInsets.only(top: sectionTopMargin),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: _buildDifficultyLevelLabel(),
-                              ),
-                            ),
-                          ),
-
-                          /// CALORES
-                          SliverToBoxAdapter(
-                            child: Container(
-                              padding: AppPaddings.regularPadding(context),
-                              margin: EdgeInsets.only(top: sectionTopMargin),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  TextsBuilder.textSmallBold(
-                                      AppLocalizations.of(context)
-                                          .translate(widget.screenConstants
-                                              .classDetailsCaloriesLabel)
-                                          .toUpperCase(),
-                                      color: AppColors.bgMainColor),
-                                  _buildCaloriesLabel(),
-                                ],
-                              ),
-                            ),
-                          ),
-
-                          /// DESCRIPTION
-                          SliverToBoxAdapter(
-                            child: Container(
-                              padding: AppPaddings.regularPadding(context),
-                              margin: EdgeInsets.only(top: sectionTopMargin),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  TextsBuilder.textSmallBold(
-                                      AppLocalizations.of(context)
-                                          .translate(widget.screenConstants
-                                              .classDetailsDescriptionLabel)
-                                          .toUpperCase(),
-                                      color: AppColors.bgMainColor),
-                                  _buildTextAreaLabel(context, widget.store.description == null, widget.store.description),
-                                ],
-                              ),
-                            ),
-                          ),
-
-                          /// CLASS DETAILS
-                          SliverToBoxAdapter(
-                            child: Container(
-                              padding:
-                                  EdgeInsets.only(bottom: sectionTopMargin),
-                              margin: EdgeInsets.only(
-                                top: sectionTopMargin,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  /// EQUIPMENT
-                                  Container(
-                                    padding:
-                                        AppPaddings.regularPadding(context),
-                                    margin: EdgeInsets.only(top: 20),
-                                    child: TextsBuilder.textSmallBold(
-                                        AppLocalizations.of(context)
-                                            .translate(widget.screenConstants
-                                                .classDetailsEquipmentLabel)
-                                            .toUpperCase(),
-                                        color: AppColors.bgMainColor),
-                                  ),
-
-                                  Container(
-                                    padding:
-                                        AppPaddings.regularPadding(context),
-                                    child: _buildTextAreaLabel(context, widget.store.equipment == null, widget.store.equipment),
-                                  ),
-
-                                  /// CLASS GOALS
-                                  Container(
-                                    padding:
-                                        AppPaddings.regularPadding(context),
-                                    margin:
-                                        EdgeInsets.only(top: sectionTopMargin),
-                                    child: TextsBuilder.textSmallBold(
-                                        AppLocalizations.of(context)
-                                            .translate(widget.screenConstants
-                                                .classDetailsClassGoalsLabel)
-                                            .toUpperCase(),
-                                        color: AppColors.bgMainColor),
-                                  ),
-
-                                  Container(
-                                    padding:
-                                        AppPaddings.regularPadding(context),
-                                    child: _buildTextAreaLabel(context, widget.store.goals == null, widget.store.goals),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-
-                          /// INSTRUCTOR
-                          SliverToBoxAdapter(
-                            child: Container(
-                              color: AppColors.bgGreyColor,
-                              padding: AppPaddings.regularPadding(context),
-                              margin: EdgeInsets.only(top: sectionTopMargin),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        bottom:
-                                            MediaQuery.of(context).size.height /
-                                                40,
-                                        top:
-                                            MediaQuery.of(context).size.height /
-                                                30),
-                                    child: TextsBuilder.h4Bold(
-                                        AppLocalizations.of(context)
-                                            .translate(widget.screenConstants
-                                                .classDetailsInstructorLabel)
-                                            .toUpperCase(),
-                                        color: AppColors.bgMainColor),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ProfileScreen(
-                                                    widget.store.languageId,
-                                                    widget.store.languageCode,
-                                                    widget.store.instructorId,
-                                                    hideLanguageChange: true,
-                                                  )));
-                                    },
-                                    child: CircleAvatar(
-                                        maxRadius:
-                                            MediaQuery.of(context).size.width *
-                                                0.20,
-                                        backgroundColor: AppColors.bgMainColor,
-                                        backgroundImage: (widget.store
-                                                    .instructorPictureUrl !=
-                                                null)
-                                            ? CachedNetworkImageProvider(
-                                                widget
-                                                    .store.instructorPictureUrl,
-                                              )
-                                            : AssetImage(
-                                                "assets/images/logo.png")),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 20),
-                                    child: _buildTextLabel(context, widget.store.instructorName == null, widget.store.instructorName, isBold: true),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        bottom:
-                                            MediaQuery.of(context).size.height /
-                                                30),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children:
-                                          IconsBuilder.startListBasedOnScore(5),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-
-                          /// COMMENTS
-                          SliverToBoxAdapter(
-                            child: Container(
-                                padding: AppPaddings.regularPadding(context),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    /// TITLE COMMENTS
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          top: sectionTopMargin),
-                                      child: TextsBuilder.h1Bold(
-                                          AppLocalizations.of(context)
-                                              .translate(widget.screenConstants
-                                                  .classDetailsCommentsLabel),
-                                          color: AppColors.bgMainColor),
-                                    ),
-
-                                    Container(
-                                        margin: EdgeInsets.only(
-                                            top: sectionTopMargin,
-                                            bottom: sectionTopMargin),
-                                        child: Center(
-                                          child: TextsBuilder.regularText(
-                                              AppLocalizations.of(context)
-                                                  .translate(widget
-                                                      .screenConstants
-                                                      .classDetailsNoCommentsYetText),
-                                              color: AppColors.bgMainColor),
-                                        )),
-                                  ],
-                                )),
-                          ),
-                        ],
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                backgroundColor: Colors.white,
+                elevation: 0.0,
+                leading: ButtonsBuilder.transparentCustomButton(
+                    Icon(
+                      Icons.arrow_back_ios,
+                      color: AppColors.bgMainColor,
+                    ), () {
+                  Navigator.pop(context);
+                }),
+                actions: <Widget>[
+                  ButtonsBuilder.transparentCustomButton(
+                      Icon(Icons.edit,
+                          color: AppColors.bgMainColor,
+                          size: AppSizes.iconRegular(context)), () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CreateOrEditClassScreen(
+                              LanguageModel(
+                                  widget.store.languageId, null, null),
+                              classId: widget.classId,
+                            )));
+                  })
+                ],
+                expandedHeight: MediaQuery.of(context).size.height / 1.6,
+                floating: true,
+                pinned: true,
+                flexibleSpace:
+                FlexibleSpaceBar(background: Observer(builder: (_) {
+                  if (widget.store.isLoading) {
+                    return Container(
+                      color: Colors.grey[100],
+                      child: Image(
+                        image: AssetImage('assets/images/vfit_logo_grey.png'),
                       ),
                     );
-                },
+                  } else {
+                    return (widget.store.imageUrl != null)
+                        ? Container(
+                      foregroundDecoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              stops: [0.0, 0.0],
+                              colors: [Colors.white, Colors.transparent])),
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        placeholder: (context, value) => Image(
+                          image: AssetImage(
+                              'assets/images/vfit_logo_grey.png'),
+                        ),
+                        imageUrl: widget.store.imageUrl,
+                      ),
+                    )
+                        : Container();
+                  }
+                })),
               ),
+            ];
+          },
+          body: RefreshIndicator(
+          onRefresh: _refreshOperation,
+          backgroundColor: Colors.white,
+    color: AppColors.regularRed,
+    child: Container(
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Observer(
+            builder: (_) {
+              return Expanded(
+                child: CustomScrollView(
+                  slivers: <Widget>[
+                    /// HEADER
+                    SliverToBoxAdapter(
+                      child: Container(
+                        margin: EdgeInsets.only(top: sectionTopMargin),
+                        padding: AppPaddings.regularPadding(context),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 10,
+                              child: Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  _buildCategoryLabel(),
+                                  _buildTitleLabel()
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 4,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: _buildRateLabel(),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
 
-              // bottom fixed book button
-              /*
+                    /// DIFFICULTY
+                    SliverToBoxAdapter(
+                      child: Container(
+                        padding: AppPaddings.regularPadding(context),
+                        margin: EdgeInsets.only(top: sectionTopMargin),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: _buildDifficultyLevelLabel(),
+                        ),
+                      ),
+                    ),
+
+                    /// CALORES
+                    SliverToBoxAdapter(
+                      child: Container(
+                        padding: AppPaddings.regularPadding(context),
+                        margin: EdgeInsets.only(top: sectionTopMargin),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            TextsBuilder.textSmallBold(
+                                AppLocalizations.of(context)
+                                    .translate(widget.screenConstants
+                                    .classDetailsCaloriesLabel)
+                                    .toUpperCase(),
+                                color: AppColors.bgMainColor),
+                            _buildCaloriesLabel(),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    /// DESCRIPTION
+                    SliverToBoxAdapter(
+                      child: Container(
+                        padding: AppPaddings.regularPadding(context),
+                        margin: EdgeInsets.only(top: sectionTopMargin),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            TextsBuilder.textSmallBold(
+                                AppLocalizations.of(context)
+                                    .translate(widget.screenConstants
+                                    .classDetailsDescriptionLabel)
+                                    .toUpperCase(),
+                                color: AppColors.bgMainColor),
+                            _buildTextAreaLabel(context, widget.store.description == null, widget.store.description),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    /// CLASS DETAILS
+                    SliverToBoxAdapter(
+                      child: Container(
+                        padding:
+                        EdgeInsets.only(bottom: sectionTopMargin),
+                        margin: EdgeInsets.only(
+                          top: sectionTopMargin,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            /// EQUIPMENT
+                            Container(
+                              padding:
+                              AppPaddings.regularPadding(context),
+                              margin: EdgeInsets.only(top: 20),
+                              child: TextsBuilder.textSmallBold(
+                                  AppLocalizations.of(context)
+                                      .translate(widget.screenConstants
+                                      .classDetailsEquipmentLabel)
+                                      .toUpperCase(),
+                                  color: AppColors.bgMainColor),
+                            ),
+
+                            Container(
+                              padding:
+                              AppPaddings.regularPadding(context),
+                              child: _buildTextAreaLabel(context, widget.store.equipment == null, widget.store.equipment),
+                            ),
+
+                            /// CLASS GOALS
+                            Container(
+                              padding:
+                              AppPaddings.regularPadding(context),
+                              margin:
+                              EdgeInsets.only(top: sectionTopMargin),
+                              child: TextsBuilder.textSmallBold(
+                                  AppLocalizations.of(context)
+                                      .translate(widget.screenConstants
+                                      .classDetailsClassGoalsLabel)
+                                      .toUpperCase(),
+                                  color: AppColors.bgMainColor),
+                            ),
+
+                            Container(
+                              padding:
+                              AppPaddings.regularPadding(context),
+                              child: _buildTextAreaLabel(context, widget.store.goals == null, widget.store.goals),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    /// INSTRUCTOR
+                    SliverToBoxAdapter(
+                      child: Container(
+                        color: AppColors.bgGreyColor,
+                        padding: AppPaddings.regularPadding(context),
+                        margin: EdgeInsets.only(top: sectionTopMargin),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              margin: EdgeInsets.only(
+                                  bottom:
+                                  MediaQuery.of(context).size.height /
+                                      40,
+                                  top:
+                                  MediaQuery.of(context).size.height /
+                                      30),
+                              child: TextsBuilder.h4Bold(
+                                  AppLocalizations.of(context)
+                                      .translate(widget.screenConstants
+                                      .classDetailsInstructorLabel)
+                                      .toUpperCase(),
+                                  color: AppColors.bgMainColor),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProfileScreen(
+                                              widget.store.languageId,
+                                              widget.store.languageCode,
+                                              widget.store.instructorId,
+                                              hideLanguageChange: true,
+                                            )));
+                              },
+                              child: CircleAvatar(
+                                  maxRadius:
+                                  MediaQuery.of(context).size.width *
+                                      0.20,
+                                  backgroundColor: AppColors.bgMainColor,
+                                  backgroundImage: (widget.store
+                                      .instructorPictureUrl !=
+                                      null)
+                                      ? CachedNetworkImageProvider(
+                                    widget
+                                        .store.instructorPictureUrl,
+                                  )
+                                      : AssetImage(
+                                      "assets/images/logo.png")),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 20),
+                              child: _buildTextLabel(context, widget.store.instructorName == null, widget.store.instructorName, isBold: true),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(
+                                  bottom:
+                                  MediaQuery.of(context).size.height /
+                                      30),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
+                                children:
+                                IconsBuilder.startListBasedOnScore(5),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    /// COMMENTS
+                    SliverToBoxAdapter(
+                      child: Container(
+                          padding: AppPaddings.regularPadding(context),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              /// TITLE COMMENTS
+                              Container(
+                                margin: EdgeInsets.only(
+                                    top: sectionTopMargin),
+                                child: TextsBuilder.h1Bold(
+                                    AppLocalizations.of(context)
+                                        .translate(widget.screenConstants
+                                        .classDetailsCommentsLabel),
+                                    color: AppColors.bgMainColor),
+                              ),
+
+                              Container(
+                                  margin: EdgeInsets.only(
+                                      top: sectionTopMargin,
+                                      bottom: sectionTopMargin),
+                                  child: Center(
+                                    child: TextsBuilder.regularText(
+                                        AppLocalizations.of(context)
+                                            .translate(widget
+                                            .screenConstants
+                                            .classDetailsNoCommentsYetText),
+                                        color: AppColors.bgMainColor),
+                                  )),
+                            ],
+                          )),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+
+          // bottom fixed book button
+          /*
             Container(
               color: Colors.white,
               padding: EdgeInsets.only(
@@ -396,17 +400,21 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
               ),
             )
              */
-            ],
-          ),
-        ),
+        ],
       ),
+    )),
+        ),
     );
   }
 
   @override
   void didInitState() {
     // load class here
-    restServices
+    _refreshOperation();
+  }
+
+  Future<void> _refreshOperation() {
+    return restServices
         .getClassService()
         .getClassById(context, widget.classId)
         .then((resp) {
