@@ -7,6 +7,7 @@ import 'package:professors/visual/widgets/dialogs/confirmation.dialog.dart';
 import 'package:professors/visual/widgets/dialogs/edit_payment_method.dialog.dart';
 import 'package:professors/visual/widgets/dialogs/select_language.dialog.dart';
 import 'package:professors/visual/widgets/dialogs/unavailable_operation.dialog.dart';
+import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class DialogsBuilder {
@@ -46,7 +47,7 @@ class DialogsBuilder {
     );
   }
 
-  selectLanguageDialog(String title, List<LanguageModel> options,
+  selectLanguageDialog(String title, String subTitle, List<LanguageModel> options,
       int selectedId, Function callback) {
     showDialog(
         context: context,
@@ -56,7 +57,7 @@ class DialogsBuilder {
               text: TextSpan(
                 children: <TextSpan>[
                   TextsBuilder.h3LightSpan('$title\n'),
-                  TextsBuilder.regularSpan('You can add more languages to your profile', color: AppColors.bgMainColor)
+                  TextsBuilder.textSmallSpan(subTitle, color: AppColors.bgMainColor)
                 ],
               ),
             ),
@@ -67,14 +68,27 @@ class DialogsBuilder {
                   child: ListView.builder(
                     itemCount: options.length,
                     itemBuilder: (BuildContext context, int index) {
+                      return ButtonsBuilder.transparentCustomButton(
+                          Row(
+                              children: [
+                                (selectedId == options[index].id) ?
+                                TextsBuilder.regularText(options[index].designation, color: AppColors.bgMainColor, bold: true) :
+                                TextsBuilder.regularText(options[index].designation, color: AppColors.bgMainColor)
+                              ],)
+                      , () {
+                        callback(options[index]);
+                        Navigator.pop(context);
+                      }
+                      );
                       return GestureDetector(
                         onTap: () {
                           if ( options[index].id != selectedId ) {
-                            callback(options[index]);
+
                           }
                           Navigator.pop(context);
                         },
                         child: Container(
+                          margin: EdgeInsets.only(bottom: 15),
                           padding: EdgeInsets.all(5),
                           child: Row(
                             children: [

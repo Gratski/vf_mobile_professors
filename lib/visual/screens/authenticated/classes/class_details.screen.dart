@@ -15,10 +15,12 @@ import 'package:professors/visual/screens/authenticated/profile/profile.screen.d
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/styles/sizes.dart';
+import 'package:professors/visual/widgets/custom.shimmer.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ClassDetailsScreen extends StatefulWidget {
   GeneralConstants generalConstants = GeneralConstants();
@@ -108,16 +110,10 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
         body: Container(
           color: Colors.white,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Observer(
                 builder: (_) {
-                  if (widget.store.isLoading) {
-                    return Container(
-                      margin: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height / 10),
-                      child: DefaultLoaderWidget(),
-                    );
-                  } else {
                     return Expanded(
                       child: CustomScrollView(
                         slivers: <Widget>[
@@ -134,13 +130,8 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        TextsBuilder.regularText(
-                                            '${widget.store.categoryName}, ${widget.store.subCategoryName}'
-                                                .toUpperCase(),
-                                            color: AppColors.bgMainColor),
-                                        TextsBuilder.h2Bold(
-                                            '${widget.store.designation}',
-                                            color: AppColors.bgMainColor),
+                                        _buildCategoryLabel(),
+                                        _buildTitleLabel()
                                       ],
                                     ),
                                   ),
@@ -148,15 +139,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                                     flex: 4,
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
-                                      children: <Widget>[
-                                        TextsBuilder.h4Bold(
-                                            '${widget.store.rate}',
-                                            color: AppColors.bgMainColor),
-                                        Icon(
-                                          Icons.star,
-                                          color: AppColors.regularRed,
-                                        )
-                                      ],
+                                      children: _buildRateLabel(),
                                     ),
                                   ),
                                 ],
@@ -171,16 +154,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                               margin: EdgeInsets.only(top: sectionTopMargin),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  TextsBuilder.textSmallBold(
-                                      '${ClassesUtils().getDifficultyLevelText(context, widget.store.difficultyLevel).toUpperCase()} '
-                                      '${AppLocalizations.of(context).translate(widget.screenConstants.classDetailsLevelLabel).toUpperCase()}',
-                                      color: AppColors.bgMainColor),
-                                  Row(
-                                    children: IconsBuilder.difficultyIcons(
-                                        widget.store.difficultyLevel),
-                                  ),
-                                ],
+                                children: _buildDifficultyLevelLabel(),
                               ),
                             ),
                           ),
@@ -199,9 +173,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                                               .classDetailsCaloriesLabel)
                                           .toUpperCase(),
                                       color: AppColors.bgMainColor),
-                                  TextsBuilder.regularText(
-                                      '${widget.store.calories} ${AppLocalizations.of(context).translate(widget.screenConstants.classesKcalWord)}',
-                                      color: AppColors.bgMainColor),
+                                  _buildCaloriesLabel(),
                                 ],
                               ),
                             ),
@@ -221,9 +193,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                                               .classDetailsDescriptionLabel)
                                           .toUpperCase(),
                                       color: AppColors.bgMainColor),
-                                  TextsBuilder.regularText(
-                                      '${widget.store.description}',
-                                      color: AppColors.bgMainColor),
+                                  _buildTextAreaLabel(context, widget.store.description == null, widget.store.description),
                                 ],
                               ),
                             ),
@@ -256,9 +226,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                                   Container(
                                     padding:
                                         AppPaddings.regularPadding(context),
-                                    child: TextsBuilder.regularText(
-                                        '${widget.store.equipment}',
-                                        color: AppColors.bgMainColor),
+                                    child: _buildTextAreaLabel(context, widget.store.equipment == null, widget.store.equipment),
                                   ),
 
                                   /// CLASS GOALS
@@ -278,9 +246,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                                   Container(
                                     padding:
                                         AppPaddings.regularPadding(context),
-                                    child: TextsBuilder.regularText(
-                                        '${widget.store.goals}',
-                                        color: AppColors.bgMainColor),
+                                    child: _buildTextAreaLabel(context, widget.store.goals == null, widget.store.goals),
                                   ),
                                 ],
                               ),
@@ -341,9 +307,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                                   ),
                                   Container(
                                     margin: EdgeInsets.only(top: 20),
-                                    child: TextsBuilder.h4Bold(
-                                        '${widget.store.instructorName}',
-                                        color: AppColors.bgMainColor),
+                                    child: _buildTextLabel(context, widget.store.instructorName == null, widget.store.instructorName, isBold: true),
                                   ),
                                   Container(
                                     margin: EdgeInsets.only(
@@ -398,7 +362,6 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                         ],
                       ),
                     );
-                  }
                 },
               ),
 
@@ -470,5 +433,85 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
           AppLocalizations.of(context)
               .translate(widget.generalConstants.internetConnectionText));
     }).whenComplete(() => widget.store.setIsLoading(false));
+  }
+
+  _buildCategoryLabel() {
+    if ( widget.store.categoryName == null ) {
+      return CustomShimmer(20, 100);
+    } else {
+      return TextsBuilder.regularText(
+          '${widget.store.categoryName}, ${widget.store.subCategoryName}'
+              .toUpperCase(),
+          color: AppColors.bgMainColor);
+    }
+  }
+
+  _buildTitleLabel() {
+    if ( widget.store.designation == null ) {
+      return CustomShimmer(30, 100);
+    } else {
+      return TextsBuilder.h2Bold(
+          '${widget.store.designation}',
+          color: AppColors.bgMainColor);
+    }
+  }
+
+  _buildRateLabel() {
+    if ( widget.store.rate == null ) {
+      return [CustomShimmer(20, 30)];
+    } else {
+      return [TextsBuilder.h3Bold(
+          '${widget.store.rate}',
+          color: AppColors.bgMainColor), Icon(
+    Icons.star,
+    color: AppColors.regularRed,
+    )];
+    }
+  }
+
+  _buildDifficultyLevelLabel() {
+    if ( widget.store.difficultyLevel == null ) {
+      return [CustomShimmer(20, 100)];
+    } else {
+      return [TextsBuilder.textSmallBold(
+          '${ClassesUtils().getDifficultyLevelText(context, widget.store.difficultyLevel).toUpperCase()} '
+              '${AppLocalizations.of(context).translate(widget.screenConstants.classDetailsLevelLabel).toUpperCase()}',
+          color: AppColors.bgMainColor),
+        Row(
+            children: IconsBuilder.difficultyIcons(
+            widget.store.difficultyLevel)),];
+    }
+  }
+
+  _buildCaloriesLabel() {
+    if ( widget.store.calories == null ) {
+      return CustomShimmer(20, 100);
+    } else {
+      return TextsBuilder.regularText(
+          '${widget.store.calories} ${AppLocalizations.of(context).translate(widget.screenConstants.classesKcalWord)}',
+          color: AppColors.bgMainColor);
+    }
+  }
+
+  _buildTextLabel(BuildContext context, bool expression, String txt, {bool isBold = false}) {
+    if ( expression ) {
+      return CustomShimmer(20, 100);
+    } else {
+      return !isBold ? TextsBuilder.regularText(
+          '$txt',
+          color: AppColors.bgMainColor) : TextsBuilder.h4Bold(
+          '$txt',
+          color: AppColors.bgMainColor);
+    }
+  }
+
+  _buildTextAreaLabel(BuildContext context, bool expression, String txt) {
+    if ( expression ) {
+      return CustomShimmer(50, MediaQuery.of(context).size.width - 20);
+    } else {
+      return TextsBuilder.regularText(
+          '$txt',
+          color: AppColors.bgMainColor);
+    }
   }
 }

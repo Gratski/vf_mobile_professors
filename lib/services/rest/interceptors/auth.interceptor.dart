@@ -22,8 +22,6 @@ class AuthInterceptor extends Interceptor {
     } else {
       options = await _authHeaders(context, options, useAuth: false);
     }
-
-    print("Making request ${options.path}");
     super.onRequest(options);
   }
 
@@ -56,7 +54,7 @@ class AuthInterceptor extends Interceptor {
       prefs.remove("authToken");
       authStore.setAuthToken(null);
       Navigator.pushNamedAndRemoveUntil(context, "/login", (route) => false);
-      return;
+      return ' ';
     }
 
     // general error handling

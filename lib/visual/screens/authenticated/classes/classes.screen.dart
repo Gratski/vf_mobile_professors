@@ -46,12 +46,12 @@ class _ClassesScreenState extends State<ClassesScreen>
         color: AppColors.regularRed,
         child: Container(
           padding: AppPaddings.regularPadding(context),
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/classes_bg.png"),
-            fit: BoxFit.cover,
-          ),
-        ),
+          decoration: ( classesStore.classes.length > 0 ) ? BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/classes_bg.png"),
+              fit: BoxFit.cover,
+            ),
+          ) : BoxDecoration(),
           child: CustomScrollView(
             controller: widget.scrollController,
             physics: const AlwaysScrollableScrollPhysics(),

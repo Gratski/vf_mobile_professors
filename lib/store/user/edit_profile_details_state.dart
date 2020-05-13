@@ -45,6 +45,11 @@ abstract class _EditProfileDetailsState with Store {
   Gender gender = Gender.MALE;
 
   @action
+  setIsLoading(bool isLoading){
+    this.isLoading = isLoading;
+  }
+
+  @action
   setFirstName(String firstName) {
     this.firstName = firstName;
   }

@@ -24,6 +24,8 @@ class IconsBuilder {
   }
 
   static List<Container> difficultyIcons(int level) {
+    if (level == null)
+      return List.of([]);
 
     List<Container> list = new List<Container>();
     int maxScore = 4;
