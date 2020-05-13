@@ -31,7 +31,7 @@ abstract class AbstractRestService {
     return dio;
   }
 
-  Future<Map<String, dynamic>> performJsonPost(
+  Future<dynamic> performJsonPost(
       BuildContext context, String path, String data,
       {bool useAuth = true}) async {
     try {
