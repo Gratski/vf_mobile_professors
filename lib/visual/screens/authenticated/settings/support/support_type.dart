@@ -24,43 +24,46 @@ class SupportTypeScreen extends StatelessWidget {
           AppHeaderWidget(AppLocalizations.of(context)
               .translate(screenConstants.topHeader)),
 
-          SliverGrid.count(
+          SliverPadding(
+            padding: AppPaddings.regularPadding(context).copyWith(top: MediaQuery.of(context).size.height / 20),
+            sliver: SliverGrid.count(
 
-            crossAxisCount: 2,
-            children: [
-              listItem(
-                  context,
-                  'account_icon',
-                  AppLocalizations.of(context)
-                      .translate(screenConstants.accountLabel), () {
-                navigateToNextScreen(
-                    context, SupportContactTypeModel.CALENDAR);
-              }),
-              listItem(
-                  context,
-                  'classes_icon',
-                  AppLocalizations.of(context)
-                      .translate(screenConstants.classesLabel), () {
-                navigateToNextScreen(
-                    context, SupportContactTypeModel.CALENDAR);
-              }),
-              listItem(
-                  context,
-                  'payments_icon',
-                  AppLocalizations.of(context)
-                      .translate(screenConstants.paymentsLabel), () {
-                navigateToNextScreen(
-                    context, SupportContactTypeModel.CALENDAR);
-              }),
-              listItem(
-                  context,
-                  'calendar_icon',
-                  AppLocalizations.of(context)
-                      .translate(screenConstants.calendarLabel), () {
-                navigateToNextScreen(
-                    context, SupportContactTypeModel.CALENDAR);
-              }),
-            ],
+              crossAxisCount: 2,
+              children: [
+                listItem(
+                    context,
+                    'account_icon',
+                    AppLocalizations.of(context)
+                        .translate(screenConstants.accountLabel), () {
+                  navigateToNextScreen(
+                      context, SupportContactTypeModel.CALENDAR);
+                }),
+                listItem(
+                    context,
+                    'classes_icon',
+                    AppLocalizations.of(context)
+                        .translate(screenConstants.classesLabel), () {
+                  navigateToNextScreen(
+                      context, SupportContactTypeModel.CALENDAR);
+                }),
+                listItem(
+                    context,
+                    'payments_icon',
+                    AppLocalizations.of(context)
+                        .translate(screenConstants.paymentsLabel), () {
+                  navigateToNextScreen(
+                      context, SupportContactTypeModel.CALENDAR);
+                }),
+                listItem(
+                    context,
+                    'calendar_icon',
+                    AppLocalizations.of(context)
+                        .translate(screenConstants.calendarLabel), () {
+                  navigateToNextScreen(
+                      context, SupportContactTypeModel.CALENDAR);
+                }),
+              ],
+            ),
           ),
         ],
       ),
@@ -82,7 +85,7 @@ class SupportTypeScreen extends StatelessWidget {
       child: GestureDetector(
         onTap: callback,
         child: Container(
-          padding: AppPaddings.regularPadding(context),
+
           margin: EdgeInsets.all(10),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
