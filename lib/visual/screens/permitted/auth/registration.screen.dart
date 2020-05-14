@@ -7,7 +7,6 @@ import 'package:professors/utils/form.utils.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/permitted/auth/abstract_auth.screen.dart';
 import 'package:professors/visual/screens/permitted/auth/login.screen.dart';
-import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
@@ -197,7 +196,7 @@ class RegistrationScreen extends AbstractAuthScreen {
   }
 
   _launchRegistrationURL() async {
-    const url = 'https://vfit.app';
+    const url = 'https://vfit.app/registrations';
     if (await canLaunch(url)) {
       await launch(url);
     } else {

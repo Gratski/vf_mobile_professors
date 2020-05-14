@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
-import 'package:professors/localization/constants/classes/classes_constants.dart';
 import 'package:professors/localization/constants/form_validation.constants.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/constants/profile_screen.constants.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
-import 'package:professors/visual/screens/authenticated/profile/profile.screen.dart';
 import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/avatar/professor_avatar.widget.dart';
@@ -192,19 +190,6 @@ class _EditProfileInLanguageScreenState
                                         maxLength: 250,
                                       ),
                                     ),
-
-                                    /*
-                            Container(
-                                alignment: Alignment.center,
-                                padding: AppPaddings.regularPadding(context),
-                                margin: EdgeInsets.only(top: sectionTopMargin / 4),
-                                child: ButtonsBuilder.redFlatButton('Save', () {
-
-
-                                },),
-                            ),
-
-                             */
                                   ],
                                 ),
                               ),

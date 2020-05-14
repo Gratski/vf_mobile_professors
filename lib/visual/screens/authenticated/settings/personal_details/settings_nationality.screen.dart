@@ -6,7 +6,6 @@ import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/constants/nationality.constants.dart';
 import 'package:professors/store/nationalities/nationalities_state.dart';
-import 'package:professors/store/user/edit_profile_details_state.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';

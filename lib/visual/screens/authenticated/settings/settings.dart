@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mobx/mobx.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';

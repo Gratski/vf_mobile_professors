@@ -7,7 +7,6 @@ import 'package:professors/localization/constants/form_validation.constants.dart
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/constants/settings/personal_details/settings_personal_details.dart';
 import 'package:professors/models/gender.dart';
-import 'package:professors/services/exceptions/api.exception.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/authenticated/settings/personal_details/settings_gender.screen.dart';
 import 'package:professors/visual/screens/authenticated/settings/personal_details/settings_nationality.screen.dart';
@@ -361,7 +360,7 @@ class _SettingsPersonalDetailsScreenState extends State<SettingsPersonalDetailsS
         widget.screenStore.birthday)
         .then((value) {
       restServices.getUserService().getUserPersonalDetails(context);
-      ToasterBuilder.buildSuccessToaster(context, "successfully updated");
+      ToasterBuilder.buildSuccessToaster(context, AppLocalizations.of(context).translate(widget.generalConstants.successfullySavedText));
       Navigator.pop(context);
     })
         .catchError((e) {

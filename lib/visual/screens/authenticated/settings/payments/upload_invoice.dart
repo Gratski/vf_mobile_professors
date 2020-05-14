@@ -115,20 +115,6 @@ class _SendInvoiceScreenState extends State<SendInvoiceScreen> {
                           screenConstants.sendInvoiceUploadButtonLabel),
                           () async {
                         DialogsBuilder(context).unavailableOperation();
-                        // if is android
-                            /*
-                        if (Theme.of(context).platform ==
-                            TargetPlatform.android) {
-                          File file = await FilePicker.getFile(
-                            type: FileType.custom,
-                            allowedExtensions: ['jpg', 'png', 'jpeg'],
-                          );
-                        } else if (Theme.of(context).platform ==
-                            TargetPlatform.iOS) {
-                          showDialog(context, sKey);
-                        }
-
-                             */
                       },
                       Icon(
                         Icons.file_upload,

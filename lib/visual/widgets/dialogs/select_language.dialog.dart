@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/models/language.model.dart';
-import 'package:professors/visual/styles/colors.dart';
-import 'package:professors/visual/styles/padding.dart';
-import 'package:professors/visual/styles/sizes.dart';
-import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class SelectLanguageDialog extends StatelessWidget {

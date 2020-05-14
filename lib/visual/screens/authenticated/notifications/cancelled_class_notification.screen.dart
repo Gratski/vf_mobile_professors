@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/notifications/notifications_constants.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/notifications/notification_details_user_details.widget.dart';
-import 'package:professors/visual/widgets/structural/appbar_builder.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';

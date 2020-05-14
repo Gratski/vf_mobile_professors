@@ -6,12 +6,10 @@ import 'package:professors/localization/constants/auth/authentication.constants.
 import 'package:professors/utils/form.utils.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/screens/permitted/auth/abstract_auth.screen.dart';
-import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
-import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class PasswordRecoveryScreen extends AbstractAuthScreen {
   // translation constants
