@@ -642,11 +642,14 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
       restServices.getClassService().getClassById(context, widget.store.id)
           .then((d) {
         widget.store.setLanguageId(d.languageId);
-         widget.store.setCategoryId(d.parentCategoryId);
-         widget.store.setCategoryName(d.parentCategoryName);
 
-        widget.store.setSubCategoryId(d.categoryId);
-         widget.store.setSubCategoryName(d.categoryName);
+        if (widget.store.subCategoryId == null) {
+          widget.store.setCategoryId(d.parentCategoryId);
+          widget.store.setCategoryName(d.parentCategoryName);
+
+          widget.store.setSubCategoryId(d.categoryId);
+          widget.store.setSubCategoryName(d.categoryName);
+        }
 
          designationController.text = d.designation;
         widget.store.setDesignation(d.designation);
