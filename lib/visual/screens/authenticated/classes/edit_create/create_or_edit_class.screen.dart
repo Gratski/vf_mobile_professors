@@ -9,7 +9,6 @@ import 'package:professors/store/classes/create_class_state.dart';
 import 'package:professors/visual/screens/authenticated/classes/edit_create/pages/class_details.page.dart';
 import 'package:professors/visual/screens/authenticated/classes/edit_create/pages/select_category.page.dart';
 import 'package:professors/visual/screens/authenticated/classes/edit_create/pages/select_sub_category.page.dart';
-import 'package:professors/visual/styles/padding.dart';
 
 class CreateOrEditClassScreen extends StatelessWidget {
   // constants for localization
@@ -29,7 +28,6 @@ class CreateOrEditClassScreen extends StatelessWidget {
   TextEditingController goalsController = TextEditingController();
 
   // labels
-  String title;
   int classId;
   ClassModel cm;
 
@@ -49,10 +47,8 @@ class CreateOrEditClassScreen extends StatelessWidget {
     store.setId(classId);
 
     if (classId != null) {
-      title = 'Editing class';
       pageController = PageController(initialPage: 2);
     } else {
-      title = 'Creating class';
       pageController = PageController(initialPage: 0);
     }
   }
@@ -80,7 +76,6 @@ class CreateOrEditClassScreen extends StatelessWidget {
       ),
     );
   }
-
   PageView buildPageView(BuildContext context) {
     return PageView(
       physics:new NeverScrollableScrollPhysics(),

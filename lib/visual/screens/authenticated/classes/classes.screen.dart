@@ -94,14 +94,14 @@ class _ClassesScreenState extends State<ClassesScreen>
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           TextsBuilder.h1Bold(
-                              "Welcome ${userStore.firstName}!"),
-                          TextsBuilder.h4Bold("Create your first class"),
+                              "${AppLocalizations.of(context).translate(widget.generalConstants.welcomeTopHeader)} ${userStore.firstName}!"),
+                          TextsBuilder.h4Bold("${AppLocalizations.of(context).translate(widget.generalConstants.welcomeSubTitle)}"),
                           Container(
                             margin: EdgeInsets.only(
                                 top: MediaQuery.of(context).size.height /
                                     20),
                             child: ButtonsBuilder.redFlatButton(
-                              "CREATE CLASS",
+                              "${AppLocalizations.of(context).translate(widget.generalConstants.welcomeCreateClassBtnLabel)}",
                                   () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) =>

@@ -23,6 +23,10 @@
   "SPLASH_FOURTH_TEXT": "Sim! Com a vfit terás um rendimento extra! Os ganhos só dependem de ti. Vai em frente! ",
   "SPLASH_FOURTH_BUTTON_LABEL": "Quero Entrar!",
 
+  "WELCOME_TOP_HEADER": "Olá",
+  "WELCOME_SUB_TITLE": "Cria a tua primeira aula",
+  "WELCOME_CREATE_CLASS_BTN_LABEL": "CRIAR AULA",
+
   "GENERAL_ERROR_SESSION_EXPIRED": "A sessão expirou",
   "GENERAL_ERROR_WHILE_UPLOADING_FILE": "Occorreu um erro ao enviar a imagem. Tente mais tarde.",
   "GENERAL_CATEGORY_LABEL": "Categoria",
@@ -247,8 +251,8 @@
 
   "CLASSES_CLASSES_WORD": "Aulas",
   "CLASSES_KCAL_WORD": "Calorias",
-  "CLASSES_ALL_WORD": "Todas",
-  "CLASSES_YOUR_WORD": "as Tuas",
+  "CLASSES_ALL_WORD": "As",
+  "CLASSES_YOUR_WORD": "Tuas",
   "CLASSES_SUB_TITLE": "Aqui encontras todas as tuas Aulas.",
   "CLASSES_SCHEDULE_LABEL": "Agenda",
   "CLASSES_CALENDAR_LABEL": "Calendário",
@@ -277,6 +281,7 @@
   "CLASS_DETAILS_NO_COMMENTS_YET": "Esta Aula ainda não tem comentários",
 
   "CREATE_CLASS_TOP_HEADER": "Criar nova Aula",
+  "CREATE_CLASS_EDIT_TOP_HEADER": "Editar Aula",
   "CREATE_CLASS_DESIGNATION_LABEL": "Título",
   "CREATE_CLASS_DESIGNATION_HINT": "Adicionar Título de Aula",
   "CREATE_CLASS_DESCRIPTION_LABEL": "Descrição",

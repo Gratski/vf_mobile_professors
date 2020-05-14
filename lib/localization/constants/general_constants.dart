@@ -3,6 +3,10 @@ class GeneralConstants {
   String get internetConnectionText => "GENERAL_INTERNET_CONNECTION_ERROR";
   String get somethingWentWrongText => "GENERAL_SOMETHING_WRONG";
 
+  String get welcomeTopHeader => "WELCOME_TOP_HEADER";
+  String get welcomeSubTitle => "WELCOME_SUB_TITLE";
+  String get welcomeCreateClassBtnLabel => "WELCOME_CREATE_CLASS_BTN_LABEL";
+
   String get successfullyCreatedText => "GENERAL_SUCCESSFULLY_CREATED";
   String get successfullySavedText => "GENERAL_SUCCESSFULLY_SAVED";
 

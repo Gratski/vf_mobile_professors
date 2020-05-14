@@ -23,6 +23,10 @@
   "SPLASH_FOURTH_TEXT": "Yes! With vfit you'll get an extra income! The earnings are up to you. Go for it!",
   "SPLASH_FOURTH_BUTTON_LABEL": "Got it!",
 
+  "WELCOME_TOP_HEADER": "Hello",
+  "WELCOME_SUB_TITLE": "Create your first class",
+  "WELCOME_CREATE_CLASS_BTN_LABEL": "CREATE CLASS",
+
   "GENERAL_ERROR_SESSION_EXPIRED": "Your session expired",
   "GENERAL_ERROR_WHILE_UPLOADING_FILE": "An error occurred uploading file. Please try again later.",
   "GENERAL_CATEGORY_LABEL": "Category",
@@ -277,6 +281,7 @@
   "CLASS_DETAILS_NO_COMMENTS_YET": "This class has no comments yet",
 
   "CREATE_CLASS_TOP_HEADER": "Create new class",
+  "CREATE_CLASS_EDIT_TOP_HEADER": "Editing class",
   "CREATE_CLASS_DESIGNATION_LABEL": "Title",
   "CREATE_CLASS_DESIGNATION_HINT": "New class title",
   "CREATE_CLASS_DESCRIPTION_LABEL": "Description",

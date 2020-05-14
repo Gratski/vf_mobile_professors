@@ -16,11 +16,9 @@ import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/styles/sizes.dart';
 import 'package:professors/visual/widgets/custom.shimmer.dart';
-import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
-import 'package:shimmer/shimmer.dart';
 
 class ClassDetailsScreen extends StatefulWidget {
   GeneralConstants generalConstants = GeneralConstants();
@@ -368,38 +366,6 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
               );
             },
           ),
-
-          // bottom fixed book button
-          /*
-            Container(
-              color: Colors.white,
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.02,
-                bottom: MediaQuery.of(context).size.height * 0.02,
-                left: MediaQuery.of(context).size.width / 20,
-              ),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 8,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        TextsBuilder.regularText('Yoga Relax'.toUpperCase(), color: AppColors.bgMainColor),
-                        TextsBuilder.textSmall('17th April'),
-                        TextsBuilder.textSmall('13:30 - 14:00'),
-                      ],
-                    ),
-                  ),
-
-                  Flexible(
-                    flex: 4,
-                    child: ButtonsBuilder.redFlatButton(AppLocalizations.of(context).translate(widget.screenConstants.classDetailsBookButtonLabel).toUpperCase(), () { }),
-                  ),
-                ],
-              ),
-            )
-             */
         ],
       ),
     )),

@@ -23,6 +23,10 @@
   "SPLASH_FOURTH_TEXT": "¡Sí! ¡Con VFIT obtendrás un ingreso extra! Las ganancias dependen de ti. ¡Ve por ello!",
   "SPLASH_FOURTH_BUTTON_LABEL": "Quiero Entrar!",
 
+  "WELCOME_TOP_HEADER": "¡Hola",
+  "WELCOME_SUB_TITLE": "Crea tu primera clase",
+  "WELCOME_CREATE_CLASS_BTN_LABEL": "CREAR CLASE",
+
   "GENERAL_ERROR_SESSION_EXPIRED": "Su sesión expiró",
   "GENERAL_ERROR_WHILE_UPLOADING_FILE": "Se produjo un error al enviar la imagen. Inténtalo más tarde.",
   "GENERAL_CATEGORY_LABEL": "Categoría",
@@ -277,6 +281,7 @@
   "CLASS_DETAILS_NO_COMMENTS_YET": "Esta clase no tiene ningún comentario todavía",
 
   "CREATE_CLASS_TOP_HEADER": "Crear nueva Clase",
+  "CREATE_CLASS_EDIT_TOP_HEADER": "Editar Aula",
   "CREATE_CLASS_DESIGNATION_LABEL": "Título",
   "CREATE_CLASS_DESIGNATION_HINT": "Nuevo título de Clase",
   "CREATE_CLASS_DESCRIPTION_LABEL": "Descripción",
