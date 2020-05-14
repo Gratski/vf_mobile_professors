@@ -581,7 +581,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
     if ( imageFile != null ) {
       CompressionUtils().compressAndGetFileSize(imageFile)
           .then((size) {
-         if ( size > 80000 ) {
+         if ( size > CompressionUtils.MAX_FILE_SIZE ) {
            ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(widget.formConstants.fileIsTooBigError));
          } else {
            _sendCreateOrUpdate();

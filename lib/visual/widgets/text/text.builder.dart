@@ -20,6 +20,7 @@ class TextsBuilder {
   static double _FONT_SIZE_H5 = 13.0;
   static double _FONT_SIZE_REGULAR = 16.0;
   static double _FONT_SMALL = 14.0;
+  static double _FONT_EXTRA_SMALL = 12.0;
 
   /// List Item Text
   static TextSpan listItemSpan(String text) {
@@ -79,7 +80,7 @@ class TextsBuilder {
         text: text,
         style: TextStyle(
             color: Colors.grey,
-            fontSize: _FONT_SMALL,
+            fontSize: _FONT_EXTRA_SMALL,
             fontFamily: _FONT_FAMILY_REGULAR));
   }
 
@@ -131,7 +132,7 @@ class TextsBuilder {
 
   /// TEXT HINT
   static Text textHint(String text) {
-    return createText(text, _FONT_SMALL, _FONT_FAMILY_REGULAR,
+    return createText(text, _FONT_EXTRA_SMALL, _FONT_FAMILY_REGULAR,
         color: Colors.grey[500]);
   }
 

@@ -54,7 +54,7 @@ class AuthInterceptor extends Interceptor {
       prefs.remove("authToken");
       authStore.setAuthToken(null);
       Navigator.pushNamedAndRemoveUntil(context, "/login", (route) => false);
-      return ' ';
+      return AppLocalizations.of(context).translate(constants.sessionExpired);
     }
 
     // general error handling

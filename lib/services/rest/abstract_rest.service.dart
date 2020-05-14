@@ -99,8 +99,8 @@ abstract class AbstractRestService {
       var length = await compressedFile.length();
 
       var imageSize = await compressedFile.length();
-      if (imageSize > 80000) {
-        throw FileSizeException(AppLocalizations.of(context).translate(formConstants.fileIsTooBigError));
+      if (imageSize > CompressionUtils.MAX_FILE_SIZE) {
+        throw ApiException(AppLocalizations.of(context).translate(formConstants.fileIsTooBigError));
       }
 
       var uri = Uri.parse(url);
@@ -124,14 +124,12 @@ abstract class AbstractRestService {
           ToasterBuilder.buildSuccessToaster(context, AppLocalizations.of(context).translate(formConstants.pictureSuccessFullyChanged));
           return;
         } else if (status == 500) {
-          throw ToasterBuilder.buildErrorToaster(
-              context, AppLocalizations.of(context).translate(formConstants.fileIsTooBigError));
+          throw ApiException(AppLocalizations.of(context).translate(constants.errorWhileUploadingImage));
         } else {
-          throw ToasterBuilder.buildErrorToaster(
-              context, AppLocalizations.of(context).translate(constants.somethingWentWrongText));
+          throw ApiException(AppLocalizations.of(context).translate(constants.somethingWentWrongText));
         }
       });
-    } on FileSizeException catch (e) {
+    } on ApiException catch (e) {
       throw ApiException(e.cause);
     } on Exception catch (e) {
       throw ApiException(AppLocalizations.of(context).translate(constants.somethingWentWrongText));

@@ -6,6 +6,8 @@ import 'package:path/path.dart';
 
 class CompressionUtils {
 
+  static int MAX_FILE_SIZE = 150000;
+
   ////////////////////////////////////////
   // Compression Helper
   ////////////////////////////////////////

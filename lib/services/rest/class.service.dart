@@ -96,10 +96,12 @@ class ClassService extends AbstractRestService {
     try {
       final rsp = await uploadFile(context, file, '$REST_URL/disciplines/$classId/picture');
       return;
-    } on ApiException catch(e) {
-      throw e;
-    } on Exception catch(e) {
-      throw ApiException(AppLocalizations.of(context).translate(constants.somethingWentWrongText));
+    } catch(e) {
+      if ( e is ApiException ) {
+        throw e;
+      } else {
+        throw ApiException(AppLocalizations.of(context).translate(constants.errorWhileUploadingImage));
+      }
     }
   }
 

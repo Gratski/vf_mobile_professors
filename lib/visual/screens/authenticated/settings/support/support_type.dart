@@ -25,7 +25,7 @@ class SupportTypeScreen extends StatelessWidget {
               .translate(screenConstants.topHeader)),
 
           SliverGrid.count(
-            
+
             crossAxisCount: 2,
             children: [
               listItem(

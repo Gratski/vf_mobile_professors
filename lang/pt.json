@@ -23,6 +23,8 @@
   "SPLASH_FOURTH_TEXT": "Sim! Com a vfit terás um rendimento extra! Os ganhos só dependem de ti. Vai em frente! ",
   "SPLASH_FOURTH_BUTTON_LABEL": "Quero Entrar!",
 
+  "GENERAL_ERROR_SESSION_EXPIRED": "A sessão expirou",
+  "GENERAL_ERROR_WHILE_UPLOADING_FILE": "Occorreu um erro ao enviar a imagem. Tente mais tarde.",
   "GENERAL_CATEGORY_LABEL": "Categoria",
   "GENERAL_PICTURE_LABEL": "Imagem",
   "GENERAL_ADD_LANGUAGE_BUTTON_LABEL": "Adicionar Idioma",

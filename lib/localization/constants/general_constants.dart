@@ -42,4 +42,8 @@ class GeneralConstants {
   String get pictureLabel => "GENERAL_PICTURE_LABEL";
 
   String get loadMoreButtonLabel => "GENERAL_LOAD_MORE_BUTTON_LABEL";
+
+  String get errorWhileUploadingImage => "GENERAL_ERROR_WHILE_UPLOADING_FILE";
+
+  String get sessionExpired => "GENERAL_ERROR_SESSION_EXPIRED";
 }
