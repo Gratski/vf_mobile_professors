@@ -15,7 +15,7 @@ class NationalitiesState extends _NationalitiesState with _$NationalitiesState {
 // The store-class
 abstract class _NationalitiesState with Store {
   @observable
-  bool isLoading = false;
+  bool isLoading = true;
 
   @observable
   ObservableList<CountryModel> nationalities = ObservableList.of([],);
