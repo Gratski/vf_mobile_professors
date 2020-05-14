@@ -57,24 +57,9 @@ abstract class AbstractRestService {
   Future<Map<String, dynamic>> performJsonGet(BuildContext context, String path,
       {bool useAuth = true, bool useCache = false}) async {
     try {
-      /*
-      // check cache
-      if (useCache) {
-        final cachedContent = await fetchFromCache(path);
-        if (cachedContent != null && cachedContent.isNotEmpty) {
-          return Response(cachedContent, 200);
-        }
-      }
-      */
       final client = await getHttpClient(context);
       final rsp = await client.get(path);
       return rsp.data;
-      // update cache
-      /*
-      if (useCache) {
-        updateCache(path, response);
-      }
-      */
     } catch (e) {
       throw ApiException(e.error);
     }
@@ -162,19 +147,9 @@ abstract class AbstractRestService {
     return map;
   }
 
-  /*
-  decodeBody(Response rsp) {
-    String jsonStr = Utf8Decoder().convert(rsp.bodyBytes);
-    if (jsonStr == null || jsonStr.isEmpty) {
-      return {};
-    }
-    return jsonDecode(jsonStr);
+  String enumToString(dynamic e) {
+    return '${e.toString().substring(e.toString().indexOf('.') + 1)}';
   }
-
-  decodeBodyPayload(String rsp) {
-    return jsonDecode(rsp);
-  }
-   */
 
   ////////////////////////////////////////
   // Cache Handlers
@@ -187,18 +162,6 @@ abstract class AbstractRestService {
     } else {
       return null;
     }
-  }
-
-  /*
-  Future<void> updateCache(String url, Response rsp) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(url, jsonEncode(decodeBody(rsp)));
-    return;
-  }
-   */
-
-  String enumToString(dynamic e) {
-    return '${e.toString().substring(e.toString().indexOf('.') + 1)}';
   }
 
 }

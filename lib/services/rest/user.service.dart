@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
@@ -8,7 +7,6 @@ import 'package:professors/models/notification_preference_type.model.dart';
 import 'package:professors/services/dto/notifications/get_notifications.response.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
 import 'package:professors/services/rest/abstract_rest.service.dart';
-import 'package:professors/store/user/edit_profile_details_state.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 
 class UserService extends AbstractRestService {
@@ -71,7 +69,7 @@ class UserService extends AbstractRestService {
       );
     } on ApiException catch (e) {
       throw e;
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     } finally {
       notificationsStore.setIsLoading(false);
@@ -90,12 +88,12 @@ class UserService extends AbstractRestService {
     try {
       String path = '$REST_URL/users/me/notification-preferences/'
           '${enumToString(type)}/${ isActive ? 'disable' : 'enable' }';
-      final rsp = await performJsonPost(context, path, jsonEncode({}));
+      await performJsonPost(context, path, jsonEncode({}));
       getUserNotificationPreferences(context);
       return;
     } on ApiException catch(e) {
       throw e;
-    } on Exception catch(e) {
+    } on Exception catch(_) {
       ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(constants.somethingWentWrongText));
       return;
     }
@@ -115,7 +113,7 @@ class UserService extends AbstractRestService {
       String phoneNumber,
       DateTime birthday) async {
     try {
-      final rsp = await this.performJsonPut(
+      await this.performJsonPut(
         context,
         '$REST_URL/users/me',
         jsonEncode(
@@ -140,8 +138,8 @@ class UserService extends AbstractRestService {
 
   Future<void> changeProfilePicture(BuildContext context, File file) async {
     try {
-      final uploadedFile = uploadFile(context, file, '$REST_URL/users/me/picture');
-    } on Exception catch(e) {
+       await uploadFile(context, file, '$REST_URL/users/me/picture');
+    } on Exception catch(_) {
       throw ApiException(AppLocalizations.of(context).translate(constants.somethingWentWrongText));
     }
   }

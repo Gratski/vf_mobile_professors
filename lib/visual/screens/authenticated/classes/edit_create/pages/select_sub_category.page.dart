@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
+import 'package:professors/localization/app_localizations.dart';
+import 'package:professors/localization/constants/classes/create_class.constants.dart';
 import 'package:professors/store/classes/create_class_state.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/styles/padding.dart';
@@ -13,6 +15,9 @@ import 'package:professors/visual/widgets/structural/header/custom_app_bar.widge
 import 'package:professors/visual/widgets/structural/lists/regular_list_tile.dart';
 
 class SelectSubCategoryPage extends StatefulWidget {
+
+  // constants
+  final screenConstants = CreateClassScreenConstants();
 
   // store
   Function onTapCallback, backCallback;
@@ -33,7 +38,7 @@ class _SelectSubCategoryPageState extends State<SelectSubCategoryPage> with Afte
         _buildAppbar(),
 
         AppHeaderWidget(
-          'What is your class about',
+            AppLocalizations.of(context).translate(widget.screenConstants.selectSubCategoryTopHeader),
         ),
         // fields to edit
 

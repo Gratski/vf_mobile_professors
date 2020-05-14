@@ -83,13 +83,4 @@ class AuthInterceptor extends Interceptor {
     return options;
   }
 
-  decodeBody(String msg) {
-    /*String jsonStr = Utf8Decoder().convert(rsp.bodyBytes);
-    if (jsonStr == null || jsonStr.isEmpty) {
-      return {};
-    }
-    return jsonDecode(jsonStr);
-    */
-  }
-
 }

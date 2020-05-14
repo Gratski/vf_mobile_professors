@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/services/dto/auth/password_recovery/password_recovery.request.dart';

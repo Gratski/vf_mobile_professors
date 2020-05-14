@@ -32,18 +32,4 @@ class CompressionUtils {
     return await compressedFile.length();
   }
 
-  double _calcScale({
-    double srcWidth,
-    double srcHeight,
-    double minWidth,
-    double minHeight,
-  }) {
-    var scaleW = srcWidth / minWidth;
-    var scaleH = srcHeight / minHeight;
-
-    var scale = math.max(1.0, math.min(scaleW, scaleH));
-
-    return scale;
-  }
-
 }

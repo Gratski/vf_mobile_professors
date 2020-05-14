@@ -297,6 +297,8 @@
   "CREATE_CLASS_ADD_FINISH_BUTTON_LABEL": "",
   "CREATE_CLASS_WILL_BE_GIVEN_IN": "Selecionar Idioma de Aula",
   "CREATE_CLASS_SELECT_LANGUAGE": "Seleciona o Idioma da tua nova Aula",
+  "CREATE_CLASS_SELECT_CATEGORY_TOP_HEADER": "Categoría da aula",
+  "CREATE_CLASS_SELECT_SUB_CATEGORY_TOP_HEADER": "Qual é o tema da aula?",
 
   "CREATE_CLASS_CLASS_DETAILS_LABEL": "Detalhes de Aula",
   "CREATE_CLASS_CLASS_TITLE_LABEL": "Título",

@@ -297,6 +297,8 @@
   "CREATE_CLASS_ADD_FINISH_BUTTON_LABEL": "",
   "CREATE_CLASS_WILL_BE_GIVEN_IN": "Select Class language",
   "CREATE_CLASS_SELECT_LANGUAGE": "Select the language for your new class",
+  "CREATE_CLASS_SELECT_CATEGORY_TOP_HEADER": "Class Category",
+  "CREATE_CLASS_SELECT_SUB_CATEGORY_TOP_HEADER": "What is your class about",
 
   "CREATE_CLASS_CLASS_DETAILS_LABEL": "Class Details",
   "CREATE_CLASS_CLASS_TITLE_LABEL": "Title",

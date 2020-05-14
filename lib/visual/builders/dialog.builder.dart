@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:professors/models/language.model.dart';
 import 'package:professors/visual/styles/colors.dart';
-import 'package:professors/visual/styles/sizes.dart';
 import 'package:professors/visual/widgets/dialogs/comment_options.dialog.dart';
 import 'package:professors/visual/widgets/dialogs/confirmation.dialog.dart';
 import 'package:professors/visual/widgets/dialogs/edit_payment_method.dialog.dart';
-import 'package:professors/visual/widgets/dialogs/select_language.dialog.dart';
 import 'package:professors/visual/widgets/dialogs/unavailable_operation.dialog.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';

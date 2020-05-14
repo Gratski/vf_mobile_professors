@@ -125,7 +125,7 @@ class WalletService extends AbstractRestService {
   Future<void> updateCurrency(BuildContext context, int currencyId) async {
     userWallet.setIsUpdating(true);
     try {
-      final rsp = await performJsonPut(context, '$REST_URL/wallet/me/currency', jsonEncode(
+      await performJsonPut(context, '$REST_URL/wallet/me/currency', jsonEncode(
         {
           "id": currencyId
         }

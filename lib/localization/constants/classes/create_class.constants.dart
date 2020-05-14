@@ -24,6 +24,9 @@ class CreateClassScreenConstants {
   String get classWillBeGivenInLabel => "CREATE_CLASS_WILL_BE_GIVEN_IN";
   String get selectLanguageLabel => "CREATE_CLASS_SELECT_LANGUAGE";
 
+  String get selectCategoryTopHeader => "CREATE_CLASS_SELECT_CATEGORY_TOP_HEADER";
+  String get selectSubCategoryTopHeader => "CREATE_CLASS_SELECT_SUB_CATEGORY_TOP_HEADER";
+
   String get classDetailsLabel => "CREATE_CLASS_CLASS_DETAILS_LABEL";
   String get classTitleLabel => "CREATE_CLASS_CLASS_TITLE_LABEL";
   String get classTitleHint => "CREATE_CLASS_CLASS_TITLE_HINT";
