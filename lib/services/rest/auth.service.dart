@@ -10,6 +10,7 @@ import 'package:professors/services/dto/auth/signout/signout.dto.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
 import 'package:professors/services/exceptions/authentication.exception.dart';
 import 'package:professors/services/rest/abstract_rest.service.dart';
+import 'package:professors/store/navigation/nav_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService extends AbstractRestService {
@@ -41,6 +42,7 @@ class AuthService extends AbstractRestService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove("authToken");
     authStore.setAuthToken(null);
+    navStore.resetBottomNavigationIndex();
     return SignOutResponse();
   }
 

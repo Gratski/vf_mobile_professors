@@ -6,7 +6,9 @@ class LocalizationConfig {
 
   static List<Locale> get supportedLocales => [
     const Locale('en'),
-    const Locale('pt')
+    const Locale('pt'),
+    const Locale('es'),
+    const Locale('fr')
   ];
 
   static Locale extractCurrentLocale(BuildContext context) {

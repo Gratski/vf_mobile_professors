@@ -11,15 +11,14 @@ import 'package:professors/localization/constants/form_validation.constants.dart
 import 'package:professors/localization/constants/general_constants.dart';
 import 'package:professors/localization/localization.config.dart';
 import 'package:professors/services/exceptions/api.exception.dart';
-import 'package:professors/services/exceptions/file_size.exception.dart';
 import 'package:professors/services/rest/interceptors/auth.interceptor.dart';
 import 'package:professors/utils/compression.utils.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AbstractRestService {
-  String REST_URL = "http://192.168.1.103:8080/api/v1";
-  //String REST_URL = "https://vf-business.herokuapp.com/api/v1";
+  //String REST_URL = "http://192.168.1.103:8080/api/v1";
+  String REST_URL = "https://vf-business.herokuapp.com/api/v1";
   FormValidationConstants formConstants = FormValidationConstants();
   GeneralConstants constants = GeneralConstants();
 
