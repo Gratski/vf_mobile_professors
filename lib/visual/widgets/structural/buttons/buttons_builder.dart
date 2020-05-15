@@ -11,6 +11,16 @@ class ButtonsBuilder {
     return createFlatButton(text, callback, AppColors.regularRed, Colors.white);
   }
 
+  static FlatButton flatButton(String text, VoidCallback callback, {Color color}){
+    return FlatButton(
+      padding: EdgeInsets.all(15.0),
+      color: AppColors.regularRed,
+      textColor: Colors.white,
+      onPressed: callback,
+      child: TextsBuilder.regularText(text, color: Colors.white, bold: true),
+    );
+  }
+
   static FlatButton greenFlatButton(String text, VoidCallback callback, {Color color}){
     return createFlatButton(text, callback, AppColors.regularGreen, Colors.white);
   }

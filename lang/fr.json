@@ -13,6 +13,9 @@
   "DATE_MONTH_11": "Novembre",
   "DATE_MONTH_12": "Décembre",
 
+  "NAV_BOTTOM_CLASSES_LABEL": "Classes",
+  "NAV_BOTTOM_SETTINGS_LABEL": "Paramètres",
+
   "SPLASH_FIRST_HEADER": "BIENVENUE À VFIT",
   "SPLASH_FIRST_TEXT": "Nous sommes très heureux de vous avoir à bord. Nous sommes impatients de voir votre énergie, votre passion et votre professionnalisme en classe",
   "SPLASH_SECOND_HEADER": "VFIT PROFILE",
@@ -97,7 +100,7 @@
   "DASHBOARD_INCOME": "Revenu",
   "DASHBOARD_CANCELLATIONS": "Annulations",
   "DASHBOARD_NEXT_CLASSES_NOT_FOUND_TEXT": "Gardez vos élèves actifs et en forme. Ajoutez vos classes maintenant!",
-  "DASHBOARD_NEXT_CLASSES_CREATE_CLASS_BUTTON": "Ajouter une classe",
+  "DASHBOARD_NEXT_CLASSES_CREATE_CLASS_BUTTON": "Ajouter classe",
   "DASHBOARD_CLASSIFICATION_HIGH_TEXT": "Le calcul des notes est basé sur la moyenne des évaluations. Vous avez un score incroyable. Félicitations!",
   "DASHBOARD_CLASSIFICATION_AVERAGE_TEXT": "Le calcul de la note est basé sur la moyenne des évaluations. Votre score est correct, mais nous savons que vous pourriez faire mieux. Gardez le travail",
   "DASHBOARD_CLASSIFICATION_LOW_TEXT": "Le calcul de la note est basé sur la moyenne des évaluations. Votre score est inférieur à la moyenne. Veuillez revoir le contenu de votre classe et l'interaction entre les classes",
@@ -142,7 +145,7 @@
 
   "SETTINGS_EDIT_PROFILE_SELECT_LANGUAGE_TOP_HEADER": "Editez\nvotre profil",
   "SETTINGS_EDIT_PROFILE_SELECT_LANGUAGE_SUB_TITLE": "Sélectionnez la langue dans laquelle vous souhaitez modifier votre profil",
-  "SETTINGS_EDIT_PROFILE_SELECT_LANGUAGE_ADD_NEW_LANGUAGE_LINK": "Ajouter une langue",
+  "SETTINGS_EDIT_PROFILE_SELECT_LANGUAGE_ADD_NEW_LANGUAGE_LINK": "Ajouter langue",
 
   "SETTINGS_ADD_NEW_LANGUAGE_SELECT_SCREEN_TOP_HEADER": "Ajouter des langues à votre profil",
   "SETTINGS_ADD_NEW_LANGUAGE_SELECT_SCREEN_SUB_TITLE": "Plus vous avez de langues de profil, plus vous monétisez vos cours. Nous avons mis cela à votre disposition, afin que vous puissiez diffuser vos cours en continu dans tous les pays du monde ! Tout ce dont vous avez besoin est de parler couramment cette langue et de créer des classes pour cette langue spécifique",
@@ -241,7 +244,7 @@
   "CLASSES_EDIT_LABEL": "Edit",
   "CLASSES_SHARE_LABEL": "Partager",
   "CLASSES_ADD_DATES_LABEL": "Ajouter des dates",
-  "CLASSES_ADD_CLASS_BUTTON_LABEL": "Ajouter une classe",
+  "CLASSES_ADD_CLASS_BUTTON_LABEL": "Ajouter classe",
 
   "CLASS_DETAILS_LEVEL_LABEL": "Niveau",
   "CLASS_DETAILS_CALORIES_LABEL": "Calories",

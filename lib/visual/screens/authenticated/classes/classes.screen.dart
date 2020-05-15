@@ -4,6 +4,7 @@ import 'package:after_init/after_init.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/classes/classes_constants.dart';
@@ -133,14 +134,12 @@ class _ClassesScreenState extends State<ClassesScreen>
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              ButtonsBuilder.transparentCustomButton(
-                                TextsBuilder.regularText(
-                                    AppLocalizations.of(context).translate(widget.screenConstants.classesAddClassButtonLabel).toUpperCase(), bold: true
-                                ), () {
+                              ButtonsBuilder.flatButton(
+                                AppLocalizations.of(context).translate(widget.screenConstants.classesAddClassButtonLabel).toUpperCase(), () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) =>
                                         CreateClassSelectLanguageScreen()));
-                              },)
+                              }, color: Colors.white)
                             ],
                           )
                       ),)
@@ -249,6 +248,27 @@ class _ClassesScreenState extends State<ClassesScreen>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
+                          Container(
+                            padding: EdgeInsets.only(right: 10),
+                            margin: EdgeInsets.only(right: 10),
+                            decoration: BoxDecoration(
+                                border: Border(
+                                  right: BorderSide(
+                                      color: AppColors.dividerColor
+                                  ),
+                                )
+                            ),
+                            child: Container(
+                              padding: EdgeInsets.all(5),
+                              margin: EdgeInsets.only(top: 5),
+                              decoration: BoxDecoration(
+                                  color: AppColors.regularRed,
+                                  borderRadius: BorderRadius.circular(2)),
+                              child: TextsBuilder.regularText(
+                                  languageCode.toUpperCase(),
+                                  color: Colors.white),
+                            ),
+                          ),
                           TextsBuilder.h4Bold("5", color: AppColors.bgMainColor),
                           Icon(Icons.star, color: AppColors.regularRed,),
                         ],
@@ -273,12 +293,14 @@ class _ClassesScreenState extends State<ClassesScreen>
                           : Container(),
                     ),
 
+                    /// STATUS
                     Positioned(
                       bottom: 10,
                       left: 10,
                       child: ClassesUtils().getChipByStatus(
                           context, status),
                     ),
+
                   ],
                 ),
               ),
@@ -290,23 +312,18 @@ class _ClassesScreenState extends State<ClassesScreen>
                 child: Row(
                   children: [
                     Expanded(
-                      flex: 8,
+                      flex: 7,
                       child: TextsBuilder.h4Bold(designation, color: AppColors.bgMainColor)
                     ),
-                    Flexible(
-                        flex: 2,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                    Expanded(
+                        flex: 3,
+                        child: Wrap(
+                          alignment: WrapAlignment.end,
                           children: [
+                            TextsBuilder.h4Bold('15'),
                             Container(
-                              padding: EdgeInsets.all(5),
-                              margin: EdgeInsets.only(top: 5),
-                              decoration: BoxDecoration(
-                                  color: AppColors.regularRed,
-                                  borderRadius: BorderRadius.circular(2)),
-                              child: TextsBuilder.regularText(
-                                  languageCode.toUpperCase(),
-                                  color: Colors.white),
+                              margin: EdgeInsets.only(left: 5),
+                              child: Icon(FontAwesomeIcons.clock, size: 20, color: AppColors.bgMainColor,),
                             ),
                           ],
                         )

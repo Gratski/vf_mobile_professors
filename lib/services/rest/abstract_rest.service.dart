@@ -18,7 +18,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AbstractRestService {
   //String REST_URL = "http://192.168.1.103:8080/api/v1";
-  String REST_URL = "https://vf-business.herokuapp.com/api/v1";
+  String REST_URL = "https://vfbusinessserver.herokuapp.com/api/v1";
   FormValidationConstants formConstants = FormValidationConstants();
   GeneralConstants constants = GeneralConstants();
 
