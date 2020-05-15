@@ -47,18 +47,37 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
               SliverAppBar(
                 backgroundColor: Colors.white,
                 elevation: 0.0,
+                snap: true,
                 leading: ButtonsBuilder.transparentCustomButton(
-                    Icon(
-                      Icons.arrow_back_ios,
-                      color: AppColors.bgMainColor,
-                    ), () {
+            Stack(
+            children: [
+              Icon(
+                Icons.arrow_back_ios,
+                color: Colors.white,
+                size: AppSizes.iconRegular(context) + 1,
+              ),
+              Icon(
+                Icons.arrow_back_ios,
+                color: AppColors.bgMainColor,
+                size: AppSizes.iconRegular(context),
+              )
+            ],
+            )
+                    , () {
                   Navigator.pop(context);
                 }),
                 actions: <Widget>[
                   ButtonsBuilder.transparentCustomButton(
-                      Icon(Icons.edit,
-                          color: AppColors.bgMainColor,
-                          size: AppSizes.iconRegular(context)), () {
+                      Stack(
+                        children: [
+                          Icon(Icons.edit,
+                              color: Colors.white,
+                              size: AppSizes.iconRegular(context) + 1),
+                          Icon(Icons.edit,
+                              color: AppColors.bgMainColor,
+                              size: AppSizes.iconRegular(context))
+                        ],
+                      ), () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -74,33 +93,41 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                 pinned: true,
                 flexibleSpace:
                 FlexibleSpaceBar(background: Observer(builder: (_) {
-                  if (widget.store.isLoading) {
-                    return Container(
-                      color: Colors.grey[100],
-                      child: Image(
-                        image: AssetImage('assets/images/vfit_logo_grey.png'),
-                      ),
-                    );
-                  } else {
-                    return (widget.store.imageUrl != null)
-                        ? Container(
-                      foregroundDecoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                              stops: [0.0, 0.0],
-                              colors: [Colors.white, Colors.transparent])),
-                      child: CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        placeholder: (context, value) => Image(
-                          image: AssetImage(
-                              'assets/images/vfit_logo_grey.png'),
+                  return Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      (widget.store.isLoading) ?
+                         Expanded(
+                           flex: 10,
+                           child: Container(
+                             color: Colors.grey[100],
+                             child: Image(
+                               image: AssetImage('assets/images/vfit_logo_grey.png'),
+                             ),
+                           ),
+                         ) : (widget.store.imageUrl != null) ?
+                      Expanded(
+                        flex: 10,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          foregroundDecoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  stops: [0.0, 0.0],
+                                  colors: [Color.fromRGBO(255, 255, 255, 0.3), Colors.transparent])),
+                          child: CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            placeholder: (context, value) => Image(
+                              image: AssetImage(
+                                  'assets/images/vfit_logo_grey.png'),
+                            ),
+                            imageUrl: widget.store.imageUrl,
+                          ),
                         ),
-                        imageUrl: widget.store.imageUrl,
-                      ),
-                    )
-                        : Container();
-                  }
+                      ) : Container()
+                    ],
+                  );
                 })),
               ),
             ];
@@ -435,7 +462,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
       return [CustomShimmer(20, 30)];
     } else {
       return [TextsBuilder.h3Bold(
-          '${widget.store.rate}',
+          '${widget.store.rate >= 5 ? 5 : widget.store.rate}',
           color: AppColors.bgMainColor), Icon(
     Icons.star,
     color: AppColors.regularRed,
