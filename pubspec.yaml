@@ -43,6 +43,8 @@ flutter:
   assets:
     - lang/en.json
     - lang/pt.json
+    - lang/es.json
+    - lang/fr.json
     - assets/icons/
     - assets/images/
     - assets/config/
