@@ -49,20 +49,20 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                 elevation: 0.0,
                 snap: true,
                 leading: ButtonsBuilder.transparentCustomButton(
-            Stack(
-            children: [
-              Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
-                size: AppSizes.iconRegular(context) + 1,
-              ),
-              Icon(
-                Icons.arrow_back_ios,
-                color: AppColors.bgMainColor,
-                size: AppSizes.iconRegular(context),
+              Stack(
+              children: [
+                Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.white,
+                  size: AppSizes.iconRegular(context) + 1,
+                ),
+                Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.bgMainColor,
+                  size: AppSizes.iconRegular(context),
+                )
+              ],
               )
-            ],
-            )
                     , () {
                   Navigator.pop(context);
                 }),
@@ -160,7 +160,6 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                                 CrossAxisAlignment.start,
                                 children: <Widget>[
                                   _buildCategoryLabel(),
-                                  _buildTitleLabel()
                                 ],
                               ),
                             ),
@@ -170,6 +169,22 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: _buildRateLabel(),
                               ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    /// TITLE
+                    SliverToBoxAdapter(
+                      child: Container(
+                        margin: EdgeInsets.only(top: 5),
+                        padding: AppPaddings.regularPadding(context),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 10,
+                              child: _buildTitleLabel(),
                             ),
                           ],
                         ),
@@ -461,7 +476,29 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
     if ( widget.store.rate == null ) {
       return [CustomShimmer(20, 30)];
     } else {
-      return [TextsBuilder.h3Bold(
+      return [
+        Container(
+          padding: EdgeInsets.only(right: 10),
+          margin: EdgeInsets.only(right: 10),
+          decoration: BoxDecoration(
+              border: Border(
+                right: BorderSide(
+                    color: AppColors.dividerColor
+                ),
+              )
+          ),
+          child: Container(
+            padding: EdgeInsets.all(5),
+            margin: EdgeInsets.only(top: 5),
+            decoration: BoxDecoration(
+                color: AppColors.regularRed,
+                borderRadius: BorderRadius.circular(2)),
+            child: TextsBuilder.regularText(
+                widget.store.languageCode.toUpperCase(),
+                color: Colors.white),
+          ),
+        ),
+        TextsBuilder.h3Bold(
           '${widget.store.rate >= 5 ? 5 : widget.store.rate}',
           color: AppColors.bgMainColor), Icon(
     Icons.star,
