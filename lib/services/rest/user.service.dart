@@ -86,6 +86,7 @@ class UserService extends AbstractRestService {
       ) async {
 
     try {
+      notificationsStore.setIsLoading(true);
       String path = '$REST_URL/users/me/notification-preferences/'
           '${enumToString(type)}/${ isActive ? 'disable' : 'enable' }';
       await performJsonPost(context, path, jsonEncode({}));
@@ -96,6 +97,8 @@ class UserService extends AbstractRestService {
     } on Exception catch(_) {
       ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(constants.somethingWentWrongText));
       return;
+    } finally {
+      notificationsStore.setIsLoading(false);
     }
 
   }

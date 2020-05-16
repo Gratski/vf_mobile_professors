@@ -18,7 +18,7 @@
 
   "SPLASH_FIRST_HEADER": "BIENVENUE À VFIT",
   "SPLASH_FIRST_TEXT": "Nous sommes très heureux de vous avoir à bord. Nous sommes impatients de voir votre énergie, votre passion et votre professionnalisme en classe",
-  "SPLASH_SECOND_HEADER": "VFIT PROFILE",
+  "SPLASH_SECOND_HEADER": "VFIT PROFIL",
   "SPLASH_SECOND_TEXT": "Créez votre profil et ajoutez autant de langues que vous parlez couramment ! Cela vous permettra de donner des cours à des étudiants du monde entier",
   "SPLASH_THIRD_HEADER": "VFIT CLASSES",
   "SPLASH_THIRD_TEXT": "Créez autant de classes que vous le souhaitez! Les membres de Vfit seront ravis de vous voir en action ! Plus vous en avez, plus vous allez monétiser",
@@ -348,7 +348,7 @@
   "FORM_VALIDATION_CURRENT_PASSWORD_IS_REQUIRED": "Insérez votre mot de passe actuel",
   "FORM_VALIDATION_NEW_PASSWORD_IS_REQUIRED": "Insérer le nouveau mot de passe",
   "FORM_VALIDATION_NEW_PASSWORD_REPEAT_IS_REQUIRED": "Réintroduire le nouveau mot de passe",
-  "FORM_VALIDATION_PASSWORD_TOO_WEAK": "Ce mot de passe est trop faible",
+  "FORM_VALIDATION_PASSWORD_TOO_WEAK": "Insérer au moins 8 caractères",
   "FORM_VALIDATION_PASSWORDS_DONT_MATCH": "Le mot de passe ne correspond pas",
   "FORM_VALIDATION_CONTACT_MESSAGE_IS_REQUIRED": "Message est requise",
   "FORM_VALIDATION_PICTURE_IS_REQUIRED": "L'image est requise",

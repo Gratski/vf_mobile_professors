@@ -374,7 +374,7 @@
   "FORM_VALIDATION_CURRENT_PASSWORD_IS_REQUIRED": "Introduz a Palavra-Passe atual",
   "FORM_VALIDATION_NEW_PASSWORD_IS_REQUIRED": "Introduz a nova Palavra-Passe",
   "FORM_VALIDATION_NEW_PASSWORD_REPEAT_IS_REQUIRED": "Reintroduz a tua nova Palavra-Passe",
-  "FORM_VALIDATION_PASSWORD_TOO_WEAK": "Esta Palavra-Passe é demasiado fraca",
+  "FORM_VALIDATION_PASSWORD_TOO_WEAK": "Pelo menos 8 caracteres",
   "FORM_VALIDATION_PASSWORDS_DONT_MATCH": "As Palavra-Passe não correspondem",
   "FORM_VALIDATION_CONTACT_MESSAGE_IS_REQUIRED": "Mensagem de contacto é necessária",
   "FORM_VALIDATION_PICTURE_IS_REQUIRED": "Imagem é necessária",

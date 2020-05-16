@@ -374,7 +374,7 @@
   "FORM_VALIDATION_CURRENT_PASSWORD_IS_REQUIRED": "Introduce tu Contraseña Actual",
   "FORM_VALIDATION_NEW_PASSWORD_IS_REQUIRED": " Introduce la nueva Contraseña",
   "FORM_VALIDATION_NEW_PASSWORD_REPEAT_IS_REQUIRED": "Reinserte la nueva Contraseña",
-  "FORM_VALIDATION_PASSWORD_TOO_WEAK": "Esta contraseña es demasiado débil",
+  "FORM_VALIDATION_PASSWORD_TOO_WEAK": "Inserte al menos 8 caracteres",
   "FORM_VALIDATION_PASSWORDS_DONT_MATCH": "La contraseña no coincide",
   "FORM_VALIDATION_CONTACT_MESSAGE_IS_REQUIRED": "Se requiere mensaje de contacto",
   "FORM_VALIDATION_PICTURE_IS_REQUIRED": "Se requiere imagen",

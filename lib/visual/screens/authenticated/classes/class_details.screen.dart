@@ -16,6 +16,7 @@ import 'package:professors/visual/styles/colors.dart';
 import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/styles/sizes.dart';
 import 'package:professors/visual/widgets/custom.shimmer.dart';
+import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/icons/icons_builder.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
@@ -47,7 +48,6 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
               SliverAppBar(
                 backgroundColor: Colors.white,
                 elevation: 0.0,
-                snap: true,
                 leading: ButtonsBuilder.transparentCustomButton(
               Stack(
               children: [
@@ -101,9 +101,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                            flex: 10,
                            child: Container(
                              color: Colors.grey[100],
-                             child: Image(
-                               image: AssetImage('assets/images/vfit_logo_grey.png'),
-                             ),
+                             child: DefaultLoaderWidget(),
                            ),
                          ) : (widget.store.imageUrl != null) ?
                       Expanded(
@@ -154,7 +152,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                         child: Row(
                           children: <Widget>[
                             Expanded(
-                              flex: 10,
+                              flex: 8,
                               child: Column(
                                 crossAxisAlignment:
                                 CrossAxisAlignment.start,
@@ -533,9 +531,9 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
       return [CustomShimmer(20, 100)];
     } else {
       return [TextsBuilder.textSmallBold(
-          '${ClassesUtils().getDifficultyLevelText(context, widget.store.difficultyLevel).toUpperCase()} '
               '${AppLocalizations.of(context).translate(widget.screenConstants.classDetailsLevelLabel).toUpperCase()}',
           color: AppColors.bgMainColor),
+        TextsBuilder.textSmall('${ClassesUtils().getDifficultyLevelText(context, widget.store.difficultyLevel).toUpperCase()}'),
         Row(
             children: IconsBuilder.difficultyIcons(
             widget.store.difficultyLevel)),];

@@ -216,6 +216,8 @@ class RegistrationScreen extends AbstractAuthScreen {
   String _passwordValidator(String value) {
     if ( value == null || value.trim().isEmpty ) {
       return AppLocalizations.of(context).translate(formConstants.currentPasswordIsRequired);
+    } else if (!FormUtils().validatePasswordStrength(value)) {
+      return AppLocalizations.of(context).translate(formConstants.passwordIsTooWeak);
     }
     return null;
   }
