@@ -320,7 +320,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                         child: Wrap(
                           alignment: WrapAlignment.end,
                           children: [
-                            TextsBuilder.h4Bold('15'),
+                            TextsBuilder.h4Bold('${classesStore.classes[index].duration}'),
                             Container(
                               margin: EdgeInsets.only(left: 5),
                               child: Icon(FontAwesomeIcons.clock, size: 20, color: AppColors.bgMainColor,),

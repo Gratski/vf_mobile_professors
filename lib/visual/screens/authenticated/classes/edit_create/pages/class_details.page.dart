@@ -236,7 +236,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
                                   AppLocalizations.of(context).translate(widget.screenConstants.classTitleLabel)
               , AppLocalizations.of(context).translate(widget.screenConstants.classTitleHint), (value) {
                                 widget.store.setDesignation(value);
-                              }, designationController, false, maxChars: 35, validator: _titleValidator),
+                              }, designationController, false, maxChars: 50, validator: _titleValidator),
 
                               /// Description
                               _buildTextField(AppLocalizations.of(context).translate(widget.screenConstants.classDescriptionLabel),

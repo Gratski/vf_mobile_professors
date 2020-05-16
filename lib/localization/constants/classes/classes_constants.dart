@@ -38,6 +38,8 @@ class ClassConstants {
   String get classCreatedOrUpdatedSubTitleCreated => "CLASS_CREATED_OR_UPDATED_SUB_TITLE_CREATED";
   String get classCreatedOrUpdatedSubTitleUpdated => "CLASS_CREATED_OR_UPDATED_SUB_TITLE_UPDATED";
   String get classCreatedOrUpdatedOkButtonLabel => "CLASS_CREATED_OR_UPDATED_OK_BUTTON_LABEL";
+  String get classDetailsDurationLabel => "CLASS_DETAILS_DURATION_LABEL";
+  String get classDetailsDurationMinutesLabel => "CLASS_DETAILS_DURATION_MINUTES_LABEL";
 
   String get classDeletedTopHeader => "CLASS_DELETED_TOP_HEADER";
   String get classDeletedSubTitle => "CLASS_DELETED_SUB_TITLE";

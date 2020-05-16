@@ -46,6 +46,9 @@ abstract class _ClassDetailsState with Store {
   int difficultyLevel;
 
   @observable
+  int duration;
+
+  @observable
   double calories;
 
   @observable
@@ -140,6 +143,11 @@ abstract class _ClassDetailsState with Store {
   @action
   setCalories(double calories) {
     this.calories = calories;
+  }
+
+  @action
+  setDuration(int duration) {
+    this.duration = duration;
   }
 
   @action

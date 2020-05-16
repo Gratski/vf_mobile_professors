@@ -203,7 +203,27 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
                       ),
                     ),
 
-                    /// CALORES
+                    /// DURATION
+                    SliverToBoxAdapter(
+                      child: Container(
+                        padding: AppPaddings.regularPadding(context),
+                        margin: EdgeInsets.only(top: sectionTopMargin),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            TextsBuilder.textSmallBold(
+                                AppLocalizations.of(context)
+                                    .translate(widget.screenConstants
+                                    .classDetailsDurationLabel)
+                                    .toUpperCase(),
+                                color: AppColors.bgMainColor),
+                            _buildDurationLabel(),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    /// CALORIES
                     SliverToBoxAdapter(
                       child: Container(
                         padding: AppPaddings.regularPadding(context),
@@ -438,6 +458,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
       widget.store.setEquipment(resp.equipment);
       widget.store.setDescription(resp.description);
       widget.store.setDesignation(resp.designation);
+      widget.store.setDuration(resp.duration);
       widget.store.setCalories(resp.calories);
       widget.store.setInstructorId(resp.instructorId);
       widget.store.setInstructorName(resp.instructorName);
@@ -527,6 +548,16 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen>
     } else {
       return TextsBuilder.regularText(
           '${widget.store.calories} ${AppLocalizations.of(context).translate(widget.screenConstants.classesKcalWord)}',
+          color: AppColors.bgMainColor);
+    }
+  }
+
+  _buildDurationLabel() {
+    if ( widget.store.duration == null ) {
+      return CustomShimmer(20, 100);
+    } else {
+      return TextsBuilder.regularText(
+          '${widget.store.duration} ${AppLocalizations.of(context).translate(widget.screenConstants.classDetailsDurationMinutesLabel)}',
           color: AppColors.bgMainColor);
     }
   }
