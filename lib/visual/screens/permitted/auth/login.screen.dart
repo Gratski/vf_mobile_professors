@@ -12,7 +12,6 @@ import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dar
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class LoginScreen extends AbstractAuthScreen {
-
   AuthenticationConstants screenConstants = AuthenticationConstants();
 
   // form controllers
@@ -36,10 +35,10 @@ class LoginScreen extends AbstractAuthScreen {
             children: <Widget>[
               // Logo
               Container(
-                margin:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height / 80),
+                margin: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height / 80),
                 child: AspectRatio(
-                  aspectRatio: 2,
+                  aspectRatio: 2.5,
                   child: Image(
                     image: AssetImage('assets/images/logo.png'),
                   ),
@@ -48,11 +47,12 @@ class LoginScreen extends AbstractAuthScreen {
 
               // Title
               Container(
-                  margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height / 40),
+                  margin: EdgeInsets.only(top: 10),
                   padding: AppPaddings.regularPadding(context),
-                  child: TextsBuilder.jumboBold(context, AppLocalizations.of(context)
-                      .translate(screenConstants.loginTopHeader), color: Colors.white)),
+                  child: TextsBuilder.h1Bold(
+                      AppLocalizations.of(context)
+                          .translate(screenConstants.loginTopHeader),
+                      color: Colors.white)),
 
               // Email
               Container(
@@ -111,9 +111,9 @@ class LoginScreen extends AbstractAuthScreen {
                           builder: (_) {
                             if (!authStore.loginIsLoading) {
                               return ButtonsBuilder.redFlatButton(
-                                AppLocalizations.of(context)
-                                    .translate(screenConstants.loginButtonLabel),
-                                    () async {
+                                AppLocalizations.of(context).translate(
+                                    screenConstants.loginButtonLabel),
+                                () async {
                                   // validate fields and perform call to auth API
                                   _authenticate();
                                 },
@@ -128,32 +128,35 @@ class LoginScreen extends AbstractAuthScreen {
 
               // forgot password
               Container(
-                  padding: AppPaddings.regularPadding(context),
-                  margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02),
-                  child: ButtonsBuilder.transparentButton(
+                padding: AppPaddings.regularPadding(context),
+                margin: EdgeInsets.only(top: 20),
+                child: GestureDetector(
+                  child: TextsBuilder.regularText(
                       AppLocalizations.of(context)
                           .translate(screenConstants.loginForgotPasswordText),
-                          () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  PasswordRecoveryScreen(emailController.text)),
-                        );
-                      }, color: Colors.white)),
+                      color: Colors.white),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              PasswordRecoveryScreen(emailController.text)),
+                    );
+                  },
+                ),
+              ),
 
               // register
               Container(
                   padding: AppPaddings.regularPadding(context),
-                  margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02),
-                  child: ButtonsBuilder.transparentButton(
-                      AppLocalizations.of(context)
-                          .translate(screenConstants.loginRegisterText),
-                          () {
-                        Navigator.pushNamed(context, '/registration');
-                      }, color: Colors.white)),
+                  margin: EdgeInsets.only(top: 20),
+                  child: GestureDetector(
+                    child: TextsBuilder.regularText(AppLocalizations.of(context)
+                        .translate(screenConstants.loginRegisterText), color: Colors.white),
+                    onTap: () {
+                      Navigator.pushNamed(context, '/registration');
+                    },
+                  )),
             ],
           ),
         ),
@@ -162,21 +165,23 @@ class LoginScreen extends AbstractAuthScreen {
   }
 
   String _emailValidator(String value) {
-    if ( value == null || value.trim().isEmpty ) {
-      return AppLocalizations.of(context).translate(formConstants.emailIsRequired);
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context)
+          .translate(formConstants.emailIsRequired);
     }
     return null;
   }
 
   String _passwordValidator(String value) {
-    if ( value == null || value.trim().isEmpty ) {
-      return AppLocalizations.of(context).translate(formConstants.currentPasswordIsRequired);
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context)
+          .translate(formConstants.currentPasswordIsRequired);
     }
     return null;
   }
 
   _authenticate() {
-    if ( !_formKey.currentState.validate() ) {
+    if (!_formKey.currentState.validate()) {
       return;
     }
 
@@ -184,19 +189,19 @@ class LoginScreen extends AbstractAuthScreen {
     restServices
         .getAuthRestService()
         .signIn(context, emailController.text.trim().toLowerCase(),
-        passwordController.text)
+            passwordController.text)
         .then((rsp) {
       authStore.reset();
       emailController.clear();
       passwordController.clear();
-      Navigator.pushNamedAndRemoveUntil(
-          context, "/home", (r) => false);
+      Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
     }).catchError(
-          (e) {
+      (e) {
         ToasterBuilder.buildErrorToaster(context, e.cause);
       },
     ).whenComplete(() => authStore.setLoginIsLoading(false));
   }
+
   @override
   onBackButtonTap() {
     authStore.reset();

@@ -37,6 +37,7 @@ class PasswordRecoveryScreen extends AbstractAuthScreen {
             .translate(screenConstants.passwordRecoverySubTitle),
         padding: AppPaddings.regularPadding(context),
         color: Colors.white,
+        subTitleColor: Colors.white,
       ),
       SliverToBoxAdapter(
         child: Form(

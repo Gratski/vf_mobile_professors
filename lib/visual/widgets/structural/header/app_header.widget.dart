@@ -4,11 +4,12 @@ import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class AppHeaderWidget extends StatelessWidget {
   Color color;
+  Color subTitleColor;
   String title, subTitle;
   bool isSubTitleSmall;
   EdgeInsets padding;
 
-  AppHeaderWidget(this.title, {this.subTitle, this.isSubTitleSmall = false, this.padding, this.color});
+  AppHeaderWidget(this.title, {this.subTitle, this.isSubTitleSmall = false, this.padding, this.color, this.subTitleColor = Colors.grey});
 
   @override
   SliverToBoxAdapter build(BuildContext context) {
@@ -42,7 +43,7 @@ class AppHeaderWidget extends StatelessWidget {
                   text: TextSpan(
                     style: TextStyle(color: Colors.black),
                     children: <TextSpan>[
-                      (!isSubTitleSmall) ? TextsBuilder.subTitleSpan(subTitle) : TextsBuilder.subTitleSpan(subTitle),
+                      (!isSubTitleSmall) ? TextsBuilder.subTitleSpan(subTitle, color: subTitleColor) : TextsBuilder.subTitleSpan(subTitle, color: subTitleColor),
                     ],
                   ),
                 ),

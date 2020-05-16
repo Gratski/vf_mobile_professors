@@ -14,7 +14,6 @@ import 'package:professors/visual/widgets/text/text.builder.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RegistrationScreen extends AbstractAuthScreen {
-
   AuthenticationConstants screenConstants = AuthenticationConstants();
 
   // form controllers
@@ -37,12 +36,11 @@ class RegistrationScreen extends AbstractAuthScreen {
           key: _formKey,
           child: Column(
             children: <Widget>[
-
               // Logo
               Container(
-                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 80),
+                margin: EdgeInsets.only(top: 10),
                 child: AspectRatio(
-                  aspectRatio: 2,
+                  aspectRatio: 2.5,
                   child: Image(
                     image: AssetImage('assets/images/logo.png'),
                   ),
@@ -51,70 +49,61 @@ class RegistrationScreen extends AbstractAuthScreen {
 
               // Title
               Container(
-                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
-                  child: TextsBuilder.jumboBold(context, AppLocalizations.of(context)
-                      .translate(screenConstants.registrationTopHeader), color: Colors.white)
-              ),
-              // Sub Title
-              GestureDetector(
-                onTap: () {
-                  _launchRegistrationURL();
-                },
-                child: Container(
-                    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01),
-                    child: TextsBuilder.regularText(AppLocalizations.of(context)
-                        .translate(screenConstants.registrationSubTitle), color: Colors.white)
-                ),
-              ),
+                  margin: EdgeInsets.only(top: 10),
+                  padding: AppPaddings.regularPadding(context),
+                  child: TextsBuilder.h1Bold(
+                      AppLocalizations.of(context)
+                          .translate(screenConstants.registrationTopHeader),
+                      color: Colors.white)),
 
               // Email
               Container(
                   padding: AppPaddings.regularPadding(context),
-                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
+                  margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height / 20),
                   child: TextFormField(
                     keyboardType: TextInputType.emailAddress,
                     validator: _validateEmail,
                     style: TextStyle(color: Colors.white),
                     controller: emailController,
                     decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context).translate(screenConstants.registrationEmailLabel)
-                    ),
-                  )
-              ),
+                        hintText: AppLocalizations.of(context)
+                            .translate(screenConstants.registrationEmailLabel)),
+                  )),
 
               // Password
               Container(
                   padding: AppPaddings.regularPadding(context),
-                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
+                  margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height / 40),
                   child: TextFormField(
                     obscureText: true,
                     validator: _passwordValidator,
                     style: TextStyle(color: Colors.white),
                     controller: passwordController,
                     decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context).translate(screenConstants.registrationPasswordLabel)
-                    ),
-                  )
-              ),
+                        hintText: AppLocalizations.of(context).translate(
+                            screenConstants.registrationPasswordLabel)),
+                  )),
 
               // Access Code
               Container(
                   padding: AppPaddings.regularPadding(context),
-                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
+                  margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height / 40),
                   child: TextFormField(
                     validator: _accessCodeValidator,
                     style: TextStyle(color: Colors.white),
                     controller: accessCodeController,
                     decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context).translate(screenConstants.registrationAccessCodeLabel)
-                    ),
-                  )
-              ),
+                        hintText: AppLocalizations.of(context).translate(
+                            screenConstants.registrationAccessCodeLabel)),
+                  )),
 
               // Loader
               Observer(
                 builder: (_) {
-                  if ( authStore.registerIsLoading ) {
+                  if (authStore.registerIsLoading) {
                     return DefaultLoaderWidget();
                   } else {
                     return Container();
@@ -125,40 +114,45 @@ class RegistrationScreen extends AbstractAuthScreen {
               // Button
               Observer(
                 builder: (_) {
-
-                  if ( !authStore.registerIsLoading ) {
+                  if (!authStore.registerIsLoading) {
                     return Container(
                         padding: AppPaddings.regularPadding(context),
-                        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 40),
+                        margin: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height / 40),
                         child: Row(
                           children: <Widget>[
                             Expanded(
                               flex: 10,
-                              child: ButtonsBuilder.redFlatButton(AppLocalizations.of(context).translate(screenConstants.registrationButtonLabel), () {
+                              child: ButtonsBuilder.redFlatButton(
+                                  AppLocalizations.of(context).translate(
+                                      screenConstants.registrationButtonLabel),
+                                  () {
                                 _sendRequest();
                               }),
                             )
                           ],
-                        )
-                    );
+                        ));
                   } else {
                     return Container();
                   }
-
                 },
               ),
 
               // Already have an account text
               Container(
                   padding: AppPaddings.regularPadding(context),
-                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
-                  child: ButtonsBuilder.transparentButton(AppLocalizations.of(context).translate(screenConstants.registrationAlreadyHaveAccount), () {
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => LoginScreen()
-                    ),);
-                  }, color: Colors.white)
-              ),
-
+                  margin: EdgeInsets.only(top: 20),
+                  child: GestureDetector(
+                    child: TextsBuilder.regularText(AppLocalizations.of(context)
+                        .translate(
+                            screenConstants.registrationAlreadyHaveAccount), color: Colors.white),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                      );
+                    },
+                  )),
             ],
           ),
         ),
@@ -175,11 +169,15 @@ class RegistrationScreen extends AbstractAuthScreen {
     String email = emailController.text;
     String password = passwordController.text;
     String accessCode = accessCodeController.text;
-    restServices.getAuthRestService().registration(context, email, password, accessCode)
+    restServices
+        .getAuthRestService()
+        .registration(context, email, password, accessCode)
         .then((rsp) {
       authStore.reset();
-      restServices.getAuthRestService().signIn(context, email, password)
-          .then((value){
+      restServices
+          .getAuthRestService()
+          .signIn(context, email, password)
+          .then((value) {
         emailController.clear();
         passwordController.clear();
         accessCodeController.clear();
@@ -205,8 +203,9 @@ class RegistrationScreen extends AbstractAuthScreen {
   }
 
   String _validateEmail(String value) {
-    if ( value == null || value.trim().isEmpty ) {
-      return AppLocalizations.of(context).translate(formConstants.emailIsRequired);
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context)
+          .translate(formConstants.emailIsRequired);
     } else if (!FormUtils().validateEmail(value)) {
       return AppLocalizations.of(context).translate(formConstants.invalidInput);
     }
@@ -214,22 +213,24 @@ class RegistrationScreen extends AbstractAuthScreen {
   }
 
   String _passwordValidator(String value) {
-    if ( value == null || value.trim().isEmpty ) {
-      return AppLocalizations.of(context).translate(formConstants.currentPasswordIsRequired);
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context)
+          .translate(formConstants.currentPasswordIsRequired);
     } else if (!FormUtils().validatePasswordStrength(value)) {
-      return AppLocalizations.of(context).translate(formConstants.passwordIsTooWeak);
+      return AppLocalizations.of(context)
+          .translate(formConstants.passwordIsTooWeak);
     }
     return null;
   }
 
   String _accessCodeValidator(String value) {
-    if ( value == null || value.trim().isEmpty ) {
-      return AppLocalizations.of(context).translate(formConstants.accessCodeIsRequired);
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizations.of(context)
+          .translate(formConstants.accessCodeIsRequired);
     }
     return null;
   }
 
   @override
   onBackButtonTap() {}
-
 }
