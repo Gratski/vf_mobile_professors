@@ -219,7 +219,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                             if ( widget.store.teaches.length > 0) {
                               return SliverToBoxAdapter(
                                 child: Container(
-                                    padding: AppPaddings.regularPadding(context),
                                     color: AppColors.bgGreyColor,
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,

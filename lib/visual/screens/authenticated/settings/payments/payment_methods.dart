@@ -46,7 +46,7 @@ class PaymentsMethodsScreen extends StatelessWidget {
                     itemCount: paymentsStore.paymentMethods.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
-                        onLongPress: () {
+                        onTap: () {
                           DialogsBuilder(context).editPaymentMethodDialog(() {
                             restServices.getWalletService().setPaymentMethodAsDefault(context, paymentsStore.paymentMethods[index].id)
                                 .then((value) => restServices.getWalletService().getPaymentMethods(context))

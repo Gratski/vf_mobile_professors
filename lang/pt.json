@@ -307,7 +307,7 @@
   "CREATE_CLASS_ADD_FINISH_BUTTON_LABEL": "",
   "CREATE_CLASS_WILL_BE_GIVEN_IN": "Selecionar Idioma de Aula",
   "CREATE_CLASS_SELECT_LANGUAGE": "Seleciona o Idioma da tua nova Aula",
-  "CREATE_CLASS_SELECT_CATEGORY_TOP_HEADER": "Categoría da aula",
+  "CREATE_CLASS_SELECT_CATEGORY_TOP_HEADER": "Categoria da Aula",
   "CREATE_CLASS_SELECT_SUB_CATEGORY_TOP_HEADER": "Qual é o tema da aula?",
 
   "CREATE_CLASS_CLASS_DETAILS_LABEL": "Detalhes de Aula",
@@ -358,7 +358,7 @@
   "PROFILE_SCREEN_COMMENTS_FR": "Comentaires",
   "PROFILE_SCREEN_NO_COMMENTS_FR": "Pas de Comentaires",
 
-  "FORM_VALIDATION_PROVIDE_ALL_DETAILS": "Fornece todos os dados necessários",
+  "FORM_VALIDATION_PROVIDE_ALL_DETAILS": "Preenche todos os dados necessários",
   "FORM_VALIDATION_EMAIL_IS_REQUIRED": "O E-mail é obrigatório",
   "FORM_VALIDATION_MAX_LENGTH_EXCEEDED": "Comprimento Máximo Excedido",
   "FORM_VALIDATION_INVALID_INPUT": "Formato Inválido",

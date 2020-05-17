@@ -111,6 +111,7 @@ class _SettingsPersonalDetailsScreenState extends State<SettingsPersonalDetailsS
                               Container(
                                 margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
                                 child: TextFormField(
+                                  maxLength: 12,
                                   style: TextStyle(color: AppColors.fontColor),
                                   controller: widget.firstNameController,
                                   onChanged: (value) => widget.screenStore.setFirstName(value),
@@ -126,6 +127,7 @@ class _SettingsPersonalDetailsScreenState extends State<SettingsPersonalDetailsS
                               Container(
                                 margin: EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
                                 child: TextFormField(
+                                  maxLength: 12,
                                   style: TextStyle(color: AppColors.fontColor),
                                   controller: widget.lastNameController,
                                   onChanged: (value) => widget.screenStore.setLastName(value),

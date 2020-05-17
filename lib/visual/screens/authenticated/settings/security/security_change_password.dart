@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/form_validation.constants.dart';
@@ -7,6 +8,7 @@ import 'package:professors/store/security/change_password_state.dart';
 import 'package:professors/utils/form.utils.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/styles/padding.dart';
+import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
@@ -16,6 +18,7 @@ import 'package:professors/visual/widgets/structural/lists/list_tile_model.dart'
 /// Screen where a list of security definitions is presented
 class ChangePasswordScreen extends StatefulWidget {
   final formConstants = FormValidationConstants();
+  final store = ChangePasswordState();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -58,53 +61,67 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           CustomAppBar([]),
           AppHeaderWidget(AppLocalizations.of(context)
               .translate(screenConstants.changePasswordTopHeader)),
-          SliverToBoxAdapter(
-            child: Container(
-              padding: AppPaddings.regularPadding(context).copyWith(top: 10),
-              child: Form(
-                key: widget._formKey,
-                child: ListView(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: <Widget>[
-                    /// Old Password
-                    InputTextWidget(
-                        AppLocalizations.of(context)
-                            .translate(screenConstants.changePasswordOldLabel)
-                            .toUpperCase(),
-                        oldPasswordController, validator: _validateCurrentPassword, obscureText: true,),
 
-                    /// New Password
-                    InputTextWidget(
-                        AppLocalizations.of(context)
-                            .translate(screenConstants.changePasswordNewLabel)
-                            .toUpperCase(),
-                        newPasswordController, validator:_validateNewPassword, obscureText: true),
+          Observer(
+            builder: (_) {
 
-                    /// New Password Repeat
-                    InputTextWidget(
-                        AppLocalizations.of(context)
-                            .translate(
-                                screenConstants.changePasswordNewRepeatLabel)
-                            .toUpperCase(),
-                        newPasswordRepeatController, validator: _validateRepeatNewPassword, obscureText: true),
+              if (widget.store.isLoading) {
+                return SliverToBoxAdapter(
+                  child: Container(
+                    padding: AppPaddings.regularPadding(context).copyWith(top: 10),
+                    child: Form(
+                      key: widget._formKey,
+                      child: ListView(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: <Widget>[
+                          /// Old Password
+                          InputTextWidget(
+                            AppLocalizations.of(context)
+                                .translate(screenConstants.changePasswordOldLabel)
+                                .toUpperCase(),
+                            oldPasswordController, validator: _validateCurrentPassword, obscureText: true,),
 
-                    /// Change Button
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: ButtonsBuilder.redFlatButton(
-                        AppLocalizations.of(context).translate(
-                            screenConstants.changePasswordButtonLabel),
-                        () {
-                          _changePassword();
-                        },
+                          /// New Password
+                          InputTextWidget(
+                              AppLocalizations.of(context)
+                                  .translate(screenConstants.changePasswordNewLabel)
+                                  .toUpperCase(),
+                              newPasswordController, validator:_validateNewPassword, obscureText: true),
+
+                          /// New Password Repeat
+                          InputTextWidget(
+                              AppLocalizations.of(context)
+                                  .translate(
+                                  screenConstants.changePasswordNewRepeatLabel)
+                                  .toUpperCase(),
+                              newPasswordRepeatController, validator: _validateRepeatNewPassword, obscureText: true),
+
+                          /// Change Button
+                          Container(
+                            margin: EdgeInsets.only(top: 10),
+                            child: ButtonsBuilder.redFlatButton(
+                              AppLocalizations.of(context).translate(
+                                  screenConstants.changePasswordButtonLabel),
+                                  () {
+                                _changePassword();
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+                  ),
+                );
+              } else {
+                return SliverToBoxAdapter(
+                  child: DefaultLoaderWidget(),
+                );
+              }
+
+            },
+          )
+
         ],
       ),
     );
