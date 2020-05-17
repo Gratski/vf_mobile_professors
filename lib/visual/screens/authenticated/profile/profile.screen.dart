@@ -225,8 +225,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                       children: <Widget>[
                                         /// TITLE
                                         Container(
-                                          margin:
-                                          EdgeInsets.only(top: sectionTopMargin),
+                                          margin: EdgeInsets.only(top: sectionTopMargin),
+                                          padding: AppPaddings.regularPadding(context),
                                           child: TextsBuilder.h2Bold(
                                               AppLocalizations.of(context).translate(
                                                   widget.screenConstants.teachesLabel(
@@ -249,7 +249,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                   int index) {
                                                 return Container(
                                                   margin: EdgeInsets.only(
-                                                      right:
+                                                      left:
                                                       MediaQuery.of(context)
                                                           .size
                                                           .width /
