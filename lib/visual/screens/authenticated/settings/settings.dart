@@ -287,23 +287,6 @@ class SettingsScreen extends StatelessWidget {
               ),
             ),
 
-            /// HOW IT WORKS
-            SliverToBoxAdapter(
-              child: RegularListTile(
-                label: AppLocalizations.of(context)
-                    .translate(TRANSLATIONS.SettingsConstants.HOW_IT_WORKS),
-                hint: AppLocalizations.of(context).translate(
-                    TRANSLATIONS.SettingsConstants.HOW_IT_WORKS_HINT),
-                callback: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SupportTypeScreen()),
-                  );
-                },
-              ),
-            ),
-
             /// TERMS
             SliverToBoxAdapter(
               child: RegularListTile(

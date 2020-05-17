@@ -177,7 +177,7 @@
 
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_TOP_HEADER": "Bon à savoir",
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_SUB_TITLE": "Pour l'instant, PayPal est le seul moyen de paiement disponible",
-  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_EXECUTION_TIME_LABEL": "L'exécution des transactions est traitée chaque mois le dernier jour ouvrable. L'exécution d'une transaction peut prendre jusqu'à 3 jours ouvrables pour être conclue.",
+  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_EXECUTION_TIME_LABEL": "L'exécution de la transaction est traitée dès réception de votre facture. L'exécution de la transaction peut prendre jusqu'à 3 jours ouvrables pour être terminée.",
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_TAXATION_LABEL": "Il peut inclure des taxes selon nos conditions et modalités en fonction du pays d'où vous émettez vos factures.",
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_PROCEED_LINK": "Je l'ai ! Procédez",
 
@@ -278,7 +278,7 @@
   "CREATE_CLASS_FINISH_MESSAGE": "",
   "CREATE_CLASS_FINISH_SUCCESS_MESSAGE": "",
   "CREATE_CLASS_FINISH_FAILURE_MESSAGE": "",
-  "CREATE_CLASS_ADD_FINISH_BUTTON_LABEL": "",
+  "CREATE_CLASS_ADD_FINISH_BUTTON_LABEL": "Créer leçon",
   "CREATE_CLASS_WILL_BE_GIVEN_IN": "Sélectionner la langue de la classe",
   "CREATE_CLASS_SELECT_LANGUAGE": "Sélectionnez la langue de votre nouvelle classe",
   "CREATE_CLASS_SELECT_CATEGORY_TOP_HEADER": "Catégorie de classe",

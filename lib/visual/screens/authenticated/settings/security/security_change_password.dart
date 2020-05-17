@@ -65,7 +65,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           Observer(
             builder: (_) {
 
-              if (widget.store.isLoading) {
+              if (!widget.store.isLoading) {
                 return SliverToBoxAdapter(
                   child: Container(
                     padding: AppPaddings.regularPadding(context).copyWith(top: 10),
@@ -115,7 +115,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 );
               } else {
                 return SliverToBoxAdapter(
-                  child: DefaultLoaderWidget(),
+                  child: Container(
+                    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 4),
+                    child: DefaultLoaderWidget(),
+                  ),
                 );
               }
 
@@ -132,7 +135,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       return;
     }
 
-    store.setIsLoading(true);
+    widget.store.setIsLoading(true);
     restServices
         .getSecurityService()
         .changePassword(
@@ -147,7 +150,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     }).catchError((e) {
       ToasterBuilder.buildErrorToaster(context, e.cause);
     }).whenComplete(() {
-      store.setIsLoading(false);
+      widget.store.setIsLoading(false);
     });
   }
 

@@ -693,7 +693,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
           child: ButtonsBuilder.transparentButton(
           (widget.classId != null) ?
               AppLocalizations.of(context).translate(widget.generalConstants.buttonSaveLabel).toUpperCase() :
-          AppLocalizations.of(context).translate(widget.generalConstants.buttonAddLabel).toUpperCase(), () {
+          AppLocalizations.of(context).translate(widget.screenConstants.finishButtonLabel).toUpperCase(), () {
             _save(context);
           },),
         )

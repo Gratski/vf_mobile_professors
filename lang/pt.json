@@ -177,7 +177,7 @@
 
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_TOP_HEADER": "É bom saber que",
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_SUB_TITLE": "Neste momento, o PayPal é a única forma de pagamento disponível",
-  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_EXECUTION_TIME_LABEL": "A execução da transacção é processada todos os meses no último dia útil. A execução da transacção pode demorar até 3 dias úteis a ser concluída.",
+  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_EXECUTION_TIME_LABEL": "A execução da transacção é processada após a receção da tua Fatura. A execução da transacção pode demorar até 3 dias úteis a ser concluída.",
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_TAXATION_LABEL": "Pode incluir impostos de acordo com as nossos Termos e Condições, dependendo do país emissor das tuas facturas.",
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_PROCEED_LINK": "Entendi! Continuar",
 
@@ -304,7 +304,7 @@
   "CREATE_CLASS_FINISH_MESSAGE": "",
   "CREATE_CLASS_FINISH_SUCCESS_MESSAGE": "",
   "CREATE_CLASS_FINISH_FAILURE_MESSAGE": "",
-  "CREATE_CLASS_ADD_FINISH_BUTTON_LABEL": "",
+  "CREATE_CLASS_ADD_FINISH_BUTTON_LABEL": "Criar Aula",
   "CREATE_CLASS_WILL_BE_GIVEN_IN": "Selecionar Idioma de Aula",
   "CREATE_CLASS_SELECT_LANGUAGE": "Seleciona o Idioma da tua nova Aula",
   "CREATE_CLASS_SELECT_CATEGORY_TOP_HEADER": "Categoria da Aula",

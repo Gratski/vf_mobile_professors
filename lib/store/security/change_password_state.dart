@@ -11,7 +11,7 @@ class ChangePasswordState extends _ChangePasswordState with _$ChangePasswordStat
 abstract class _ChangePasswordState with Store {
 
   @observable
-  bool isLoading = true;
+  bool isLoading = false;
 
   @action
   setIsLoading(bool isLoading) {

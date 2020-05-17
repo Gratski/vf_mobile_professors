@@ -104,6 +104,8 @@ class SupportTypeScreen extends StatelessWidget {
 
                       Image(
                         image: AssetImage('assets/icons/$img.png'),
+                        width: 60,
+                        height: 60,
                       ),
 
                       Container(
