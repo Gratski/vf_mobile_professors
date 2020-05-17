@@ -130,7 +130,7 @@ class _ClassesScreenState extends State<ClassesScreen>
                   if (classesStore.classes.length > 0 && !classesStore.isLoading ) {
                     return SliverToBoxAdapter(
                       child: Container(child: Container(
-                          margin: EdgeInsets.only(top: 20, bottom: 20),
+                          margin: EdgeInsets.only(top: 40, bottom: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [

@@ -253,7 +253,7 @@
 
 
   "CLASSES_CLASSES_WORD": "Classes",
-  "CLASSES_KCAL_WORD": "Calories",
+  "CLASSES_KCAL_WORD": "Kcal",
   "CLASSES_ALL_WORD": "All",
   "CLASSES_YOUR_WORD": "Your",
   "CLASSES_SUB_TITLE": "Here you can find all your classes",
@@ -297,7 +297,7 @@
   "CREATE_CLASS_EQUIPMENT_HINT": "What is the required equipment",
   "CREATE_CLASS_GOALS_LABEL": "Class Goals",
   "CREATE_CLASS_GOALS_HINT": "Describe the class goals here",
-  "CREATE_CLASS_CALORIES_LABEL": "Estimated Calories",
+  "CREATE_CLASS_CALORIES_LABEL": "Estimated Kcal",
   "CREATE_CLASS_CALORIES_HINT": "",
   "CREATE_CLASS_ADD_COVER_PICTURE_BUTTON_LABEL": "",
   "CREATE_CLASS_UPLOAD_PICTURE_BUTTON_LABEL": "",
@@ -319,7 +319,7 @@
   "CREATE_CLASS_CLASS_EQUIPMENT_HINT": "What is the required equipment",
   "CREATE_CLASS_CLASS_GOALS_LABEL": "Goals",
   "CREATE_CLASS_CLASS_GOALS_HINT": "Enter your class goals",
-  "CREATE_CLASS_CLASS_CALORIES_LABEL": "Expected Calories loss",
+  "CREATE_CLASS_CLASS_CALORIES_LABEL": "Expected Kcal loss",
   "CREATE_CLASS_CLASS_CALORIES_HINT": "330,8",
   "CREATE_CLASS_CLASS_DURATION_LABEL": "Duration in minutes",
   "CREATE_CLASS_CLASS_DIFFICULTY_LEVEL_LABEL": "Difficulty Level",

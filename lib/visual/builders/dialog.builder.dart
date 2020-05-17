@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:professors/models/language.model.dart';
 import 'package:professors/visual/styles/colors.dart';
+import 'package:professors/visual/styles/padding.dart';
 import 'package:professors/visual/widgets/dialogs/comment_options.dialog.dart';
 import 'package:professors/visual/widgets/dialogs/confirmation.dialog.dart';
 import 'package:professors/visual/widgets/dialogs/edit_payment_method.dialog.dart';
@@ -50,39 +51,32 @@ class DialogsBuilder {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
-            title: RichText(
-              text: TextSpan(
-                children: <TextSpan>[
-                  TextsBuilder.h3LightSpan('$title\n'),
-                  TextsBuilder.textSmallSpan(subTitle, color: AppColors.bgMainColor)
-                ],
+          List<Widget> widgets = options.map((e) =>
+            GestureDetector(
+              onTap: () {
+                callback(e);
+                Navigator.pop(context);
+              },
+              child: Container(
+                  padding: AppPaddings.regularPadding(context).copyWith(bottom: 20),
+                  child: (selectedId == e.id) ?
+                  TextsBuilder.regularText(e.designation, color: AppColors.bgMainColor, bold: true) :
+                  TextsBuilder.regularText(e.designation, color: AppColors.bgMainColor) ),
+            ),
+            ).toList();
+          return SimpleDialog(
+            title: Container(
+              margin: EdgeInsets.only(bottom: 10),
+              child: RichText(
+                text: TextSpan(
+                  children: <TextSpan>[
+                    TextsBuilder.h3LightSpan('$title\n'),
+                    TextsBuilder.textSmallSpan(subTitle, color: AppColors.bgMainColor)
+                  ],
+                ),
               ),
             ),
-            content: Container(
-              width: double.maxFinite,
-              child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: options.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ButtonsBuilder.transparentCustomButton(
-                          Row(
-                              children: [
-                                (selectedId == options[index].id) ?
-                                TextsBuilder.regularText(options[index].designation, color: AppColors.bgMainColor, bold: true) :
-                                TextsBuilder.regularText(options[index].designation, color: AppColors.bgMainColor)
-                              ],)
-                      , () {
-                        callback(options[index]);
-                        Navigator.pop(context);
-                      }
-                      );
-                    },
-                  ),
-                )
-              ]),
-            ),
+            children: widgets,
           );
         });
   }
