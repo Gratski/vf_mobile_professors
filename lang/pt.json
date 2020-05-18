@@ -31,6 +31,7 @@
   "WELCOME_CREATE_CLASS_BTN_LABEL": "CRIAR AULA",
 
   "GENERAL_ERROR_SESSION_EXPIRED": "A sessão expirou",
+  "GENERAL_ERROR_COULD_NOT_LAUNCH": "Não foi possível abrir",
   "GENERAL_ERROR_WHILE_UPLOADING_FILE": "Occorreu um erro ao enviar a imagem. Tente mais tarde.",
   "GENERAL_CATEGORY_LABEL": "Categoria",
   "GENERAL_PICTURE_LABEL": "Imagem",

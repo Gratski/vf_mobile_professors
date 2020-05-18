@@ -50,4 +50,5 @@ class GeneralConstants {
   String get errorWhileUploadingImage => "GENERAL_ERROR_WHILE_UPLOADING_FILE";
 
   String get sessionExpired => "GENERAL_ERROR_SESSION_EXPIRED";
+  String get couldNotLaunchUrl => "GENERAL_ERROR_COULD_NOT_LAUNCH";
 }

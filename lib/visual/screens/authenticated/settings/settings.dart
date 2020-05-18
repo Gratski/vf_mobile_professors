@@ -24,6 +24,7 @@ import 'package:professors/visual/widgets/structural/lists/regular_list_tile.dar
 import 'package:professors/visual/widgets/text/text.builder.dart';
 import 'package:professors/localization/constants/settings/settings_constants.dart'
     as TRANSLATIONS;
+import 'package:url_launcher/url_launcher.dart';
 
 import 'notifications/settings_notifications.dart';
 
@@ -292,12 +293,13 @@ class SettingsScreen extends StatelessWidget {
               child: RegularListTile(
                 label: AppLocalizations.of(context)
                     .translate(TRANSLATIONS.SettingsConstants.TERMS),
-                callback: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SupportTypeScreen()),
-                  );
+                callback: () async {
+                  const url = 'https://vfit.app/Instructor-Terms.html';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    throw '${AppLocalizations.of(context).translate(generalConstants.couldNotLaunchUrl)} $url';
+                  }
                 },
               ),
             ),

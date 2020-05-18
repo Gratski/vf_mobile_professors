@@ -31,6 +31,7 @@
   "WELCOME_CREATE_CLASS_BTN_LABEL": "CREATE CLASS",
 
   "GENERAL_ERROR_SESSION_EXPIRED": "Your session expired",
+  "GENERAL_ERROR_COULD_NOT_LAUNCH": "Could not launch",
   "GENERAL_ERROR_WHILE_UPLOADING_FILE": "An error occurred uploading file. Please try again later.",
   "GENERAL_CATEGORY_LABEL": "Category",
   "GENERAL_PICTURE_LABEL": "Picture",
