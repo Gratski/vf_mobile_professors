@@ -64,7 +64,10 @@ class PasswordRecoveryScreen extends AbstractAuthScreen {
               Observer(
                 builder: (_) {
                   return authStore.passwordRecoveryIsLoading
-                      ? DefaultLoaderWidget()
+                      ? Container(
+                        margin: EdgeInsets.only(top: 15),
+                        child: DefaultLoaderWidget(),
+                      )
                       : Container();
                 },
               ),

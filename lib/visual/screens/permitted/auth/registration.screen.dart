@@ -104,7 +104,10 @@ class RegistrationScreen extends AbstractAuthScreen {
               Observer(
                 builder: (_) {
                   if (authStore.registerIsLoading) {
-                    return DefaultLoaderWidget();
+                    return Container(
+                      margin: EdgeInsets.only(top: 15),
+                      child: DefaultLoaderWidget(),
+                    );
                   } else {
                     return Container();
                   }

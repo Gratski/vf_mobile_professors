@@ -69,7 +69,7 @@ class AuthService extends AbstractRestService {
       PasswordRecoveryResponse result = PasswordRecoveryResponse();
       return result;
     } catch(e) {
-      throw ApiException(e.error);
+      throw ApiException(e.cause);
     }
   }
 
