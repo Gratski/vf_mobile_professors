@@ -49,6 +49,7 @@ class SettingsPersonalDetailsScreen extends StatefulWidget {
 
   SettingsPersonalDetailsScreen() {
     this.screenStore.setFirstName(userStore.firstName);
+    this.screenStore.setGender(userStore.gender);
     this.screenStore.setLastName(userStore.lastName);
     this.screenStore.setEmail(userStore.email);
     this.screenStore.setCountry(userStore.countryId, userStore.countryLabel);
@@ -143,6 +144,7 @@ class _SettingsPersonalDetailsScreenState extends State<SettingsPersonalDetailsS
                               Container(
                                 margin: EdgeInsets.only(top: AppSizes.inputTopMargin(context)),
                                 child: TextFormField(
+                                  maxLength: 20,
                                   style: TextStyle(color: AppColors.fontColor),
                                   controller: widget.phoneNumberController,
                                   onChanged: (value) => widget.screenStore.setPhoneNumber(value),

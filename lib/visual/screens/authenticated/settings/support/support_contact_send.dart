@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 import 'package:professors/globals/global_vars.dart';
 import 'package:professors/localization/app_localizations.dart';
 import 'package:professors/localization/constants/form_validation.constants.dart';
 import 'package:professors/localization/constants/settings/support/support_contact_constants.dart';
 import 'package:professors/models/support/support_contact_type.dart';
+import 'package:professors/store/support/support_contact_state.dart';
 import 'package:professors/visual/builders/toaster.builder.dart';
 import 'package:professors/visual/styles/padding.dart';
+import 'package:professors/visual/widgets/loaders/default.loader.widget.dart';
 import 'package:professors/visual/widgets/structural/buttons/buttons_builder.dart';
 import 'package:professors/visual/widgets/structural/header/app_header.widget.dart';
 import 'package:professors/visual/widgets/structural/header/custom_app_bar.widget.dart';
 import 'package:professors/visual/widgets/text/text.builder.dart';
 
 class SupportContactSendScreen extends StatelessWidget {
-  SupportContactConstants screenConstants = SupportContactConstants();
+
+  final SupportContactConstants screenConstants = SupportContactConstants();
+  final store = SupportContactState();
   final formConstants = FormValidationConstants();
-  TextEditingController msgController = TextEditingController();
+  final TextEditingController msgController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -26,65 +32,71 @@ class SupportContactSendScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     this.context = context;
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          CustomAppBar([]),
-          AppHeaderWidget(
-            AppLocalizations.of(context)
-                .translate(screenConstants.contactSendTopHeader),
-          ),
+      body: GestureDetector(
+        onTap: () {
+      FocusScope.of(context).requestFocus(new FocusNode());
+    },
+    child: CustomScrollView(
+      slivers: <Widget>[
+        CustomAppBar([]),
+        AppHeaderWidget(
+          AppLocalizations.of(context)
+              .translate(screenConstants.contactSendTopHeader),
+        ),
 
-          SliverToBoxAdapter(
-            child: Container(
-              padding: AppPaddings.regularPadding(context),
-              margin: EdgeInsets.only(top: 20),
-              child: RichText(
-                text: TextsBuilder.subTitleSpan(
-                  AppLocalizations.of(context)
-                      .translate(screenConstants.contactSendSubTitleOne),
-                ),
+        SliverToBoxAdapter(
+          child: Container(
+            padding: AppPaddings.regularPadding(context),
+            margin: EdgeInsets.only(top: 20),
+            child: RichText(
+              text: TextsBuilder.subTitleSpan(
+                AppLocalizations.of(context)
+                    .translate(screenConstants.contactSendSubTitleOne),
               ),
             ),
           ),
-
-          /// TEXT AREA
-          SliverToBoxAdapter(
-            child: Container(
-              padding: AppPaddings.regularPadding(context),
-              margin: EdgeInsets.only(top: 10),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      validator: _validateMessage,
-                      controller: msgController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                                width: 2.0, color: Colors.grey[300])),
-                      ),
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 8,
-                      maxLength: 250,
+        ),
+        /// TEXT AREA
+        SliverToBoxAdapter(
+          child: Container(
+            padding: AppPaddings.regularPadding(context),
+            margin: EdgeInsets.only(top: 10),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    validator: _validateMessage,
+                    controller: msgController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                              width: 2.0, color: Colors.grey[300])),
                     ),
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 8,
+                    maxLength: 250,
+                  ),
 
-                    /// BUTTON
-                    ButtonsBuilder.redFlatButton(
-                        AppLocalizations.of(context)
-                            .translate(screenConstants.contactSendButtonLabel),
-                        () {
-                      _send(context);
-                    }),
-                  ],
-                ),
+                  /// BUTTON
+                  ButtonsBuilder.redFlatButton(
+                      AppLocalizations.of(context)
+                          .translate(screenConstants.contactSendButtonLabel),
+                          () {
+                        _send(context);
+                      }),
+                ],
               ),
             ),
           ),
+        ),
 
-          /// BUTTON
-        ],
+
+
+        /// BUTTON
+      ],
+    )
       ),
     );
   }
@@ -100,6 +112,7 @@ class SupportContactSendScreen extends StatelessWidget {
     if ( !_formKey.currentState.validate()) {
       return;
     }
+    store.setIsLoading(true);
     restServices
         .getSupportService()
         .sendSupportMessage(
@@ -112,6 +125,6 @@ class SupportContactSendScreen extends StatelessWidget {
       Navigator.pop(context);
     }).catchError((e) {
       ToasterBuilder.buildSuccessToaster(context, e.cause);
-    });
+    }).whenComplete(() => store.setIsLoading(false));
   }
 }

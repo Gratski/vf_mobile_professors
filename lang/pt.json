@@ -68,7 +68,7 @@
   "GENERAL_LOAD_MORE_BUTTON_LABEL": "Carregar Mais",
   "GENERAL_DIALOG_UNAVAILABLE_OPERATION_TITLE": "Operação Indisponível",
   "GENERAL_DIALOG_UNAVAILABLE_OPERATION_BODY": "Esta operação não é permitida durante a fase de pré-lançamento. Está presente no teu ecrã para consigas ter uma noção das funcionalidades que vais ter acesso.",
-  "GENERAL_DIALOG_UNAVAILABLE_OPERATION_DISMISS_LABEL": "Cancel",
+  "GENERAL_DIALOG_UNAVAILABLE_OPERATION_DISMISS_LABEL": "Cancelar",
 
   "AUTH_LOGIN_TOP_HEADER": "Entrar",
   "AUTH_LOGIN_SUB_TITLE": "Entrar com uma conta existente",
@@ -166,7 +166,7 @@
   "SETTINGS_NOTIFICATIONS_ACCOUNT_SUPPORT_HINT": "Ser notificado sempre que lançarmos novas versões, alterações aos Termos e Condições Legais. Estas notificações serão também enviadas via e-mail",
 
   "SETTINGS_PAYMENTS_TOP_HEADER": "Carteira",
-  "SETTINGS_PAYMENTS_BALANCE_LABEL": "O seu Saldo",
+  "SETTINGS_PAYMENTS_BALANCE_LABEL": "O teu Saldo",
   "SETTINGS_PAYMENTS_SEND_INVOICE_LABEL": "Envia Fatura",
   "SETTINGS_PAYMENTS_PAYMENT_METHOD_LABEL": "Método de Pagamento",
   "SETTINGS_PAYMENTS_CURRENCY_LABEL": "Alterar Moeda",
@@ -178,8 +178,8 @@
 
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_TOP_HEADER": "É bom saber que",
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_SUB_TITLE": "Neste momento, o PayPal é a única forma de pagamento disponível",
-  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_EXECUTION_TIME_LABEL": "A execução da transacção é processada após a receção da tua Fatura. A execução da transacção pode demorar até 3 dias úteis a ser concluída.",
-  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_TAXATION_LABEL": "Pode incluir impostos de acordo com as nossos Termos e Condições, dependendo do país emissor das tuas facturas.",
+  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_EXECUTION_TIME_LABEL": "A execução da transação é processada após a receção da tua Fatura. A execução da transação pode demorar até 3 dias úteis a ser concluída.",
+  "SETTINGS_ADD_PAYMENT_METHODS_TERMS_TAXATION_LABEL": "Pode incluir impostos de acordo com as nossos Termos e Condições, dependendo do país emissor das tuas faturas.",
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_PROCEED_LINK": "Entendi! Continuar",
 
   "SETTINGS_ADD_PAYMENT_METHODS_TOP_HEADER": "Adicionar Conta de Paypal",
@@ -190,9 +190,9 @@
   "SETTINGS_ADD_PAYMENT_METHODS_SUCCESS_TEXT": "Criada",
   "SETTINGS_ADD_PAYMENT_METHODS_FAILURE_TEXT": "Não foi possível criar um método de pagamento",
 
-  "SETTINGS_ADD_PAYMENT_SEND_INVOICE_TOP_HEADER": "Enviar Factura",
-  "SETTINGS_ADD_PAYMENT_SEND_INVOICE_SUB_TITLE": "Envia-nos a tua factura mensalmente. Carregua a sua factura e a nossa equipa de facturação terá todo o prazer em processá-la.",
-  "SETTINGS_ADD_PAYMENT_SEND_INVOICE_UPLOAD_BUTTON_LABEL": "Upload Invoice",
+  "SETTINGS_ADD_PAYMENT_SEND_INVOICE_TOP_HEADER": "Enviar Fatura",
+  "SETTINGS_ADD_PAYMENT_SEND_INVOICE_SUB_TITLE": "Envia-nos a tua fatura mensalmente. Carregua a sua fatura e a nossa equipa de faturação terá todo o prazer em processá-la.",
+  "SETTINGS_ADD_PAYMENT_SEND_INVOICE_UPLOAD_BUTTON_LABEL": "Enviar Fatura",
 
   "SETTINGS_PAYMENTS_SELECT_CURRENCY_TOP_HEADER": "Seleciona a tua moeda",
   "SETTINGS_PAYMENTS_SELECT_CURRENCY_SUB_TITLE": "Isso não afetará o teu saldo atual",
@@ -254,7 +254,7 @@
 
 
   "CLASSES_CLASSES_WORD": "Aulas",
-  "CLASSES_KCAL_WORD": "Calorias",
+  "CLASSES_KCAL_WORD": "Kcal",
   "CLASSES_ALL_WORD": "As",
   "CLASSES_YOUR_WORD": "Tuas",
   "CLASSES_SUB_TITLE": "Aqui encontras todas as tuas Aulas.",
@@ -337,7 +337,7 @@
 
   "PROFILE_SCREEN_ABOUT_DEFAULT": "Sobre",
   "PROFILE_SCREEN_QUOTE_DEFAULT": "Citação",
-  "PROFILE_SCREEN_CHANGE_LANGUAGE_SUB_TITLE": "Quantos mais idiomas tiver maior é o seu alcance!",
+  "PROFILE_SCREEN_CHANGE_LANGUAGE_SUB_TITLE": "Quantos mais idiomas tiveres maior é o seu alcance!",
   "PROFILE_SCREEN_ABOUT_PT": "Sobre",
   "PROFILE_SCREEN_QUOTE_PT": "Citação",
   "PROFILE_SCREEN_TEACHES_PT": "Dá Aulas de",

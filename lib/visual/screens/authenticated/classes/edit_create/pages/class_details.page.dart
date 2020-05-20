@@ -552,6 +552,9 @@ class _ClassDetailsPageState extends State<ClassDetailsPage>
   /// Submits either for save an existing Class
   ///
   _save(BuildContext context) {
+    if (widget.store.isLoadingContext) {
+      return;
+    }
     // validate fields here
     if (!formKey.currentState.validate()) {
       ToasterBuilder.buildErrorToaster(context, AppLocalizations.of(context).translate(widget.formConstants.provideAllDetails));

@@ -183,15 +183,15 @@
   "SETTINGS_ADD_PAYMENT_METHODS_TERMS_PROCEED_LINK": "Got it! Proceed",
 
   "SETTINGS_ADD_PAYMENT_METHODS_TOP_HEADER": "Add PayPal account",
-  "SETTINGS_ADD_PAYMENT_METHODS_SUB_TITLE": "Here you add a PayPal account to your wallet. For your safety, to make it your default payments account, add it here and then edit it.",
-  "SETTINGS_ADD_PAYMENT_METHODS_EMAIL_LABEL": "PayPal email",
+  "SETTINGS_ADD_PAYMENT_METHODS_SUB_TITLE": "Here you add a PayPal account to your wallet.",
+  "SETTINGS_ADD_PAYMENT_METHODS_EMAIL_LABEL": "PayPal Email",
   "SETTINGS_ADD_PAYMENT_METHODS_EMAIL_HINT": "",
   "SETTINGS_ADD_PAYMENT_METHODS_ADD_BUTTON": "Add Account",
   "SETTINGS_ADD_PAYMENT_METHODS_SUCCESS_TEXT": "Created",
   "SETTINGS_ADD_PAYMENT_METHODS_FAILURE_TEXT": "Could not create Payment Method",
 
   "SETTINGS_ADD_PAYMENT_SEND_INVOICE_TOP_HEADER": "Send Invoice",
-  "SETTINGS_ADD_PAYMENT_SEND_INVOICE_SUB_TITLE": "Send us your monthly invoice. Upload your invoice and our billing team will happy to process it for you.",
+  "SETTINGS_ADD_PAYMENT_SEND_INVOICE_SUB_TITLE": "Send us your monthly invoice. Upload your invoice and our billing team will be happy to process it for you.",
   "SETTINGS_ADD_PAYMENT_SEND_INVOICE_UPLOAD_BUTTON_LABEL": "Upload Invoice",
 
   "SETTINGS_PAYMENTS_SELECT_CURRENCY_TOP_HEADER": "Select your currency",
@@ -337,7 +337,7 @@
 
   "PROFILE_SCREEN_ABOUT_DEFAULT": "About",
   "PROFILE_SCREEN_QUOTE_DEFAULT": "Quote",
-  "PROFILE_SCREEN_CHANGE_LANGUAGE_SUB_TITLE": "The more languages you have the people you reach!",
+  "PROFILE_SCREEN_CHANGE_LANGUAGE_SUB_TITLE": "The more languages you have the more people you reach!",
   "PROFILE_SCREEN_ABOUT_PT": "Sobre",
   "PROFILE_SCREEN_QUOTE_PT": "Citação",
   "PROFILE_SCREEN_TEACHES_PT": "Dá Aulas de",
